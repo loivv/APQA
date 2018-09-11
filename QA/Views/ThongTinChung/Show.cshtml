@@ -1,0 +1,310 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin chung";
+    //var data = ViewBag.Info;
+}
+
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <!-- body-->
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="form-group">
+                    <label>Mã trường</label>
+                    <input type="text" maxlength="10" ng-model="ThongTin.MaTruong" class="form-control" required ng-disabled="CountryIDDisable" />
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Tên trường theo quyết định</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.TenTruongMoi" required />
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Tên trường cũ</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.TenTruongCu" />
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Cơ quan chủ quản</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.CoQuanChuQuan" />
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label>Tỉnh thành</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.TinhThanh" />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label>Quận huyện</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.QuanHuyen" />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label>Phường xã</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.PhuongXa" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.DiaChi" />
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Điện thoại</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.DienThoai" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Fax</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.Fax" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Website</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.Website" />
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Hiệu trưởng</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.HieuTruong" />
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label>Năm thành lập</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.NamThanhLap" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Đạt chuẩn quốc gia</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.ChuanQuocGia" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Số điểm trường</label>
+                    <input type="text" class="form-control" ng-model="ThongTin.SoDiemTruong" />
+                </div>
+            </div>
+
+
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Loại trường</label>
+                    <select class="form-control">
+                        <option value="danlap">Công lập</option>
+                        <option value="tuthuc">Tư thục</option>
+                        <option value="danlap">Dân lập</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Thuộc vùng khó khăn</label>
+                    <input type="checkbox" ng-model="ThongTin.VungKhoKhan" />
+                </div>
+            </div>
+            <div class="col-sm-3 ">
+                <div class="funkyradio">
+                    <div class="funkyradio-success">
+                        <input type="radio"  name="checkbox" ng-model="ThongTin.LienKetNuocNgoai" />
+                        <label>Liên kế nước ngoài</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Khác</label>
+                    <input type="checkbox" ng-model="ThongTin.Khac" />
+                    <input type="text" class="form-control" ng-model="ThongTin.GhiChuKhac" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- end body-->
+    <!-- begin footer-->
+    <div class="modal-footer">
+        <button ng-click="edit()" class="btn btn-default">Lưu</button>
+    </div>
+    <!-- end footer-->
+</div>
+
+@section styles {
+
+    <style type="text/css">
+        .funkyradio div {
+            clear: both;
+            overflow: hidden;
+        }
+
+        .funkyradio label {
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid #D1D3D4;
+            font-weight: normal;
+        }
+
+        .funkyradio input[type="radio"]:empty,
+        .funkyradio input[type="checkbox"]:empty {
+            display: none;
+        }
+
+            .funkyradio input[type="radio"]:empty ~ label,
+            .funkyradio input[type="checkbox"]:empty ~ label {
+                position: relative;
+                line-height: 2.5em;
+                text-indent: 3.25em;
+                margin-top: 2em;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+                .funkyradio input[type="radio"]:empty ~ label:before,
+                .funkyradio input[type="checkbox"]:empty ~ label:before {
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    content: '';
+                    width: 2.5em;
+                    background: #D1D3D4;
+                    border-radius: 3px 0 0 3px;
+                }
+
+        .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+        .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+            color: #888;
+        }
+
+            .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+            .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+                content: '\2714';
+                text-indent: .9em;
+                color: #C2C2C2;
+            }
+
+        .funkyradio input[type="radio"]:checked ~ label,
+        .funkyradio input[type="checkbox"]:checked ~ label {
+            color: #777;
+        }
+
+            .funkyradio input[type="radio"]:checked ~ label:before,
+            .funkyradio input[type="checkbox"]:checked ~ label:before {
+                content: '\2714';
+                text-indent: .9em;
+                color: #333;
+                background-color: #ccc;
+            }
+
+        .funkyradio input[type="radio"]:focus ~ label:before,
+        .funkyradio input[type="checkbox"]:focus ~ label:before {
+            box-shadow: 0 0 0 3px #999;
+        }
+
+        .funkyradio-default input[type="radio"]:checked ~ label:before,
+        .funkyradio-default input[type="checkbox"]:checked ~ label:before {
+            color: #333;
+            background-color: #ccc;
+        }
+
+        .funkyradio-primary input[type="radio"]:checked ~ label:before,
+        .funkyradio-primary input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #337ab7;
+        }
+
+        .funkyradio-success input[type="radio"]:checked ~ label:before,
+        .funkyradio-success input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #5cb85c;
+        }
+
+        .funkyradio-danger input[type="radio"]:checked ~ label:before,
+        .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #d9534f;
+        }
+
+        .funkyradio-warning input[type="radio"]:checked ~ label:before,
+        .funkyradio-warning input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #f0ad4e;
+        }
+
+        .funkyradio-info input[type="radio"]:checked ~ label:before,
+        .funkyradio-info input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #5bc0de;
+        }
+    </style>
+
+}
+
+@section scripts {
+
+    <script>
+
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap']);
+        //var app = angular.module('myApp', ['ngRoute']);
+        app.controller('myCtrl', function ($scope, $http) {
+
+            $scope.ThongTin = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Info))');
+            console.log($scope.ThongTin);
+            $scope.edit = function () {
+                showLoader(true);
+                //update data
+                $http({
+                    method: "POST",
+                    url: "/ThongTinChung/edit",
+                    data: $scope.ThongTin
+                }).then(
+                    function success(response) {
+
+                        var result = response.data;
+
+                        if (result.error == 0) {
+
+                            showNotify("Đã cập nhật");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    },
+                    function errror(response) {
+                        showLoader(false);
+                        showNotify("connect has disconnect");
+                    }
+                    );
+                //ket thuc update
+            };
+        });
+
+    </script>
+}

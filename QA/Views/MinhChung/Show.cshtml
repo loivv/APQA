@@ -1,0 +1,372 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách minh chứng";
+}
+
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Danh sách minh chứng&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end x_title-->
+            <div class="x_content">
+                <!-- table data-->
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th>STT</th>
+                                <th>Mã MC</th>
+                                <th>Tên MC</th>
+                                <th>Số , ngày ban hành, thời điểm quan sát, phỏng vấn</th>
+                                <th>Cơ quan ban hành</th>
+                                <th>Ghi chú</th>
+                                <th>#</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="item in allDanhMuc">
+                                <td>{{$index + 1}}</td>
+                                <td>{{item.MaMC}}</td>
+                                <td>{{item.TenMC}}</td>
+                                <td>{{item.SoHieu}}</td>
+                                <td>{{item.CoQuan}}</td>
+                                <td>{{item.GhiChu}}</td>
+                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end table data-->
+                <!--phan trang-->
+                <ul items-per-page="itemPerPage" uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                <!-- end phan trang-->
+
+            </div>
+            <!-- end x_content-->
+        </div>
+        <!-- end x_pannel-->
+    </div>
+
+
+    <!-- tao model them moi-->
+    <div id="insertmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{modaltitle}}</h4>
+                </div>
+
+
+                <!-- begin form-->
+                <form class="css-form" name="createForm" ng-submit="finishForm(createForm.$valid)">
+                    <!-- body-->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Mã minh chứng</label>
+                                    <input type="text" class="form-control text-uppercase" ng-model="Info.MaMC" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Tên minh chứng</label>
+                                    <input type="text" class="form-control" ng-model="Info.TenMC" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Số hiệu</label>
+                                    <input type="text" class="form-control" ng-model="Info.SoHieu" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cơ quan</label>
+                                    <input type="text" class="form-control" ng-model="Info.CoQuan" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Ghi chú</label>
+                                    <input type="text" class="form-control" ng-model="Info.GhiChu" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>File đính kèm</label>
+                                    <input type="file" id="filetailieu" class="form-control" ng-model="Info.LinkFile" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end body-->
+                    <!-- begin footer-->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Hoàn thành</button>
+                    </div>
+                    <!-- end footer-->
+                </form>
+                <!-- end form-->
+
+            </div>
+            <!-- end modal content-->
+        </div>
+    </div>
+    <!-- end modal them-->
+</div>
+
+
+<!-- end content-->
+@section scripts {
+
+    <script>
+
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader']);
+
+        app.controller('myCtrl', function ($scope, $http, uiUploader) {
+
+            // phan trang
+            $scope.numPages;
+            $scope.itemPerPage;
+            $scope.totalItems;
+            $scope.currentPage = 1;
+            $scope.maxSize = 5;
+            $scope.pageChanged = function () {
+                $scope.GetData($scope.currentPage);
+            };
+
+            // lay du lieu
+            $scope.allDanhMuc = [];
+            $scope.GetData = function (page, search) {
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/MinhChung/getMinhChung?page=" + page + "&search=" + search
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allDanhMuc = response.data.data;
+                        $scope.itemPerPage = response.data.pageSize;
+                        $scope.totalItems = response.data.toltalSize;
+                        $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            // goi lay du liẹu
+
+            $scope.GetData(1, "");
+            //
+            // khoi tao bien dung cho create va edit
+            $scope.Info = {};
+            $scope.IsAction = '';
+
+            $scope.addNew = function () {
+
+                $scope.Info = { "MaMC": "", "TenMC": "","SoHieu":"","CoQuan":"","GhiChu":"","LinkFile":"","TieuChuan":"","TieuChi":"" };
+                $scope.modaltitle = "Thêm minh chứng";
+                //$scope.ZoneIDDisable = false;
+                $scope.IsAction = 'add';
+                showModel("insertmodal")
+                console.log($scope.Info);
+
+            };
+
+            $scope.edit = function (index) {
+
+                var info = $scope.allDanhMuc[index];
+
+                $scope.Info = angular.copy(info);
+                $scope.modaltitle = "Chỉnh sửa minh chứng";
+                // $scope.CountryIDDisable = true;
+                $scope.IsAction = 'edit';
+                showModel("insertmodal")
+            };
+
+
+            // tim index theo ma tinh
+            function getSelectedIndex(id) {
+                for (var i = 0; i < $scope.allDanhMuc.length; i++)
+                    if ($scope.allDanhMuc[i].NamHoc == id)
+                        return i;
+                return -1;
+            };
+
+            // action
+            $scope.finishForm = function (isValid) {
+                if (isValid) {
+                    if ($scope.IsAction === 'add') {
+                        $scope.sendCreate();
+                    } else if ($scope.IsAction === 'edit') {
+                        $scope.sendEdit();
+                    } else if ($scope.IsAction === 'delete') {
+                        $scope.sendDelete();
+                    }
+
+                } else {
+                    showNotify('our form is missing');
+                }
+            }
+
+
+            // them tinh
+            $scope.sendCreate = function () {
+                showLoader(true);
+                uiUploader.startUpload({
+                    url: '/MinhChung/create',
+                    paramName: 'fileTaiLieu',
+                    data: $scope.Info ,
+                    onProgress: function (file) {
+                        $scope.$apply();
+                    },
+                    onCompleted: function (file, response) {
+
+                        showLoader(false);
+                        var result = angular.fromJson(response);
+
+                        if (result.error === 0) {
+                            // xoa file hien tai trong danh sach upload
+                            uiUploader.removeAll();
+                            $('#filetailieu').value = "";
+                            $scope.$apply();
+
+                            $scope.allDanhMuc.unshift(result.data);
+
+                            hideModel("insertmodal");
+
+                            showNotify("Đã thêm minh chứng");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    }
+                });
+            };
+
+            // cap nhat tinh
+            $scope.sendEdit = function () {
+                showLoader(true);
+                uiUploader.startUpload({
+                    url: '/MinhChung/edit',
+                    paramName: 'fileTaiLieu',
+                    data: $scope.Info,
+                    onProgress: function (file) {
+                        $scope.$apply();
+                    },
+                    onCompleted: function (file, response) {
+
+                        showLoader(false);
+                        var result = angular.fromJson(response);
+
+                        if (result.error === 0) {
+                            // xoa file hien tai trong danh sach upload
+                            uiUploader.removeAll();
+                            $('#filetailieu').value = "";
+                            $scope.$apply();
+
+                            $scope.allDanhMuc.unshift(result.data);
+
+                            hideModel("insertmodal");
+
+                            showNotify("Đã Sửa minh chứng");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    }
+                });
+            };
+
+            // xoa du lieu
+            $scope.sendDelete = function (index) {
+                var info = $scope.allDanhMuc[index];
+
+                var r = confirm("Bạn muốn xóa không ?");
+                if (r == true) {
+                    showLoader(true);
+
+                    $http({
+                        method: "POST",
+                        url: "/MinhChung/delete",
+                        data: { id: info.ID }
+                    }).then(
+                        function success(response) {
+
+                            var result = response.data;
+
+                            if (result.error == 0) {
+
+                                // var findIndex = getSelectedIndex(result.data.CountryID);
+
+                                // if (findIndex !== -1) {
+                                $scope.allDanhMuc.splice(index, 1);
+                                //  }
+
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
+
+                        },
+                        function errror(response) {
+                            showLoader(false);
+                            showNotify("connect has disconnect");
+                        }
+                        );
+                } else {
+
+                }
+
+
+            }
+
+
+
+            // upload
+         //   $scope.files = [];
+            var uploadFileTaiLieu = document.getElementById('filetailieu');
+            uploadFileTaiLieu.addEventListener('change', function (e) {
+                uiUploader.removeAll();
+                var files = e.target.files;
+                uiUploader.addFiles(files);
+               // $scope.files = uiUploader.getFiles();
+                $scope.$apply();
+            });
+
+        });
+        //-- end controller
+
+    </script>
+}
+
+
+

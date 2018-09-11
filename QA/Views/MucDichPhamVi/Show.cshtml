@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Mục đích , phạm vi tự đánh giá";
+    var data = ViewBag.Info;
+}
+
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <!-- body-->
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Mục đích</label>
+                    <p style="white-space:pre-line;" ng-bind-html="ThongTin.MucDich | unsafe"></p>
+                    <textarea style="white-space:pre-line;" rows="5" ng-bind-html="ThongTin.MucDich | unsafe" class="form-control" required> </textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Phạm vi</label>
+                    <textarea rows="5" class="form-control" ng-model="ThongTin.PhamVi" required></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Yêu cầu</label>
+                    <textarea rows="10" class="form-control" ng-model="ThongTin.YeuCau" required></textarea>
+                </div>
+            </div>    
+        </div>
+    </div>
+    <!-- end body-->
+    <!-- begin footer-->
+    <div class="modal-footer">
+        <button ng-click="edit()" class="btn btn-default">Lưu</button>
+    </div>
+    <!-- end footer-->
+</div>
+
+
+@section scripts {
+
+    <script>
+       
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap']);
+        app.filter('unsafe', function ($sce) {
+            return function (val) {
+                return $sce.trustAsHtml(val);
+            };
+        });
+
+        //var app = angular.module('myApp', ['ngRoute']);
+        app.controller('myCtrl', function ($scope, $http) {
+         
+            $scope.ThongTin = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Info))');         
+            $scope.edit = function () {
+                showLoader(true);
+                //update data
+                $http({
+                    method: "POST",
+                    url: "/MucDichPhamVi/edit",
+                    data: $scope.ThongTin
+                }).then(
+                    function success(response) {
+
+                        var result = response.data;
+
+                        if (result.error == 0) {
+
+                            showNotify("Đã cập nhật");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    },
+                    function errror(response) {
+                        showLoader(false);
+                        showNotify("connect has disconnect");
+                    }
+                    );
+                //ket thuc update
+            };
+        });
+
+    </script>
+}

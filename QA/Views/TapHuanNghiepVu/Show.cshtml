@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Tập huấn nghiệp vụ tự đánh giá";
+}
+
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <!-- body-->
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Thời gian</label>                    
+                    <input type="text" class="form-control" ng-model="Info.ThoiGian" required/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Thành phần</label>
+                    <textarea rows="5" class="form-control" ng-model="Info.ThanhPhan" required></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Nội dung</label>
+                    <textarea rows="10" class="form-control" ng-model="Info.NoiDung" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end body-->
+    <!-- begin footer-->
+    <div class="modal-footer">
+        <button ng-click="edit()" class="btn btn-default">Lưu</button>
+    </div>
+    <!-- end footer-->
+</div>
+
+
+@section scripts {
+
+    <script>
+
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap']);
+        app.controller('myCtrl', function ($scope, $http) {
+
+            $scope.Info = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Info))');
+            $scope.edit = function () {
+                showLoader(true);
+                //update data
+                $http({
+                    method: "POST",
+                    url: "/TapHuanNghiepVu/edit",
+                    data: $scope.Info
+                }).then(
+                    function success(response) {
+
+                        var result = response.data;
+
+                        if (result.error == 0) {
+
+                            showNotify("Đã cập nhật");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    },
+                    function errror(response) {
+                        showLoader(false);
+                        showNotify("connect has disconnect");
+                    }
+                    );
+                //ket thuc update
+            };
+        });
+
+    </script>
+}
