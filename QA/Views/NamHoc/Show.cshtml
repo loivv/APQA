@@ -39,7 +39,7 @@
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
                                 <td>{{$index + 1}}</td>
-                                <td>{{item.NamHoc}}</td>
+                                <td><input type="checkbox" ng-model="item.NamHienTai" ng-checked="item.NamHienTai">{{item.NamHoc}}</td>
                                 <td>{{item.TuNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td>{{item.DenNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
@@ -76,10 +76,16 @@
                     <!-- body-->
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Năm học</label>
                                     <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Năm hiện tại</label>
+                                    <input type="checkbox" maxlength="10" class="form-control" ng-model="Info.NamHienTai" required />
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -166,9 +172,7 @@
             $scope.IsAction = '';
 
             $scope.addNew = function () {
-
-                $scope.NamHocInfo = { "NamHoc": ""};
-
+                $scope.Info = { "NamHoc": "","NamHienTai":"","TuNgay":"","DenNgay":""};
                 $scope.modaltitle = "Thêm năm học";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
@@ -196,9 +200,11 @@
             };
 
             // action
+
             $scope.finishForm = function (isValid) {
+                console.log($scope.Info.TuNgay);
                 if (isValid) {
-                    if ($scope.IsAction === 'add') {
+                    if ($scope.IsAction === 'add') {                     
                         $scope.sendCreate();
                     } else if ($scope.IsAction === 'edit') {
                         $scope.sendEdit();

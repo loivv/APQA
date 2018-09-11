@@ -6,9 +6,10 @@ using System.Web.Mvc;
 using QA.Models;
 namespace QA.Controllers.danhmuc
 {
-    public class NamHocController : BaseController
+    public class VanBanController : BaseController
     {
-        // GET: NamHoc
+        //
+        // GET: /VanBan/
         public ActionResult Show()
         {
             return View();
@@ -53,15 +54,15 @@ namespace QA.Controllers.danhmuc
             db.DM_NamHoc.Add(namhoc);
             db.SaveChanges();
             //kiem tra neu  la nam hoc hien tai thi xoa nhưng cai con lai
-            if(namhoc.NamHienTai == true)
+            if (namhoc.NamHienTai == true)
             {
                 db.DM_NamHoc.Where(x => x.MaTruong == MaTruong && x.NamHoc != namhoc.NamHoc).ToList().ForEach(x =>
                 {
-                    x.NamHienTai = false; 
+                    x.NamHienTai = false;
                 });
                 db.SaveChanges();
             }
-            
+
             return Json(new ResultInfo() { error = 0, msg = "", data = namhoc }, JsonRequestBehavior.AllowGet);
 
         }
@@ -113,5 +114,5 @@ namespace QA.Controllers.danhmuc
 
             return Json(new ResultInfo() { error = 0, msg = "", data = check }, JsonRequestBehavior.AllowGet);
         }
-    }
+	}
 }

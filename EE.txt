@@ -1,0 +1,5 @@
+db.DM_NamHoc.Where(x => x.MaTruong == MaTruong && x.NamHoc != namhoc.NamHoc).ToList().ForEach(x =>
+                {
+                    x.NamHienTai = false; 
+                });
+                db.SaveChanges();
