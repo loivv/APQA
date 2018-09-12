@@ -2,107 +2,152 @@
     ViewBag.Title = "Danh sách văn bản";
 }
 
-<div ng-app="myApp" class="row" ng-controller="myCtrl">
-
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <div class="x_content">
-                <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                    <ul class="nav nav-tabs bar_tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#tab_danhmuc" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Danh mục</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#tab_chitiet" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chi tiết</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active in" id="tab_danhmuc" aria-labelledby="home-tab">
-                            <!-- begin tab-->
-                            <div class="row">
-                                <!-- thong tin-->
-                                <form class="css-form" name="createForm" ng-submit="edit()">
-                                    <div class="row">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped jambo_table bulk_action">
-                                                <thead>
-                                                    <tr class="headings">
-                                                        <th>STT</th>
-                                                        <th>Ký hiệu</th>
-                                                        <th>Trích yếu</th>
-                                                        <th>Ngày ban hành</th>
-                                                        <th>Cơ quan ban hành</th>
-                                                        <th>Cấp học</th>
-                                                        <th>#</th>
-                                                        <th>#</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr ng-repeat="item in allDanhMuc">
-                                                        <td>{{$index + 1}}</td>
-                                                        <td>{{item.MaSo}}</td>
-                                                        <td>{{item.TrichYeu}}</td>
-                                                        <td>{{item.NgayBanHanh}}</td>
-                                                        <td>{{item.CoBanBanHanh}}</td>
-                                                        <td>{{item.CapHoc}}</td>
-                                                        <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
-                                                        <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-default">Lưu</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- end tab-->
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab_chitiet" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="table-responsive">
-                                    <table class="table table-striped jambo_table bulk_action">
-                                        <thead>
-                                            <tr class="headings">
-                                                <th>STT</th>
-                                                <th>Họ Tên</th>
-                                                <th>Chức vụ</th>
-                                                <th>Nhiệm vụ</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="item in allthanhvien">
-                                                <td>{{$index + 1}}</td>
-                                                <td>{{item.TenThanhVien}}</td>
-                                                <td>{{item.ChucVu}}</td>
-                                                <td>{{item.NhiemVu}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="x_title">
+                <h2>Danh sách quy định&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
+                <div class="clearfix"></div>
             </div>
+            <!-- end x_title-->
+            <div class="x_content">
+                <!-- table data-->
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th>STT</th>
+                                <th>Số hiệu</th>
+                                <th>Tên quy định</th>
+                                <th>Ngày ban hành</th>
+                                <th>Cơ quan ban hành</th>
+                                <th>Cấp học</th>
+                                <th>Bộ giáo dục</th>
+                                <th>#</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="item in allDanhMuc">
+                                <td>{{$index + 1}}</td>
+                                <td>{{item.MaSo}}</td>
+                                <td>{{item.TrichYeu}}</td>
+                                <td>{{item.NgayBanHanh.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
+                                <td>{{item.CoQuanBanHanh}}</td>
+                                <td>{{item.CapHoc}}</td>
+                                <td><input type="checkbox" ng-model="item.BoGiaoDuc" ng-checked="item.BoGiaoDuc"></td>
+                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end table data-->
+                <!--phan trang-->
+                <ul items-per-page="itemPerPage" uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                <!-- end phan trang-->
+
+            </div>
+            <!-- end x_content-->
         </div>
+        <!-- end x_pannel-->
     </div>
 
+
+    <!-- tao model them moi-->
+    <div id="insertmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{modaltitle}}</h4>
+                </div>
+
+
+                <!-- begin form-->
+                <form class="css-form" name="createForm" ng-submit="finishForm(createForm.$valid)">
+                    <!-- body-->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Số/Ký hiệu</label>
+                                    <input type="text" class="form-control text-uppercase" ng-model="Info.MaSo" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cấp học</label>
+                                    <select class="form-control" ng-model="Info.IDCapHoc" required>
+                                        <option ng-repeat="x in allcaphoc" value="{{x.IDCapHoc}}">{{x.Ten}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Trích yếu</label>
+                                    <input type="text" class="form-control" ng-model="Info.TrichYeu" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Ngày ban hành</label>
+                                    <input type="date"  class="form-control" ng-model="Info.NgayBanHanh" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cơ quan</label>
+                                    <input type="text" class="form-control" ng-model="Info.CoQuanBanHanh" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>File đính kèm</label>
+                                    <input type="file" id="filetailieu" class="form-control" ng-model="Info.LinkFile" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Bộ giáo dục</label>
+                                    <input type="checkbox" class="form-control" ng-model="Info.BoGiaoDuc" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end body-->
+                    <!-- begin footer-->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Hoàn thành</button>
+                    </div>
+                    <!-- end footer-->
+                </form>
+                <!-- end form-->
+
+            </div>
+            <!-- end modal content-->
+        </div>
+    </div>
+    <!-- end modal them-->
 </div>
 
 
-
 <!-- end content-->
+
 @section scripts {
 
     <script>
-
+        
         // tao controller
         var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader']);
 
         app.controller('myCtrl', function ($scope, $http, uiUploader) {
 
+           
+            $scope.allcaphoc = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllCapHoc))');
             // phan trang
             $scope.numPages;
             $scope.itemPerPage;
@@ -146,7 +191,7 @@
 
             $scope.addNew = function () {
 
-                $scope.Info = { "SoHieu": "", "TenQuyDinh": "","NgayBanHanh":"","CoQuan":"","LinkFile":"","ApDung":"" };
+                $scope.Info = { "MaSo": "", "TrichYeu": "", "NgayBanHanh": "", "CoQuanBanHanh": "", "LinkFile": "", "IDCapHoc": "","BoGiaoDuc":"" };
                 $scope.modaltitle = "Thêm quy định";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
@@ -160,7 +205,7 @@
                 var info = $scope.allDanhMuc[index];
 
                 $scope.Info = angular.copy(info);
-                $scope.modaltitle = "Chỉnh sửa quy định";
+                $scope.modaltitle = "Chỉnh sửa văn bản";
                 // $scope.CountryIDDisable = true;
                 $scope.IsAction = 'edit';
                 showModel("insertmodal")
@@ -196,46 +241,7 @@
             $scope.sendCreate = function () {
                 showLoader(true);
                 uiUploader.startUpload({
-                    url: '/QuyDinh/create',
-                    paramName: 'fileTaiLieu',
-                    data: $scope.Info ,
-                    onProgress: function (file) {
-                        $scope.$apply();
-                    },
-                    onCompleted: function (file, response) {
-
-                        showLoader(false);
-                        var result = angular.fromJson(response);
-
-                        if (result.error === 0) {
-                            // xoa file hien tai trong danh sach upload
-                            uiUploader.removeAll();
-                            $('#filetailieu').value = "";
-                            $scope.$apply();
-
-                            $scope.allDanhMuc.unshift(result.data);
-
-                            hideModel("insertmodal");
-
-                            showNotify("Đã thêm chức vụ");
-
-                        } else {
-
-                            alert(result.msg);
-
-                        }
-
-                        showLoader(false);
-
-                    }
-                });
-            };
-
-            // cap nhat tinh
-            $scope.sendEdit = function () {
-                showLoader(true);
-                uiUploader.startUpload({
-                    url: '/QuyDinh/edit',
+                    url: '/VanBan/create',
                     paramName: 'fileTaiLieu',
                     data: $scope.Info,
                     onProgress: function (file) {
@@ -256,7 +262,46 @@
 
                             hideModel("insertmodal");
 
-                            showNotify("Đã thêm chức vụ");
+                            showNotify("Đã thêm văn bản");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    }
+                });
+            };
+
+            // cap nhat tinh
+            $scope.sendEdit = function () {
+                showLoader(true);
+                uiUploader.startUpload({
+                    url: '/VanBan/edit',
+                    paramName: 'fileTaiLieu',
+                    data: $scope.Info,
+                    onProgress: function (file) {
+                        $scope.$apply();
+                    },
+                    onCompleted: function (file, response) {
+
+                        showLoader(false);
+                        var result = angular.fromJson(response);
+
+                        if (result.error === 0) {
+                            // xoa file hien tai trong danh sach upload
+                            uiUploader.removeAll();
+                            $('#filetailieu').value = "";
+                            $scope.$apply();
+
+                            $scope.allDanhMuc.unshift(result.data);
+
+                            hideModel("insertmodal");
+
+                            showNotify("Đã thêm văn bản");
 
                         } else {
 
@@ -280,7 +325,7 @@
 
                     $http({
                         method: "POST",
-                        url: "/QuyDinh/delete",
+                        url: "/VanBan/delete",
                         data: { id: info.ID }
                     }).then(
                         function success(response) {
@@ -319,13 +364,13 @@
 
 
             // upload
-         //   $scope.files = [];
+            //   $scope.files = [];
             var uploadFileTaiLieu = document.getElementById('filetailieu');
             uploadFileTaiLieu.addEventListener('change', function (e) {
                 uiUploader.removeAll();
                 var files = e.target.files;
                 uiUploader.addFiles(files);
-               // $scope.files = uiUploader.getFiles();
+                // $scope.files = uiUploader.getFiles();
                 $scope.$apply();
             });
 
@@ -334,9 +379,6 @@
 
     </script>
 }
-
-
-
 
 
 

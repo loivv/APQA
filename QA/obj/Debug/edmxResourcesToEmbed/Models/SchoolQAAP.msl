@@ -239,14 +239,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HT_CapHoc">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_CapHoc">
-        <MappingFragment StoreEntitySet="HT_CapHoc">
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="HT_HocSinhLopHoc">
       <EntityTypeMapping TypeName="SchoolQAAPModel.HT_HocSinhLopHoc">
         <MappingFragment StoreEntitySet="HT_HocSinhLopHoc">
@@ -420,6 +412,14 @@
           <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_CapHoc">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_CapHoc">
+        <MappingFragment StoreEntitySet="HT_CapHoc">
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -49,6 +49,7 @@ namespace QA.Controllers.danhmuc
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
             tieuchuan.MaTruong = MaTruong;
+            tieuchuan.NamHoc = NamHoc;
             db.DM_TieuChuan.Add(tieuchuan);
 
             db.SaveChanges();
@@ -64,12 +65,12 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(tieuchuan.ID.ToString()) || String.IsNullOrEmpty(tieuchuan.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_TieuChuan.Where(p => p.MaTruong == MaTruong && p.ID == tieuchuan.ID).FirstOrDefault();
+            var check = db.DM_TieuChuan.Where(p => p.MaTruong == MaTruong && p.ID == tieuchuan.ID && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);
 
-            check.MaTruong = MaTruong;
+            
             check.NoiDung = tieuchuan.NoiDung;
 
             db.Entry(check).State = System.Data.Entity.EntityState.Modified;

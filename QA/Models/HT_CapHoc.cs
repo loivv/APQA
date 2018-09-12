@@ -14,7 +14,7 @@ namespace QA.Models
     
     public partial class HT_CapHoc
     {
-        public string ID { get; set; }
+        public string IDCapHoc { get; set; }
         public string Ten { get; set; }
     }
 }

@@ -3,3 +3,7 @@ db.DM_NamHoc.Where(x => x.MaTruong == MaTruong && x.NamHoc != namhoc.NamHoc).ToL
                     x.NamHienTai = false; 
                 });
                 db.SaveChanges();
+
+
+
+dinh dang ngay : .slice(6, -2) | date : 'dd/MM/yyyy
