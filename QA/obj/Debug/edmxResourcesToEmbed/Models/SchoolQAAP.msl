@@ -230,21 +230,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DM_VanBan">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_VanBan">
-        <MappingFragment StoreEntitySet="DM_VanBan">
-          <ScalarProperty Name="BoGiaoDuc" ColumnName="BoGiaoDuc" />
-          <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
-          <ScalarProperty Name="LinkVanBan" ColumnName="LinkVanBan" />
-          <ScalarProperty Name="CoQuanBanHanh" ColumnName="CoQuanBanHanh" />
-          <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
-          <ScalarProperty Name="TrichYeu" ColumnName="TrichYeu" />
-          <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="HT_CanBo">
       <EntityTypeMapping TypeName="SchoolQAAPModel.HT_CanBo">
         <MappingFragment StoreEntitySet="HT_CanBo">
@@ -419,6 +404,22 @@
           <ScalarProperty Name="ChiSo" ColumnName="ChiSo" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_VanBan">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_VanBan">
+        <MappingFragment StoreEntitySet="DM_VanBan">
+          <ScalarProperty Name="BoGiaoDuc" ColumnName="BoGiaoDuc" />
+          <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
+          <ScalarProperty Name="LinkVanBan" ColumnName="LinkVanBan" />
+          <ScalarProperty Name="CoQuanBanHanh" ColumnName="CoQuanBanHanh" />
+          <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
+          <ScalarProperty Name="TrichYeu" ColumnName="TrichYeu" />
+          <ScalarProperty Name="MaSo" ColumnName="MaSo" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

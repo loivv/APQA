@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Hội đồng tự đánh giá";
+    ViewBag.Title = "Danh sách văn bản";
 }
 
 <div ng-app="myApp" class="row" ng-controller="myCtrl">
@@ -10,10 +10,10 @@
                 <div class="" role="tabpanel" data-example-id="togglable-tabs">
                     <ul class="nav nav-tabs bar_tabs" role="tablist">
                         <li role="presentation" class="active">
-                            <a href="#tab_danhmuc" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Mở đầu</a>
+                            <a href="#tab_danhmuc" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Danh mục</a>
                         </li>
                         <li role="presentation">
-                            <a href="#tab_chitiet" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Danh sách thành viên</a>
+                            <a href="#tab_chitiet" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chi tiết</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -22,10 +22,34 @@
                             <div class="row">
                                 <!-- thong tin-->
                                 <form class="css-form" name="createForm" ng-submit="edit()">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Giới thiệu </label>
-                                            <textarea class="form-control" ng-model="Info.MoDau" required></textarea>
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped jambo_table bulk_action">
+                                                <thead>
+                                                    <tr class="headings">
+                                                        <th>STT</th>
+                                                        <th>Ký hiệu</th>
+                                                        <th>Trích yếu</th>
+                                                        <th>Ngày ban hành</th>
+                                                        <th>Cơ quan ban hành</th>
+                                                        <th>Cấp học</th>
+                                                        <th>#</th>
+                                                        <th>#</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="item in allDanhMuc">
+                                                        <td>{{$index + 1}}</td>
+                                                        <td>{{item.MaSo}}</td>
+                                                        <td>{{item.TrichYeu}}</td>
+                                                        <td>{{item.NgayBanHanh}}</td>
+                                                        <td>{{item.CoBanBanHanh}}</td>
+                                                        <td>{{item.CapHoc}}</td>
+                                                        <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                                        <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -71,51 +95,248 @@
 
 <!-- end content-->
 @section scripts {
+
     <script>
 
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader']);
 
-      // tao controller
-        var app = angular.module('myApp', ['ui.bootstrap']);
-        app.controller('myCtrl', function ($scope, $http) {
+        app.controller('myCtrl', function ($scope, $http, uiUploader) {
 
-            $scope.Info = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Info))');
-            $scope.allthanhvien = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllThanhVien))');
+            // phan trang
+            $scope.numPages;
+            $scope.itemPerPage;
+            $scope.totalItems;
+            $scope.currentPage = 1;
+            $scope.maxSize = 5;
+            $scope.pageChanged = function () {
+                $scope.GetData($scope.currentPage);
+            };
 
-           // $scope.Info = {};
-
-            $scope.edit = function () {
+            // lay du lieu
+            $scope.allDanhMuc = [];
+            $scope.GetData = function (page, search) {
                 showLoader(true);
                 $http({
-                    method: "POST",
-                    url: "/HoiDongTuDanhGia/edit",
-                    data: { hd: $scope.Info }
-                }).then(
-                  function success(response) {
+                    method: "GET",
+                    url: "/VanBan/getVanBan?page=" + page + "&search=" + search
+                }).then(function mySuccess(response) {
+                    showLoader(false);
 
-                      var result = response.data;
+                    if (response.data.error === 0) {
 
-                      if (result.error == 0) {
+                        $scope.allDanhMuc = response.data.data;
+                        $scope.itemPerPage = response.data.pageSize;
+                        $scope.totalItems = response.data.toltalSize;
+                        $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+                    }
 
-                          showNotify("Đã cập nhật");
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            // goi lay du liẹu
 
-                      } else {
+            $scope.GetData(1, "");
+            //
+            // khoi tao bien dung cho create va edit
+            $scope.Info = {};
+            $scope.IsAction = '';
 
-                          alert(result.msg);
+            $scope.addNew = function () {
 
-                      }
-
-                      showLoader(false);
-
-                  },
-                  function errror(response) {
-                      showLoader(false);
-                      showNotify("connect has disconnect");
-                  }
-              );
+                $scope.Info = { "SoHieu": "", "TenQuyDinh": "","NgayBanHanh":"","CoQuan":"","LinkFile":"","ApDung":"" };
+                $scope.modaltitle = "Thêm quy định";
+                //$scope.ZoneIDDisable = false;
+                $scope.IsAction = 'add';
+                showModel("insertmodal")
+                console.log($scope.Info);
 
             };
+
+            $scope.edit = function (index) {
+
+                var info = $scope.allDanhMuc[index];
+
+                $scope.Info = angular.copy(info);
+                $scope.modaltitle = "Chỉnh sửa quy định";
+                // $scope.CountryIDDisable = true;
+                $scope.IsAction = 'edit';
+                showModel("insertmodal")
+            };
+
+
+            // tim index theo ma tinh
+            function getSelectedIndex(id) {
+                for (var i = 0; i < $scope.allDanhMuc.length; i++)
+                    if ($scope.allDanhMuc[i].NamHoc == id)
+                        return i;
+                return -1;
+            };
+
+            // action
+            $scope.finishForm = function (isValid) {
+                if (isValid) {
+                    if ($scope.IsAction === 'add') {
+                        $scope.sendCreate();
+                    } else if ($scope.IsAction === 'edit') {
+                        $scope.sendEdit();
+                    } else if ($scope.IsAction === 'delete') {
+                        $scope.sendDelete();
+                    }
+
+                } else {
+                    showNotify('our form is missing');
+                }
+            }
+
+
+            // them tinh
+            $scope.sendCreate = function () {
+                showLoader(true);
+                uiUploader.startUpload({
+                    url: '/QuyDinh/create',
+                    paramName: 'fileTaiLieu',
+                    data: $scope.Info ,
+                    onProgress: function (file) {
+                        $scope.$apply();
+                    },
+                    onCompleted: function (file, response) {
+
+                        showLoader(false);
+                        var result = angular.fromJson(response);
+
+                        if (result.error === 0) {
+                            // xoa file hien tai trong danh sach upload
+                            uiUploader.removeAll();
+                            $('#filetailieu').value = "";
+                            $scope.$apply();
+
+                            $scope.allDanhMuc.unshift(result.data);
+
+                            hideModel("insertmodal");
+
+                            showNotify("Đã thêm chức vụ");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    }
+                });
+            };
+
+            // cap nhat tinh
+            $scope.sendEdit = function () {
+                showLoader(true);
+                uiUploader.startUpload({
+                    url: '/QuyDinh/edit',
+                    paramName: 'fileTaiLieu',
+                    data: $scope.Info,
+                    onProgress: function (file) {
+                        $scope.$apply();
+                    },
+                    onCompleted: function (file, response) {
+
+                        showLoader(false);
+                        var result = angular.fromJson(response);
+
+                        if (result.error === 0) {
+                            // xoa file hien tai trong danh sach upload
+                            uiUploader.removeAll();
+                            $('#filetailieu').value = "";
+                            $scope.$apply();
+
+                            $scope.allDanhMuc.unshift(result.data);
+
+                            hideModel("insertmodal");
+
+                            showNotify("Đã thêm chức vụ");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    }
+                });
+            };
+
+            // xoa du lieu
+            $scope.sendDelete = function (index) {
+                var info = $scope.allDanhMuc[index];
+
+                var r = confirm("Bạn muốn xóa không ?");
+                if (r == true) {
+                    showLoader(true);
+
+                    $http({
+                        method: "POST",
+                        url: "/QuyDinh/delete",
+                        data: { id: info.ID }
+                    }).then(
+                        function success(response) {
+
+                            var result = response.data;
+
+                            if (result.error == 0) {
+
+                                // var findIndex = getSelectedIndex(result.data.CountryID);
+
+                                // if (findIndex !== -1) {
+                                $scope.allDanhMuc.splice(index, 1);
+                                //  }
+
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
+
+                        },
+                        function errror(response) {
+                            showLoader(false);
+                            showNotify("connect has disconnect");
+                        }
+                        );
+                } else {
+
+                }
+
+
+            }
+
+
+
+            // upload
+         //   $scope.files = [];
+            var uploadFileTaiLieu = document.getElementById('filetailieu');
+            uploadFileTaiLieu.addEventListener('change', function (e) {
+                uiUploader.removeAll();
+                var files = e.target.files;
+                uiUploader.addFiles(files);
+               // $scope.files = uiUploader.getFiles();
+                $scope.$apply();
+            });
+
         });
+        //-- end controller
 
     </script>
 }
+
+
+
+
+
 

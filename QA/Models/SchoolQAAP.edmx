@@ -316,9 +316,11 @@
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
           </Key>
           <Property Name="ID" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MaTruong" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MaSo" Type="nvarchar" MaxLength="20" />
           <Property Name="TrichYeu" Type="nvarchar" MaxLength="200" />
           <Property Name="NgayBanHanh" Type="date" />
@@ -576,7 +578,6 @@
           <EntitySet Name="DM_ThanhVien" EntityType="SchoolQAAPModel.DM_ThanhVien" />
           <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
           <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
-          <EntitySet Name="DM_VanBan" EntityType="SchoolQAAPModel.DM_VanBan" />
           <EntitySet Name="HT_CanBo" EntityType="SchoolQAAPModel.HT_CanBo" />
           <EntitySet Name="HT_CapHoc" EntityType="SchoolQAAPModel.HT_CapHoc" />
           <EntitySet Name="HT_HocSinhLopHoc" EntityType="SchoolQAAPModel.HT_HocSinhLopHoc" />
@@ -608,6 +609,7 @@
           <EntitySet Name="DM_TieuChuan" EntityType="SchoolQAAPModel.DM_TieuChuan" />
           <EntitySet Name="DM_MinhChung" EntityType="SchoolQAAPModel.DM_MinhChung" />
           <EntitySet Name="DM_TieuChi_ChiSo" EntityType="SchoolQAAPModel.DM_TieuChi_ChiSo" />
+          <EntitySet Name="DM_VanBan" EntityType="SchoolQAAPModel.DM_VanBan" />
         </EntityContainer>
         <ComplexType Name="USER_CHECKACCESS_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -830,21 +832,6 @@
           <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DM_VanBan">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="MaTruong" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="MaSo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TrichYeu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
-          <Property Name="CoQuanBanHanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LinkVanBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BoGiaoDuc" Type="Boolean" />
-        </EntityType>
         <EntityType Name="HT_CanBo">
           <Key>
             <PropertyRef Name="MaCanBo" />
@@ -1058,6 +1045,23 @@
           <Property Name="HienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GoiY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_VanBan">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MaSo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TrichYeu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
+          <Property Name="CoQuanBanHanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LinkVanBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BoGiaoDuc" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1294,21 +1298,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_VanBan">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_VanBan">
-              <MappingFragment StoreEntitySet="DM_VanBan">
-                <ScalarProperty Name="BoGiaoDuc" ColumnName="BoGiaoDuc" />
-                <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
-                <ScalarProperty Name="LinkVanBan" ColumnName="LinkVanBan" />
-                <ScalarProperty Name="CoQuanBanHanh" ColumnName="CoQuanBanHanh" />
-                <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
-                <ScalarProperty Name="TrichYeu" ColumnName="TrichYeu" />
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="HT_CanBo">
             <EntityTypeMapping TypeName="SchoolQAAPModel.HT_CanBo">
               <MappingFragment StoreEntitySet="HT_CanBo">
@@ -1483,6 +1472,22 @@
                 <ScalarProperty Name="ChiSo" ColumnName="ChiSo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_VanBan">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_VanBan">
+              <MappingFragment StoreEntitySet="DM_VanBan">
+                <ScalarProperty Name="BoGiaoDuc" ColumnName="BoGiaoDuc" />
+                <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
+                <ScalarProperty Name="LinkVanBan" ColumnName="LinkVanBan" />
+                <ScalarProperty Name="CoQuanBanHanh" ColumnName="CoQuanBanHanh" />
+                <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
+                <ScalarProperty Name="TrichYeu" ColumnName="TrichYeu" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -38,7 +38,6 @@
     <EntitySet Name="DM_ThanhVien" EntityType="SchoolQAAPModel.DM_ThanhVien" />
     <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
     <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
-    <EntitySet Name="DM_VanBan" EntityType="SchoolQAAPModel.DM_VanBan" />
     <EntitySet Name="HT_CanBo" EntityType="SchoolQAAPModel.HT_CanBo" />
     <EntitySet Name="HT_CapHoc" EntityType="SchoolQAAPModel.HT_CapHoc" />
     <EntitySet Name="HT_HocSinhLopHoc" EntityType="SchoolQAAPModel.HT_HocSinhLopHoc" />
@@ -70,6 +69,7 @@
     <EntitySet Name="DM_TieuChuan" EntityType="SchoolQAAPModel.DM_TieuChuan" />
     <EntitySet Name="DM_MinhChung" EntityType="SchoolQAAPModel.DM_MinhChung" />
     <EntitySet Name="DM_TieuChi_ChiSo" EntityType="SchoolQAAPModel.DM_TieuChi_ChiSo" />
+    <EntitySet Name="DM_VanBan" EntityType="SchoolQAAPModel.DM_VanBan" />
   </EntityContainer>
   <ComplexType Name="USER_CHECKACCESS_Result">
     <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -292,21 +292,6 @@
     <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="DM_VanBan">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="MaTruong" />
-    </Key>
-    <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="MaSo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="TrichYeu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
-    <Property Name="CoQuanBanHanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="LinkVanBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="BoGiaoDuc" Type="Boolean" />
-  </EntityType>
   <EntityType Name="HT_CanBo">
     <Key>
       <PropertyRef Name="MaCanBo" />
@@ -520,5 +505,22 @@
     <Property Name="HienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="GoiY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_VanBan">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MaSo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TrichYeu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
+    <Property Name="CoQuanBanHanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LinkVanBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="BoGiaoDuc" Type="Boolean" />
   </EntityType>
 </Schema>

@@ -44,6 +44,11 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(quydinh.TenQuyDinh) || String.IsNullOrEmpty(quydinh.CoQuan) || String.IsNullOrEmpty(quydinh.SoHieu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
+            var check = db.DM_QuyDinh.Where(p => p.MaTruong == MaTruong && p.SoHieu == quydinh.SoHieu && p.TenQuyDinh == quydinh.TenQuyDinh).FirstOrDefault();
+
+            if (check != null)
+                return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
+
             string path = "";
             string fileSave = "";
             string extension = "";
@@ -59,12 +64,6 @@ namespace QA.Controllers.danhmuc
                 fileTaiLieu.SaveAs(path);
 
             }
-
-
-            var check = db.DM_QuyDinh.Where(p => p.MaTruong == MaTruong && p.SoHieu == quydinh.SoHieu && p.TenQuyDinh == quydinh.TenQuyDinh).FirstOrDefault();
-
-            if (check != null)
-                return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
 
             var maxid = db.DM_QuyDinh.OrderByDescending(x => x.ID).Where(x => x.MaTruong == MaTruong).FirstOrDefault();
             string maxqd = string.Empty;
@@ -86,7 +85,6 @@ namespace QA.Controllers.danhmuc
             return Json(new ResultInfo() { error = 0, msg = "", data = quydinh }, JsonRequestBehavior.AllowGet);
 
         }
-
 
         [HttpPost]
         public ActionResult edit(DM_QuyDinh quydinh)

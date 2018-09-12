@@ -45,7 +45,6 @@ namespace QA.Models
         public virtual DbSet<DM_ThanhVien> DM_ThanhVien { get; set; }
         public virtual DbSet<DM_ThongTinChung> DM_ThongTinChung { get; set; }
         public virtual DbSet<DM_ToChucThucHien> DM_ToChucThucHien { get; set; }
-        public virtual DbSet<DM_VanBan> DM_VanBan { get; set; }
         public virtual DbSet<HT_CanBo> HT_CanBo { get; set; }
         public virtual DbSet<HT_CapHoc> HT_CapHoc { get; set; }
         public virtual DbSet<HT_HocSinhLopHoc> HT_HocSinhLopHoc { get; set; }
@@ -61,6 +60,7 @@ namespace QA.Models
         public virtual DbSet<DM_TieuChuan> DM_TieuChuan { get; set; }
         public virtual DbSet<DM_MinhChung> DM_MinhChung { get; set; }
         public virtual DbSet<DM_TieuChi_ChiSo> DM_TieuChi_ChiSo { get; set; }
+        public virtual DbSet<DM_VanBan> DM_VanBan { get; set; }
     
         public virtual ObjectResult<USER_CHECKACCESS_Result> USER_CHECKACCESS(string groupId, string menuCode)
         {

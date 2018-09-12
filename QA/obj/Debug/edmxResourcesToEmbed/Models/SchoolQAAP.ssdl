@@ -311,9 +311,11 @@
     <Key>
       <PropertyRef Name="ID" />
       <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="ID" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MaSo" Type="nvarchar" MaxLength="20" />
     <Property Name="TrichYeu" Type="nvarchar" MaxLength="200" />
     <Property Name="NgayBanHanh" Type="date" />
