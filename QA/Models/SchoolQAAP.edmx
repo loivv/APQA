@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -337,6 +337,16 @@
           <Property Name="TenCanBo" Type="nvarchar" MaxLength="50" />
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
         </EntityType>
+<<<<<<< HEAD
+=======
+        <EntityType Name="HT_CapHoc">
+          <Key>
+            <PropertyRef Name="IDCapHoc" />
+          </Key>
+          <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+>>>>>>> 7a71f26d9162b987b37176bff236047f1de5b617
         <EntityType Name="HT_HocSinhLopHoc">
           <Key>
             <PropertyRef Name="MaKhoi" />
@@ -601,6 +611,7 @@
           <EntitySet Name="DM_MinhChung" EntityType="SchoolQAAPModel.DM_MinhChung" />
           <EntitySet Name="DM_TieuChi_ChiSo" EntityType="SchoolQAAPModel.DM_TieuChi_ChiSo" />
           <EntitySet Name="DM_VanBan" EntityType="SchoolQAAPModel.DM_VanBan" />
+          <EntitySet Name="HT_CapHoc" EntityType="SchoolQAAPModel.HT_CapHoc" />
         </EntityContainer>
         <ComplexType Name="USER_CHECKACCESS_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -1047,6 +1058,13 @@
           <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="BoGiaoDuc" Type="Boolean" />
         </EntityType>
+        <EntityType Name="HT_CapHoc">
+          <Key>
+            <PropertyRef Name="IDCapHoc" />
+          </Key>
+          <Property Name="IDCapHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1464,6 +1482,14 @@
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HT_CapHoc">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_CapHoc">
+              <MappingFragment StoreEntitySet="HT_CapHoc">
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

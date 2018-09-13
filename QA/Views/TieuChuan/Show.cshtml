@@ -85,8 +85,8 @@
                             </div>
                             <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Kết thúc</label>
-                                <input type="text" class="form-control" ng-model="Info.MoDau" required />
+                                <label>Kết luận</label>
+                                <input type="text" class="form-control" ng-model="Info.KetLuan" required />
                             </div>
                         </div>
 
@@ -162,7 +162,7 @@
 
             $scope.addNew = function () {
 
-                $scope.Info = { "ID": "", "NoiDung": "" };
+                $scope.Info = { "ID": "", "NoiDung": "","MoDau":"","KetLuan":"" };
 
                 $scope.modaltitle = "Thêm tiêu chuẩn";
                 //$scope.ZoneIDDisable = false;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -334,9 +334,9 @@
   </EntityType>
   <EntityType Name="HT_CapHoc">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="IDCapHoc" />
     </Key>
-    <Property Name="ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Ten" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="HT_HocSinhLopHoc">

@@ -96,6 +96,19 @@ namespace QA.Models
         public string NhiemVu { get; set; }
         public string TenNhom { get; set; }
 
+    }
+    public class VanBan
+    {
+
+        public string ID { get; set; }
+        public string MaTruong { get; set; }
+        public string MaSo { get; set; }
+        public string TrichYeu { get; set; }
+        public string CoQuanBanHanh { get; set; }
+        public bool BoGiaoDuc { get; set; }
+        public DateTime NgayBanHanh { get; set; }
+        public string CapHoc { get; set; }
+        public string LinkVanBan { get; set; }
 
     }
 }

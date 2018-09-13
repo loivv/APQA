@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QA.Models;
+using System.Data.SqlClient;
 namespace QA.Controllers.danhmuc
 {
     public class VanBanController : BaseController
@@ -12,6 +13,7 @@ namespace QA.Controllers.danhmuc
         // GET: /VanBan/
         public ActionResult Show()
         {
+          
             ViewBag.AllCapHoc = db.HT_CapHoc.ToList();
             return View();
         }
@@ -24,7 +26,9 @@ namespace QA.Controllers.danhmuc
             int pageNumber = (page ?? 1);
 
 
-            var data = db.DM_VanBan.Where(p => p.TrichYeu.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
+          //  var data = db.DM_VanBan.Where(p => p.TrichYeu.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var data = db.Database.SqlQuery<VanBan>("GET_VANBAN_CAPHOC @MaTruong", matruong).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -44,16 +48,36 @@ namespace QA.Controllers.danhmuc
         public ActionResult create(DM_VanBan vanban, HttpPostedFileBase fileTaiLieu,string ngay)
         {
 
-            if (String.IsNullOrEmpty(vanban.NamHoc))
+            if (String.IsNullOrEmpty(vanban.MaSo) || String.IsNullOrEmpty(vanban.TrichYeu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
+<<<<<<< HEAD
             DateTime Ngay = DateTime.Parse(ngay);
             var check = db.DM_VanBan.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+=======
 
-            if (check != null)
-                return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
+           // var check = db.DM_VanBan.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+>>>>>>> 7a71f26d9162b987b37176bff236047f1de5b617
+
+            //if (check != null)
+              //  return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
             string path = "";
             string fileSave = "";
             string extension = "";
+<<<<<<< HEAD
+=======
+            if (fileTaiLieu != null && fileTaiLieu.ContentLength > 0)
+            {
+                extension = System.IO.Path.GetExtension(fileTaiLieu.FileName);
+                fileSave = "VBN" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                path = Server.MapPath("~/TaiLieu/VanBan/" + fileSave);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                fileTaiLieu.SaveAs(path);
+
+            }
+>>>>>>> 7a71f26d9162b987b37176bff236047f1de5b617
             //lay ra max manhom
             var maxid = db.DM_VanBan.OrderByDescending(x => x.ID).Where(x => x.MaTruong == MaTruong && x.NamHoc == NamHoc).FirstOrDefault();
             string maxndg = string.Empty;
