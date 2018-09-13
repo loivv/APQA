@@ -303,7 +303,22 @@
     <Compile Include="Models\DM_VanBan.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GET_NHOMDANHGIA_Result.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GET_NHOMDANHGIA_THUKY_Result.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GET_THANHVIEN_Result.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GET_VANBAN_CAPHOC_Result.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HT_CanBo.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HT_CapHoc.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HT_HocSinhLopHoc.cs">

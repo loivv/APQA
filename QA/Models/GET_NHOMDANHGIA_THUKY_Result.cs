@@ -11,12 +11,13 @@ namespace QA.Models
 {
     using System;
     
-    public partial class GET_THANHVIEN_Result
+    public partial class GET_NHOMDANHGIA_THUKY_Result
     {
-        public string MaThanhVien { get; set; }
-        public string TenThanhVien { get; set; }
-        public string MaTruong { get; set; }
+        public string MaNhom { get; set; }
+        public string TenNhom { get; set; }
         public string NhiemVu { get; set; }
+        public Nullable<bool> ThuKy { get; set; }
+        public string TenThanhVien { get; set; }
         public string ChucVu { get; set; }
     }
 }

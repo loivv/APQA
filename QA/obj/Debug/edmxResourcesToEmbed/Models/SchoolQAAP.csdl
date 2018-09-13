@@ -1,118 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SchoolQAAPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="SchoolQAAPEntities" annotation:LazyLoadingEnabled="true">
-    <FunctionImport Name="USER_CHECKACCESS" ReturnType="Collection(SchoolQAAPModel.USER_CHECKACCESS_Result)">
-      <Parameter Name="groupId" Mode="In" Type="String" />
-      <Parameter Name="menuCode" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="USER_GETMENU">
-      <Parameter Name="user" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="USER_GETROLE">
-      <Parameter Name="user" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="NhomDanhGia_ThanhVien" ReturnType="Collection(SchoolQAAPModel.NhomDanhGia_ThanhVien_Result)">
-      <Parameter Name="manhom" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="GET_THANHVIEN">
-      <Parameter Name="MaTruong" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="GET_THANHVIEN1">
-      <Parameter Name="MaTruong" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="C__MigrationHistory" EntityType="SchoolQAAPModel.C__MigrationHistory" />
-    <EntitySet Name="AspNetRoles" EntityType="SchoolQAAPModel.AspNetRole" />
-    <EntitySet Name="AspNetUserClaims" EntityType="SchoolQAAPModel.AspNetUserClaim" />
-    <EntitySet Name="AspNetUserLogins" EntityType="SchoolQAAPModel.AspNetUserLogin" />
-    <EntitySet Name="AspNetUsers" EntityType="SchoolQAAPModel.AspNetUser" />
-    <EntitySet Name="DM_ChucVu" EntityType="SchoolQAAPModel.DM_ChucVu" />
-    <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="SchoolQAAPModel.DM_HoiDongTuDanhGia" />
-    <EntitySet Name="DM_MucDichPhamVi" EntityType="SchoolQAAPModel.DM_MucDichPhamVi" />
-    <EntitySet Name="DM_NamHoc" EntityType="SchoolQAAPModel.DM_NamHoc" />
-    <EntitySet Name="DM_NhiemVu" EntityType="SchoolQAAPModel.DM_NhiemVu" />
-    <EntitySet Name="DM_NhomDanhGia" EntityType="SchoolQAAPModel.DM_NhomDanhGia" />
-    <EntitySet Name="DM_NhomDanhGiaChiTiet" EntityType="SchoolQAAPModel.DM_NhomDanhGiaChiTiet" />
-    <EntitySet Name="DM_NhomTuDanhGia" EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" />
-    <EntitySet Name="DM_NLCSVCTaiChinh" EntityType="SchoolQAAPModel.DM_NLCSVCTaiChinh" />
-    <EntitySet Name="DM_SoLop" EntityType="SchoolQAAPModel.DM_SoLop" />
-    <EntitySet Name="DM_ThanhVien" EntityType="SchoolQAAPModel.DM_ThanhVien" />
-    <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
-    <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
-    <EntitySet Name="HT_CanBo" EntityType="SchoolQAAPModel.HT_CanBo" />
-    <EntitySet Name="HT_HocSinhLopHoc" EntityType="SchoolQAAPModel.HT_HocSinhLopHoc" />
-    <EntitySet Name="HT_PhongHoc" EntityType="SchoolQAAPModel.HT_PhongHoc" />
-    <EntitySet Name="UMS_GroupMenu" EntityType="SchoolQAAPModel.UMS_GroupMenu" />
-    <EntitySet Name="UMS_Menu" EntityType="SchoolQAAPModel.UMS_Menu" />
-    <EntitySet Name="UMS_MenuGroupUser" EntityType="SchoolQAAPModel.UMS_MenuGroupUser" />
-    <EntitySet Name="UserPostOptions" EntityType="SchoolQAAPModel.UserPostOption" />
-    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="SchoolQAAPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUser" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="SchoolQAAPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUser" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
-    </AssociationSet>
-    <AssociationSet Name="FK__UMS_Menu__GroupM__6754599E" Association="SchoolQAAPModel.FK__UMS_Menu__GroupM__6754599E">
-      <End Role="UMS_GroupMenu" EntitySet="UMS_GroupMenu" />
-      <End Role="UMS_Menu" EntitySet="UMS_Menu" />
-    </AssociationSet>
-    <AssociationSet Name="AspNetUserRoles" Association="SchoolQAAPModel.AspNetUserRoles">
-      <End Role="AspNetRole" EntitySet="AspNetRoles" />
-      <End Role="AspNetUser" EntitySet="AspNetUsers" />
-    </AssociationSet>
-    <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" />
-    <EntitySet Name="DM_ThoiGianBieu" EntityType="SchoolQAAPModel.DM_ThoiGianBieu" />
-    <EntitySet Name="DM_QuyDinh" EntityType="SchoolQAAPModel.DM_QuyDinh" />
-    <EntitySet Name="DM_TieuChi" EntityType="SchoolQAAPModel.DM_TieuChi" />
-    <EntitySet Name="DM_TieuChuan" EntityType="SchoolQAAPModel.DM_TieuChuan" />
-    <EntitySet Name="DM_MinhChung" EntityType="SchoolQAAPModel.DM_MinhChung" />
-    <EntitySet Name="DM_TieuChi_ChiSo" EntityType="SchoolQAAPModel.DM_TieuChi_ChiSo" />
-    <EntitySet Name="DM_VanBan" EntityType="SchoolQAAPModel.DM_VanBan" />
-    <EntitySet Name="HT_CapHoc" EntityType="SchoolQAAPModel.HT_CapHoc" />
-  </EntityContainer>
-  <ComplexType Name="USER_CHECKACCESS_Result">
-    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
-    <Property Type="String" Name="MenuId" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="GroupUserId" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="CanEdit" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="NhomDanhGia_ThanhVien_Result">
-    <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
-    <Property Type="String" Name="TenNhom" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="MaNhanVien" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="TenThanhVien" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="NhiemVu" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="ChucVu" Nullable="true" MaxLength="50" />
-    <Property Type="Boolean" Name="TruongNhom" Nullable="true" />
-  </ComplexType>
   <EntityType Name="C__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
       <PropertyRef Name="ContextKey" />
     </Key>
-    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetRole">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUsers" Relationship="SchoolQAAPModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUser" Relationship="SchoolQAAPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="AspNetUserLogin">
     <Key>
@@ -120,16 +34,16 @@
       <PropertyRef Name="ProviderKey" />
       <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUser" Relationship="SchoolQAAPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
   </EntityType>
   <EntityType Name="AspNetUser">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
     <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -140,19 +54,19 @@
     <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
     <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
     <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUserClaims" Relationship="SchoolQAAPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-    <NavigationProperty Name="AspNetUserLogins" Relationship="SchoolQAAPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-    <NavigationProperty Name="AspNetRoles" Relationship="SchoolQAAPModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
   </EntityType>
   <EntityType Name="DM_ChucVu">
     <Key>
       <PropertyRef Name="ID" />
       <PropertyRef Name="MaTruong" />
     </Key>
-    <Property Name="ID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DM_HoiDongTuDanhGia">
@@ -160,15 +74,32 @@
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MoDau" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_MinhChung">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="MaMC" />
+    </Key>
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaMC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenMC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="SoHieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CoQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LinkFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TieuChuan" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="TieuChi" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DM_MucDichPhamVi">
     <Key>
       <PropertyRef Name="MaTruong" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MucDich" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="PhamVi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -178,7 +109,7 @@
     <Key>
       <PropertyRef Name="NamHoc" />
     </Key>
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TuNgay" Type="DateTime" Precision="0" />
     <Property Name="DenNgay" Type="DateTime" Precision="0" />
     <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -189,9 +120,9 @@
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="MaNhiemVu" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaNhiemVu" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NhiemVu" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaNhiemVu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NhiemVu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="STT" Type="Int32" />
   </EntityType>
   <EntityType Name="DM_NhomDanhGia">
@@ -199,8 +130,8 @@
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="MaNhom" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaNhom" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TenNhom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="ThuKy" Type="Boolean" />
     <Property Name="STT" Type="Int32" />
@@ -212,9 +143,9 @@
       <PropertyRef Name="MaNhom" />
       <PropertyRef Name="MaNhanVien" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaNhom" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaNhanVien" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaNhom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TruongNhom" Type="Boolean" />
   </EntityType>
   <EntityType Name="DM_NhomTuDanhGia">
@@ -222,8 +153,8 @@
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MoDau" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DM_NLCSVCTaiChinh">
@@ -231,10 +162,24 @@
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="NhanLuc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="CSVCTC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_QuyDinh">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="MaTruong" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SoHieu" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="TenQuyDinh" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
+    <Property Name="CoQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LinkFile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ApDung" Type="Boolean" />
   </EntityType>
   <EntityType Name="DM_SoLop">
     <Key>
@@ -242,29 +187,53 @@
       <PropertyRef Name="NamHoc" />
       <PropertyRef Name="LopHoc" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="LopHoc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LopHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SoLuong" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DM_TapHuanTuDanhGia">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ThoiGian" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ThanhPhan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DM_ThanhVien">
     <Key>
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="MaThanhVien" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaThanhVien" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaThanhVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TenThanhVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ChucVu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="NhiemVu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="UserLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="DM_ThoiGianBieu">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="Tuan" />
+    </Key>
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tuan" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TuNgay" Type="DateTime" Precision="0" />
+    <Property Name="DenNgay" Type="DateTime" Precision="0" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="DM_ThongTinChung">
     <Key>
       <PropertyRef Name="MaTruong" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TenTruongMoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="TenTruongCu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="CoQuanChuQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -285,65 +254,133 @@
     <Property Name="GhiChuKhac" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="DM_TieuChi">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DiemManh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DiemYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KeHoach" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TuDanhGia" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DM_TieuChi_ChiSo">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ChiSo" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ChiSo" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="HienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GoiY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_TieuChuan">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="DM_ToChucThucHien">
     <Key>
       <PropertyRef Name="MaTruong" />
     </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_VanBan">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaTruong" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaSo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TrichYeu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
+    <Property Name="CoQuanBanHanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LinkVanBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="BoGiaoDuc" Type="Boolean" />
   </EntityType>
   <EntityType Name="HT_CanBo">
     <Key>
       <PropertyRef Name="MaCanBo" />
     </Key>
-    <Property Name="MaCanBo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MaCanBo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TenCanBo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="HT_CapHoc">
+    <Key>
+      <PropertyRef Name="IDCapHoc" />
+    </Key>
+    <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="HT_HocSinhLopHoc">
     <Key>
       <PropertyRef Name="MaKhoi" />
       <PropertyRef Name="LopHoc" />
     </Key>
-    <Property Name="MaKhoi" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="LopHoc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MaKhoi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LopHoc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <EntityType Name="HT_PhongHoc">
     <Key>
       <PropertyRef Name="MaLoai" />
     </Key>
-    <Property Name="MaLoai" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MaLoai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="UMS_GroupMenu">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="Int32" />
     <Property Name="Icon" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Int32" />
-    <NavigationProperty Name="UMS_Menu" Relationship="SchoolQAAPModel.FK__UMS_Menu__GroupM__6754599E" FromRole="UMS_GroupMenu" ToRole="UMS_Menu" />
+    <NavigationProperty Name="UMS_Menu" Relationship="Self.FK__UMS_Menu__GroupM__6754599E" FromRole="UMS_GroupMenu" ToRole="UMS_Menu" />
   </EntityType>
   <EntityType Name="UMS_Menu">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Icon" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="GroupMenuId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="Int32" />
     <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="UMS_GroupMenu" Relationship="SchoolQAAPModel.FK__UMS_Menu__GroupM__6754599E" FromRole="UMS_Menu" ToRole="UMS_GroupMenu" />
+    <NavigationProperty Name="UMS_GroupMenu" Relationship="Self.FK__UMS_Menu__GroupM__6754599E" FromRole="UMS_Menu" ToRole="UMS_GroupMenu" />
   </EntityType>
   <EntityType Name="UMS_MenuGroupUser">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MenuId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="GroupUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="CanEdit" Type="Int32" />
@@ -352,41 +389,41 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TUser" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="TPostId" Type="String" MaxLength="129" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-    <End Type="SchoolQAAPModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Type="SchoolQAAPModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="AspNetUser">
+      <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="AspNetUserClaim">
+      <Dependent Role="AspNetUserClaims">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-    <End Type="SchoolQAAPModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Type="SchoolQAAPModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="AspNetUser">
+      <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="AspNetUserLogin">
+      <Dependent Role="AspNetUserLogins">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__UMS_Menu__GroupM__6754599E">
-    <End Type="SchoolQAAPModel.UMS_GroupMenu" Role="UMS_GroupMenu" Multiplicity="0..1" />
-    <End Type="SchoolQAAPModel.UMS_Menu" Role="UMS_Menu" Multiplicity="*" />
+    <End Role="UMS_GroupMenu" Type="Self.UMS_GroupMenu" Multiplicity="0..1" />
+    <End Role="UMS_Menu" Type="Self.UMS_Menu" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UMS_GroupMenu">
         <PropertyRef Name="Id" />
@@ -397,130 +434,134 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="AspNetUserRoles">
-    <End Type="SchoolQAAPModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-    <End Type="SchoolQAAPModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
   </Association>
-  <EntityType Name="DM_TapHuanTuDanhGia">
-    <Key>
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-    </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="ThoiGian" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ThanhPhan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DM_ThoiGianBieu">
-    <Key>
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-      <PropertyRef Name="Tuan" />
-    </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Tuan" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="TuNgay" Type="DateTime" Precision="0" />
-    <Property Name="DenNgay" Type="DateTime" Precision="0" />
-    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DM_QuyDinh">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="MaTruong" />
-    </Key>
-    <Property Name="ID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="SoHieu" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="TenQuyDinh" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-    <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
-    <Property Name="CoQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="LinkFile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="ApDung" Type="Boolean" />
-  </EntityType>
-  <EntityType Name="DM_TieuChi">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-    </Key>
-    <Property Name="ID" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="DiemManh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DiemYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="KeHoach" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="TuDanhGia" Type="Boolean" />
-  </EntityType>
-  <EntityType Name="DM_TieuChuan">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DM_MinhChung">
-    <Key>
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-      <PropertyRef Name="MaMC" />
-    </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaMC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="TenMC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="SoHieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CoQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="LinkFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="TieuChuan" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="TieuChi" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DM_TieuChi_ChiSo">
-    <Key>
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="ChiSo" />
-      <PropertyRef Name="NamHoc" />
-    </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="ID" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="ChiSo" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="HienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="GoiY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DM_VanBan">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-    </Key>
-    <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="MaSo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="TrichYeu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
-    <Property Name="CoQuanBanHanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="LinkVanBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="BoGiaoDuc" Type="Boolean" />
-  </EntityType>
-  <EntityType Name="HT_CapHoc">
-    <Key>
-      <PropertyRef Name="IDCapHoc" />
-    </Key>
-    <Property Name="IDCapHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
+  <EntityContainer Name="SchoolQAAPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" />
+    <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" />
+    <EntitySet Name="DM_MinhChung" EntityType="Self.DM_MinhChung" />
+    <EntitySet Name="DM_MucDichPhamVi" EntityType="Self.DM_MucDichPhamVi" />
+    <EntitySet Name="DM_NamHoc" EntityType="Self.DM_NamHoc" />
+    <EntitySet Name="DM_NhiemVu" EntityType="Self.DM_NhiemVu" />
+    <EntitySet Name="DM_NhomDanhGia" EntityType="Self.DM_NhomDanhGia" />
+    <EntitySet Name="DM_NhomDanhGiaChiTiet" EntityType="Self.DM_NhomDanhGiaChiTiet" />
+    <EntitySet Name="DM_NhomTuDanhGia" EntityType="Self.DM_NhomTuDanhGia" />
+    <EntitySet Name="DM_NLCSVCTaiChinh" EntityType="Self.DM_NLCSVCTaiChinh" />
+    <EntitySet Name="DM_QuyDinh" EntityType="Self.DM_QuyDinh" />
+    <EntitySet Name="DM_SoLop" EntityType="Self.DM_SoLop" />
+    <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="Self.DM_TapHuanTuDanhGia" />
+    <EntitySet Name="DM_ThanhVien" EntityType="Self.DM_ThanhVien" />
+    <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" />
+    <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" />
+    <EntitySet Name="DM_TieuChi" EntityType="Self.DM_TieuChi" />
+    <EntitySet Name="DM_TieuChi_ChiSo" EntityType="Self.DM_TieuChi_ChiSo" />
+    <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" />
+    <EntitySet Name="DM_ToChucThucHien" EntityType="Self.DM_ToChucThucHien" />
+    <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" />
+    <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" />
+    <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" />
+    <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" />
+    <EntitySet Name="HT_PhongHoc" EntityType="Self.HT_PhongHoc" />
+    <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" />
+    <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" />
+    <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" />
+    <EntitySet Name="UserPostOptions" EntityType="Self.UserPostOption" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UMS_Menu__GroupM__6754599E" Association="Self.FK__UMS_Menu__GroupM__6754599E">
+      <End Role="UMS_GroupMenu" EntitySet="UMS_GroupMenu" />
+      <End Role="UMS_Menu" EntitySet="UMS_Menu" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <FunctionImport Name="GET_NHOMDANHGIA" ReturnType="Collection(SchoolQAAPModel.GET_NHOMDANHGIA_Result)">
+      <Parameter Name="MaTruong" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GET_NHOMDANHGIA_THUKY" ReturnType="Collection(SchoolQAAPModel.GET_NHOMDANHGIA_THUKY_Result)">
+      <Parameter Name="MaTruong" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GET_THANHVIEN" ReturnType="Collection(SchoolQAAPModel.GET_THANHVIEN_Result)">
+      <Parameter Name="MaTruong" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GET_VANBAN_CAPHOC" ReturnType="Collection(SchoolQAAPModel.GET_VANBAN_CAPHOC_Result)">
+      <Parameter Name="MaTruong" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="NhomDanhGia_ThanhVien" ReturnType="Collection(SchoolQAAPModel.NhomDanhGia_ThanhVien_Result)">
+      <Parameter Name="manhom" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="USER_CHECKACCESS" ReturnType="Collection(SchoolQAAPModel.USER_CHECKACCESS_Result)">
+      <Parameter Name="groupId" Mode="In" Type="String" />
+      <Parameter Name="menuCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="USER_GETMENU">
+      <Parameter Name="user" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="USER_GETROLE">
+      <Parameter Name="user" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GET_NHOMDANHGIA_Result">
+    <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TenNhom" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NhiemVu" Nullable="true" MaxLength="200" />
+    <Property Type="Boolean" Name="ThuKy" Nullable="true" />
+    <Property Type="String" Name="TenThanhVien" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ChucVu" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GET_NHOMDANHGIA_THUKY_Result">
+    <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TenNhom" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NhiemVu" Nullable="true" MaxLength="200" />
+    <Property Type="Boolean" Name="ThuKy" Nullable="true" />
+    <Property Type="String" Name="TenThanhVien" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ChucVu" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GET_THANHVIEN_Result">
+    <Property Type="String" Name="MaThanhVien" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TenThanhVien" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MaTruong" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="NhiemVu" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ChucVu" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GET_VANBAN_CAPHOC_Result">
+    <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="MaTruong" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="MaSo" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="TrichYeu" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="CoQuanBanHanh" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="BoGiaoDuc" Nullable="true" />
+    <Property Type="DateTime" Name="NgayBanHanh" Nullable="true" />
+    <Property Type="String" Name="IDCapHoc" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="CapHoc" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LinkVanBan" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="NhomDanhGia_ThanhVien_Result">
+    <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="TenNhom" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="MaNhanVien" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="TenThanhVien" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="NhiemVu" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="ChucVu" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="TruongNhom" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="USER_CHECKACCESS_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="MenuId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="GroupUserId" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="CanEdit" Nullable="true" />
+  </ComplexType>
 </Schema>

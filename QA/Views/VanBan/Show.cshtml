@@ -94,13 +94,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Ngày ban hành</label>
-                                    <input type="date"  class="form-control" ng-model="Info.NgayBanHanh" required />
+                                    <input type="date" class="form-control" required  id="datebanhanh" ng-model="Info.NgayBanHanh"/>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Cơ quan</label>
-                                    <input type="text" class="form-control" ng-model="Info.CoQuanBanHanh" required />
+                                    <input type="text"  class="form-control" ng-model="Info.CoQuanBanHanh" required />
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -140,13 +140,14 @@
 @section scripts {
 
     <script>
-        
+
+    
         // tao controller
         var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader']);
 
         app.controller('myCtrl', function ($scope, $http, uiUploader) {
 
-           
+
             $scope.allcaphoc = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllCapHoc))');
             // phan trang
             $scope.numPages;
@@ -171,6 +172,7 @@
                     if (response.data.error === 0) {
 
                         $scope.allDanhMuc = response.data.data;
+                        console.log($scope.allDanhMuc);
                         $scope.itemPerPage = response.data.pageSize;
                         $scope.totalItems = response.data.toltalSize;
                         $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
@@ -222,7 +224,6 @@
 
             // action
             $scope.finishForm = function (isValid) {
-                if (isValid) {
                     if ($scope.IsAction === 'add') {
                         $scope.sendCreate();
                     } else if ($scope.IsAction === 'edit') {
@@ -230,24 +231,20 @@
                     } else if ($scope.IsAction === 'delete') {
                         $scope.sendDelete();
                     }
-
-                } else {
-                    showNotify('our form is missing');
-                }
             }
 
 
             // them tinh
             $scope.sendCreate = function () {
                 showLoader(true);
+                var dateBH = $('#datebanhanh').val();
+                console.log($scope.Info);
                 uiUploader.startUpload({
                     url: '/VanBan/create',
                     paramName: 'fileTaiLieu',
-<<<<<<< HEAD
-                    data: { $scope.Info , ngay: $scope.Info.NgayBanHanh} ,
-=======
-                    data: $scope.Info,
->>>>>>> 7a71f26d9162b987b37176bff236047f1de5b617
+                    data: {
+                        vanban : $scope.Info, ngaybanhanh: dateBH
+                    },
                     onProgress: function (file) {
                         $scope.$apply();
                     },
@@ -286,7 +283,7 @@
                 uiUploader.startUpload({
                     url: '/VanBan/edit',
                     paramName: 'fileTaiLieu',
-                    data: { $scope.Info, ngay: $scope.Info.NgayBanHanh } ,
+                    data: { vanban: $scope.Info, ngaybanhanh: $scope.Info.NgayBanHanh },
                     onProgress: function (file) {
                         $scope.$apply();
                     },
