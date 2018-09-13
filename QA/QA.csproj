@@ -306,9 +306,6 @@
     <Compile Include="Models\HT_CanBo.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HT_CapHoc.cs">
-      <DependentUpon>SchoolQAAP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\HT_HocSinhLopHoc.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>

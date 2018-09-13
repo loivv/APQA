@@ -41,12 +41,12 @@ namespace QA.Controllers.danhmuc
         }
 
         [HttpPost]
-        public ActionResult create(DM_VanBan vanban, HttpPostedFileBase fileTaiLieu)
+        public ActionResult create(DM_VanBan vanban, HttpPostedFileBase fileTaiLieu,string ngay)
         {
 
             if (String.IsNullOrEmpty(vanban.NamHoc))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
-
+            DateTime Ngay = DateTime.Parse(ngay);
             var check = db.DM_VanBan.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check != null)
@@ -54,18 +54,6 @@ namespace QA.Controllers.danhmuc
             string path = "";
             string fileSave = "";
             string extension = "";
-            if (fileTaiLieu != null && fileTaiLieu.ContentLength > 0)
-            {
-                extension = System.IO.Path.GetExtension(fileTaiLieu.FileName);
-                fileSave = "tailieu" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
-                path = Server.MapPath("~/TaiLieu/VanBan/" + fileSave);
-                if (System.IO.File.Exists(path))
-                {
-                    System.IO.File.Delete(path);
-                }
-                fileTaiLieu.SaveAs(path);
-
-            }
             //lay ra max manhom
             var maxid = db.DM_VanBan.OrderByDescending(x => x.ID).Where(x => x.MaTruong == MaTruong && x.NamHoc == NamHoc).FirstOrDefault();
             string maxndg = string.Empty;
@@ -77,6 +65,19 @@ namespace QA.Controllers.danhmuc
             {
                 maxndg = "VBN0001";
             }
+            if (fileTaiLieu != null && fileTaiLieu.ContentLength > 0)
+            {
+                extension = System.IO.Path.GetExtension(fileTaiLieu.FileName);
+                fileSave = MaTruong+ "_VBN" + maxndg + extension;
+                path = Server.MapPath("~/TaiLieu/VanBan/" + fileSave);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                fileTaiLieu.SaveAs(path);
+
+            }           
+            vanban.NgayBanHanh = Ngay;
             vanban.ID = maxndg;
             vanban.MaTruong = MaTruong;
             vanban.NamHoc = NamHoc;
@@ -88,11 +89,11 @@ namespace QA.Controllers.danhmuc
         }
 
         [HttpPost]
-        public ActionResult edit(DM_VanBan vanban, HttpPostedFileBase fileTaiLieu)
+        public ActionResult edit(DM_VanBan vanban, HttpPostedFileBase fileTaiLieu,string ngay)
         {
             if (String.IsNullOrEmpty(vanban.MaSo) || String.IsNullOrEmpty(vanban.TrichYeu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
-
+            DateTime Ngay = DateTime.Parse(ngay);
             var check = db.DM_VanBan.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc && p.ID == vanban.ID).FirstOrDefault();
 
             if (check == null)
@@ -104,7 +105,7 @@ namespace QA.Controllers.danhmuc
             if (fileTaiLieu != null && fileTaiLieu.ContentLength > 0)
             {
                 extension = System.IO.Path.GetExtension(fileTaiLieu.FileName);
-                fileSave = "tailieu" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                fileSave = MaTruong+ "_VBN" + vanban.ID + extension;
                 path = Server.MapPath("~/TaiLieu/VanBan/" + fileSave);
                 if (System.IO.File.Exists(path))
                 {
@@ -117,7 +118,7 @@ namespace QA.Controllers.danhmuc
             check.NamHoc = NamHoc;
             check.MaSo = vanban.MaSo;
             check.TrichYeu = vanban.TrichYeu;
-            check.NgayBanHanh = vanban.NgayBanHanh;
+            check.NgayBanHanh = Ngay;
             check.LinkVanBan = vanban.LinkVanBan;
             check.IDCapHoc = vanban.IDCapHoc;
             check.BoGiaoDuc = vanban.BoGiaoDuc;

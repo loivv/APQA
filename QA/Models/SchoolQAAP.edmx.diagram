@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThongTinChung" Width="1.5" PointX="11.75" PointY="7.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ToChucThucHien" Width="1.5" PointX="4.75" PointY="12.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_CanBo" Width="1.5" PointX="8.75" PointY="12.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_CapHoc" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_HocSinhLopHoc" Width="1.5" PointX="0.75" PointY="13.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_PhongHoc" Width="1.5" PointX="13.75" PointY="3.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.UMS_GroupMenu" Width="1.5" PointX="0.75" PointY="7.125" />

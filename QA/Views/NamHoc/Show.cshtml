@@ -85,7 +85,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Năm hiện tại</label>
-                                    <input type="checkbox" maxlength="10" class="form-control" ng-model="Info.NamHienTai" required />
+                                    <input type="checkbox"  class="form-control" ng-model="Info.NamHienTai" ng-checked="item.NamHienTai" />
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -100,7 +100,7 @@
                                     <input type="date" maxlength="10" class="form-control" ng-model="Info.DenNgay" required />
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                     <!-- end body-->
@@ -127,7 +127,6 @@
 
         // tao controller
         var app = angular.module('myApp', ['ui.bootstrap']);
-
         app.controller('myCtrl', function ($scope, $http) {
 
             // phan trang
@@ -172,7 +171,7 @@
             $scope.IsAction = '';
 
             $scope.addNew = function () {
-                $scope.Info = { "NamHoc": "","NamHienTai":"","TuNgay":"","DenNgay":""};
+                $scope.Info = { "NamHoc": "", "NamHienTai": "", "TuNgay": "", "DenNgay": "" };
                 $scope.modaltitle = "Thêm năm học";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
@@ -182,11 +181,9 @@
 
             $scope.edit = function (index) {
                 var info = $scope.allDanhMuc[index];
-
                 $scope.Info = angular.copy(info);
 
                 $scope.modaltitle = "Chỉnh sửa năm học";
-               // $scope.CountryIDDisable = true;
                 $scope.IsAction = 'edit';
                 showModel("insertmodal")
             };
@@ -202,36 +199,33 @@
             // action
 
             $scope.finishForm = function (isValid) {
-                console.log($scope.Info.TuNgay);
-                if (isValid) {
-                    if ($scope.IsAction === 'add') {                     
-                        $scope.sendCreate();
-                    } else if ($scope.IsAction === 'edit') {
-                        $scope.sendEdit();
-                    } else if ($scope.IsAction === 'delete') {
-                        $scope.Info = angular.copy(info);
-                        $scope.sendDelete();
-                    }
-
-                } else {
-                    showNotify('our form is missing');
+                if ($scope.IsAction === 'add') {
+                    $scope.sendCreate();
+                } else if ($scope.IsAction === 'edit') {
+                    $scope.sendEdit();
+                } else if ($scope.IsAction === 'delete') {
+                    $scope.Info = angular.copy(info);
+                    $scope.sendDelete();
                 }
+
+
             }
 
 
             // them tinh
             $scope.sendCreate = function () {
                 showLoader(true);
+               
                 $http({
                     method: "POST",
                     url: "/NamHoc/create",
-                    data: { namhoc:$scope.Info }
+                    data: { namhoc: $scope.Info, tuNgay: $scope.Info.TuNgay, denNgay: $scope.Info.DenNgay, ht: $scope.Info.NamHienTai }
                 }).then(function success(response) {
-                   
+
                     var result = response.data;
                     console.log(result);
                     if (result.error === 0) {
-
+                        $scope.GetData(1, "");
                         $scope.allDanhMuc.unshift(result.data);
 
                         hideModel("insertmodal");
@@ -247,25 +241,25 @@
                     showLoader(false);
 
                 }
-                , function error(response) {
-                    showNotify("connect has disconnect");
-                    showLoader(false);
-                });
+                    , function error(response) {
+                        showNotify("connect has disconnect");
+                        showLoader(false);
+                    });
 
             };
 
             // cap nhat tinh
             $scope.sendEdit = function () {
 
-                showLoader(true);
-
+                showLoader(true); 
+                console.log($scope.Info.NamHienTai);
                 $http({
                     method: "POST",
                     url: "/NamHoc/edit",
-                    data: { namhoc: $scope.Info }
+                    data: { namhoc: $scope.Info, tuNgay: $scope.Info.TuNgay, denNgay: $scope.Info.DenNgay, ht: $scope.Info.NamHienTai}
                 }).then(
                     function success(response) {
-
+                        $scope.GetData(1, "");
                         var result = response.data;
 
                         if (result.error == 0) {
@@ -292,12 +286,12 @@
                         showLoader(false);
                         showNotify("connect has disconnect");
                     }
-                );
+                    );
             }
 
             // xoa du lieu
             $scope.sendDelete = function (index) {
-                var info = $scope.allDanhMuc[index];               
+                var info = $scope.allDanhMuc[index];
                 var r = confirm("Bạn muốn xóa không ?");
                 if (r == true) {
                     showLoader(true);
@@ -313,11 +307,11 @@
 
                             if (result.error == 0) {
 
-                               // var findIndex = getSelectedIndex(result.data.CountryID);
+                                // var findIndex = getSelectedIndex(result.data.CountryID);
 
-                               // if (findIndex !== -1) {
+                                // if (findIndex !== -1) {
                                 $scope.allDanhMuc.splice(index, 1);
-                              //  }
+                                //  }
 
                             } else {
 
@@ -332,7 +326,7 @@
                             showLoader(false);
                             showNotify("connect has disconnect");
                         }
-                    );
+                        );
                 } else {
 
                 }

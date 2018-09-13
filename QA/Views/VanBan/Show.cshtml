@@ -198,7 +198,7 @@
                 uiUploader.startUpload({
                     url: '/QuyDinh/create',
                     paramName: 'fileTaiLieu',
-                    data: $scope.Info ,
+                    data: { $scope.Info , ngay: $scope.Info.NgayBanHanh} ,
                     onProgress: function (file) {
                         $scope.$apply();
                     },
@@ -237,7 +237,7 @@
                 uiUploader.startUpload({
                     url: '/QuyDinh/edit',
                     paramName: 'fileTaiLieu',
-                    data: $scope.Info,
+                    data: { $scope.Info, ngay: $scope.Info.NgayBanHanh } ,
                     onProgress: function (file) {
                         $scope.$apply();
                     },
