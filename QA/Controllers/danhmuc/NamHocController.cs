@@ -65,8 +65,8 @@ namespace QA.Controllers.danhmuc
             var insData = new DM_NamHoc()
             {
                 NamHoc = NamHoc,
-                DenNgay = dateFrom,
-                TuNgay = dateTo,
+                TuNgay = dateFrom,
+                DenNgay = dateTo,
                 MaTruong = MaTruong,
                 NamHienTai = NamHienTai
             };
@@ -120,6 +120,8 @@ namespace QA.Controllers.danhmuc
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);
+            if (check.NamHienTai == true)
+                return Json(new ResultInfo() { error = 1, msg = "Không thể xóa năm hiện tại" }, JsonRequestBehavior.AllowGet);
 
             db.Entry(check).State = System.Data.Entity.EntityState.Deleted;
             db.SaveChanges();

@@ -109,6 +109,7 @@ namespace QA.Models
         public DateTime NgayBanHanh { get; set; }
         public string CapHoc { get; set; }
         public string LinkVanBan { get; set; }
+        public string IDCapHoc { get; set; }
 
     }
 }

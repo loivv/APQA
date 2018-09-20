@@ -10,8 +10,8 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Mục đích</label>
-                    <p style="white-space:pre-line;" ng-bind-html="ThongTin.MucDich | unsafe"></p>
-                    <textarea style="white-space:pre-line;" rows="5" ng-bind-html="ThongTin.MucDich | unsafe" class="form-control" required> </textarea>
+                 
+                    <textarea rows="5" ng-model="ThongTin.MucDich" class="form-control" required></textarea>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -52,7 +52,18 @@
         //var app = angular.module('myApp', ['ngRoute']);
         app.controller('myCtrl', function ($scope, $http) {
          
-            $scope.ThongTin = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Info))');         
+
+            $scope.getData = function () {
+
+                $http.get('/mucdichphamvi/getdata').then(function (response) {
+
+                    $scope.ThongTin = angular.copy(response.data.data);
+                });
+
+            };
+
+            $scope.getData();
+
             $scope.edit = function () {
                 showLoader(true);
                 //update data
@@ -64,7 +75,7 @@
                     function success(response) {
 
                         var result = response.data;
-
+                       
                         if (result.error == 0) {
 
                             showNotify("Đã cập nhật");

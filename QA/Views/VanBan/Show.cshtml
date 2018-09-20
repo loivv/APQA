@@ -6,7 +6,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Danh sách quy định&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
+                <h2>Danh sách văn bản&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
                 <div class="clearfix"></div>
             </div>
             <!-- end x_title-->
@@ -18,13 +18,14 @@
                             <tr class="headings">
                                 <th>STT</th>
                                 <th>Số hiệu</th>
-                                <th>Tên quy định</th>
+                                <th>Trích yếu</th>
                                 <th>Ngày ban hành</th>
                                 <th>Cơ quan ban hành</th>
                                 <th>Cấp học</th>
                                 <th>Bộ giáo dục</th>
+                                <th>File</th>
                                 <th>#</th>
-                                <th>#</th>
+                                <th>#</th>                               
                             </tr>
                         </thead>
 
@@ -37,6 +38,7 @@
                                 <td>{{item.CoQuanBanHanh}}</td>
                                 <td>{{item.CapHoc}}</td>
                                 <td><input type="checkbox" ng-model="item.BoGiaoDuc" ng-checked="item.BoGiaoDuc"></td>
+                                <td>{{item.LinkFile}}</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
@@ -208,7 +210,6 @@
 
                 $scope.Info = angular.copy(info);
                 $scope.modaltitle = "Chỉnh sửa văn bản";
-                // $scope.CountryIDDisable = true;
                 $scope.IsAction = 'edit';
                 showModel("insertmodal")
             };

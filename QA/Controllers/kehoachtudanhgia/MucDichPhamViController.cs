@@ -11,13 +11,22 @@ namespace QA.Controllers.kehoachtudanhgia
         // GET: MucDichPhamVi
         public ActionResult Show()
         {
-            var MDInfo = db.DM_MucDichPhamVi.Where(p => p.MaTruong == MaTruong).FirstOrDefault();
-            MDInfo.MucDich = MDInfo.MucDich.Replace("\n"," ");
-            ViewBag.Info = MDInfo;
+          //  var MDInfo = db.DM_MucDichPhamVi.Where(p => p.MaTruong == MaTruong).FirstOrDefault();
+           // MDInfo.MucDich = MDInfo.MucDich.Replace("\n"," ");
+         //   ViewBag.Info = MDInfo;
             return View();
         }
 
+        [HttpGet]
+        public JsonResult GetData()
+        {
+            var MDInfo = db.DM_MucDichPhamVi.Where(p => p.MaTruong == MaTruong).FirstOrDefault();
+
+            return Json(new ResultInfo() { error = 0, data = MDInfo }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult edit(DM_MucDichPhamVi mdpv)
         {
             
