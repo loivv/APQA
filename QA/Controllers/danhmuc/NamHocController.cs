@@ -39,36 +39,41 @@ namespace QA.Controllers.danhmuc
         }
 
         [HttpPost]
-        public ActionResult create(DM_NamHoc namhoc,string tuNgay, string denNgay)
+        public ActionResult create(string NamHoc, string tuNgay, string denNgay, bool NamHienTai)
         {
 
-            if (String.IsNullOrEmpty(namhoc.NamHoc))
+            if (String.IsNullOrEmpty(NamHoc))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
             DateTime dateFrom = DateTime.Parse(tuNgay);
             DateTime dateTo = DateTime.Parse(denNgay);
 
-            var check = db.DM_NamHoc.Where(p => p.MaTruong == MaTruong && p.NamHoc == namhoc.NamHoc).FirstOrDefault();
+            var check = db.DM_NamHoc.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
            
             //kiem tra neu  la nam hoc hien tai thi xoa nhưng cai con lai
-            if(namhoc.NamHienTai == true)
+            if(NamHienTai == true)
             {
-                db.DM_NamHoc.Where(x => x.MaTruong == MaTruong && x.NamHoc != namhoc.NamHoc).ToList().ForEach(x =>
+                db.DM_NamHoc.Where(x => x.MaTruong == MaTruong && x.NamHoc != NamHoc).ToList().ForEach(x =>
                 {
                     x.NamHienTai = false; 
                 });
-              //  db.SaveChanges();
+                db.SaveChanges();
             }
-            namhoc.TuNgay = dateFrom;
-            namhoc.DenNgay = dateTo;
-            namhoc.MaTruong = MaTruong;
-            db.DM_NamHoc.Add(namhoc);
+            var insData = new DM_NamHoc()
+            {
+                NamHoc = NamHoc,
+                DenNgay = dateFrom,
+                TuNgay = dateTo,
+                MaTruong = MaTruong,
+                NamHienTai = NamHienTai
+            };
+            db.DM_NamHoc.Add(insData);
             db.SaveChanges();
 
-            return Json(new ResultInfo() { error = 0, msg = "", data = namhoc }, JsonRequestBehavior.AllowGet);
+            return Json(new ResultInfo() { error = 0, msg = "", data = insData }, JsonRequestBehavior.AllowGet);
 
         }
 

@@ -91,13 +91,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Từ ngày</label>
-                                    <input type="date" maxlength="10" class="form-control" ng-model="Info.TuNgay" required />
+                                    <input type="text" class="form-control" ng-model="Info.FromDate" required ui-mask="99/99/9999"  ui-mask-placeholder  />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Đến ngày</label>
-                                    <input type="date" maxlength="10" class="form-control" ng-model="Info.DenNgay" required />
+                                    <input type="text" class="form-control" ng-model="Info.ToDate" requiredui-mask="99/99/9999"  ui-mask-placeholder  />
                                 </div>
                             </div>
 
@@ -126,8 +126,8 @@
     <script>
 
         // tao controller
-        var app = angular.module('myApp', ['ui.bootstrap','ui.uploader']);
-        app.controller('myCtrl', function ($scope, $http) {
+        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader', 'ui.mask']);
+        app.controller('myCtrl', function ($scope, $http, $filter) {
 
             // phan trang
             $scope.numPages;
@@ -171,27 +171,39 @@
             $scope.IsAction = '';
 
             $scope.addNew = function () {
-                $scope.Info = { "NamHoc": "", "NamHienTai": "", "TuNgay": "", "DenNgay": "" };
+                var date = new Date();
+                var fDate = $filter('date')(date.addDays(-7), "dd/MM/yyyy");
+                var tDate = $filter('date')(date.addDays(7), "dd/MM/yyyy");
+
+                $scope.Info = { "NamHoc": "", "NamHienTai": "", "FromDate": fDate, "ToDate": tDate };
                 $scope.modaltitle = "Thêm năm học";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
-                showModel("insertmodal")
+
+                showModel("insertmodal");
 
             };
+
+
 
             $scope.edit = function (index) {
                 var info = $scope.allDanhMuc[index];
                 $scope.Info = angular.copy(info);
 
+                var fDate = $filter('date')($scope.Info .TuNgay.slice(6, -2), "dd/MM/yyyy");
+                var tDate = $filter('date')($scope.Info.DenNgay.slice(6, -2), "dd/MM/yyyy");
+                $scope.Info.FromDate = fDate;
+                $scope.Info.ToDate = tDate;
+
                 $scope.modaltitle = "Chỉnh sửa năm học";
                 $scope.IsAction = 'edit';
-                showModel("insertmodal")
+                showModel("insertmodal");
             };
 
             // tim index theo ma tinh
             function getSelectedIndex(id) {
                 for (var i = 0; i < $scope.allDanhMuc.length; i++)
-                    if ($scope.allDanhMuc[i].NamHoc == id)
+                    if ($scope.allDanhMuc[i].NamHoc === id)
                         return i;
                 return -1;
             };
@@ -209,7 +221,7 @@
                 }
 
 
-            }
+            };
 
 
             // them tinh
@@ -219,7 +231,7 @@
                 $http({
                     method: "POST",
                     url: "/NamHoc/create",
-                    data: { namhoc: $scope.Info, tuNgay: $scope.Info.TuNgay, denNgay: $scope.Info.DenNgay, ht: $scope.Info.NamHienTai }
+                    data: { NamHoc: $scope.Info.NamHoc, NamHienTai: $scope.Info.NamHienTai, tuNgay: $scope.Info.FromDate, denNgay: $scope.Info.ToDate }
                 }).then(function success(response) {
 
                     var result = response.data;
@@ -251,18 +263,18 @@
             // cap nhat tinh
             $scope.sendEdit = function () {
 
-                showLoader(true); 
+                showLoader(true);
                 console.log($scope.Info.NamHienTai);
                 $http({
                     method: "POST",
                     url: "/NamHoc/edit",
-                    data: { namhoc: $scope.Info, tuNgay: $scope.Info.TuNgay, denNgay: $scope.Info.DenNgay, ht: $scope.Info.NamHienTai}
+                    data: { namhoc: $scope.Info, tuNgay: $scope.Info.FromDate, denNgay: $scope.Info.ToDate }
                 }).then(
                     function success(response) {
                         $scope.GetData(1, "");
                         var result = response.data;
 
-                        if (result.error == 0) {
+                        if (result.error === 0) {
 
                             var findIndex = getSelectedIndex(result.data.NamHoc);
 
@@ -287,13 +299,13 @@
                         showNotify("connect has disconnect");
                     }
                     );
-            }
+            };
 
             // xoa du lieu
             $scope.sendDelete = function (index) {
                 var info = $scope.allDanhMuc[index];
                 var r = confirm("Bạn muốn xóa không ?");
-                if (r == true) {
+                if (r) {
                     showLoader(true);
 
                     $http({
