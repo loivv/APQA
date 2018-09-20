@@ -96,7 +96,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Ngày ban hành</label>
-                                    <input type="date" class="form-control" required  id="datebanhanh" ng-model="Info.NgayBanHanh"/>
+                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.NgayBanHanh" required ui-mask="99/99/9999" ui-mask-placeholder />
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -145,9 +145,9 @@
 
     
         // tao controller
-        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader']);
+        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader', 'ui.mask']);
 
-        app.controller('myCtrl', function ($scope, $http, uiUploader) {
+        app.controller('myCtrl', function ($scope, $http, $filter,uiUploader) {
 
 
             $scope.allcaphoc = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllCapHoc))');
@@ -174,7 +174,7 @@
                     if (response.data.error === 0) {
 
                         $scope.allDanhMuc = response.data.data;
-                        console.log($scope.allDanhMuc);
+                       // console.log($scope.allDanhMuc);
                         $scope.itemPerPage = response.data.pageSize;
                         $scope.totalItems = response.data.toltalSize;
                         $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
@@ -192,23 +192,28 @@
             // khoi tao bien dung cho create va edit
             $scope.Info = {};
             $scope.IsAction = '';
-
+            var date = new Date();
+            var fDate = $filter('date')(date, "dd/MM/yyyy");
             $scope.addNew = function () {
 
-                $scope.Info = { "MaSo": "", "TrichYeu": "", "NgayBanHanh": "", "CoQuanBanHanh": "", "LinkFile": "", "IDCapHoc": "","BoGiaoDuc":"" };
+                $scope.Info = { "MaSo": "", "TrichYeu": "", "NgayBanHanh": fDate, "CoQuanBanHanh": "", "LinkFile": "", "IDCapHoc": "","BoGiaoDuc":"" };
                 $scope.modaltitle = "Thêm quy định";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
                 showModel("insertmodal")
-                console.log($scope.Info);
 
             };
 
             $scope.edit = function (index) {
 
                 var info = $scope.allDanhMuc[index];
-
+               
                 $scope.Info = angular.copy(info);
+
+                //console.log($scope.Info.NgayBanHanh);
+                var fDate = $filter('date')($scope.Info.NgayBanHanh.slice(6, -2), "dd/MM/yyyy");
+                $scope.Info.NgayBanHanh = fDate;
+
                 $scope.modaltitle = "Chỉnh sửa văn bản";
                 $scope.IsAction = 'edit';
                 showModel("insertmodal")
@@ -238,13 +243,11 @@
             // them tinh
             $scope.sendCreate = function () {
                 showLoader(true);
-                var dateBH = $('#datebanhanh').val();
-                console.log($scope.Info);
                 uiUploader.startUpload({
                     url: '/VanBan/create',
                     paramName: 'fileTaiLieu',
                     data: {
-                        vanban : $scope.Info, ngaybanhanh: dateBH
+                        vanban : $scope.Info, ngaybanhanh: $scope.Info.NgayBanHanh
                     },
                     onProgress: function (file) {
                         $scope.$apply();
@@ -280,11 +283,16 @@
 
             // cap nhat tinh
             $scope.sendEdit = function () {
+                console.log($scope.Info);
                 showLoader(true);
+                var ngayBH = $scope.Info.NgayBanHanh;
+                $scope.Info.ngaybanhanh = ngayBH;
+
                 uiUploader.startUpload({
                     url: '/VanBan/edit',
+                    concurrency: 2,
                     paramName: 'fileTaiLieu',
-                    data: { vanban: $scope.Info, ngaybanhanh: $scope.Info.NgayBanHanh },
+                    data: $scope.Info,
                     onProgress: function (file) {
                         $scope.$apply();
                     },
@@ -300,10 +308,10 @@
                             $scope.$apply();
 
                             $scope.allDanhMuc.unshift(result.data);
-
+                            $scope.GetData(1, "");
                             hideModel("insertmodal");
 
-                            showNotify("Đã thêm văn bản");
+                            showNotify("Đã chỉnh sửa văn bản");
 
                         } else {
 

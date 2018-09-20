@@ -112,4 +112,5 @@ namespace QA.Models
         public string IDCapHoc { get; set; }
 
     }
+
 }

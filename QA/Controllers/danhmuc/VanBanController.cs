@@ -140,6 +140,7 @@ namespace QA.Controllers.danhmuc
             check.LinkVanBan = vanban.LinkVanBan;
             check.IDCapHoc = vanban.IDCapHoc;
             check.BoGiaoDuc = vanban.BoGiaoDuc;
+            check.CoQuanBanHanh = vanban.CoQuanBanHanh;
 
             db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
