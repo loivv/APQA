@@ -15,6 +15,7 @@ namespace QA.Models
     public partial class DM_ToChucThucHien
     {
         public string MaTruong { get; set; }
+        public string NamHoc { get; set; }
         public string NoiDung { get; set; }
     }
 }

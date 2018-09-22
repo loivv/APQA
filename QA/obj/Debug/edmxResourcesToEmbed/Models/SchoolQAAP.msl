@@ -193,32 +193,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DM_ThongTinChung">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
-        <MappingFragment StoreEntitySet="DM_ThongTinChung">
-          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-          <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
-          <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
-          <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
-          <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
-          <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
-          <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
-          <ScalarProperty Name="HieuTruong" ColumnName="HieuTruong" />
-          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-          <ScalarProperty Name="Fax" ColumnName="Fax" />
-          <ScalarProperty Name="ChuanQuocGia" ColumnName="ChuanQuocGia" />
-          <ScalarProperty Name="Website" ColumnName="Website" />
-          <ScalarProperty Name="NamThanhLap" ColumnName="NamThanhLap" />
-          <ScalarProperty Name="SoDiemTruong" ColumnName="SoDiemTruong" />
-          <ScalarProperty Name="Loai" ColumnName="Loai" />
-          <ScalarProperty Name="VungKhoKhan" ColumnName="VungKhoKhan" />
-          <ScalarProperty Name="LienKetNuocNgoai" ColumnName="LienKetNuocNgoai" />
-          <ScalarProperty Name="Khac" ColumnName="Khac" />
-          <ScalarProperty Name="GhiChuKhac" ColumnName="GhiChuKhac" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DM_TieuChi">
       <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi">
         <MappingFragment StoreEntitySet="DM_TieuChi">
@@ -256,14 +230,6 @@
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
           <ScalarProperty Name="MoDau" ColumnName="MoDau" />
           <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DM_ToChucThucHien">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ToChucThucHien">
-        <MappingFragment StoreEntitySet="DM_ToChucThucHien">
-          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -469,6 +435,43 @@
           <ScalarProperty Name="ThanhPhan" ColumnName="ThanhPhan" />
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
           <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_ToChucThucHien">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ToChucThucHien">
+        <MappingFragment StoreEntitySet="DM_ToChucThucHien">
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_ThongTinChung">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
+        <MappingFragment StoreEntitySet="DM_ThongTinChung">
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="GhiChuKhac" ColumnName="GhiChuKhac" />
+          <ScalarProperty Name="Khac" ColumnName="Khac" />
+          <ScalarProperty Name="LienKetNuocNgoai" ColumnName="LienKetNuocNgoai" />
+          <ScalarProperty Name="VungKhoKhan" ColumnName="VungKhoKhan" />
+          <ScalarProperty Name="Loai" ColumnName="Loai" />
+          <ScalarProperty Name="SoDiemTruong" ColumnName="SoDiemTruong" />
+          <ScalarProperty Name="NamThanhLap" ColumnName="NamThanhLap" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="ChuanQuocGia" ColumnName="ChuanQuocGia" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+          <ScalarProperty Name="HieuTruong" ColumnName="HieuTruong" />
+          <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
+          <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
+          <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
+          <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
+          <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
+          <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
           <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
         </MappingFragment>

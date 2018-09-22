@@ -927,6 +927,7 @@
     <Content Include="Views\TieuChuan\Show.cshtml" />
     <Content Include="Views\MinhChung\Show.cshtml" />
     <Content Include="Views\VanBan\Show.cshtml" />
+    <Content Include="Views\ToChucThucHien\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -943,7 +944,6 @@
     <Folder Include="Views\SoLopHoc\" />
     <Folder Include="Views\SoPhongHoc\" />
     <Folder Include="Views\ThoiGianCungCap\" />
-    <Folder Include="Views\ToChucThucHien\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

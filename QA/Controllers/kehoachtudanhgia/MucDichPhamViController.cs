@@ -11,9 +11,6 @@ namespace QA.Controllers.kehoachtudanhgia
         // GET: MucDichPhamVi
         public ActionResult Show()
         {
-          //  var MDInfo = db.DM_MucDichPhamVi.Where(p => p.MaTruong == MaTruong).FirstOrDefault();
-           // MDInfo.MucDich = MDInfo.MucDich.Replace("\n"," ");
-         //   ViewBag.Info = MDInfo;
             return View();
         }
 

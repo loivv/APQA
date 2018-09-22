@@ -169,13 +169,13 @@
             // khoi tao bien dung cho create va edit
             $scope.Info = {};
             $scope.IsAction = '';
-            var date = new Date();
+           
             $scope.addNew = function () {
-
+                var date = new Date();
                 var fDate = $filter('date')(date, "dd/MM/yyyy");
                 var tDate = $filter('date')(date, "dd/MM/yyyy");
 
-                $scope.NamHocInfo = { "Tuan": "","TuNgay":fDate,"DenNgay":tDate,"NoiDung":"" };
+                $scope.Info = { "Tuan": "","TuNgay":fDate,"DenNgay":tDate,"NoiDung":"" };
 
                 $scope.modaltitle = "Thêm thời gian biểu";
                 //$scope.ZoneIDDisable = false;
@@ -190,6 +190,8 @@
                 $scope.Info = angular.copy(info);
                 var fDate = $filter('date')($scope.Info.TuNgay.slice(6, -2), "dd/MM/yyyy");
                 var tDate = $filter('date')($scope.Info.DenNgay.slice(6, -2), "dd/MM/yyyy");
+                $scope.Info.TuNgay = fDate;
+                $scope.Info.DenNgay = tDate;
                 $scope.modaltitle = "Chỉnh sửa thời gian biểu";
                 // $scope.CountryIDDisable = true;
                 $scope.IsAction = 'edit';

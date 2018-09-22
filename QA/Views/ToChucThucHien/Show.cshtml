@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Tổ chức thực hiện";
+
+}
+
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <!-- body-->
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Nội dung</label>
+                    <textarea rows="10" class="form-control" ng-model="Info.NoiDung" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end body-->
+    <!-- begin footer-->
+    <div class="modal-footer">
+        <button ng-click="edit()" class="btn btn-default">Lưu</button>
+    </div>
+    <!-- end footer-->
+</div>
+
+
+@section scripts {
+
+    <script>
+
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap']);
+        app.filter('unsafe', function ($sce) {
+            return function (val) {
+                return $sce.trustAsHtml(val);
+            };
+        });
+
+        //var app = angular.module('myApp', ['ngRoute']);
+        app.controller('myCtrl', function ($scope, $http) {
+
+
+            $scope.getData = function () {
+
+                $http.get('/ToChucThucHien/getdata').then(function (response) {
+
+                    $scope.Info = angular.copy(response.data.data);
+                });
+
+            };
+
+            $scope.getData();
+
+            $scope.edit = function () {
+                showLoader(true);
+                //update data
+                $http({
+                    method: "POST",
+                    url: "/ToChucThucHien/edit",
+                    data: $scope.Info
+                }).then(
+                    function success(response) {
+
+                        var result = response.data;
+
+                        if (result.error == 0) {
+
+                            showNotify("Đã cập nhật");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    },
+                    function errror(response) {
+                        showLoader(false);
+                        showNotify("connect has disconnect");
+                    }
+                    );
+                //ket thuc update
+            };
+        });
+
+    </script>
+}

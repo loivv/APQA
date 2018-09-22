@@ -22,8 +22,7 @@ namespace QA.Controllers.kehoachtudanhgia
 
             int pageNumber = (page ?? 1);
 
-
-            var data = db.DM_ThoiGianBieu.Where(p => p.Tuan.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
+            var data = db.DM_ThoiGianBieu.Where(p => p.Tuan.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).OrderBy(x => x.Tuan).ToList(); 
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -53,8 +52,8 @@ namespace QA.Controllers.kehoachtudanhgia
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
             tgb.MaTruong = MaTruong;
             tgb.NamHoc = NamHoc;
-            check.TuNgay = dateFrom;
-            check.DenNgay = dateTo;
+            tgb.TuNgay = dateFrom;
+            tgb.DenNgay = dateTo;
             db.DM_ThoiGianBieu.Add(tgb);
 
             db.SaveChanges();

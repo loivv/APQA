@@ -15,6 +15,7 @@ namespace QA.Models
     public partial class DM_ThongTinChung
     {
         public string MaTruong { get; set; }
+        public string NamHoc { get; set; }
         public string TenTruongMoi { get; set; }
         public string TenTruongCu { get; set; }
         public string CoQuanChuQuan { get; set; }
@@ -28,11 +29,12 @@ namespace QA.Models
         public string Website { get; set; }
         public string NamThanhLap { get; set; }
         public Nullable<int> SoDiemTruong { get; set; }
-        public Nullable<int> Loai { get; set; }
+        public string Loai { get; set; }
         public Nullable<bool> VungKhoKhan { get; set; }
         public Nullable<bool> LienKetNuocNgoai { get; set; }
         public Nullable<bool> Khac { get; set; }
         public string GhiChuKhac { get; set; }
         public string Code { get; set; }
+        public string DiaChi { get; set; }
     }
 }

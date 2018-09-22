@@ -102,13 +102,11 @@
                     <input type="text" class="form-control" ng-model="ThongTin.SoDiemTruong" />
                 </div>
             </div>
-
-
             <div class="col-sm-3">
                 <div class="form-group">
                     <label>Loại trường</label>
-                    <select class="form-control">
-                        <option value="danlap">Công lập</option>
+                    <select class="form-control" ng-model="ThongTin.Loai">
+                        <option value="conglap">Công lập</option>
                         <option value="tuthuc">Tư thục</option>
                         <option value="danlap">Dân lập</option>
                     </select>
@@ -116,16 +114,14 @@
             </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <label>Thuộc vùng khó khăn</label>
-                    <input type="checkbox" ng-model="ThongTin.VungKhoKhan" />
+                    <label>Vùng khó khăn</label>
+                    <input type="checkbox" class="form-control" ng-model="ThongTin.VungKhoKhan" />
                 </div>
             </div>
-            <div class="col-sm-3 ">
-                <div class="funkyradio">
-                    <div class="funkyradio-success">
-                        <input type="radio"  name="checkbox" ng-model="ThongTin.LienKetNuocNgoai" />
-                        <label>Liên kế nước ngoài</label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Liên kết nước ngoài</label>
+                    <input type="checkbox" class="form-control" ng-model="ThongTin.LienKetNuocNgoai" />
                 </div>
             </div>
             <div class="col-sm-3">

@@ -234,8 +234,10 @@
   <EntityType Name="DM_ThongTinChung">
     <Key>
       <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="TenTruongMoi" Type="nvarchar" MaxLength="100" />
     <Property Name="TenTruongCu" Type="nvarchar" MaxLength="100" />
     <Property Name="CoQuanChuQuan" Type="nvarchar" MaxLength="100" />
@@ -249,12 +251,13 @@
     <Property Name="Website" Type="nvarchar" MaxLength="50" />
     <Property Name="NamThanhLap" Type="nvarchar" MaxLength="50" />
     <Property Name="SoDiemTruong" Type="int" />
-    <Property Name="Loai" Type="int" />
+    <Property Name="Loai" Type="nvarchar" MaxLength="50" />
     <Property Name="VungKhoKhan" Type="bit" />
     <Property Name="LienKetNuocNgoai" Type="bit" />
     <Property Name="Khac" Type="bit" />
     <Property Name="GhiChuKhac" Type="nvarchar" MaxLength="200" />
     <Property Name="Code" Type="nvarchar" MaxLength="10" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="DM_TieuChi">
     <Key>
@@ -303,8 +306,10 @@
   <EntityType Name="DM_ToChucThucHien">
     <Key>
       <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NoiDung" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="DM_VanBan">

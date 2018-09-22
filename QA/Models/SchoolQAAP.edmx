@@ -239,8 +239,10 @@
         <EntityType Name="DM_ThongTinChung">
           <Key>
             <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TenTruongMoi" Type="nvarchar" MaxLength="100" />
           <Property Name="TenTruongCu" Type="nvarchar" MaxLength="100" />
           <Property Name="CoQuanChuQuan" Type="nvarchar" MaxLength="100" />
@@ -254,12 +256,13 @@
           <Property Name="Website" Type="nvarchar" MaxLength="50" />
           <Property Name="NamThanhLap" Type="nvarchar" MaxLength="50" />
           <Property Name="SoDiemTruong" Type="int" />
-          <Property Name="Loai" Type="int" />
+          <Property Name="Loai" Type="nvarchar" MaxLength="50" />
           <Property Name="VungKhoKhan" Type="bit" />
           <Property Name="LienKetNuocNgoai" Type="bit" />
           <Property Name="Khac" Type="bit" />
           <Property Name="GhiChuKhac" Type="nvarchar" MaxLength="200" />
           <Property Name="Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="DM_TieuChi">
           <Key>
@@ -308,8 +311,10 @@
         <EntityType Name="DM_ToChucThucHien">
           <Key>
             <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NoiDung" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DM_VanBan">
@@ -751,31 +756,6 @@
           <Property Name="DenNgay" Type="DateTime" Precision="0" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DM_ThongTinChung">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-          </Key>
-          <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TenTruongMoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TenTruongCu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CoQuanChuQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TinhThanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="QuanHuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhuongXa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HieuTruong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChuanQuocGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NamThanhLap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SoDiemTruong" Type="Int32" />
-          <Property Name="Loai" Type="Int32" />
-          <Property Name="VungKhoKhan" Type="Boolean" />
-          <Property Name="LienKetNuocNgoai" Type="Boolean" />
-          <Property Name="Khac" Type="Boolean" />
-          <Property Name="GhiChuKhac" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DM_TieuChi">
           <Key>
             <PropertyRef Name="ID" />
@@ -819,13 +799,6 @@
           <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DM_ToChucThucHien">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-          </Key>
-          <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_VanBan">
           <Key>
@@ -977,11 +950,9 @@
           <EntitySet Name="DM_SoLop" EntityType="Self.DM_SoLop" />
           <EntitySet Name="DM_ThanhVien" EntityType="Self.DM_ThanhVien" />
           <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" />
-          <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" />
           <EntitySet Name="DM_TieuChi" EntityType="Self.DM_TieuChi" />
           <EntitySet Name="DM_TieuChi_ChiSo" EntityType="Self.DM_TieuChi_ChiSo" />
           <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" />
-          <EntitySet Name="DM_ToChucThucHien" EntityType="Self.DM_ToChucThucHien" />
           <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" />
           <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" />
           <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" />
@@ -1035,6 +1006,8 @@
           <EntitySet Name="DM_MucDichPhamVi" EntityType="SchoolQAAPModel.DM_MucDichPhamVi" />
           <EntitySet Name="DM_NhomTuDanhGia" EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" />
           <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" />
+          <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
+          <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
         </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -1115,6 +1088,43 @@
           <Property Name="ThoiGian" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ThanhPhan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_ToChucThucHien">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_ThongTinChung">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TenTruongMoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TenTruongCu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CoQuanChuQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TinhThanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuanHuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhuongXa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HieuTruong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChuanQuocGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NamThanhLap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoDiemTruong" Type="Int32" />
+          <Property Name="Loai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VungKhoKhan" Type="Boolean" />
+          <Property Name="LienKetNuocNgoai" Type="Boolean" />
+          <Property Name="Khac" Type="Boolean" />
+          <Property Name="GhiChuKhac" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1314,32 +1324,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_ThongTinChung">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
-              <MappingFragment StoreEntitySet="DM_ThongTinChung">
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
-                <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
-                <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
-                <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
-                <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
-                <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
-                <ScalarProperty Name="HieuTruong" ColumnName="HieuTruong" />
-                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="ChuanQuocGia" ColumnName="ChuanQuocGia" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="NamThanhLap" ColumnName="NamThanhLap" />
-                <ScalarProperty Name="SoDiemTruong" ColumnName="SoDiemTruong" />
-                <ScalarProperty Name="Loai" ColumnName="Loai" />
-                <ScalarProperty Name="VungKhoKhan" ColumnName="VungKhoKhan" />
-                <ScalarProperty Name="LienKetNuocNgoai" ColumnName="LienKetNuocNgoai" />
-                <ScalarProperty Name="Khac" ColumnName="Khac" />
-                <ScalarProperty Name="GhiChuKhac" ColumnName="GhiChuKhac" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_TieuChi">
             <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi">
               <MappingFragment StoreEntitySet="DM_TieuChi">
@@ -1377,14 +1361,6 @@
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="MoDau" ColumnName="MoDau" />
                 <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_ToChucThucHien">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ToChucThucHien">
-              <MappingFragment StoreEntitySet="DM_ToChucThucHien">
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1590,6 +1566,43 @@
                 <ScalarProperty Name="ThanhPhan" ColumnName="ThanhPhan" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_ToChucThucHien">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ToChucThucHien">
+              <MappingFragment StoreEntitySet="DM_ToChucThucHien">
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_ThongTinChung">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
+              <MappingFragment StoreEntitySet="DM_ThongTinChung">
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="GhiChuKhac" ColumnName="GhiChuKhac" />
+                <ScalarProperty Name="Khac" ColumnName="Khac" />
+                <ScalarProperty Name="LienKetNuocNgoai" ColumnName="LienKetNuocNgoai" />
+                <ScalarProperty Name="VungKhoKhan" ColumnName="VungKhoKhan" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="SoDiemTruong" ColumnName="SoDiemTruong" />
+                <ScalarProperty Name="NamThanhLap" ColumnName="NamThanhLap" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ChuanQuocGia" ColumnName="ChuanQuocGia" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="HieuTruong" ColumnName="HieuTruong" />
+                <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
+                <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
+                <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
+                <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
+                <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
+                <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
