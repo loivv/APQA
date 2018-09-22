@@ -55,7 +55,7 @@ namespace QA.Controllers.danhmuc
             if (fileTaiLieu != null && fileTaiLieu.ContentLength > 0)
             {
                 extension = System.IO.Path.GetExtension(fileTaiLieu.FileName);
-                fileSave = "tailieu" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                fileSave = MaTruong + "_QDH" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
                 path = Server.MapPath("~/TaiLieu/QuyDinh/" + fileSave);
                 if (System.IO.File.Exists(path))
                 {

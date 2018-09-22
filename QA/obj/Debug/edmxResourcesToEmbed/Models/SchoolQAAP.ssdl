@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -102,8 +102,8 @@
       <PropertyRef Name="MaTruong" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="MucDich" Type="nvarchar" MaxLength="300" />
-    <Property Name="PhamVi" Type="nvarchar" MaxLength="200" />
+    <Property Name="MucDich" Type="nvarchar(max)" />
+    <Property Name="PhamVi" Type="nvarchar(max)" />
     <Property Name="YeuCau" Type="nvarchar(max)" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" />
   </EntityType>
@@ -157,7 +157,7 @@
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="MoDau" Type="nvarchar" MaxLength="300" />
+    <Property Name="MoDau" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="DM_NLCSVCTaiChinh">
     <Key>
@@ -201,9 +201,9 @@
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="ThoiGian" Type="nvarchar" MaxLength="100" />
+    <Property Name="ThoiGian" Type="nvarchar(max)" />
     <Property Name="NoiDung" Type="nvarchar(max)" />
-    <Property Name="ThanhPhan" Type="nvarchar" MaxLength="200" />
+    <Property Name="ThanhPhan" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="DM_ThanhVien">
     <Key>

@@ -63,7 +63,7 @@ namespace QA.Controllers.danhmuc
             if (fileTaiLieu != null && fileTaiLieu.ContentLength > 0)
             {
                 extension = System.IO.Path.GetExtension(fileTaiLieu.FileName);
-                fileSave = "VBN" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                fileSave = MaTruong+ "_VBN" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
                 path = Server.MapPath("~/TaiLieu/VanBan/" + fileSave);
                 if (System.IO.File.Exists(path))
                 {

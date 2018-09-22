@@ -40,18 +40,21 @@ namespace QA.Controllers.kehoachtudanhgia
         }
 
         [HttpPost]
-        public ActionResult create(DM_ThoiGianBieu tgb)
+        public ActionResult create(DM_ThoiGianBieu tgb,string tuNgay, string denNgay)
         {
 
             if (String.IsNullOrEmpty(tgb.Tuan) ||  String.IsNullOrEmpty(tgb.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
-
+            DateTime dateFrom = DateTime.Parse(tuNgay);
+            DateTime dateTo = DateTime.Parse(denNgay);
             var check = db.DM_ThoiGianBieu.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc && p.Tuan == tgb.Tuan).FirstOrDefault();
 
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
             tgb.MaTruong = MaTruong;
             tgb.NamHoc = NamHoc;
+            check.TuNgay = dateFrom;
+            check.DenNgay = dateTo;
             db.DM_ThoiGianBieu.Add(tgb);
 
             db.SaveChanges();
@@ -61,11 +64,12 @@ namespace QA.Controllers.kehoachtudanhgia
         }
 
         [HttpPost]
-        public ActionResult edit(DM_ThoiGianBieu tgb)
+        public ActionResult edit(DM_ThoiGianBieu tgb, string tuNgay, string denNgay)
         {
             if (String.IsNullOrEmpty(tgb.Tuan) || String.IsNullOrEmpty(tgb.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
-
+            DateTime dateFrom = DateTime.Parse(tuNgay);
+            DateTime dateTo = DateTime.Parse(denNgay);
             var check = db.DM_ThoiGianBieu.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc && p.Tuan == tgb.Tuan).FirstOrDefault();
 
             if (check == null)
@@ -73,8 +77,8 @@ namespace QA.Controllers.kehoachtudanhgia
 
             check.MaTruong = MaTruong;
             check.NamHoc = NamHoc;
-            check.TuNgay = tgb.TuNgay;
-            check.DenNgay = tgb.DenNgay;
+            check.TuNgay = dateFrom;
+            check.DenNgay = dateTo;
             check.NoiDung = tgb.NoiDung;
 
             db.Entry(check).State = System.Data.Entity.EntityState.Modified;

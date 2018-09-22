@@ -8,19 +8,19 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label>Thời gian</label>                    
+                    <label>a) Thời gian</label>                    
                     <input type="text" class="form-control" ng-model="Info.ThoiGian" required/>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label>Thành phần</label>
+                    <label>b) Thành phần</label>
                     <textarea rows="5" class="form-control" ng-model="Info.ThanhPhan" required></textarea>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label>Nội dung</label>
+                    <label>c) Nội dung</label>
                     <textarea rows="10" class="form-control" ng-model="Info.NoiDung" required></textarea>
                 </div>
             </div>
@@ -41,9 +41,24 @@
 
         // tao controller
         var app = angular.module('myApp', ['ui.bootstrap']);
+        app.filter('unsafe', function ($sce) {
+            return function (val) {
+                return $sce.trustAsHtml(val);
+            };
+        });
         app.controller('myCtrl', function ($scope, $http) {
 
-            $scope.Info = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Info))');
+            $scope.getData = function () {
+
+                $http.get('/TapHuanNGhiepVu/getdata').then(function (response) {
+
+                    $scope.Info = angular.copy(response.data.data);
+                });
+
+            };
+
+            $scope.getData();
+
             $scope.edit = function () {
                 showLoader(true);
                 //update data

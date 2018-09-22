@@ -13,16 +13,13 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ChucVu" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_HoiDongTuDanhGia" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_MinhChung" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_MucDichPhamVi" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NamHoc" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhiemVu" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomDanhGia" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomDanhGiaChiTiet" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NLCSVCTaiChinh" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_QuyDinh" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_SoLop" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThanhVien" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThoiGianBieu" Width="1.5" PointX="11.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThongTinChung" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="true" />
@@ -43,6 +40,9 @@
         <AssociationConnector Association="SchoolQAAPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SchoolQAAPModel.FK__UMS_Menu__GroupM__6754599E" ManuallyRouted="false" />
         <AssociationConnector Association="SchoolQAAPModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_MucDichPhamVi" Width="1.5" PointX="16.375" PointY="3.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" Width="1.5" PointX="16.375" PointY="6.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" Width="1.5" PointX="16.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

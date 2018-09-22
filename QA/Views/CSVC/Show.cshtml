@@ -35,9 +35,23 @@
 
         // tao controller
         var app = angular.module('myApp', ['ui.bootstrap']);
+        app.filter('unsafe', function ($sce) {
+            return function (val) {
+                return $sce.trustAsHtml(val);
+            };
+        });
         app.controller('myCtrl', function ($scope, $http) {
 
-            $scope.Info = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Info))');
+            $scope.getData = function () {
+
+                $http.get('/CSVC/getdata').then(function (response) {
+
+                    $scope.Info = angular.copy(response.data.data);
+                });
+
+            };
+
+            $scope.getData();
             $scope.edit = function () {
                 showLoader(true);
                 //update data

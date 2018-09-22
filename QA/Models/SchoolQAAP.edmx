@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -107,8 +107,8 @@
             <PropertyRef Name="MaTruong" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="MucDich" Type="nvarchar" MaxLength="300" />
-          <Property Name="PhamVi" Type="nvarchar" MaxLength="200" />
+          <Property Name="MucDich" Type="nvarchar(max)" />
+          <Property Name="PhamVi" Type="nvarchar(max)" />
           <Property Name="YeuCau" Type="nvarchar(max)" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" />
         </EntityType>
@@ -162,7 +162,7 @@
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="MoDau" Type="nvarchar" MaxLength="300" />
+          <Property Name="MoDau" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DM_NLCSVCTaiChinh">
           <Key>
@@ -206,9 +206,9 @@
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="ThoiGian" Type="nvarchar" MaxLength="100" />
+          <Property Name="ThoiGian" Type="nvarchar(max)" />
           <Property Name="NoiDung" Type="nvarchar(max)" />
-          <Property Name="ThanhPhan" Type="nvarchar" MaxLength="200" />
+          <Property Name="ThanhPhan" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DM_ThanhVien">
           <Key>
@@ -548,8 +548,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SchoolQAAPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -648,16 +647,6 @@
           <Property Name="TieuChuan" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="TieuChi" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DM_MucDichPhamVi">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-          </Key>
-          <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MucDich" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="PhamVi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DM_NamHoc">
           <Key>
             <PropertyRef Name="NamHoc" />
@@ -701,15 +690,6 @@
           <Property Name="MaNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TruongNhom" Type="Boolean" />
         </EntityType>
-        <EntityType Name="DM_NhomTuDanhGia">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MoDau" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DM_NLCSVCTaiChinh">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -744,17 +724,6 @@
           <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LopHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
-        </EntityType>
-        <EntityType Name="DM_TapHuanTuDanhGia">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NamHoc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ThoiGian" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ThanhPhan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_ThanhVien">
           <Key>
@@ -999,16 +968,13 @@
           <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" />
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" />
           <EntitySet Name="DM_MinhChung" EntityType="Self.DM_MinhChung" />
-          <EntitySet Name="DM_MucDichPhamVi" EntityType="Self.DM_MucDichPhamVi" />
           <EntitySet Name="DM_NamHoc" EntityType="Self.DM_NamHoc" />
           <EntitySet Name="DM_NhiemVu" EntityType="Self.DM_NhiemVu" />
           <EntitySet Name="DM_NhomDanhGia" EntityType="Self.DM_NhomDanhGia" />
           <EntitySet Name="DM_NhomDanhGiaChiTiet" EntityType="Self.DM_NhomDanhGiaChiTiet" />
-          <EntitySet Name="DM_NhomTuDanhGia" EntityType="Self.DM_NhomTuDanhGia" />
           <EntitySet Name="DM_NLCSVCTaiChinh" EntityType="Self.DM_NLCSVCTaiChinh" />
           <EntitySet Name="DM_QuyDinh" EntityType="Self.DM_QuyDinh" />
           <EntitySet Name="DM_SoLop" EntityType="Self.DM_SoLop" />
-          <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="Self.DM_TapHuanTuDanhGia" />
           <EntitySet Name="DM_ThanhVien" EntityType="Self.DM_ThanhVien" />
           <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" />
           <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" />
@@ -1042,30 +1008,33 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <FunctionImport Name="GET_NHOMDANHGIA" ReturnType="Collection(SchoolQAAPModel.GET_NHOMDANHGIA_Result)">
-            <Parameter Name="MaTruong" Mode="In" Type="String" />
+          <Parameter Name="MaTruong" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_NHOMDANHGIA_THUKY" ReturnType="Collection(SchoolQAAPModel.GET_NHOMDANHGIA_THUKY_Result)">
-            <Parameter Name="MaTruong" Mode="In" Type="String" />
+          <Parameter Name="MaTruong" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_THANHVIEN" ReturnType="Collection(SchoolQAAPModel.GET_THANHVIEN_Result)">
-            <Parameter Name="MaTruong" Mode="In" Type="String" />
+          <Parameter Name="MaTruong" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_VANBAN_CAPHOC" ReturnType="Collection(SchoolQAAPModel.GET_VANBAN_CAPHOC_Result)">
-            <Parameter Name="MaTruong" Mode="In" Type="String" />
+          <Parameter Name="MaTruong" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="NhomDanhGia_ThanhVien" ReturnType="Collection(SchoolQAAPModel.NhomDanhGia_ThanhVien_Result)">
-            <Parameter Name="manhom" Mode="In" Type="String" />
+          <Parameter Name="manhom" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USER_CHECKACCESS" ReturnType="Collection(SchoolQAAPModel.USER_CHECKACCESS_Result)">
             <Parameter Name="groupId" Mode="In" Type="String" />
             <Parameter Name="menuCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USER_GETMENU">
-            <Parameter Name="user" Mode="In" Type="String" />
+          <Parameter Name="user" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USER_GETROLE">
-            <Parameter Name="user" Mode="In" Type="String" />
+          <Parameter Name="user" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="DM_MucDichPhamVi" EntityType="SchoolQAAPModel.DM_MucDichPhamVi" />
+          <EntitySet Name="DM_NhomTuDanhGia" EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" />
+          <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" />
         </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -1117,6 +1086,36 @@
           <Property Type="String" Name="GroupUserId" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="CanEdit" Nullable="true" />
         </ComplexType>
+        <EntityType Name="DM_MucDichPhamVi">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MucDich" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhamVi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_NhomTuDanhGia">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_TapHuanTuDanhGia">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ThoiGian" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThanhPhan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1213,17 +1212,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_MucDichPhamVi">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_MucDichPhamVi">
-              <MappingFragment StoreEntitySet="DM_MucDichPhamVi">
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="MucDich" ColumnName="MucDich" />
-                <ScalarProperty Name="PhamVi" ColumnName="PhamVi" />
-                <ScalarProperty Name="YeuCau" ColumnName="YeuCau" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_NamHoc">
             <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NamHoc">
               <MappingFragment StoreEntitySet="DM_NamHoc">
@@ -1267,15 +1255,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_NhomTuDanhGia">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NhomTuDanhGia">
-              <MappingFragment StoreEntitySet="DM_NhomTuDanhGia">
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MoDau" ColumnName="MoDau" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_NLCSVCTaiChinh">
             <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NLCSVCTaiChinh">
               <MappingFragment StoreEntitySet="DM_NLCSVCTaiChinh">
@@ -1307,17 +1286,6 @@
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_TapHuanTuDanhGia">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TapHuanTuDanhGia">
-              <MappingFragment StoreEntitySet="DM_TapHuanTuDanhGia">
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="ThanhPhan" ColumnName="ThanhPhan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1596,6 +1564,37 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="USER_GETMENU" FunctionName="SchoolQAAPModel.Store.USER_GETMENU" />
           <FunctionImportMapping FunctionImportName="USER_GETROLE" FunctionName="SchoolQAAPModel.Store.USER_GETROLE" />
+          <EntitySetMapping Name="DM_MucDichPhamVi">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_MucDichPhamVi">
+              <MappingFragment StoreEntitySet="DM_MucDichPhamVi">
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="YeuCau" ColumnName="YeuCau" />
+                <ScalarProperty Name="PhamVi" ColumnName="PhamVi" />
+                <ScalarProperty Name="MucDich" ColumnName="MucDich" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_NhomTuDanhGia">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NhomTuDanhGia">
+              <MappingFragment StoreEntitySet="DM_NhomTuDanhGia">
+                <ScalarProperty Name="MoDau" ColumnName="MoDau" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_TapHuanTuDanhGia">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TapHuanTuDanhGia">
+              <MappingFragment StoreEntitySet="DM_TapHuanTuDanhGia">
+                <ScalarProperty Name="ThanhPhan" ColumnName="ThanhPhan" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

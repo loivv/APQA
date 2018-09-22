@@ -206,11 +206,9 @@
 
             $scope.edit = function (index) {
 
-                var info = $scope.allDanhMuc[index];
-               
+                var info = $scope.allDanhMuc[index];               
                 $scope.Info = angular.copy(info);
 
-                //console.log($scope.Info.NgayBanHanh);
                 var fDate = $filter('date')($scope.Info.NgayBanHanh.slice(6, -2), "dd/MM/yyyy");
                 $scope.Info.NgayBanHanh = fDate;
 

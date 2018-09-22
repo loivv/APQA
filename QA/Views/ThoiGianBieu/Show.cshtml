@@ -12,13 +12,6 @@
             <!-- end x_title-->
             <div class="x_content">
                 <div class="row">
-                    <!-- search-->
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" ng-model="searchText" my-enter="GetData(1,searchText)" />
-                        </div>
-                    </div>
-                    <!-- search-->
                 </div>
 
                 <!-- table data-->
@@ -86,13 +79,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Từ ngày</label>
-                                    <input type="date" maxlength="10" class="form-control" ng-model="Info.TuNgay" required />
+                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.TuNgay" required ui-mask="99/99/9999" ui-mask-placeholder />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Đến ngày</label>
-                                    <input type="date" maxlength="10" class="form-control" ng-model="Info.DenNgay" required />
+                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.DenNgay" required ui-mask="99/99/9999" ui-mask-placeholder />
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -127,9 +120,14 @@
     <script>
 
         // tao controller
-        var app = angular.module('myApp', ['ui.bootstrap']);
-
-        app.controller('myCtrl', function ($scope, $http) {
+        var app = angular.module('myApp', ['ui.bootstrap', 'ui.mask']);
+        //format xuong dong
+        app.filter('unsafe', function ($sce) {
+            return function (val) {
+                return $sce.trustAsHtml(val);
+            };
+        });
+        app.controller('myCtrl', function ($scope, $http, $filter) {
 
             // phan trang
             $scope.numPages;
@@ -171,10 +169,13 @@
             // khoi tao bien dung cho create va edit
             $scope.Info = {};
             $scope.IsAction = '';
-
+            var date = new Date();
             $scope.addNew = function () {
 
-                $scope.NamHocInfo = { "Tuan": "","TuNgay":"","DenNgay":"","NoiDung":"" };
+                var fDate = $filter('date')(date, "dd/MM/yyyy");
+                var tDate = $filter('date')(date, "dd/MM/yyyy");
+
+                $scope.NamHocInfo = { "Tuan": "","TuNgay":fDate,"DenNgay":tDate,"NoiDung":"" };
 
                 $scope.modaltitle = "Thêm thời gian biểu";
                 //$scope.ZoneIDDisable = false;
@@ -187,7 +188,8 @@
                 var info = $scope.allDanhMuc[index];
 
                 $scope.Info = angular.copy(info);
-
+                var fDate = $filter('date')($scope.Info.TuNgay.slice(6, -2), "dd/MM/yyyy");
+                var tDate = $filter('date')($scope.Info.DenNgay.slice(6, -2), "dd/MM/yyyy");
                 $scope.modaltitle = "Chỉnh sửa thời gian biểu";
                 // $scope.CountryIDDisable = true;
                 $scope.IsAction = 'edit';
@@ -226,7 +228,7 @@
                 $http({
                     method: "POST",
                     url: "/ThoiGianBieu/create",
-                    data: { tgb: $scope.Info }
+                    data: { tgb: $scope.Info, tuNgay: $scope.Info.TuNgay, denNgay: $scope.Info.DenNgay }
                 }).then(function success(response) {
 
                     var result = response.data;
@@ -263,7 +265,7 @@
                 $http({
                     method: "POST",
                     url: "/ThoiGianBieu/edit",
-                    data: { tgb: $scope.Info }
+                    data: { tgb: $scope.Info, tuNgay: $scope.Info.TuNgay, denNgay: $scope.Info.DenNgay }
                 }).then(
                     function success(response) {
 

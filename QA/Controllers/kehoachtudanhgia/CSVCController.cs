@@ -12,9 +12,16 @@ namespace QA.Controllers.kehoachtudanhgia
         // GET: /CSVC/
         public ActionResult Show()
         {
-            var MDInfo = db.DM_NLCSVCTaiChinh.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
-            ViewBag.Info = MDInfo;
+            //var MDInfo = db.DM_NLCSVCTaiChinh.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+            //ViewBag.Info = MDInfo;
             return View();
+        }
+        [HttpGet]
+        public JsonResult GetData()
+        {
+            var MDInfo = db.DM_NLCSVCTaiChinh.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+
+            return Json(new ResultInfo() { error = 0, data = MDInfo }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
