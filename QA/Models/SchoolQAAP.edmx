@@ -325,6 +325,7 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
           <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
           <Property Name="MoDau" Type="nvarchar(max)" />
           <Property Name="KetLuan" Type="nvarchar(max)" />
@@ -802,19 +803,6 @@
           <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GoiY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DM_TieuChuan">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DM_VanBan">
           <Key>
             <PropertyRef Name="ID" />
@@ -960,7 +948,6 @@
           <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" />
           <EntitySet Name="DM_TieuChi" EntityType="Self.DM_TieuChi" />
           <EntitySet Name="DM_TieuChi_ChiSo" EntityType="Self.DM_TieuChi_ChiSo" />
-          <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" />
           <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" />
           <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" />
           <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" />
@@ -1017,6 +1004,7 @@
           <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
           <EntitySet Name="DM_HocSinhNamHoc" EntityType="SchoolQAAPModel.DM_HocSinhNamHoc" />
           <EntitySet Name="DM_PhongHoc" EntityType="SchoolQAAPModel.DM_PhongHoc" />
+          <EntitySet Name="DM_TieuChuan" EntityType="SchoolQAAPModel.DM_TieuChuan" />
         </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -1155,6 +1143,20 @@
           <Property Name="KienCo" Type="Int32" />
           <Property Name="BanKienCo" Type="Int32" />
           <Property Name="Tam" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_TieuChuan">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1379,18 +1381,6 @@
                 <ScalarProperty Name="HienTrang" ColumnName="HienTrang" />
                 <ScalarProperty Name="YeuCau" ColumnName="YeuCau" />
                 <ScalarProperty Name="GoiY" ColumnName="GoiY" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_TieuChuan">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChuan">
-              <MappingFragment StoreEntitySet="DM_TieuChuan">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="MoDau" ColumnName="MoDau" />
-                <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1648,6 +1638,19 @@
                 <ScalarProperty Name="KienCo" ColumnName="KienCo" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_TieuChuan">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChuan">
+              <MappingFragment StoreEntitySet="DM_TieuChuan">
+                <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
+                <ScalarProperty Name="MoDau" ColumnName="MoDau" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

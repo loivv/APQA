@@ -17,7 +17,6 @@
                     <table class="table table-striped jambo_table bulk_action">
                         <thead>
                             <tr class="headings">
-                                <th>STT</th>
                                 <th>Tiêu chuẩn</th>
                                 <th>Nội dung</th>
                                 <th>#</th>
@@ -27,7 +26,6 @@
 
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
-                                <td>{{$index + 1}}</td>
                                 <td>{{item.ID}}</td>
                                 <td>{{item.NoiDung}}</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
@@ -80,13 +78,13 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Mở đầu</label>
-                                    <input type="text" class="form-control" ng-model="Info.MoDau" required />
+                                    <textarea rows="5" class="form-control" ng-model="Info.MoDau" ></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Kết luận</label>
-                                <input type="text" class="form-control" ng-model="Info.KetLuan" required />
+                                <textarea rows="5" class="form-control" ng-model="Info.KetLuan" ></textarea>
                             </div>
                         </div>
 
@@ -116,7 +114,11 @@
 
         // tao controller
         var app = angular.module('myApp', ['ui.bootstrap']);
-
+        app.filter('unsafe', function ($sce) {
+            return function (val) {
+                return $sce.trustAsHtml(val);
+            };
+        });
         app.controller('myCtrl', function ($scope, $http) {
 
             // phan trang

@@ -21,7 +21,7 @@ namespace QA.Controllers.danhmuc
             int pageNumber = (page ?? 1);
 
 
-            var data = db.DM_TieuChuan.Where(p => p.NoiDung.Contains(search) && p.MaTruong == MaTruong).ToList();
+            var data = db.DM_TieuChuan.Where(p => p.NoiDung.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -44,12 +44,12 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(tieuchuan.ID.ToString()) || String.IsNullOrEmpty(tieuchuan.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_TieuChuan.Where(p => p.MaTruong == MaTruong && p.ID == tieuchuan.ID).FirstOrDefault();
+            var check = db.DM_TieuChuan.Where(p=> p.ID == tieuchuan.ID && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
-            tieuchuan.MaTruong = MaTruong;
             tieuchuan.NamHoc = NamHoc;
+            tieuchuan.MaTruong = MaTruong;
             db.DM_TieuChuan.Add(tieuchuan);
 
             db.SaveChanges();
@@ -65,13 +65,15 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(tieuchuan.ID.ToString()) || String.IsNullOrEmpty(tieuchuan.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_TieuChuan.Where(p => p.MaTruong == MaTruong && p.ID == tieuchuan.ID && p.NamHoc == NamHoc).FirstOrDefault();
+            var check = db.DM_TieuChuan.Where(p => p.ID == tieuchuan.ID && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);
 
             
+            check.MoDau = tieuchuan.MoDau;
             check.NoiDung = tieuchuan.NoiDung;
+            check.KetLuan = tieuchuan.KetLuan;
 
             db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();

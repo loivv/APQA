@@ -320,6 +320,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
     <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
     <Property Name="MoDau" Type="nvarchar(max)" />
     <Property Name="KetLuan" Type="nvarchar(max)" />
