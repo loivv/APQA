@@ -112,5 +112,14 @@ namespace QA.Models
         public string IDCapHoc { get; set; }
 
     }
+    public class LopHoc
+    {
+        public string NamHoc { get; set; }
+        public int KienCo { get; set; }
+        public int BanKienCo { get; set; }
+        public int Tam { get; set; }
+        public int Tong { get; set; }
+
+    }
 
 }

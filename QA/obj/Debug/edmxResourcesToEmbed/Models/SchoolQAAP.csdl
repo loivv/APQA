@@ -283,13 +283,6 @@
     <Property Name="MaKhoi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="LopHoc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
-  <EntityType Name="HT_PhongHoc">
-    <Key>
-      <PropertyRef Name="MaLoai" />
-    </Key>
-    <Property Name="MaLoai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="UMS_GroupMenu">
     <Key>
       <PropertyRef Name="Id" />
@@ -400,7 +393,6 @@
     <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" />
     <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" />
     <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" />
-    <EntitySet Name="HT_PhongHoc" EntityType="Self.HT_PhongHoc" />
     <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" />
     <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" />
     <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" />
@@ -451,6 +443,8 @@
     <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" />
     <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
     <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
+    <EntitySet Name="DM_HocSinhNamHoc" EntityType="SchoolQAAPModel.DM_HocSinhNamHoc" />
+    <EntitySet Name="DM_PhongHoc" EntityType="SchoolQAAPModel.DM_PhongHoc" />
   </EntityContainer>
   <ComplexType Name="GET_NHOMDANHGIA_Result">
     <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -568,5 +562,26 @@
     <Property Name="GhiChuKhac" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_HocSinhNamHoc">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LopHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DM_PhongHoc">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="KienCo" Type="Int32" />
+    <Property Name="BanKienCo" Type="Int32" />
+    <Property Name="Tam" Type="Int32" />
   </EntityType>
 </Schema>

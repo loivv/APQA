@@ -12,9 +12,11 @@ namespace QA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HT_PhongHoc
+    public partial class DM_HocSinhNamHoc
     {
-        public string MaLoai { get; set; }
-        public string TenLoai { get; set; }
+        public string MaTruong { get; set; }
+        public string NamHoc { get; set; }
+        public string LopHoc { get; set; }
+        public Nullable<int> SoLuong { get; set; }
     }
 }

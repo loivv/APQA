@@ -71,6 +71,16 @@
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="DM_HocSinhNamHoc">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="LopHoc" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoLuong" Type="int" />
+  </EntityType>
   <EntityType Name="DM_HoiDongTuDanhGia">
     <Key>
       <PropertyRef Name="MaTruong" />
@@ -168,6 +178,17 @@
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NhanLuc" Type="nvarchar" MaxLength="200" />
     <Property Name="CSVCTC" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="DM_PhongHoc">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="KienCo" Type="int" />
+    <Property Name="BanKienCo" Type="int" />
+    <Property Name="Tam" Type="int" />
   </EntityType>
   <EntityType Name="DM_QuyDinh">
     <Key>
@@ -352,13 +373,6 @@
     <Property Name="MaKhoi" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="LopHoc" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
-  <EntityType Name="HT_PhongHoc">
-    <Key>
-      <PropertyRef Name="MaLoai" />
-    </Key>
-    <Property Name="MaLoai" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="TenLoai" Type="nvarchar" MaxLength="100" />
-  </EntityType>
   <EntityType Name="UMS_GroupMenu">
     <Key>
       <PropertyRef Name="Id" />
@@ -499,6 +513,7 @@
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_MinhChung" EntityType="Self.DM_MinhChung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_MucDichPhamVi" EntityType="Self.DM_MucDichPhamVi" Schema="dbo" store:Type="Tables" />
@@ -508,6 +523,7 @@
     <EntitySet Name="DM_NhomDanhGiaChiTiet" EntityType="Self.DM_NhomDanhGiaChiTiet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_NhomTuDanhGia" EntityType="Self.DM_NhomTuDanhGia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_NLCSVCTaiChinh" EntityType="Self.DM_NLCSVCTaiChinh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_PhongHoc" EntityType="Self.DM_PhongHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_QuyDinh" EntityType="Self.DM_QuyDinh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_SoLop" EntityType="Self.DM_SoLop" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="Self.DM_TapHuanTuDanhGia" Schema="dbo" store:Type="Tables" />
@@ -522,7 +538,6 @@
     <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="HT_PhongHoc" EntityType="Self.HT_PhongHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" Schema="dbo" store:Type="Tables" />

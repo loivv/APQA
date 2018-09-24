@@ -51,7 +51,6 @@ namespace QA.Models
         public virtual DbSet<HT_CanBo> HT_CanBo { get; set; }
         public virtual DbSet<HT_CapHoc> HT_CapHoc { get; set; }
         public virtual DbSet<HT_HocSinhLopHoc> HT_HocSinhLopHoc { get; set; }
-        public virtual DbSet<HT_PhongHoc> HT_PhongHoc { get; set; }
         public virtual DbSet<UMS_GroupMenu> UMS_GroupMenu { get; set; }
         public virtual DbSet<UMS_Menu> UMS_Menu { get; set; }
         public virtual DbSet<UMS_MenuGroupUser> UMS_MenuGroupUser { get; set; }
@@ -61,6 +60,8 @@ namespace QA.Models
         public virtual DbSet<DM_TapHuanTuDanhGia> DM_TapHuanTuDanhGia { get; set; }
         public virtual DbSet<DM_ToChucThucHien> DM_ToChucThucHien { get; set; }
         public virtual DbSet<DM_ThongTinChung> DM_ThongTinChung { get; set; }
+        public virtual DbSet<DM_HocSinhNamHoc> DM_HocSinhNamHoc { get; set; }
+        public virtual DbSet<DM_PhongHoc> DM_PhongHoc { get; set; }
     
         public virtual ObjectResult<GET_NHOMDANHGIA_Result> GET_NHOMDANHGIA(string maTruong)
         {

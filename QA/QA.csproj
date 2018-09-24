@@ -195,6 +195,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\cosodulieu\HocSinhNamHocController.cs" />
     <Compile Include="Controllers\cosodulieu\SoCanBoController.cs" />
     <Compile Include="Controllers\cosodulieu\SoHocSinhController.cs" />
     <Compile Include="Controllers\cosodulieu\SoLopHocController.cs" />
@@ -244,6 +245,9 @@
     <Compile Include="Models\DM_ChucVu.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DM_HocSinhNamHoc.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DM_HoiDongTuDanhGia.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
@@ -269,6 +273,9 @@
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_NLCSVCTaiChinh.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_PhongHoc.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_QuyDinh.cs">
@@ -323,9 +330,6 @@
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HT_HocSinhLopHoc.cs">
-      <DependentUpon>SchoolQAAP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HT_PhongHoc.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityCommon.cs" />
@@ -928,6 +932,7 @@
     <Content Include="Views\MinhChung\Show.cshtml" />
     <Content Include="Views\VanBan\Show.cshtml" />
     <Content Include="Views\ToChucThucHien\Show.cshtml" />
+    <Content Include="Views\SoPhongHoc\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -939,10 +944,11 @@
     <Folder Include="Views\ChuyenDuLieu\" />
     <Folder Include="Views\DanhGiaTieuChi\" />
     <Folder Include="Views\GoiYMinhChung\" />
+    <Folder Include="Views\HocSinhNamHoc\" />
+    <Folder Include="Views\PhongHoc\" />
     <Folder Include="Views\SoCanBo\" />
     <Folder Include="Views\SoHocSinh\" />
     <Folder Include="Views\SoLopHoc\" />
-    <Folder Include="Views\SoPhongHoc\" />
     <Folder Include="Views\ThoiGianCungCap\" />
   </ItemGroup>
   <ItemGroup>

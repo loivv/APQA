@@ -11,8 +11,8 @@ namespace QA.Controllers.tudanhgia
         // GET: ThanhVien
         public ActionResult Show()
         {
-            ViewBag.AllChucVu = db.DM_ChucVu.ToList();
-            ViewBag.AllNhiemVu = db.DM_NhiemVu.ToList();
+            ViewBag.AllChucVu = db.DM_ChucVu.Where(p=>p.MaTruong == MaTruong).ToList();
+            ViewBag.AllNhiemVu = db.DM_NhiemVu.Where(p => p.MaTruong == MaTruong).ToList();
             return View();
         }
 

@@ -14,8 +14,6 @@ namespace QA.Controllers.tudanhgia
         {
             var matruong = new SqlParameter("@MaTruong", MaTruong);
             var result = db.Database.SqlQuery<ThanhVien>("GET_THANHVIEN @MaTruong", matruong).ToList();
-           
-
             ViewBag.AllThanhVien = result;
             return View();
         }

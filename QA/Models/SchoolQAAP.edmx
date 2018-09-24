@@ -76,6 +76,16 @@
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="DM_HocSinhNamHoc">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LopHoc" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoLuong" Type="int" />
+        </EntityType>
         <EntityType Name="DM_HoiDongTuDanhGia">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -173,6 +183,17 @@
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NhanLuc" Type="nvarchar" MaxLength="200" />
           <Property Name="CSVCTC" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DM_PhongHoc">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="KienCo" Type="int" />
+          <Property Name="BanKienCo" Type="int" />
+          <Property Name="Tam" Type="int" />
         </EntityType>
         <EntityType Name="DM_QuyDinh">
           <Key>
@@ -357,13 +378,6 @@
           <Property Name="MaKhoi" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="LopHoc" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityType Name="HT_PhongHoc">
-          <Key>
-            <PropertyRef Name="MaLoai" />
-          </Key>
-          <Property Name="MaLoai" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TenLoai" Type="nvarchar" MaxLength="100" />
-        </EntityType>
         <EntityType Name="UMS_GroupMenu">
           <Key>
             <PropertyRef Name="Id" />
@@ -504,6 +518,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_MinhChung" EntityType="Self.DM_MinhChung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_MucDichPhamVi" EntityType="Self.DM_MucDichPhamVi" Schema="dbo" store:Type="Tables" />
@@ -513,6 +528,7 @@
           <EntitySet Name="DM_NhomDanhGiaChiTiet" EntityType="Self.DM_NhomDanhGiaChiTiet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_NhomTuDanhGia" EntityType="Self.DM_NhomTuDanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_NLCSVCTaiChinh" EntityType="Self.DM_NLCSVCTaiChinh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_PhongHoc" EntityType="Self.DM_PhongHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_QuyDinh" EntityType="Self.DM_QuyDinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_SoLop" EntityType="Self.DM_SoLop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="Self.DM_TapHuanTuDanhGia" Schema="dbo" store:Type="Tables" />
@@ -527,7 +543,6 @@
           <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HT_PhongHoc" EntityType="Self.HT_PhongHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" Schema="dbo" store:Type="Tables" />
@@ -840,13 +855,6 @@
           <Property Name="MaKhoi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LopHoc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="HT_PhongHoc">
-          <Key>
-            <PropertyRef Name="MaLoai" />
-          </Key>
-          <Property Name="MaLoai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="UMS_GroupMenu">
           <Key>
             <PropertyRef Name="Id" />
@@ -957,7 +965,6 @@
           <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" />
           <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" />
           <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" />
-          <EntitySet Name="HT_PhongHoc" EntityType="Self.HT_PhongHoc" />
           <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" />
           <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" />
           <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" />
@@ -1008,6 +1015,8 @@
           <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" />
           <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
           <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
+          <EntitySet Name="DM_HocSinhNamHoc" EntityType="SchoolQAAPModel.DM_HocSinhNamHoc" />
+          <EntitySet Name="DM_PhongHoc" EntityType="SchoolQAAPModel.DM_PhongHoc" />
         </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -1125,6 +1134,27 @@
           <Property Name="GhiChuKhac" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhNamHoc">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LopHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_PhongHoc">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KienCo" Type="Int32" />
+          <Property Name="BanKienCo" Type="Int32" />
+          <Property Name="Tam" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1405,14 +1435,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HT_PhongHoc">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_PhongHoc">
-              <MappingFragment StoreEntitySet="HT_PhongHoc">
-                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
-                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UMS_GroupMenu">
             <EntityTypeMapping TypeName="SchoolQAAPModel.UMS_GroupMenu">
               <MappingFragment StoreEntitySet="UMS_GroupMenu">
@@ -1603,6 +1625,27 @@
                 <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
                 <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
                 <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_HocSinhNamHoc">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_HocSinhNamHoc">
+              <MappingFragment StoreEntitySet="DM_HocSinhNamHoc">
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_PhongHoc">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_PhongHoc">
+              <MappingFragment StoreEntitySet="DM_PhongHoc">
+                <ScalarProperty Name="Tam" ColumnName="Tam" />
+                <ScalarProperty Name="BanKienCo" ColumnName="BanKienCo" />
+                <ScalarProperty Name="KienCo" ColumnName="KienCo" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>

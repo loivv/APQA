@@ -274,14 +274,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HT_PhongHoc">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_PhongHoc">
-        <MappingFragment StoreEntitySet="HT_PhongHoc">
-          <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
-          <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UMS_GroupMenu">
       <EntityTypeMapping TypeName="SchoolQAAPModel.UMS_GroupMenu">
         <MappingFragment StoreEntitySet="UMS_GroupMenu">
@@ -472,6 +464,27 @@
           <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
           <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
           <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_HocSinhNamHoc">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_HocSinhNamHoc">
+        <MappingFragment StoreEntitySet="DM_HocSinhNamHoc">
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_PhongHoc">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_PhongHoc">
+        <MappingFragment StoreEntitySet="DM_PhongHoc">
+          <ScalarProperty Name="Tam" ColumnName="Tam" />
+          <ScalarProperty Name="BanKienCo" ColumnName="BanKienCo" />
+          <ScalarProperty Name="KienCo" ColumnName="KienCo" />
           <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
         </MappingFragment>
