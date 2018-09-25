@@ -462,16 +462,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HT_TieuChuan">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_TieuChuan">
-        <MappingFragment StoreEntitySet="HT_TieuChuan">
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
-          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-          <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DM_ThongTinChung">
       <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
         <MappingFragment StoreEntitySet="DM_ThongTinChung">
@@ -498,6 +488,28 @@
           <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
           <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_TieuChuan">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_TieuChuan">
+        <MappingFragment StoreEntitySet="HT_TieuChuan">
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
+          <ScalarProperty Name="GuiID" ColumnName="GuiID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_TieuChi">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_TieuChi">
+        <MappingFragment StoreEntitySet="HT_TieuChi">
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
+          <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="GuiID" ColumnName="GuiID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
