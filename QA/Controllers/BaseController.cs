@@ -21,6 +21,7 @@ namespace QA.Controllers
 
         public string MaTruong;
         public string NamHoc;
+        public string CapHoc;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
@@ -32,9 +33,11 @@ namespace QA.Controllers
               
                 if (checkUser != null)
                 {
-                    var checkYear = db.DM_NamHoc.Where(p => p.NamHienTai == true).FirstOrDefault();
+                    var checkYear = db.DM_NamHoc.Where(p => p.NamHienTai == true).FirstOrDefault();                  
                     MaTruong = checkUser.MaTruong;
+                    var checkcaphoc = db.DM_ThongTinChung.Where(x => x.MaTruong == checkUser.MaTruong).FirstOrDefault();
                     NamHoc = checkYear.NamHoc;
+                    CapHoc = checkcaphoc.IDCapHoc;
                 }                   
             }
         }

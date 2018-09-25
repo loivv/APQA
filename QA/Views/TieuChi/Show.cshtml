@@ -1,36 +1,38 @@
 ﻿
 @{
-    ViewBag.Title = "Thông tin tiêu chuẩn";
+    ViewBag.Title = "Thông tin tiêu chí";
 }
 
 <div class="row" ng-app="myApp" ng-controller="myCtrl">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Danh sách tiêu chuẩn&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
+                <h2>Danh sách tiêu chuẩn- tiêu chí&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
                 <div class="clearfix"></div>
             </div>
             <!-- end x_title-->
             <div class="x_content">
+                <div class="row">
+                </div>
+
                 <!-- table data-->
                 <div class="table-responsive">
                     <table class="table table-striped jambo_table bulk_action">
                         <thead>
                             <tr class="headings">
+                                <th>STT</th>
                                 <th>Tiêu chuẩn</th>
-                                <th>Nội dung</th>
-                                <th>#</th>
+                                <th>Danh sách tiêu chí</th>
                                 <th>#</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
+                                <td>{{$index + 1}}</td>
                                 <td>{{item.IDTieuChuan}}</td>
                                 <td>{{item.NoiDung}}</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
-                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -44,7 +46,6 @@
         </div>
         <!-- end x_pannel-->
     </div>
-
 
     <!-- tao model them moi-->
     <div id="insertmodal" class="modal fade" role="dialog">
@@ -65,8 +66,16 @@
                             <div class="col-sm-12">
 
                                 <div class="form-group">
-                                    <label>Tiêu chuẩn (1.2.3...)</label>
-                                    <input type="number" class="form-control text-uppercase" ng-model="Info.IDTieuChuan" required />
+                                    <label>Tiêu chuẩn</label>
+                                    <select class="form-control" ng-model="Info.IDTieuChuan" required>
+                                        <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}-{{x.NoiDung}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Tiêu chí (1,2,3)</label>
+                                    <input type="number" class="form-control" ng-model="Info.IDTieuChi" required />
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -77,16 +86,28 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Mở đầu</label>
-                                    <textarea rows="5" class="form-control" ng-model="Info.MoDau" ></textarea>
+                                    <label>Điểm mạnh</label>
+                                    <textarea rows="5" class="form-control" ng-model="Info.DiemManh"></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                            <div class="form-group">
-                                <label>Kết luận</label>
-                                <textarea rows="5" class="form-control" ng-model="Info.KetLuan" ></textarea>
+                                <div class="form-group">
+                                    <label>Điểm yếu</label>
+                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu"></textarea>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Kế hoạch cải tiến chất lượng</label>
+                                    <textarea rows="5" class="form-control" ng-model="Info.KeHoach"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Đạt</label>
+                                    <input type="checkbox" class="form-control" ng-model="Info.TuDanhGia" />
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -113,14 +134,15 @@
     <script>
 
         // tao controller
-        var app = angular.module('myApp', ['ui.bootstrap']);
+        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader', 'ui.mask']);
         app.filter('unsafe', function ($sce) {
             return function (val) {
                 return $sce.trustAsHtml(val);
             };
         });
-        app.controller('myCtrl', function ($scope, $http) {
+        app.controller('myCtrl', function ($scope, $http, $filter) {
 
+             $scope.allTieuChuan = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChuan))');
             // phan trang
             $scope.numPages;
             $scope.itemPerPage;
@@ -137,13 +159,14 @@
                 showLoader(true);
                 $http({
                     method: "GET",
-                    url: "/TieuChuan/getTieuChuan?page=" + page + "&search=" + search
+                    url: "/TieuChi/getTieuChi?page=" + page + "&search=" + search
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
                     if (response.data.error === 0) {
 
                         $scope.allDanhMuc = response.data.data;
+                        //console.log($scope.allDanhMuc);
                         $scope.itemPerPage = response.data.pageSize;
                         $scope.totalItems = response.data.toltalSize;
                         $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
@@ -163,71 +186,73 @@
             $scope.IsAction = '';
 
             $scope.addNew = function () {
+                var date = new Date();
+                var fDate = $filter('date')(date, "dd/MM/yyyy");
+                var tDate = $filter('date')(date.addDays(365), "dd/MM/yyyy");
 
-                $scope.Info = { "IDTieuChuan": "", "NoiDung": "","MoDau":"","KetLuan":"" };
-
-                $scope.modaltitle = "Thêm tiêu chuẩn";
+                $scope.Info = { "IDTieuChuan": "", "IDTieuChi": "", "NoiDung": "", "DiemManh": "","DiemYeu":"","KeHoach":"","TuDanhGia":false };
+                $scope.modaltitle = "Thêm tiêu chí";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
-                showModel("insertmodal")
+
+                showModel("insertmodal");
 
             };
+
+
 
             $scope.edit = function (index) {
-
                 var info = $scope.allDanhMuc[index];
-
                 $scope.Info = angular.copy(info);
-                $scope.modaltitle = "Chỉnh sửa tiêu chuẩn";
-                // $scope.CountryIDDisable = true;
+                console.log($scope.Info);
+                $scope.modaltitle = "Chỉnh sửa tiêu chí";
                 $scope.IsAction = 'edit';
-                showModel("insertmodal")
+                showModel("insertmodal");
             };
-
 
             // tim index theo ma tinh
             function getSelectedIndex(id) {
                 for (var i = 0; i < $scope.allDanhMuc.length; i++)
-                    if ($scope.allDanhMuc[i].NamHoc == id)
+                    if ($scope.allDanhMuc[i].NamHoc === id)
                         return i;
                 return -1;
             };
 
             // action
-            $scope.finishForm = function (isValid) {
-                if (isValid) {
-                    if ($scope.IsAction === 'add') {
-                        $scope.sendCreate();
-                    } else if ($scope.IsAction === 'edit') {
-                        $scope.sendEdit();
-                    } else if ($scope.IsAction === 'delete') {
-                        $scope.sendDelete();
-                    }
 
-                } else {
-                    showNotify('our form is missing');
+            $scope.finishForm = function (isValid) {
+                if ($scope.IsAction === 'add') {
+                    $scope.sendCreate();
+                } else if ($scope.IsAction === 'edit') {
+                    $scope.sendEdit();
+                } else if ($scope.IsAction === 'delete') {
+                    $scope.Info = angular.copy(info);
+                    $scope.sendDelete();
                 }
-            }
+
+
+            };
 
 
             // them tinh
             $scope.sendCreate = function () {
                 showLoader(true);
+
                 $http({
                     method: "POST",
-                    url: "/TieuChuan/create",
-                    data: { tieuchuan: $scope.Info }
+                    url: "/TieuChi/create",
+                    data: { tc: $scope.Info}
                 }).then(function success(response) {
 
                     var result = response.data;
                     console.log(result);
                     if (result.error === 0) {
-
+                        $scope.GetData(1, "");
                         $scope.allDanhMuc.unshift(result.data);
 
                         hideModel("insertmodal");
 
-                        showNotify("Đã thêm tiêu chuẩn");
+                        showNotify("Đã thêm năm học");
 
                     } else {
 
@@ -247,19 +272,19 @@
 
             // cap nhat tinh
             $scope.sendEdit = function () {
-                console.log($scope.Info);
+                console.log("edit");
                 showLoader(true);
-
+                //console.log($scope.Info.NamHienTai);
                 $http({
                     method: "POST",
-                    url: "/TieuChuan/edit",
-                    data: { tieuchuan: $scope.Info}
+                    url: "/TieuChi/edit",
+                    data: { tc: $scope.Info }
                 }).then(
                     function success(response) {
                         $scope.GetData(1, "");
                         var result = response.data;
 
-                        if (result.error == 0) {
+                        if (result.error === 0) {
 
                             var findIndex = getSelectedIndex(result.data.NamHoc);
 
@@ -289,15 +314,14 @@
             // xoa du lieu
             $scope.sendDelete = function (index) {
                 var info = $scope.allDanhMuc[index];
-
                 var r = confirm("Bạn muốn xóa không ?");
-                if (r == true) {
+                if (r) {
                     showLoader(true);
 
                     $http({
                         method: "POST",
-                        url: "/TieuChuan/delete",
-                        data: { id: info.ID }
+                        url: "/TieuChi/delete",
+                        data: { namhoc: info.NamHoc }
                     }).then(
                         function success(response) {
 

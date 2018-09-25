@@ -12,16 +12,12 @@ namespace QA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DM_TieuChi
+    public partial class HT_TieuChuan
     {
+        public string GuiID { get; set; }
         public int IDTieuChuan { get; set; }
-        public int IDTieuChi { get; set; }
-        public string MaTruong { get; set; }
         public string NamHoc { get; set; }
+        public string IDCapHoc { get; set; }
         public string NoiDung { get; set; }
-        public string DiemManh { get; set; }
-        public string DiemYeu { get; set; }
-        public string KeHoach { get; set; }
-        public Nullable<bool> TuDanhGia { get; set; }
     }
 }

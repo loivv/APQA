@@ -121,5 +121,23 @@ namespace QA.Models
         public int Tong { get; set; }
 
     }
+    public class TieuChi
+    {
+        public int IDTieuChuan { get; set; }
+        public string NoiDung { get; set; }
+        public Nullable< int> TC1 { get; set; }
+        public Nullable<int> TC2 { get; set; }
+        public Nullable<int> TC3 { get; set; }
+        public Nullable<int> TC4 { get; set; }
+        public Nullable<int> TC5 { get; set; }
+        public Nullable<int> TC6 { get; set; }
+        public Nullable<int> TC7 { get; set; }
+        public Nullable<int> TC8 { get; set; }
+        public Nullable<int> TC9 { get; set; }
+        public Nullable<int> TC10 { get; set; }
+        public Nullable<int> TC11 { get; set; }
+        public Nullable<int> TC12 { get; set; }
+
+    }
 
 }

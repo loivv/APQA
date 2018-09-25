@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -259,6 +259,7 @@
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
     <Property Name="TenTruongMoi" Type="nvarchar" MaxLength="100" />
     <Property Name="TenTruongCu" Type="nvarchar" MaxLength="100" />
     <Property Name="CoQuanChuQuan" Type="nvarchar" MaxLength="100" />
@@ -282,11 +283,13 @@
   </EntityType>
   <EntityType Name="DM_TieuChi">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="IDTieuChuan" />
+      <PropertyRef Name="IDTieuChi" />
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
     </Key>
-    <Property Name="ID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="IDTieuChuan" Type="int" Nullable="false" />
+    <Property Name="IDTieuChi" Type="int" Nullable="false" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
@@ -313,15 +316,13 @@
   </EntityType>
   <EntityType Name="DM_TieuChuan">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="IDTieuChuan" />
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="IDTieuChuan" Type="int" Nullable="false" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
-    <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
     <Property Name="MoDau" Type="nvarchar(max)" />
     <Property Name="KetLuan" Type="nvarchar(max)" />
   </EntityType>
@@ -373,6 +374,17 @@
     </Key>
     <Property Name="MaKhoi" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="LopHoc" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HT_TieuChuan">
+    <Key>
+      <PropertyRef Name="IDTieuChuan" />
+      <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="IDCapHoc" />
+    </Key>
+    <Property Name="IDTieuChuan" Type="int" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="UMS_GroupMenu">
     <Key>
@@ -539,6 +551,7 @@
     <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HT_TieuChuan" EntityType="Self.HT_TieuChuan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" Schema="dbo" store:Type="Tables" />
