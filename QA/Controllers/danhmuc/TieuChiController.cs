@@ -12,7 +12,7 @@ namespace QA.Controllers.danhmuc
         // GET: TieuChi
         public ActionResult Show()
         {
-            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDCapHoc == CapHoc && p.NamHoc == NamHoc).Select(x => new {IDTieuChuan = x.IDTieuChuan,NoiDung = x.NoiDung }).ToList();
+            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDCapHoc == CapHoc && p.NamHoc == NamHoc).Select(x => new {IDTieuChuan = x.IDTieuChuan,NoiDung = x.NoiDung,GuiIDTC = x.GuiID }).ToList();
             return View();
         }
 
@@ -23,10 +23,7 @@ namespace QA.Controllers.danhmuc
 
             int pageNumber = (page ?? 1);
 
-            var matruong = new SqlParameter("@MaTruong", MaTruong);
-            var namhoc = new SqlParameter("@NamHoc", NamHoc);
-            // var data = db.Database.SqlQuery<TieuChi>("GET_TIEUCHUAN_TIEUCHI @MaTruong,@NamHoc", matruong, namhoc).ToList();
-            var data = db.DM_TieuChi.Where(x=> x.MaTruong == MaTruong && x.NamHoc == NamHoc).ToList();
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI").ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -43,21 +40,23 @@ namespace QA.Controllers.danhmuc
         }
 
         [HttpPost]
-        public ActionResult create(DM_TieuChi tc)
+        public ActionResult create(HT_TieuChi tc,string guiid)
         {
 
             if (String.IsNullOrEmpty(tc.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_TieuChi.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc && p.IDTieuChuan == tc.IDTieuChuan && p.IDTieuChi == tc.IDTieuChi).FirstOrDefault();
+            var check = db.HT_TieuChi.Where(p =>  p.NamHoc == NamHoc && p.IDTieuChuan == guiid && p.IDTieuChi == tc.IDTieuChi).FirstOrDefault();
 
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
 
             //kiem tra neu  la nam hoc hien tai thi xoa nhưng cai con lai
-            tc.MaTruong = MaTruong;
+
             tc.NamHoc = NamHoc;
-            db.DM_TieuChi.Add(tc);
+            tc.GuiID = Guid.NewGuid().ToString();
+            tc.IDTieuChuan = guiid;
+            db.HT_TieuChi.Add(tc);
             db.SaveChanges();
 
             return Json(new ResultInfo() { error = 0, msg = "", data = tc }, JsonRequestBehavior.AllowGet);
@@ -65,22 +64,18 @@ namespace QA.Controllers.danhmuc
         }
 
         [HttpPost]
-        public ActionResult edit(DM_TieuChi tc)
+        public ActionResult edit(HT_TieuChi tc,string guiid)
         {
             if (String.IsNullOrEmpty(tc.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_TieuChi.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc && p.IDTieuChuan == tc.IDTieuChuan && p.IDTieuChi == tc.IDTieuChi).FirstOrDefault();
+            var check = db.HT_TieuChi.Where(p => p.NamHoc == NamHoc && p.IDTieuChuan == guiid && p.IDTieuChi == tc.IDTieuChi && p.GuiID == tc.GuiID).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);
 
             check.IDTieuChuan = tc.IDTieuChuan;
             check.NoiDung = tc.NoiDung;
-            check.KeHoach = tc.KeHoach;
-            check.TuDanhGia = tc.TuDanhGia;
-            check.DiemManh = tc.DiemManh;
-            check.DiemYeu = tc.DiemYeu;
 
             db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
@@ -89,12 +84,12 @@ namespace QA.Controllers.danhmuc
 
         }
         [HttpPost]
-        public ActionResult delete(int id)
+        public ActionResult delete(string guiid)
         {
-            if (String.IsNullOrEmpty(id.ToString()))
+            if (String.IsNullOrEmpty(guiid.ToString()))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_TieuChi.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc && p.IDTieuChi == id).FirstOrDefault();
+            var check = db.HT_TieuChi.Where(p => p.GuiID == guiid).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);

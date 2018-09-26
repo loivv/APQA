@@ -121,6 +121,16 @@ namespace QA.Models
         public int Tong { get; set; }
 
     }
+    public class TieuChuanTieuChi
+    {
+        public string GuiID { get; set; }
+        public int IDTieuChuan { get; set; }
+        public string NoiDung { get; set; }
+        public string GuiIDTC { get; set; }
+        public int IDTieuChi { get; set; }
+        public string NoiDungTC { get; set; }
+
+    }
     public class TieuChi
     {
         public int IDTieuChuan { get; set; }

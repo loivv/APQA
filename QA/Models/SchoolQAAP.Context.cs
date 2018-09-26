@@ -62,8 +62,8 @@ namespace QA.Models
         public virtual DbSet<DM_TieuChi> DM_TieuChi { get; set; }
         public virtual DbSet<DM_TieuChuan> DM_TieuChuan { get; set; }
         public virtual DbSet<DM_ThongTinChung> DM_ThongTinChung { get; set; }
-        public virtual DbSet<HT_TieuChi> HT_TieuChi { get; set; }
         public virtual DbSet<HT_TieuChuan> HT_TieuChuan { get; set; }
+        public virtual DbSet<HT_TieuChi> HT_TieuChi { get; set; }
     
         public virtual ObjectResult<GET_NHOMDANHGIA_Result> GET_NHOMDANHGIA(string maTruong)
         {

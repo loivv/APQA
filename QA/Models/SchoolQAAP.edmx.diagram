@@ -44,8 +44,8 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChi" Width="1.5" PointX="16.375" PointY="0.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChuan" Width="1.5" PointX="16.375" PointY="4.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThongTinChung" Width="1.5" PointX="3.375" PointY="15.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi" Width="1.5" PointX="9.375" PointY="16.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChuan" Width="1.5" PointX="16.375" PointY="11.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi" Width="1.5" PointX="9.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
