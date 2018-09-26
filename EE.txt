@@ -7,3 +7,8 @@ db.DM_NamHoc.Where(x => x.MaTruong == MaTruong && x.NamHoc != namhoc.NamHoc).ToL
 
 
 dinh dang ngay : .slice(6, -2) | date : 'dd/MM/yyyy
+
+
+select cn.IDTieuChuan,tc.IDTieuChi,cn.NoiDung,tc.GuiID as GuiIDTC,tc.NoiDung from HT_TieuChi tc inner join HT_TieuChuan cn
+on cn.GuiID = tc.IDTieuChuan
+order by cn.IDTieuChuan,IDTieuChi
