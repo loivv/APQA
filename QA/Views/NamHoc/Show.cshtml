@@ -69,9 +69,15 @@
                     <!-- body-->
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Năm học</label>
+                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Nam" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Niên khóa</label>
                                     <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
                                 </div>
                             </div>
@@ -168,7 +174,7 @@
                 var fDate = $filter('date')(date, "dd/MM/yyyy");
                 var tDate = $filter('date')(date.addDays(365), "dd/MM/yyyy");
 
-                $scope.Info = { "NamHoc": "", "NamHienTai": false, "FromDate": fDate, "ToDate": tDate };
+                $scope.Info = {"Nam":"", "NamHoc": "", "NamHienTai": false, "FromDate": fDate, "ToDate": tDate };
                 $scope.modaltitle = "Thêm năm học";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
@@ -224,7 +230,7 @@
                 $http({
                     method: "POST",
                     url: "/NamHoc/create",
-                    data: { NamHoc: $scope.Info.NamHoc, NamHienTai: $scope.Info.NamHienTai, tuNgay: $scope.Info.FromDate, denNgay: $scope.Info.ToDate }
+                    data: { Nam:$scope.Info.Nam,NamHoc: $scope.Info.NamHoc, NamHienTai: $scope.Info.NamHienTai, tuNgay: $scope.Info.FromDate, denNgay: $scope.Info.ToDate }
                 }).then(function success(response) {
 
                     var result = response.data;

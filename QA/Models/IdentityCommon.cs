@@ -99,7 +99,6 @@ namespace QA.Models
     }
     public class VanBan
     {
-
         public string ID { get; set; }
         public string MaTruong { get; set; }
         public string MaSo { get; set; }
@@ -129,6 +128,7 @@ namespace QA.Models
         public string GuiIDTC { get; set; }
         public int IDTieuChi { get; set; }
         public string NoiDungTC { get; set; }
+        public int TieuChi { get; set; }
 
     }
     public class TieuChi

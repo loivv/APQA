@@ -37,7 +37,7 @@
                                 <td>{{item.TenQuyDinh}}</td>
                                 <td>{{item.NgayBanHanh.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td>{{item.CoQuan}}</td>
-                                <td>{{item.ApDung}}</td>
+                                <td><i ng-class="{'fa fa-check' : item.ApDung == true, 'fa fa-close' : item.ApDung == false}"></i></td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>

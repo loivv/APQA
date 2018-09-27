@@ -15,12 +15,12 @@ namespace QA.Models
     public partial class DM_QuyDinh
     {
         public string ID { get; set; }
-        public string MaTruong { get; set; }
         public string SoHieu { get; set; }
         public string TenQuyDinh { get; set; }
         public Nullable<System.DateTime> NgayBanHanh { get; set; }
         public string CoQuan { get; set; }
         public string LinkFile { get; set; }
         public Nullable<bool> ApDung { get; set; }
+        public string IDCapHoc { get; set; }
     }
 }

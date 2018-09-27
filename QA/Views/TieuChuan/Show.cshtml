@@ -6,99 +6,142 @@
 <div class="row" ng-app="myApp" ng-controller="myCtrl">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <div class="x_title">
-                <h2>Danh sách tiêu chuẩn&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
-                <div class="clearfix"></div>
-            </div>
-            <!-- end x_title-->
             <div class="x_content">
-                <!-- table data-->
-                <div class="table-responsive">
-                    <table class="table table-striped jambo_table bulk_action">
-                        <thead>
-                            <tr class="headings">
-                                <th>Tiêu chuẩn</th>
-                                <th>Nội dung</th>
-                                <th>#</th>
-                                <th>#</th>
-                            </tr>
-                        </thead>
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#tab_danhmuc" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Danh sách tiêu chuẩn</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#tab_chitiet" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Danh sách tiêu chí</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active in" id="tab_danhmuc" aria-labelledby="home-tab">
+                            <!-- begin tab-->
+                            <div class="row">
+                                <!-- thong tin-->
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th>Tiêu chuẩn</th>
+                                                <th>Nội dung</th>
+                                                <th>Tổng số tiêu chí</th>
+                                                <th>#</th>
+                                                <th>#</th>
+                                            </tr>
+                                        </thead>
 
-                        <tbody>
-                            <tr ng-repeat="item in allDanhMuc">
-                                <td>{{item.IDTieuChuan}}</td>
-                                <td>{{item.NoiDung}}</td>
-                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
-                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                        <tbody>
+                                            <tr ng-repeat="item in allDanhMuc">
+                                                <td>{{item.IDTieuChuan}}</td>
+                                                <td>{{item.NoiDung}}</td>
+                                                <td>{{item.TieuChi}}</td>
+                                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end tab-->
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_chitiet" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th>STT</th>
+                                                <th>Tiêu chuẩn</th>
+                                                <th>Mã tiêu chí</th>
+                                                <th>Tiêu chí</th>
+                                                <th>Xem chỉ số</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in allTieuChi">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{item.NoiDung}}</td>
+                                                <td>{{item.IDTieuChi}}</td>
+                                                <td>{{item.NoiDungTC}}</td>
+                                                <td><a href="#" ng-click="xemchiso($index)">Chi tiết</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- end table data-->
-                <!--phan trang-->
-                <ul items-per-page="itemPerPage" uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
-                <!-- end phan trang-->
-
             </div>
-            <!-- end x_content-->
         </div>
-        <!-- end x_pannel-->
     </div>
-
-
     <!-- tao model them moi-->
     <div id="insertmodal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">{{modaltitle}}</h4>
                 </div>
-
-
-                <!-- begin form-->
-                <form class="css-form" name="createForm" ng-submit="finishForm(createForm.$valid)">
-                    <!-- body-->
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-
-                                <div class="form-group">
-                                    <label>Tiêu chuẩn (1.2.3...)</label>
-                                    <input type="number" class="form-control text-uppercase" ng-model="Info.IDTieuChuan" required />
+            <!--panel dialog-->
+                <div class="x_panel">
+                    <div class="x_content">
+                        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                            <ul class="nav nav-tabs bar_tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#tab_noidung" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Nội dung</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#tab_chisoa" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chỉ số a</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#tab_chisob" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chỉ số b</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#tab_chisoc" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chỉ số c</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active in" id="tab_noidung" aria-labelledby="home-tab">
+                                    <!-- begin tab-->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end tab-->
                                 </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label>Nội dung</label>
-                                    <input type="text" class="form-control" ng-model="Info.NoiDung" required />
+                                <div role="tabpanel" class="tab-pane fade" id="tab_chisoa" aria-labelledby="profile-tab">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nội dung</label>
+                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Yêu cầu (Nội hàm)</label>
+                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Gợi ý</label>
+                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label>Mở đầu</label>
-                                    <textarea rows="5" class="form-control" ng-model="Info.MoDau" ></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                            <div class="form-group">
-                                <label>Kết luận</label>
-                                <textarea rows="5" class="form-control" ng-model="Info.KetLuan" ></textarea>
                             </div>
                         </div>
-
-                        </div>
                     </div>
-                    <!-- end body-->
-                    <!-- begin footer-->
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-default">Hoàn thành</button>
-                    </div>
-                    <!-- end footer-->
-                </form>
-                <!-- end form-->
-
+                </div>
             </div>
             <!-- end modal content-->
         </div>
@@ -154,7 +197,30 @@
                     showNotify('Connect error');
                 });
             }
-            // goi lay du liẹu
+            //ham lay chi tiet tieu chi
+            $scope.allTieuChi = [];
+            $scope.GetTieuChi = function (page, search) {
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/TieuChuan/getTieuChi?page=" + page + "&idtieuchuan=" + search
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allTieuChi = response.data.data;
+                        $scope.itemPerPage = response.data.pageSize;
+                        $scope.totalItems = response.data.toltalSize;
+                        $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            //ket thuc ham lay goi tieu chi
 
             $scope.GetData(1, "");
             //
@@ -176,12 +242,20 @@
             $scope.edit = function (index) {
 
                 var info = $scope.allDanhMuc[index];
-
                 $scope.Info = angular.copy(info);
-                $scope.modaltitle = "Chỉnh sửa tiêu chuẩn";
-                // $scope.CountryIDDisable = true;
+                $('.nav-tabs a[href="#tab_chitiet"]').tab('show');
+                $scope.GetTieuChi(1, $scope.Info.GuiID);
+
+            };
+
+            $scope.xemchiso = function (index) {
+
+                var infotc = $scope.allTieuChi[index];
+                $scope.InfoTC = angular.copy(infotc);
+                $scope.modaltitle = "Xem tiêu chí";
                 $scope.IsAction = 'edit';
-                showModel("insertmodal")
+                showModel("insertmodal");
+
             };
 
 

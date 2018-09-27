@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -126,6 +126,7 @@
     <Property Name="DenNgay" Type="date" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
     <Property Name="NamHienTai" Type="bit" />
+    <Property Name="Nam" Type="nvarchar" MaxLength="4" />
   </EntityType>
   <EntityType Name="DM_NhiemVu">
     <Key>
@@ -193,16 +194,15 @@
   <EntityType Name="DM_QuyDinh">
     <Key>
       <PropertyRef Name="ID" />
-      <PropertyRef Name="MaTruong" />
     </Key>
     <Property Name="ID" Type="nvarchar" MaxLength="15" Nullable="false" />
-    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="SoHieu" Type="nvarchar" MaxLength="30" />
     <Property Name="TenQuyDinh" Type="nvarchar" MaxLength="300" />
     <Property Name="NgayBanHanh" Type="date" />
     <Property Name="CoQuan" Type="nvarchar" MaxLength="100" />
     <Property Name="LinkFile" Type="nvarchar" MaxLength="100" />
     <Property Name="ApDung" Type="bit" />
+    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="DM_SoLop">
     <Key>
@@ -280,6 +280,7 @@
     <Property Name="GhiChuKhac" Type="nvarchar" MaxLength="200" />
     <Property Name="Code" Type="nvarchar" MaxLength="10" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
+    <Property Name="PhanLoai" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="DM_TieuChi">
     <Key>
@@ -297,22 +298,6 @@
     <Property Name="DiemYeu" Type="nvarchar(max)" />
     <Property Name="KeHoach" Type="nvarchar(max)" />
     <Property Name="TuDanhGia" Type="bit" />
-  </EntityType>
-  <EntityType Name="DM_TieuChi_ChiSo">
-    <Key>
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="ChiSo" />
-      <PropertyRef Name="NamHoc" />
-    </Key>
-    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="ID" Type="nvarchar" MaxLength="2" Nullable="false" />
-    <Property Name="ChiSo" Type="nvarchar" MaxLength="2" Nullable="false" />
-    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
-    <Property Name="HienTrang" Type="nvarchar(max)" />
-    <Property Name="YeuCau" Type="nvarchar(max)" />
-    <Property Name="GoiY" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="DM_TieuChuan">
     <Key>
@@ -338,19 +323,14 @@
   <EntityType Name="DM_VanBan">
     <Key>
       <PropertyRef Name="ID" />
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="ID" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="MaTruong" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MaSo" Type="nvarchar" MaxLength="20" />
     <Property Name="TrichYeu" Type="nvarchar" MaxLength="200" />
     <Property Name="NgayBanHanh" Type="date" />
     <Property Name="CoQuanBanHanh" Type="nvarchar" MaxLength="100" />
     <Property Name="LinkVanBan" Type="nvarchar" MaxLength="100" />
     <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
-    <Property Name="BoGiaoDuc" Type="bit" />
   </EntityType>
   <EntityType Name="HT_CanBo">
     <Key>
@@ -380,10 +360,22 @@
       <PropertyRef Name="GuiID" />
     </Key>
     <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IDTieuChi" Type="int" Nullable="false" />
     <Property Name="NoiDung" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="HT_TieuChi_ChiSo">
+    <Key>
+      <PropertyRef Name="GuiID" />
+    </Key>
+    <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChiSo" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="HienTrang" Type="nvarchar(max)" />
+    <Property Name="YeuCau" Type="nvarchar(max)" />
+    <Property Name="GoiY" Type="nvarchar(max)" />
+    <Property Name="Muc" Type="int" />
   </EntityType>
   <EntityType Name="HT_TieuChuan">
     <Key>
@@ -512,7 +504,8 @@
     <Parameter Name="MaTruong" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="GET_VANBAN_CAPHOC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaTruong" Type="nvarchar" Mode="In" />
+    <Parameter Name="CapHoc" Type="nvarchar" Mode="In" />
+    <Parameter Name="PhanLoai" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="NhomDanhGia_ThanhVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="manhom" Type="nvarchar" Mode="In" />
@@ -553,7 +546,6 @@
     <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_TieuChi" EntityType="Self.DM_TieuChi" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DM_TieuChi_ChiSo" EntityType="Self.DM_TieuChi_ChiSo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ToChucThucHien" EntityType="Self.DM_ToChucThucHien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" Schema="dbo" store:Type="Tables" />
@@ -561,6 +553,7 @@
     <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChi" EntityType="Self.HT_TieuChi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HT_TieuChi_ChiSo" EntityType="Self.HT_TieuChi_ChiSo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChuan" EntityType="Self.HT_TieuChuan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" Schema="dbo" store:Type="Tables" />

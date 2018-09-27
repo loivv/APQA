@@ -37,5 +37,6 @@ namespace QA.Models
         public string GhiChuKhac { get; set; }
         public string Code { get; set; }
         public string DiaChi { get; set; }
+        public string PhanLoai { get; set; }
     }
 }

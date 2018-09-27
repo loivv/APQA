@@ -22,7 +22,6 @@
                                 <th>Ngày ban hành</th>
                                 <th>Cơ quan ban hành</th>
                                 <th>Cấp học</th>
-                                <th>Bộ giáo dục</th>
                                 <th>File</th>
                                 <th>#</th>
                                 <th>#</th>                               
@@ -37,8 +36,7 @@
                                 <td>{{item.NgayBanHanh.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td>{{item.CoQuanBanHanh}}</td>
                                 <td>{{item.CapHoc}}</td>
-                                <td><input type="checkbox" ng-model="item.BoGiaoDuc" ng-checked="item.BoGiaoDuc"></td>
-                                <td>{{item.LinkFile}}</td>
+                                <td><i class="fa fa-paperclip"><a target="_blank" href="TaiLieu/VanBan/{{item.ID}}.{{item.LinkVanBan}}">Tải file</a> </i></td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
@@ -108,13 +106,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>File đính kèm</label>
-                                    <input type="file" id="filetailieu" class="form-control" ng-model="Info.LinkFile" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Bộ giáo dục</label>
-                                    <input type="checkbox" class="form-control" ng-model="Info.BoGiaoDuc" />
+                                    <input type="file" id="filetailieu" class="form-control" ng-model="Info.LinkVanBan" />
                                 </div>
                             </div>
 
@@ -196,7 +188,7 @@
             var fDate = $filter('date')(date, "dd/MM/yyyy");
             $scope.addNew = function () {
 
-                $scope.Info = { "MaSo": "", "TrichYeu": "", "NgayBanHanh": fDate, "CoQuanBanHanh": "", "LinkFile": "", "IDCapHoc": "","BoGiaoDuc":"" };
+                $scope.Info = { "MaSo": "", "TrichYeu": "", "NgayBanHanh": fDate, "CoQuanBanHanh": "", "LinkVanBan": "", "IDCapHoc": "" };
                 $scope.modaltitle = "Thêm quy định";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
@@ -240,13 +232,12 @@
 
             // them tinh
             $scope.sendCreate = function () {
+                console.log($scope.Info);
                 showLoader(true);
                 uiUploader.startUpload({
                     url: '/VanBan/create',
                     paramName: 'fileTaiLieu',
-                    data: {
-                        vanban : $scope.Info, ngaybanhanh: $scope.Info.NgayBanHanh
-                    },
+                    data: { maso: $scope.Info.MaSo, trichyeu: $scope.Info.TrichYeu, coquan: $scope.Info.CoQuanBanHanh, ngaybanhanh: $scope.Info.NgayBanHanh, idcaphoc: $scope.Info.IDCapHoc},
                     onProgress: function (file) {
                         $scope.$apply();
                     },
@@ -281,7 +272,6 @@
 
             // cap nhat tinh
             $scope.sendEdit = function () {
-                console.log($scope.Info);
                 showLoader(true);
                 var ngayBH = $scope.Info.NgayBanHanh;
                 $scope.Info.ngaybanhanh = ngayBH;
@@ -290,7 +280,7 @@
                     url: '/VanBan/edit',
                     concurrency: 2,
                     paramName: 'fileTaiLieu',
-                    data: $scope.Info,
+                    data: { maso: $scope.Info.MaSo, trichyeu: $scope.Info.TrichYeu, coquan: $scope.Info.CoQuanBanHanh, ngaybanhanh: $scope.Info.NgayBanHanh, idcaphoc: $scope.Info.IDCapHoc, id: $scope.Info.ID },
                     onProgress: function (file) {
                         $scope.$apply();
                     },

@@ -39,7 +39,7 @@ namespace QA.Controllers.danhmuc
         }
 
         [HttpPost]
-        public ActionResult create(string NamHoc, string tuNgay, string denNgay, bool NamHienTai)
+        public ActionResult create(string Nam,string NamHoc, string tuNgay, string denNgay, bool NamHienTai)
         {
 
             if (String.IsNullOrEmpty(NamHoc))
@@ -64,6 +64,7 @@ namespace QA.Controllers.danhmuc
             }
             var insData = new DM_NamHoc()
             {
+                Nam = Nam,
                 NamHoc = NamHoc,
                 TuNgay = dateFrom,
                 DenNgay = dateTo,
@@ -98,6 +99,7 @@ namespace QA.Controllers.danhmuc
                 });
                // db.SaveChanges();
             }
+            check.Nam = namhoc.Nam;
             check.MaTruong = MaTruong;
             namhoc.TuNgay = dateFrom;
             namhoc.DenNgay = dateTo;

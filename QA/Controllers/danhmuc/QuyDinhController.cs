@@ -21,7 +21,7 @@ namespace QA.Controllers.danhmuc
             int pageNumber = (page ?? 1);
 
 
-            var data = db.DM_QuyDinh.Where(p => p.TenQuyDinh.Contains(search) && p.MaTruong == MaTruong).ToList();
+            var data = db.DM_QuyDinh.Where(p => p.TenQuyDinh.Contains(search)).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -44,7 +44,7 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(quydinh.TenQuyDinh) || String.IsNullOrEmpty(quydinh.CoQuan) || String.IsNullOrEmpty(quydinh.SoHieu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_QuyDinh.Where(p => p.MaTruong == MaTruong && p.SoHieu == quydinh.SoHieu && p.TenQuyDinh == quydinh.TenQuyDinh).FirstOrDefault();
+            var check = db.DM_QuyDinh.Where(p => p.SoHieu == quydinh.SoHieu && p.TenQuyDinh == quydinh.TenQuyDinh).FirstOrDefault();
 
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
@@ -65,7 +65,7 @@ namespace QA.Controllers.danhmuc
 
             }
 
-            var maxid = db.DM_QuyDinh.OrderByDescending(x => x.ID).Where(x => x.MaTruong == MaTruong).FirstOrDefault();
+            var maxid = db.DM_QuyDinh.OrderByDescending(x => x.ID).FirstOrDefault();
             string maxqd = string.Empty;
             if (maxid != null)
             {
@@ -76,7 +76,6 @@ namespace QA.Controllers.danhmuc
                 maxqd = "QDH0001";
             }
             quydinh.ID = maxqd;
-            quydinh.MaTruong = MaTruong;
             quydinh.LinkFile = path;
             db.DM_QuyDinh.Add(quydinh);
 
@@ -92,12 +91,11 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(quydinh.TenQuyDinh) || String.IsNullOrEmpty(quydinh.CoQuan) || String.IsNullOrEmpty(quydinh.SoHieu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_QuyDinh.Where(p => p.MaTruong == MaTruong && p.SoHieu == quydinh.SoHieu && p.TenQuyDinh == quydinh.TenQuyDinh).FirstOrDefault();
+            var check = db.DM_QuyDinh.Where(p => p.SoHieu == quydinh.SoHieu && p.TenQuyDinh == quydinh.TenQuyDinh).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);
 
-            check.MaTruong = MaTruong;
             check.SoHieu = quydinh.SoHieu;
             check.TenQuyDinh = quydinh.TenQuyDinh;
             check.NgayBanHanh = quydinh.NgayBanHanh;
@@ -116,7 +114,7 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(id))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_QuyDinh.Where(p => p.MaTruong == MaTruong && p.ID == id).FirstOrDefault();
+            var check = db.DM_QuyDinh.Where(p => p.ID == id).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);

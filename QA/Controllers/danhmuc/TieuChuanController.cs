@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QA.Models;
+using System.Data.SqlClient;
 namespace QA.Controllers.danhmuc
 {
     public class TieuChuanController : BaseController
@@ -20,8 +21,9 @@ namespace QA.Controllers.danhmuc
 
             int pageNumber = (page ?? 1);
 
-
-            var data = db.DM_TieuChuan.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
+            var caphoc = new SqlParameter("@CapHoc", CapHoc);
+            var phanloai = new SqlParameter("@PhanLoai", PhanLoai);
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHUAN_TIEUCHI @CapHoc, @PhanLoai", caphoc, phanloai).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -32,8 +34,27 @@ namespace QA.Controllers.danhmuc
                 toltalSize = data.Count(),
                 data = data.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList()
             };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult getTieuChi(int? page, string idtieuchuan)
+        {
+            int pageSize = 50;
 
+            int pageNumber = (page ?? 1);
 
+            var id = new SqlParameter("@IDTieuChuan", idtieuchuan);
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI_TIEUCHUAN @IDTieuChuan", id).ToList();
+
+            ResultInfo result = new ResultWithPaging()
+            {
+                error = 0,
+                msg = "",
+                page = pageNumber,
+                pageSize = pageSize,
+                toltalSize = data.Count(),
+                data = data.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList()
+            };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

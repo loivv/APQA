@@ -46,14 +46,13 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(tc.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.HT_TieuChi.Where(p =>  p.NamHoc == NamHoc && p.IDTieuChuan == guiid && p.IDTieuChi == tc.IDTieuChi).FirstOrDefault();
+            var check = db.HT_TieuChi.Where(p =>   p.IDTieuChuan == guiid && p.IDTieuChi == tc.IDTieuChi).FirstOrDefault();
 
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
 
             //kiem tra neu  la nam hoc hien tai thi xoa nhưng cai con lai
 
-            tc.NamHoc = NamHoc;
             tc.GuiID = Guid.NewGuid().ToString();
             tc.IDTieuChuan = guiid;
             db.HT_TieuChi.Add(tc);
@@ -69,7 +68,7 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(tc.NoiDung))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.HT_TieuChi.Where(p => p.NamHoc == NamHoc && p.IDTieuChuan == guiid && p.IDTieuChi == tc.IDTieuChi && p.GuiID == tc.GuiID).FirstOrDefault();
+            var check = db.HT_TieuChi.Where(p => p.IDTieuChuan == guiid && p.IDTieuChi == tc.IDTieuChi && p.GuiID == tc.GuiID).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);

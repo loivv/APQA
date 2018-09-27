@@ -19,5 +19,6 @@ namespace QA.Models
         public Nullable<System.DateTime> DenNgay { get; set; }
         public string MaTruong { get; set; }
         public Nullable<bool> NamHienTai { get; set; }
+        public string Nam { get; set; }
     }
 }

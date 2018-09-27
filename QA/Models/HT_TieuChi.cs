@@ -15,7 +15,6 @@ namespace QA.Models
     public partial class HT_TieuChi
     {
         public string GuiID { get; set; }
-        public string NamHoc { get; set; }
         public string IDTieuChuan { get; set; }
         public int IDTieuChi { get; set; }
         public string NoiDung { get; set; }

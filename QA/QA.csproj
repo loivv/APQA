@@ -301,9 +301,6 @@
     <Compile Include="Models\DM_TieuChi.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DM_TieuChi_ChiSo.cs">
-      <DependentUpon>SchoolQAAP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DM_TieuChuan.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
@@ -335,6 +332,9 @@
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HT_TieuChi.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HT_TieuChi_ChiSo.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HT_TieuChuan.cs">
