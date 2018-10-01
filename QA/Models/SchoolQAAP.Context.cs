@@ -32,12 +32,10 @@ namespace QA.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<DM_ChucVu> DM_ChucVu { get; set; }
         public virtual DbSet<DM_HocSinhNamHoc> DM_HocSinhNamHoc { get; set; }
         public virtual DbSet<DM_HoiDongTuDanhGia> DM_HoiDongTuDanhGia { get; set; }
         public virtual DbSet<DM_MinhChung> DM_MinhChung { get; set; }
         public virtual DbSet<DM_MucDichPhamVi> DM_MucDichPhamVi { get; set; }
-        public virtual DbSet<DM_NhiemVu> DM_NhiemVu { get; set; }
         public virtual DbSet<DM_NhomDanhGia> DM_NhomDanhGia { get; set; }
         public virtual DbSet<DM_NhomDanhGiaChiTiet> DM_NhomDanhGiaChiTiet { get; set; }
         public virtual DbSet<DM_NhomTuDanhGia> DM_NhomTuDanhGia { get; set; }
@@ -46,7 +44,6 @@ namespace QA.Models
         public virtual DbSet<DM_QuyDinh> DM_QuyDinh { get; set; }
         public virtual DbSet<DM_SoLop> DM_SoLop { get; set; }
         public virtual DbSet<DM_TapHuanTuDanhGia> DM_TapHuanTuDanhGia { get; set; }
-        public virtual DbSet<DM_ThanhVien> DM_ThanhVien { get; set; }
         public virtual DbSet<DM_ThoiGianBieu> DM_ThoiGianBieu { get; set; }
         public virtual DbSet<DM_TieuChi> DM_TieuChi { get; set; }
         public virtual DbSet<DM_TieuChuan> DM_TieuChuan { get; set; }
@@ -64,6 +61,9 @@ namespace QA.Models
         public virtual DbSet<DM_NamHoc> DM_NamHoc { get; set; }
         public virtual DbSet<DM_VanBan> DM_VanBan { get; set; }
         public virtual DbSet<DM_ThongTinChung> DM_ThongTinChung { get; set; }
+        public virtual DbSet<DM_ThanhVien> DM_ThanhVien { get; set; }
+        public virtual DbSet<DM_ChucVu> DM_ChucVu { get; set; }
+        public virtual DbSet<DM_NhiemVu> DM_NhiemVu { get; set; }
     
         public virtual ObjectResult<GET_NHOMDANHGIA_Result> GET_NHOMDANHGIA(string maTruong)
         {

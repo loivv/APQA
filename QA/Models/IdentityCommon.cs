@@ -160,5 +160,20 @@ namespace QA.Models
        public string HienTrang{get;set;}
        public int Muc { get; set; }
     }
+    public  class DMThanhVien
+    {
+        public string MaTruong { get; set; }
+        public string MaThanhVien { get; set; }
+        public string NamHoc { get; set; }
+        public string TenThanhVien { get; set; }
+        public string ChucVu { get; set; }
+        public string NhiemVu { get; set; }
+        public string UserLogin { get; set; }
+        public Nullable<bool> ThanhVien { get; set; }
+        public string TVChucVu { get; set; }
+        public string TVNhiemVu { get; set; }
+        public string ID { get; set; }
+        public string MaNhiemVu { get; set; }
+    }
 
 }

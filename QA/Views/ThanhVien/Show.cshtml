@@ -6,7 +6,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Danh sách chức vụ&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
+                <h2>Danh sách thành viên&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
                 <div class="clearfix"></div>
             </div>
             <!-- end x_title-->
@@ -83,7 +83,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Chức vụ</label>
-                                    <select class="form-control" ng-model="Info.ChucVu" required>
+                                    <select class="form-control" ng-model="Info.ID" required>
                                         <option ng-repeat="x in allChucVu" value="{{x.ID}}">{{x.ChucVu | uppercase}}</option>
                                     </select>
                                 </div>
@@ -91,7 +91,7 @@
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label>Nhiệm vụ</label>
-                                    <select class="form-control" ng-model="Info.NhiemVu" required>
+                                    <select class="form-control" ng-model="Info.MaNhiemVu" required>
                                         <option ng-repeat="x in allNhiemVu" value="{{x.MaNhiemVu}}">{{x.NhiemVu | uppercase}}</option>
                                     </select>
                                 </div>
@@ -183,6 +183,9 @@
                 var info = $scope.allDanhMuc[index];
 
                 $scope.Info = angular.copy(info);
+                console.log($scope.Info);
+                console.log($scope.Info.ID);
+                console.log($scope.Info.MaNhiemVu);
                 $scope.modaltitle = "Chỉnh sửa thành viên";
                 $scope.MaThanhVienDisable = true;
                 $scope.IsAction = 'edit';
@@ -217,7 +220,8 @@
 
             // them tinh
             $scope.sendCreate = function () {
-                console.log($scope.Info);
+                $scope.Info.TVNhiemVu = $scope.Info.NhiemVu;
+                $scope.Info.TVChucVu = $scope.Info.ChucVu;
                 showLoader(true);
                 $http({
                     method: "POST",
@@ -230,7 +234,7 @@
                     if (result.error === 0) {
 
                         $scope.allDanhMuc.unshift(result.data);
-
+                        $scope.GetData(1, "");
                         hideModel("insertmodal");
 
                         showNotify("Đã thêm thành viên");
@@ -253,7 +257,8 @@
 
             // cap nhat tinh
             $scope.sendEdit = function () {
-                console.log($scope.Info);
+                $scope.Info.TVNhiemVu = $scope.Info.NhiemVu;
+                $scope.Info.TVChucVu = $scope.Info.ChucVu;
                 showLoader(true);
 
                 $http({
@@ -272,7 +277,7 @@
                             if (findIndex !== -1) {
                                 $scope.allDanhMuc[findIndex] = angular.copy(result.data);
                             }
-
+                            $scope.GetData(1, "");
                             showNotify("Đã cập nhật");
                             hideModel("insertmodal");
 

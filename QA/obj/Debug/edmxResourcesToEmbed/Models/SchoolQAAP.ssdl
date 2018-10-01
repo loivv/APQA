@@ -66,9 +66,11 @@
     <Key>
       <PropertyRef Name="ID" />
       <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="ID" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="DM_HocSinhNamHoc">
@@ -132,9 +134,11 @@
     <Key>
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="MaNhiemVu" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MaNhiemVu" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="NhiemVu" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="STT" Type="int" />
   </EntityType>
@@ -230,14 +234,16 @@
     <Key>
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="MaThanhVien" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MaThanhVien" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="TenThanhVien" Type="nvarchar" MaxLength="50" />
     <Property Name="ChucVu" Type="nvarchar" MaxLength="20" />
     <Property Name="NhiemVu" Type="nvarchar" MaxLength="20" />
     <Property Name="UserLogin" Type="nvarchar" MaxLength="20" />
-    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" />
+    <Property Name="ThanhVien" Type="bit" />
   </EntityType>
   <EntityType Name="DM_ThoiGianBieu">
     <Key>

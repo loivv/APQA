@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QA.Models;
+using System.Data.SqlClient;
 namespace QA.Controllers.tudanhgia
 {
     public class ThanhVienController : BaseController
@@ -23,8 +24,10 @@ namespace QA.Controllers.tudanhgia
 
             int pageNumber = (page ?? 1);
 
-
-            var data = db.DM_ThanhVien.Where(p => p.TenThanhVien.Contains(search) && p.MaTruong == MaTruong).ToList();
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var namhoc = new SqlParameter("@NamHoc", NamHoc);
+            var data = db.Database.SqlQuery<DMThanhVien>("GET_THANHVIEN @MaTruong, @NamHoc", matruong, namhoc).ToList();
+            //var data = db.DM_ThanhVien.Where(p => p.TenThanhVien.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -47,11 +50,14 @@ namespace QA.Controllers.tudanhgia
             if (String.IsNullOrEmpty(thanhvien.MaThanhVien))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_ThanhVien.Where(p => p.MaTruong == MaTruong && p.MaThanhVien == thanhvien.MaThanhVien).FirstOrDefault();
+            var check = db.DM_ThanhVien.Where(p => p.MaTruong == MaTruong && p.MaThanhVien == thanhvien.MaThanhVien && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
             thanhvien.MaTruong = MaTruong;
+            thanhvien.NamHoc = NamHoc;
+            thanhvien.NhiemVu = thanhvien.MaNhiemVu;
+            thanhvien.ChucVu = thanhvien.ID;
             db.DM_ThanhVien.Add(thanhvien);
 
             db.SaveChanges();
@@ -67,12 +73,16 @@ namespace QA.Controllers.tudanhgia
             if (String.IsNullOrEmpty(thanhvien.MaThanhVien))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_ThanhVien.Where(p => p.MaTruong == MaTruong && p.MaThanhVien == thanhvien.MaThanhVien).FirstOrDefault();
+            var check = db.DM_ThanhVien.Where(p => p.MaTruong == MaTruong && p.MaThanhVien == thanhvien.MaThanhVien && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);
 
             check.MaTruong = MaTruong;
+            check.TenThanhVien = thanhvien.TenThanhVien;
+            check.NhiemVu = thanhvien.MaNhiemVu;
+            check.ThanhVien = thanhvien.ThanhVien;
+            check.ChucVu = thanhvien.ID;
 
             db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
@@ -86,7 +96,7 @@ namespace QA.Controllers.tudanhgia
             if (String.IsNullOrEmpty(mathanhvien))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_ThanhVien.Where(p => p.MaTruong == MaTruong && p.MaThanhVien == mathanhvien).FirstOrDefault();
+            var check = db.DM_ThanhVien.Where(p => p.MaTruong == MaTruong && p.MaThanhVien == mathanhvien && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);

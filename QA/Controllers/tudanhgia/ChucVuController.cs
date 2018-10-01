@@ -21,7 +21,7 @@ namespace QA.Controllers.tudanhgia
             int pageNumber = (page ?? 1);
 
 
-            var data = db.DM_ChucVu.Where(p => p.ChucVu.Contains(search) && p.MaTruong == MaTruong).ToList();
+            var data = db.DM_ChucVu.Where(p => p.ChucVu.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -44,11 +44,12 @@ namespace QA.Controllers.tudanhgia
             if (String.IsNullOrEmpty(chucvu.ChucVu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_ChucVu.Where(p => p.MaTruong == MaTruong && p.ID == chucvu.ID).FirstOrDefault();
+            var check = db.DM_ChucVu.Where(p => p.MaTruong == MaTruong && p.ID == chucvu.ID && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
             chucvu.MaTruong = MaTruong;
+            chucvu.NamHoc = NamHoc;
             db.DM_ChucVu.Add(chucvu);
 
             db.SaveChanges();
@@ -64,7 +65,7 @@ namespace QA.Controllers.tudanhgia
             if (String.IsNullOrEmpty(chucvu.ChucVu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_ChucVu.Where(p => p.MaTruong == MaTruong && p.ID == chucvu.ID).FirstOrDefault();
+            var check = db.DM_ChucVu.Where(p => p.MaTruong == MaTruong && p.ID == chucvu.ID && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);
@@ -85,7 +86,7 @@ namespace QA.Controllers.tudanhgia
             if (String.IsNullOrEmpty(id))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_ChucVu.Where(p => p.MaTruong == MaTruong && p.ID == id).FirstOrDefault();
+            var check = db.DM_ChucVu.Where(p => p.MaTruong == MaTruong && p.ID == id && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);

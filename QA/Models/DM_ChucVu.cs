@@ -16,6 +16,7 @@ namespace QA.Models
     {
         public string ID { get; set; }
         public string MaTruong { get; set; }
+        public string NamHoc { get; set; }
         public string ChucVu { get; set; }
     }
 }

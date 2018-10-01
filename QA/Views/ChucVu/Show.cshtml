@@ -28,7 +28,7 @@
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
                                 <td>{{$index + 1}}</td>
-                                <td>{{item.ID}}</td>
+                                <td>{{item.ID | uppercase}}</td>
                                 <td>{{item.ChucVu}}</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
