@@ -149,5 +149,16 @@ namespace QA.Models
         public Nullable<int> TC12 { get; set; }
 
     }
+    public class TieuChiChiSo
+    {
+       public string  GuiID{get;set;}
+       public string  IDTieuChi{get;set;}
+       public string ChiSo {get;set;}
+       public string NoiDung {get;set;}
+       public string YeuCau {get;set;}
+       public string GoiY{get;set;}
+       public string HienTrang{get;set;}
+       public int Muc { get; set; }
+    }
 
 }

@@ -110,7 +110,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NoiDungTC" required />
                                             </div>
                                         </div>
                                     </div>
@@ -121,19 +121,63 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Nội dung</label>
-                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                                <textarea rows="2" class="form-control" ng-model="ChiSoA.NoiDung" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Yêu cầu (Nội hàm)</label>
-                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                                <textarea rows="5" class="form-control" ng-model="ChiSoA.YeuCau" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Gợi ý</label>
-                                                <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                                <textarea rows="5" class="form-control" ng-model="ChiSoA.GoiY" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab_chisob" aria-labelledby="profile-tab">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nội dung</label>
+                                                <textarea rows="2" class="form-control" ng-model="ChiSoB.NoiDung" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Yêu cầu (Nội hàm)</label>
+                                                <textarea rows="5" class="form-control" ng-model="ChiSoB.YeuCau" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Gợi ý</label>
+                                                <textarea rows="5" class="form-control" ng-model="ChiSoB.GoiY" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab_chisoc" aria-labelledby="profile-tab">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nội dung</label>
+                                                <textarea rows="2" class="form-control" ng-model="ChiSoC.NoiDung" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Yêu cầu (Nội hàm)</label>
+                                                <textarea rows="5" class="form-control" ng-model="ChiSoC.YeuCau" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Gợi ý</label>
+                                                <textarea rows="5" class="form-control" ng-model="ChiSoC.GoiY" required></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -165,6 +209,7 @@
         app.controller('myCtrl', function ($scope, $http) {
 
             // phan trang
+            $scope.idtchuan;
             $scope.numPages;
             $scope.itemPerPage;
             $scope.totalItems;
@@ -221,6 +266,38 @@
                 });
             }
             //ket thuc ham lay goi tieu chi
+            //ham lay chi tiet chi so
+            $scope.allChiSo = [];
+            $scope.ChiSoA = [];
+            $scope.ChiSoB = [];
+            $scope.ChiSoC = [];
+            $scope.GetChiSo = function (page, search) {
+                showLoader(true);
+                console.log(search);
+                $http({
+                    method: "GET",
+                    url: "/TieuChuan/getChiSo?page=" + page + "&idtieuchi=" + search
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allChiSo = response.data.data;
+                        $scope.ChiSoA = angular.copy($scope.allChiSo[0]);
+                        $scope.ChiSoB = angular.copy($scope.allChiSo[1]);
+                        $scope.ChiSoC = angular.copy($scope.allChiSo[2]);
+                        //console.log($scope.allChiSo);
+                        //$scope.itemPerPage = response.data.pageSize;
+                        //$scope.totalItems = response.data.toltalSize;
+                        //$scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            //ket thuc ham lay chi tiet chi so
 
             $scope.GetData(1, "");
             //
@@ -245,6 +322,7 @@
                 $scope.Info = angular.copy(info);
                 $('.nav-tabs a[href="#tab_chitiet"]').tab('show');
                 $scope.GetTieuChi(1, $scope.Info.GuiID);
+                $scope.idtchuan = $scope.Info.IDTieuChuan;
 
             };
 
@@ -252,19 +330,18 @@
 
                 var infotc = $scope.allTieuChi[index];
                 $scope.InfoTC = angular.copy(infotc);
-                $scope.modaltitle = "Xem tiêu chí";
+
+                var info = $scope.allTieuChi[index];
+                $scope.Info = angular.copy(info);
+                console.log($scope.Info);
+
+                //lay thong tin chi tiet cac chi so
+                $scope.GetChiSo(1, $scope.InfoTC.GuiIDTC);
+
+                $scope.modaltitle = "Xem tiêu chí - Tiêu chuẩn: " + $scope.idtchuan + " - Tiêu chí: " + $scope.InfoTC.IDTieuChi;
                 $scope.IsAction = 'edit';
                 showModel("insertmodal");
 
-            };
-
-
-            // tim index theo ma tinh
-            function getSelectedIndex(id) {
-                for (var i = 0; i < $scope.allDanhMuc.length; i++)
-                    if ($scope.allDanhMuc[i].NamHoc == id)
-                        return i;
-                return -1;
             };
 
             // action

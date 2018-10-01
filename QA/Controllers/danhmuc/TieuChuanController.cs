@@ -57,6 +57,27 @@ namespace QA.Controllers.danhmuc
             };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public ActionResult getChiSo(int? page, string idtieuchi)
+        {
+            int pageSize = 50;
+
+            int pageNumber = (page ?? 1);
+
+            var id = new SqlParameter("@idtieuchi", idtieuchi);
+            var data = db.Database.SqlQuery<TieuChiChiSo>("GET_CHISO @idtieuchi", id).ToList();
+
+            ResultInfo result = new ResultWithPaging()
+            {
+                error = 0,
+                msg = "",
+                page = pageNumber,
+                pageSize = pageSize,
+                toltalSize = data.Count(),
+                data = data.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList()
+            };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public ActionResult create(DM_TieuChuan tieuchuan)
