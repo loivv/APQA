@@ -15,9 +15,9 @@ namespace QA.Models
     public partial class DM_MucDichPhamVi
     {
         public string MaTruong { get; set; }
+        public string NamHoc { get; set; }
         public string MucDich { get; set; }
         public string PhamVi { get; set; }
         public string YeuCau { get; set; }
-        public string NamHoc { get; set; }
     }
 }

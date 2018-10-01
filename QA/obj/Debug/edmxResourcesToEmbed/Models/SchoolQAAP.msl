@@ -168,17 +168,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DM_MucDichPhamVi">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_MucDichPhamVi">
-        <MappingFragment StoreEntitySet="DM_MucDichPhamVi">
-          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-          <ScalarProperty Name="YeuCau" ColumnName="YeuCau" />
-          <ScalarProperty Name="PhamVi" ColumnName="PhamVi" />
-          <ScalarProperty Name="MucDich" ColumnName="MucDich" />
-          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DM_NhomDanhGia">
       <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NhomDanhGia">
         <MappingFragment StoreEntitySet="DM_NhomDanhGia">
@@ -327,14 +316,6 @@
         <MappingFragment StoreEntitySet="HT_CapHoc">
           <ScalarProperty Name="Ten" ColumnName="Ten" />
           <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HT_HocSinhLopHoc">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_HocSinhLopHoc">
-        <MappingFragment StoreEntitySet="HT_HocSinhLopHoc">
-          <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
-          <ScalarProperty Name="MaKhoi" ColumnName="MaKhoi" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -510,6 +491,50 @@
           <ScalarProperty Name="NhiemVu" ColumnName="NhiemVu" />
           <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
           <ScalarProperty Name="MaNhiemVu" ColumnName="MaNhiemVu" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_MucDichPhamVi">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_MucDichPhamVi">
+        <MappingFragment StoreEntitySet="DM_MucDichPhamVi">
+          <ScalarProperty Name="YeuCau" ColumnName="YeuCau" />
+          <ScalarProperty Name="PhamVi" ColumnName="PhamVi" />
+          <ScalarProperty Name="MucDich" ColumnName="MucDich" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_LopHoc">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_LopHoc">
+        <MappingFragment StoreEntitySet="HT_LopHoc">
+          <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
+          <ScalarProperty Name="MaKhoi" ColumnName="MaKhoi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_LopHocTH">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_LopHocTH">
+        <MappingFragment StoreEntitySet="DM_LopHocTH">
+          <ScalarProperty Name="Lop5" ColumnName="Lop5" />
+          <ScalarProperty Name="Lop4" ColumnName="Lop4" />
+          <ScalarProperty Name="Lop3" ColumnName="Lop3" />
+          <ScalarProperty Name="Lop2" ColumnName="Lop2" />
+          <ScalarProperty Name="Lop1" ColumnName="Lop1" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_LopHocTHCS">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_LopHocTHCS">
+        <MappingFragment StoreEntitySet="DM_LopHocTHCS">
+          <ScalarProperty Name="Lop9" ColumnName="Lop9" />
+          <ScalarProperty Name="Lop8" ColumnName="Lop8" />
+          <ScalarProperty Name="Lop7" ColumnName="Lop7" />
+          <ScalarProperty Name="Lop6" ColumnName="Lop6" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
         </MappingFragment>
       </EntityTypeMapping>

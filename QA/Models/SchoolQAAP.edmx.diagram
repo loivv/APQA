@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_HocSinhNamHoc" Width="1.5" PointX="7.75" PointY="3.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_HoiDongTuDanhGia" Width="1.5" PointX="7.75" PointY="6.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_MinhChung" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_MucDichPhamVi" Width="1.5" PointX="9.75" PointY="4.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomDanhGia" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomDanhGiaChiTiet" Width="1.5" PointX="2.75" PointY="10.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" Width="1.5" PointX="0.875" PointY="5" />
@@ -28,7 +27,6 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ToChucThucHien" Width="1.5" PointX="13.75" PointY="7.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_CanBo" Width="1.5" PointX="13.75" PointY="11.25" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_CapHoc" Width="1.5" PointX="10.75" PointY="13.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_HocSinhLopHoc" Width="1.5" PointX="12.75" PointY="13.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi" Width="1.5" PointX="14.75" PointY="13.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi_ChiSo" Width="1.5" PointX="15.75" PointY="0.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChuan" Width="1.5" PointX="15.75" PointY="4.75" />
@@ -46,6 +44,10 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThanhVien" Width="1.5" PointX="2.875" PointY="13.125" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ChucVu" Width="1.5" PointX="7.5" PointY="1" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhiemVu" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_MucDichPhamVi" Width="1.5" PointX="7.375" PointY="15.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_LopHoc" Width="1.5" PointX="9.375" PointY="16.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTH" Width="1.5" PointX="11.375" PointY="16.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTHCS" Width="1.5" PointX="13.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

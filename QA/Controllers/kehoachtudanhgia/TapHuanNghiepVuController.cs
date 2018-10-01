@@ -12,8 +12,6 @@ namespace QA.Controllers.kehoachtudanhgia
         // GET: /TapHuanNghiepVu/
         public ActionResult Show()
         {
-           // var MDInfo = db.DM_TapHuanTuDanhGia.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
-           // ViewBag.Info = MDInfo;
             return View();
         }
         [HttpGet]

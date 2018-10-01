@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -97,6 +97,31 @@
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MoDau" Type="nvarchar" MaxLength="300" />
         </EntityType>
+        <EntityType Name="DM_LopHocTH">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lop1" Type="int" />
+          <Property Name="Lop2" Type="int" />
+          <Property Name="Lop3" Type="int" />
+          <Property Name="Lop4" Type="int" />
+          <Property Name="Lop5" Type="int" />
+        </EntityType>
+        <EntityType Name="DM_LopHocTHCS">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lop6" Type="int" />
+          <Property Name="Lop7" Type="int" />
+          <Property Name="Lop8" Type="int" />
+          <Property Name="Lop9" Type="int" />
+        </EntityType>
         <EntityType Name="DM_MinhChung">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -117,12 +142,13 @@
         <EntityType Name="DM_MucDichPhamVi">
           <Key>
             <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MucDich" Type="nvarchar(max)" />
           <Property Name="PhamVi" Type="nvarchar(max)" />
           <Property Name="YeuCau" Type="nvarchar(max)" />
-          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="DM_NamHoc">
           <Key>
@@ -358,7 +384,7 @@
           <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="HT_HocSinhLopHoc">
+        <EntityType Name="HT_LopHoc">
           <Key>
             <PropertyRef Name="MaKhoi" />
             <PropertyRef Name="LopHoc" />
@@ -513,6 +539,7 @@
         </Function>
         <Function Name="GET_THANHVIEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaTruong" Type="nvarchar" Mode="In" />
+          <Parameter Name="NamHoc" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GET_VANBAN_CAPHOC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CapHoc" Type="nvarchar" Mode="In" />
@@ -541,6 +568,8 @@
           <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_LopHocTH" EntityType="Self.DM_LopHocTH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_LopHocTHCS" EntityType="Self.DM_LopHocTHCS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_MinhChung" EntityType="Self.DM_MinhChung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_MucDichPhamVi" EntityType="Self.DM_MucDichPhamVi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_NamHoc" EntityType="Self.DM_NamHoc" Schema="dbo" store:Type="Tables" />
@@ -562,7 +591,7 @@
           <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HT_LopHoc" EntityType="Self.HT_LopHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_TieuChi" EntityType="Self.HT_TieuChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_TieuChi_ChiSo" EntityType="Self.HT_TieuChi_ChiSo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_TieuChuan" EntityType="Self.HT_TieuChuan" Schema="dbo" store:Type="Tables" />
@@ -603,7 +632,8 @@
           <Parameter Name="MaTruong" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_THANHVIEN" ReturnType="Collection(SchoolQAAPModel.GET_THANHVIEN_Result)">
-          <Parameter Name="MaTruong" Mode="In" Type="String" />
+            <Parameter Name="MaTruong" Mode="In" Type="String" />
+            <Parameter Name="NamHoc" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_VANBAN_CAPHOC" ReturnType="Collection(SchoolQAAPModel.GET_VANBAN_CAPHOC_Result)">
             <Parameter Name="CapHoc" Mode="In" Type="String" />
@@ -630,7 +660,6 @@
           <EntitySet Name="DM_HocSinhNamHoc" EntityType="SchoolQAAPModel.DM_HocSinhNamHoc" />
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="SchoolQAAPModel.DM_HoiDongTuDanhGia" />
           <EntitySet Name="DM_MinhChung" EntityType="SchoolQAAPModel.DM_MinhChung" />
-          <EntitySet Name="DM_MucDichPhamVi" EntityType="SchoolQAAPModel.DM_MucDichPhamVi" />
           <EntitySet Name="DM_NhomDanhGia" EntityType="SchoolQAAPModel.DM_NhomDanhGia" />
           <EntitySet Name="DM_NhomDanhGiaChiTiet" EntityType="SchoolQAAPModel.DM_NhomDanhGiaChiTiet" />
           <EntitySet Name="DM_NhomTuDanhGia" EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" />
@@ -645,7 +674,6 @@
           <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
           <EntitySet Name="HT_CanBo" EntityType="SchoolQAAPModel.HT_CanBo" />
           <EntitySet Name="HT_CapHoc" EntityType="SchoolQAAPModel.HT_CapHoc" />
-          <EntitySet Name="HT_HocSinhLopHoc" EntityType="SchoolQAAPModel.HT_HocSinhLopHoc" />
           <EntitySet Name="HT_TieuChi" EntityType="SchoolQAAPModel.HT_TieuChi" />
           <EntitySet Name="HT_TieuChi_ChiSo" EntityType="SchoolQAAPModel.HT_TieuChi_ChiSo" />
           <EntitySet Name="HT_TieuChuan" EntityType="SchoolQAAPModel.HT_TieuChuan" />
@@ -675,6 +703,10 @@
           <EntitySet Name="DM_ThanhVien" EntityType="SchoolQAAPModel.DM_ThanhVien" />
           <EntitySet Name="DM_ChucVu" EntityType="SchoolQAAPModel.DM_ChucVu" />
           <EntitySet Name="DM_NhiemVu" EntityType="SchoolQAAPModel.DM_NhiemVu" />
+          <EntitySet Name="DM_MucDichPhamVi" EntityType="SchoolQAAPModel.DM_MucDichPhamVi" />
+          <EntitySet Name="HT_LopHoc" EntityType="SchoolQAAPModel.HT_LopHoc" />
+          <EntitySet Name="DM_LopHocTH" EntityType="SchoolQAAPModel.DM_LopHocTH" />
+          <EntitySet Name="DM_LopHocTHCS" EntityType="SchoolQAAPModel.DM_LopHocTHCS" />
         </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -821,16 +853,6 @@
           <Property Name="LinkFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TieuChuan" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="TieuChi" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DM_MucDichPhamVi">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MucDich" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhamVi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_NhomDanhGia">
           <Key>
@@ -985,14 +1007,6 @@
           </Key>
           <Property Name="IDCapHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="HT_HocSinhLopHoc">
-          <Key>
-            <PropertyRef Name="MaKhoi" />
-            <PropertyRef Name="LopHoc" />
-          </Key>
-          <Property Name="MaKhoi" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="LopHoc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="HT_TieuChi">
           <Key>
@@ -1202,6 +1216,50 @@
           <Property Name="NhiemVu" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="STT" Type="Int32" />
         </EntityType>
+        <EntityType Name="DM_MucDichPhamVi">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MucDich" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhamVi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HT_LopHoc">
+          <Key>
+            <PropertyRef Name="MaKhoi" />
+            <PropertyRef Name="LopHoc" />
+          </Key>
+          <Property Name="MaKhoi" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LopHoc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_LopHocTH">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Lop1" Type="Int32" />
+          <Property Name="Lop2" Type="Int32" />
+          <Property Name="Lop3" Type="Int32" />
+          <Property Name="Lop4" Type="Int32" />
+          <Property Name="Lop5" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_LopHocTHCS">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Lop6" Type="Int32" />
+          <Property Name="Lop7" Type="Int32" />
+          <Property Name="Lop8" Type="Int32" />
+          <Property Name="Lop9" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1375,17 +1433,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_MucDichPhamVi">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_MucDichPhamVi">
-              <MappingFragment StoreEntitySet="DM_MucDichPhamVi">
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="YeuCau" ColumnName="YeuCau" />
-                <ScalarProperty Name="PhamVi" ColumnName="PhamVi" />
-                <ScalarProperty Name="MucDich" ColumnName="MucDich" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_NhomDanhGia">
             <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NhomDanhGia">
               <MappingFragment StoreEntitySet="DM_NhomDanhGia">
@@ -1534,14 +1581,6 @@
               <MappingFragment StoreEntitySet="HT_CapHoc">
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HT_HocSinhLopHoc">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_HocSinhLopHoc">
-              <MappingFragment StoreEntitySet="HT_HocSinhLopHoc">
-                <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
-                <ScalarProperty Name="MaKhoi" ColumnName="MaKhoi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1717,6 +1756,50 @@
                 <ScalarProperty Name="NhiemVu" ColumnName="NhiemVu" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaNhiemVu" ColumnName="MaNhiemVu" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_MucDichPhamVi">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_MucDichPhamVi">
+              <MappingFragment StoreEntitySet="DM_MucDichPhamVi">
+                <ScalarProperty Name="YeuCau" ColumnName="YeuCau" />
+                <ScalarProperty Name="PhamVi" ColumnName="PhamVi" />
+                <ScalarProperty Name="MucDich" ColumnName="MucDich" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HT_LopHoc">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_LopHoc">
+              <MappingFragment StoreEntitySet="HT_LopHoc">
+                <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
+                <ScalarProperty Name="MaKhoi" ColumnName="MaKhoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_LopHocTH">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_LopHocTH">
+              <MappingFragment StoreEntitySet="DM_LopHocTH">
+                <ScalarProperty Name="Lop5" ColumnName="Lop5" />
+                <ScalarProperty Name="Lop4" ColumnName="Lop4" />
+                <ScalarProperty Name="Lop3" ColumnName="Lop3" />
+                <ScalarProperty Name="Lop2" ColumnName="Lop2" />
+                <ScalarProperty Name="Lop1" ColumnName="Lop1" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_LopHocTHCS">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_LopHocTHCS">
+              <MappingFragment StoreEntitySet="DM_LopHocTHCS">
+                <ScalarProperty Name="Lop9" ColumnName="Lop9" />
+                <ScalarProperty Name="Lop8" ColumnName="Lop8" />
+                <ScalarProperty Name="Lop7" ColumnName="Lop7" />
+                <ScalarProperty Name="Lop6" ColumnName="Lop6" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
             </EntityTypeMapping>

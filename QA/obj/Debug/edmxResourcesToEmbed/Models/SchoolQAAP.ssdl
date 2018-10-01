@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="SchoolQAAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -92,6 +92,31 @@
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MoDau" Type="nvarchar" MaxLength="300" />
   </EntityType>
+  <EntityType Name="DM_LopHocTH">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Lop1" Type="int" />
+    <Property Name="Lop2" Type="int" />
+    <Property Name="Lop3" Type="int" />
+    <Property Name="Lop4" Type="int" />
+    <Property Name="Lop5" Type="int" />
+  </EntityType>
+  <EntityType Name="DM_LopHocTHCS">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Lop6" Type="int" />
+    <Property Name="Lop7" Type="int" />
+    <Property Name="Lop8" Type="int" />
+    <Property Name="Lop9" Type="int" />
+  </EntityType>
   <EntityType Name="DM_MinhChung">
     <Key>
       <PropertyRef Name="MaTruong" />
@@ -112,12 +137,13 @@
   <EntityType Name="DM_MucDichPhamVi">
     <Key>
       <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MucDich" Type="nvarchar(max)" />
     <Property Name="PhamVi" Type="nvarchar(max)" />
     <Property Name="YeuCau" Type="nvarchar(max)" />
-    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="DM_NamHoc">
     <Key>
@@ -353,7 +379,7 @@
     <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Ten" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="HT_HocSinhLopHoc">
+  <EntityType Name="HT_LopHoc">
     <Key>
       <PropertyRef Name="MaKhoi" />
       <PropertyRef Name="LopHoc" />
@@ -508,6 +534,7 @@
   </Function>
   <Function Name="GET_THANHVIEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaTruong" Type="nvarchar" Mode="In" />
+    <Parameter Name="NamHoc" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="GET_VANBAN_CAPHOC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CapHoc" Type="nvarchar" Mode="In" />
@@ -536,6 +563,8 @@
     <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_LopHocTH" EntityType="Self.DM_LopHocTH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_LopHocTHCS" EntityType="Self.DM_LopHocTHCS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_MinhChung" EntityType="Self.DM_MinhChung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_MucDichPhamVi" EntityType="Self.DM_MucDichPhamVi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_NamHoc" EntityType="Self.DM_NamHoc" Schema="dbo" store:Type="Tables" />
@@ -557,7 +586,7 @@
     <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="HT_HocSinhLopHoc" EntityType="Self.HT_HocSinhLopHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HT_LopHoc" EntityType="Self.HT_LopHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChi" EntityType="Self.HT_TieuChi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChi_ChiSo" EntityType="Self.HT_TieuChi_ChiSo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChuan" EntityType="Self.HT_TieuChuan" Schema="dbo" store:Type="Tables" />

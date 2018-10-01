@@ -44,7 +44,7 @@ namespace QA.Controllers.tudanhgia
         }
 
         [HttpPost]
-        public ActionResult create(DM_ThanhVien thanhvien)
+        public ActionResult create(DM_ThanhVien thanhvien,string manv,string id)
         {
 
             if (String.IsNullOrEmpty(thanhvien.MaThanhVien))
@@ -56,8 +56,8 @@ namespace QA.Controllers.tudanhgia
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
             thanhvien.MaTruong = MaTruong;
             thanhvien.NamHoc = NamHoc;
-            thanhvien.NhiemVu = thanhvien.MaNhiemVu;
-            thanhvien.ChucVu = thanhvien.ID;
+            thanhvien.NhiemVu = manv;
+            thanhvien.ChucVu = id;
             db.DM_ThanhVien.Add(thanhvien);
 
             db.SaveChanges();
@@ -68,7 +68,7 @@ namespace QA.Controllers.tudanhgia
 
 
         [HttpPost]
-        public ActionResult edit(DM_ThanhVien thanhvien)
+        public ActionResult edit(DM_ThanhVien thanhvien, string manv, string id)
         {
             if (String.IsNullOrEmpty(thanhvien.MaThanhVien))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
@@ -80,9 +80,9 @@ namespace QA.Controllers.tudanhgia
 
             check.MaTruong = MaTruong;
             check.TenThanhVien = thanhvien.TenThanhVien;
-            check.NhiemVu = thanhvien.MaNhiemVu;
+            check.NhiemVu = manv;
             check.ThanhVien = thanhvien.ThanhVien;
-            check.ChucVu = thanhvien.ID;
+            check.ChucVu = id;
 
             db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();

@@ -13,7 +13,8 @@ namespace QA.Controllers.tudanhgia
         public ActionResult Show()
         {
             var matruong = new SqlParameter("@MaTruong", MaTruong);
-            var result = db.Database.SqlQuery<ThanhVien>("GET_THANHVIEN @MaTruong", matruong).ToList();
+            var namhoc = new SqlParameter("@NamHoc", NamHoc);
+            var result = db.Database.SqlQuery<ThanhVien>("GET_THANHVIEN @MaTruong,@NamHoc", matruong,namhoc).ToList();
             ViewBag.AllThanhVien = result;
             return View();
         }
@@ -47,6 +48,16 @@ namespace QA.Controllers.tudanhgia
 
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult GetThanhVien(string manhom)
+        {
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var mnhom = new SqlParameter("@MaNhom", manhom);
+            var data = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA_THANHVIEN @MaTruong,@MaNhom", matruong, mnhom).ToList();
+            //var data = db.DM_NhomDanhGiaChiTiet.Where(p => p.MaNhom == manhom && p.MaTruong == MaTruong).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        
         }
 
         [HttpPost]
@@ -88,7 +99,10 @@ namespace QA.Controllers.tudanhgia
         public ActionResult GetNhomDanhGiaChiTiet(string manhom)
         {
             //var result = db.Database.SqlQuery<ThanhVien>("GET_THANHVIEN @MaTruong", MaTruong).ToList();
-            var data = db.NhomDanhGia_ThanhVien(manhom).ToList();
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var mnhom = new SqlParameter("@MaNhom", manhom);
+            var data = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA_THANHVIEN @MaTruong,@MaNhom", matruong, mnhom).ToList();
+            //var data = db.NhomDanhGia_ThanhVien(manhom).ToList();
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

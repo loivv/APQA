@@ -226,7 +226,7 @@
                 $http({
                     method: "POST",
                     url: "/ThanhVien/create",
-                    data: { thanhvien :$scope.Info }
+                    data: { thanhvien: $scope.Info, manv: $scope.Info.MaNhiemVu, id: $scope.Info.ID }
                 }).then(function success(response) {
 
                     var result = response.data;
@@ -264,7 +264,7 @@
                 $http({
                     method: "POST",
                     url: "/ThanhVien/edit",
-                    data: { thanhvien: $scope.Info }
+                    data: { thanhvien: $scope.Info, manv: $scope.Info.MaNhiemVu, id: $scope.Info.ID }
                 }).then(
                     function success(response) {
 

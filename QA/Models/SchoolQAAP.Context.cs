@@ -35,7 +35,6 @@ namespace QA.Models
         public virtual DbSet<DM_HocSinhNamHoc> DM_HocSinhNamHoc { get; set; }
         public virtual DbSet<DM_HoiDongTuDanhGia> DM_HoiDongTuDanhGia { get; set; }
         public virtual DbSet<DM_MinhChung> DM_MinhChung { get; set; }
-        public virtual DbSet<DM_MucDichPhamVi> DM_MucDichPhamVi { get; set; }
         public virtual DbSet<DM_NhomDanhGia> DM_NhomDanhGia { get; set; }
         public virtual DbSet<DM_NhomDanhGiaChiTiet> DM_NhomDanhGiaChiTiet { get; set; }
         public virtual DbSet<DM_NhomTuDanhGia> DM_NhomTuDanhGia { get; set; }
@@ -50,7 +49,6 @@ namespace QA.Models
         public virtual DbSet<DM_ToChucThucHien> DM_ToChucThucHien { get; set; }
         public virtual DbSet<HT_CanBo> HT_CanBo { get; set; }
         public virtual DbSet<HT_CapHoc> HT_CapHoc { get; set; }
-        public virtual DbSet<HT_HocSinhLopHoc> HT_HocSinhLopHoc { get; set; }
         public virtual DbSet<HT_TieuChi> HT_TieuChi { get; set; }
         public virtual DbSet<HT_TieuChi_ChiSo> HT_TieuChi_ChiSo { get; set; }
         public virtual DbSet<HT_TieuChuan> HT_TieuChuan { get; set; }
@@ -64,6 +62,10 @@ namespace QA.Models
         public virtual DbSet<DM_ThanhVien> DM_ThanhVien { get; set; }
         public virtual DbSet<DM_ChucVu> DM_ChucVu { get; set; }
         public virtual DbSet<DM_NhiemVu> DM_NhiemVu { get; set; }
+        public virtual DbSet<DM_MucDichPhamVi> DM_MucDichPhamVi { get; set; }
+        public virtual DbSet<HT_LopHoc> HT_LopHoc { get; set; }
+        public virtual DbSet<DM_LopHocTH> DM_LopHocTH { get; set; }
+        public virtual DbSet<DM_LopHocTHCS> DM_LopHocTHCS { get; set; }
     
         public virtual ObjectResult<GET_NHOMDANHGIA_Result> GET_NHOMDANHGIA(string maTruong)
         {
@@ -83,13 +85,17 @@ namespace QA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_NHOMDANHGIA_THUKY_Result>("GET_NHOMDANHGIA_THUKY", maTruongParameter);
         }
     
-        public virtual ObjectResult<GET_THANHVIEN_Result> GET_THANHVIEN(string maTruong)
+        public virtual ObjectResult<GET_THANHVIEN_Result> GET_THANHVIEN(string maTruong, string namHoc)
         {
             var maTruongParameter = maTruong != null ?
                 new ObjectParameter("MaTruong", maTruong) :
                 new ObjectParameter("MaTruong", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_THANHVIEN_Result>("GET_THANHVIEN", maTruongParameter);
+            var namHocParameter = namHoc != null ?
+                new ObjectParameter("NamHoc", namHoc) :
+                new ObjectParameter("NamHoc", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_THANHVIEN_Result>("GET_THANHVIEN", maTruongParameter, namHocParameter);
         }
     
         public virtual ObjectResult<GET_VANBAN_CAPHOC_Result> GET_VANBAN_CAPHOC(string capHoc, string phanLoai)

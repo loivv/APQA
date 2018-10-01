@@ -46,25 +46,6 @@
                 </div>
                 <!-- end table data-->
 
-                <!-- table data-->
-                <div class="table-responsive">
-                    <table class="table table-striped jambo_table bulk_action">
-                        <thead>
-                            <tr class="headings">
-                                <th>Năm học</th>
-                                <th ng-repeat="x in allnamhoc" id={{x.NamHoc}} scope="colgroup" style="text-align:center" colspan="2">
-                                    {{x.NamHoc}}
-                                </th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                           
-                        </tbody>
-                    </table>
-                </div>
-                <!-- end table data-->
-
                 <!--phan trang-->
                 <ul items-per-page="itemPerPage" uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
                 <!-- end phan trang-->
@@ -92,7 +73,7 @@
                     <!-- body-->
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Năm học</label>
                                     <select class="form-control" ng-model="Info.NamHoc" required>
@@ -100,19 +81,19 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Phòng kiên cố</label>
                                     <input type="number" class="form-control" ng-model="Info.KienCo" required/>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Phòng bán kiên cố</label>
                                     <input type="number" class="form-control" ng-model="Info.BanKienCo" required />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Phòng tạm</label>
                                     <input type="number" class="form-control" ng-model="Info.Tam" required />

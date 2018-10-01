@@ -17,7 +17,7 @@ namespace QA.Controllers.kehoachtudanhgia
         [HttpGet]
         public JsonResult GetData()
         {
-            var MDInfo = db.DM_MucDichPhamVi.Where(p => p.MaTruong == MaTruong).FirstOrDefault();
+            var MDInfo = db.DM_MucDichPhamVi.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
 
             return Json(new ResultInfo() { error = 0, data = MDInfo }, JsonRequestBehavior.AllowGet);
         }

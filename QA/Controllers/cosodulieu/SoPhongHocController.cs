@@ -25,8 +25,7 @@ namespace QA.Controllers.cosodulieu
 
             // var data = db.DM_PhongHoc.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
             var matruong = new SqlParameter("@MaTruong", MaTruong);
-            var namhoc = new SqlParameter("@NamHoc", NamHoc);
-            var data = db.Database.SqlQuery<LopHoc>("GET_LOPHOC @MaTruong,@NamHoc", matruong, namhoc).ToList();
+            var data = db.Database.SqlQuery<LopHoc>("GET_LOPHOC @MaTruong", matruong).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -53,7 +52,6 @@ namespace QA.Controllers.cosodulieu
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
 
             ph.MaTruong = MaTruong;
-            ph.NamHoc = NamHoc;
             db.DM_PhongHoc.Add(ph);
 
             db.SaveChanges();

@@ -253,6 +253,12 @@
     <Compile Include="Models\DM_HoiDongTuDanhGia.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DM_LopHocTH.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_LopHocTHCS.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DM_MinhChung.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
@@ -328,7 +334,7 @@
     <Compile Include="Models\HT_CapHoc.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HT_HocSinhLopHoc.cs">
+    <Compile Include="Models\HT_LopHoc.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HT_TieuChi.cs">
@@ -942,6 +948,7 @@
     <Content Include="Views\ToChucThucHien\Show.cshtml" />
     <Content Include="Views\SoPhongHoc\Show.cshtml" />
     <Content Include="Views\TieuChi\Show.cshtml" />
+    <Content Include="Views\SoLopHoc\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -957,7 +964,6 @@
     <Folder Include="Views\PhongHoc\" />
     <Folder Include="Views\SoCanBo\" />
     <Folder Include="Views\SoHocSinh\" />
-    <Folder Include="Views\SoLopHoc\" />
     <Folder Include="Views\TDGTieuChi\" />
     <Folder Include="Views\ThoiGianCungCap\" />
   </ItemGroup>

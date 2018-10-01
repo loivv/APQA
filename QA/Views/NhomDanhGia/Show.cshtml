@@ -33,12 +33,13 @@
                                 <td>{{item.MaNhom}}</td>
                                 <td>{{item.TenNhom}}</td>
                                 <td>
-                                    <table class="table table-striped jambo_table bulk_action">
-                                        <tr ng-repeat="item1 in allChiTiet">
-                                            <td>{{$item1.ThanhVien}}</td>
+                                    <table border="0" ng-init="detail($index)">
+                                        <tr ng-repeat="item1 in item.allDetail">
+                                            <td>{{item1.TenThanhVien}}</td>
+                                        </tr>
                                     </table>
                                 </td>
-                                <td>{{item.NhomThuKy}}</td>
+                                <td><input type="checkbox" ng-model="item.ThuKy" ng-checked="item.ThuKy"></td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
@@ -217,6 +218,29 @@
                 showModel("insertmodal")
 
             };
+            //lay chi tiet thanh vien trong nhom
+          //  $scope.alldetail = [];
+            $scope.detail = function (index) {
+                $scope.alldetail = [];
+                var info = $scope.allDanhMuc[index];
+                $scope.Info = angular.copy(info);
+                showLoader(false);
+                $http({
+                    method: "GET",
+                    url: "/NhomDanhGia/GetThanhVien?manhom=" + $scope.Info.MaNhom
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    $scope.allDanhMuc[index].allDetail = response.data;
+
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+
+            };
+            //ket thuc lay thanh vien trong nhom
 
             $scope.edit = function (index) {
                 $scope.allThanhVienByNhom = [];

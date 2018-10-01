@@ -120,6 +120,25 @@ namespace QA.Models
         public int Tong { get; set; }
 
     }
+    public class KhoiLopHocTH
+    {
+        public string NamHoc { get; set; }
+        public int Lop1 { get; set; }
+        public int Lop2 { get; set; }
+        public int Lop3 { get; set; }
+        public int Lop4 { get; set; }
+        public int Lop5 { get; set; }
+        public int Tong { get; set; }
+    }
+    public class KhoiLopHocTHCS
+    {
+        public string NamHoc { get; set; }
+        public int Lop6 { get; set; }
+        public int Lop7 { get; set; }
+        public int Lop8 { get; set; }
+        public int Lop9 { get; set; }
+        public int Tong { get; set; }
+    }
     public class TieuChuanTieuChi
     {
         public string GuiID { get; set; }

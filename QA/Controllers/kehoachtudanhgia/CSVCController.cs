@@ -12,8 +12,6 @@ namespace QA.Controllers.kehoachtudanhgia
         // GET: /CSVC/
         public ActionResult Show()
         {
-            //var MDInfo = db.DM_NLCSVCTaiChinh.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
-            //ViewBag.Info = MDInfo;
             return View();
         }
         [HttpGet]

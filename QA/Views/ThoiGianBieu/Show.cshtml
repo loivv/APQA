@@ -20,10 +20,8 @@
                         <thead>
                             <tr class="headings">
                                 <th>STT</th>
-                                <th>Tuần</th>
-                                <th>Từ ngày</th>
-                                <th>Đến ngày</th>
-                                <th>Hoạt động</th>
+                                <th class="text-center">Tuần</th>
+                                <th class="text-center">Hoạt động</th>
                                 <th>#</th>
                                 <th>#</th>
                             </tr>
@@ -32,9 +30,10 @@
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
                                 <td>{{$index + 1}}</td>
-                                <td>Tuần {{item.Tuan}}</td>
-                                <td>{{item.TuNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
-                                <td>{{item.DenNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
+                                <td class="text-center"><strong> Tuần {{item.Tuan}}</strong> <br />
+                                   ({{item.TuNgay.slice(6, -2) | date : 'dd/MM/yyyy'}} -
+                                {{item.DenNgay.slice(6, -2) | date : 'dd/MM/yyyy'}})
+                                </td>
                                 <td>{{item.NoiDung}}</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
@@ -91,7 +90,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Nội dung</label>
-                                    <textarea class="form-control" ng-model="Info.NoiDung" required ></textarea>
+                                    <textarea rows="6" class="form-control" ng-model="Info.NoiDung" required ></textarea>
                                 </div>
                             </div>
 
@@ -280,7 +279,7 @@
                             if (findIndex !== -1) {
                                 $scope.allDanhMuc[findIndex] = angular.copy(result.data);
                             }
-
+                            $scope.GetData(1, "");
                             showNotify("Đã cập nhật");
                             hideModel("insertmodal");
 
