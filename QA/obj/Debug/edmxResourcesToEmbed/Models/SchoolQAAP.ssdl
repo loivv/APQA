@@ -62,6 +62,23 @@
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="DM_CanBoCNV">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="Loai" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Loai" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TongSo" Type="int" />
+    <Property Name="Nu" Type="int" />
+    <Property Name="DanToc" Type="nvarchar" MaxLength="20" />
+    <Property Name="DatChuan" Type="int" />
+    <Property Name="TrenChuan" Type="int" />
+    <Property Name="ChuaDatChuan" Type="int" />
+    <Property Name="GhiChu" Type="nvarchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="DM_ChucVu">
     <Key>
       <PropertyRef Name="ID" />
@@ -73,6 +90,28 @@
     <Property Name="NamHoc" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DM_HocSinh">
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="10" />
+          <Property Name="KhoiLop" Type="nvarchar" MaxLength="20" />
+          <Property Name="Nu" Type="int" />
+          <Property Name="DanToc" Type="int" />
+          <Property Name="ChinhSach" Type="int" />
+          <Property Name="KhuyetTat" Type="int" />
+          <Property Name="TuyenMoi" Type="int" />
+          <Property Name="LuuBan" Type="int" />
+          <Property Name="BoHoc" Type="int" />
+          <Property Name="HocCaNgay" Type="int" />
+          <Property Name="BanTru" Type="int" />
+          <Property Name="NoiTru" Type="int" />
+          <Property Name="HSHTCTTH" Type="int" />
+          <Property Name="HSGioiHuyen" Type="int" />
+          <Property Name="HSGioiTinh" Type="int" />
+          <Property Name="HSGioiQG" Type="int" />
+          <Property Name="TiLeChuyenCap" Type="int" />
+        </EntityType>-->
   <EntityType Name="DM_HocSinhNamHoc">
     <Key>
       <PropertyRef Name="MaTruong" />
@@ -331,6 +370,21 @@
     <Property Name="KeHoach" Type="nvarchar(max)" />
     <Property Name="TuDanhGia" Type="bit" />
   </EntityType>
+  <EntityType Name="DM_TieuChi_DuKien">
+    <Key>
+      <PropertyRef Name="IDTieuChi" />
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="HoatDong" Type="nvarchar(max)" />
+    <Property Name="NhanLuc" Type="nvarchar(max)" />
+    <Property Name="VatLuc" Type="nvarchar(max)" />
+    <Property Name="ThoiDiem" Type="nvarchar(max)" />
+    <Property Name="GhiChu" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="DM_TieuChuan">
     <Key>
       <PropertyRef Name="IDTieuChuan" />
@@ -560,6 +614,7 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_CanBoCNV" EntityType="Self.DM_CanBoCNV" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
@@ -581,6 +636,7 @@
     <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_TieuChi" EntityType="Self.DM_TieuChi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_TieuChi_DuKien" EntityType="Self.DM_TieuChi_DuKien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ToChucThucHien" EntityType="Self.DM_ToChucThucHien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" Schema="dbo" store:Type="Tables" />

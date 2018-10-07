@@ -28,7 +28,7 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_CanBo" Width="1.5" PointX="13.75" PointY="11.25" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_CapHoc" Width="1.5" PointX="10.75" PointY="13.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi" Width="1.5" PointX="14.75" PointY="13.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi_ChiSo" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi_ChiSo" Width="2.375" PointX="15.75" PointY="0.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChuan" Width="1.5" PointX="15.75" PointY="4.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.UMS_GroupMenu" Width="1.5" PointX="0.75" PointY="7.125" />
         <EntityTypeShape EntityType="SchoolQAAPModel.UMS_Menu" Width="1.5" PointX="3" PointY="7" />
@@ -48,6 +48,8 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_LopHoc" Width="1.5" PointX="9.375" PointY="16.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTH" Width="1.5" PointX="11.375" PointY="16.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTHCS" Width="1.5" PointX="13.375" PointY="16.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_CanBoCNV" Width="1.5" PointX="15.375" PointY="16.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" Width="1.5" PointX="17.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

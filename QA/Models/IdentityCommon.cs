@@ -194,5 +194,19 @@ namespace QA.Models
         public string ID { get; set; }
         public string MaNhiemVu { get; set; }
     }
+    public class TieuChiDuKien
+    {
+        //tcn.GuiID, tcn.IDTieuChuan as ID, tc.GuiID as GuiIDTC,tc.IDTieuChi,tcdk.HoatDong,tcdk.NhanLuc,tcdk.VatLuc,tcdk.ThoiDiem,tcdk.GhiChu
+        public string GuiID { get; set; }
+        public int ID { get; set; }
+        public string GuiIDTC { get; set; }
+        public int IDTieuChi { get; set; }
+        public string HoatDong { get; set; }
+        public string NhanLuc { get; set; }
+        public string VatLuc { get; set; }
+        public string ThoiDiem { get; set; }
+        public string GhiChu { get; set; }
+
+    }
 
 }

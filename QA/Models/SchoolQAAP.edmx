@@ -67,6 +67,23 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="DM_CanBoCNV">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="Loai" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Loai" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TongSo" Type="int" />
+          <Property Name="Nu" Type="int" />
+          <Property Name="DanToc" Type="nvarchar" MaxLength="20" />
+          <Property Name="DatChuan" Type="int" />
+          <Property Name="TrenChuan" Type="int" />
+          <Property Name="ChuaDatChuan" Type="int" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="DM_ChucVu">
           <Key>
             <PropertyRef Name="ID" />
@@ -78,6 +95,28 @@
           <Property Name="NamHoc" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DM_HocSinh">
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="10" />
+          <Property Name="KhoiLop" Type="nvarchar" MaxLength="20" />
+          <Property Name="Nu" Type="int" />
+          <Property Name="DanToc" Type="int" />
+          <Property Name="ChinhSach" Type="int" />
+          <Property Name="KhuyetTat" Type="int" />
+          <Property Name="TuyenMoi" Type="int" />
+          <Property Name="LuuBan" Type="int" />
+          <Property Name="BoHoc" Type="int" />
+          <Property Name="HocCaNgay" Type="int" />
+          <Property Name="BanTru" Type="int" />
+          <Property Name="NoiTru" Type="int" />
+          <Property Name="HSHTCTTH" Type="int" />
+          <Property Name="HSGioiHuyen" Type="int" />
+          <Property Name="HSGioiTinh" Type="int" />
+          <Property Name="HSGioiQG" Type="int" />
+          <Property Name="TiLeChuyenCap" Type="int" />
+        </EntityType>-->
         <EntityType Name="DM_HocSinhNamHoc">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -336,6 +375,21 @@
           <Property Name="KeHoach" Type="nvarchar(max)" />
           <Property Name="TuDanhGia" Type="bit" />
         </EntityType>
+        <EntityType Name="DM_TieuChi_DuKien">
+          <Key>
+            <PropertyRef Name="IDTieuChi" />
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="HoatDong" Type="nvarchar(max)" />
+          <Property Name="NhanLuc" Type="nvarchar(max)" />
+          <Property Name="VatLuc" Type="nvarchar(max)" />
+          <Property Name="ThoiDiem" Type="nvarchar(max)" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="DM_TieuChuan">
           <Key>
             <PropertyRef Name="IDTieuChuan" />
@@ -565,6 +619,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_CanBoCNV" EntityType="Self.DM_CanBoCNV" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
@@ -586,6 +641,7 @@
           <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TieuChi" EntityType="Self.DM_TieuChi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_TieuChi_DuKien" EntityType="Self.DM_TieuChi_DuKien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ToChucThucHien" EntityType="Self.DM_ToChucThucHien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" Schema="dbo" store:Type="Tables" />
@@ -707,6 +763,8 @@
           <EntitySet Name="HT_LopHoc" EntityType="SchoolQAAPModel.HT_LopHoc" />
           <EntitySet Name="DM_LopHocTH" EntityType="SchoolQAAPModel.DM_LopHocTH" />
           <EntitySet Name="DM_LopHocTHCS" EntityType="SchoolQAAPModel.DM_LopHocTHCS" />
+          <EntitySet Name="DM_CanBoCNV" EntityType="SchoolQAAPModel.DM_CanBoCNV" />
+          <EntitySet Name="DM_TieuChi_DuKien" EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" />
         </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -1260,6 +1318,38 @@
           <Property Name="Lop8" Type="Int32" />
           <Property Name="Lop9" Type="Int32" />
         </EntityType>
+        <EntityType Name="DM_CanBoCNV">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="Loai" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Loai" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TongSo" Type="Int32" />
+          <Property Name="Nu" Type="Int32" />
+          <Property Name="DanToc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DatChuan" Type="Int32" />
+          <Property Name="TrenChuan" Type="Int32" />
+          <Property Name="ChuaDatChuan" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_TieuChi_DuKien">
+          <Key>
+            <PropertyRef Name="IDTieuChi" />
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="IDTieuChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoatDong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NhanLuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VatLuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1801,6 +1891,36 @@
                 <ScalarProperty Name="Lop6" ColumnName="Lop6" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_CanBoCNV">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_CanBoCNV">
+              <MappingFragment StoreEntitySet="DM_CanBoCNV">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="ChuaDatChuan" ColumnName="ChuaDatChuan" />
+                <ScalarProperty Name="TrenChuan" ColumnName="TrenChuan" />
+                <ScalarProperty Name="DatChuan" ColumnName="DatChuan" />
+                <ScalarProperty Name="DanToc" ColumnName="DanToc" />
+                <ScalarProperty Name="Nu" ColumnName="Nu" />
+                <ScalarProperty Name="TongSo" ColumnName="TongSo" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_TieuChi_DuKien">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi_DuKien">
+              <MappingFragment StoreEntitySet="DM_TieuChi_DuKien">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="ThoiDiem" ColumnName="ThoiDiem" />
+                <ScalarProperty Name="VatLuc" ColumnName="VatLuc" />
+                <ScalarProperty Name="NhanLuc" ColumnName="NhanLuc" />
+                <ScalarProperty Name="HoatDong" ColumnName="HoatDong" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

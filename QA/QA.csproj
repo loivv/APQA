@@ -244,6 +244,9 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DM_CanBoCNV.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DM_ChucVu.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
@@ -305,6 +308,9 @@
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_TieuChi.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_TieuChi_DuKien.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_TieuChuan.cs">
@@ -949,6 +955,7 @@
     <Content Include="Views\SoPhongHoc\Show.cshtml" />
     <Content Include="Views\TieuChi\Show.cshtml" />
     <Content Include="Views\SoLopHoc\Show.cshtml" />
+    <Content Include="Views\ThoiGianCungCap\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -965,7 +972,6 @@
     <Folder Include="Views\SoCanBo\" />
     <Folder Include="Views\SoHocSinh\" />
     <Folder Include="Views\TDGTieuChi\" />
-    <Folder Include="Views\ThoiGianCungCap\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
