@@ -83,8 +83,8 @@
     <EntitySet Name="HT_LopHoc" EntityType="SchoolQAAPModel.HT_LopHoc" />
     <EntitySet Name="DM_LopHocTH" EntityType="SchoolQAAPModel.DM_LopHocTH" />
     <EntitySet Name="DM_LopHocTHCS" EntityType="SchoolQAAPModel.DM_LopHocTHCS" />
-    <EntitySet Name="DM_CanBoCNV" EntityType="SchoolQAAPModel.DM_CanBoCNV" />
     <EntitySet Name="DM_TieuChi_DuKien" EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" />
+    <EntitySet Name="DM_CanBoCNV" EntityType="SchoolQAAPModel.DM_CanBoCNV" />
   </EntityContainer>
   <ComplexType Name="GET_NHOMDANHGIA_Result">
     <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -638,23 +638,6 @@
     <Property Name="Lop8" Type="Int32" />
     <Property Name="Lop9" Type="Int32" />
   </EntityType>
-  <EntityType Name="DM_CanBoCNV">
-    <Key>
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-      <PropertyRef Name="Loai" />
-    </Key>
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="Loai" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="TongSo" Type="Int32" />
-    <Property Name="Nu" Type="Int32" />
-    <Property Name="DanToc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="DatChuan" Type="Int32" />
-    <Property Name="TrenChuan" Type="Int32" />
-    <Property Name="ChuaDatChuan" Type="Int32" />
-    <Property Name="GhiChu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="DM_TieuChi_DuKien">
     <Key>
       <PropertyRef Name="IDTieuChi" />
@@ -669,5 +652,23 @@
     <Property Name="VatLuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ThoiDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_CanBoCNV">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="Loai" />
+    </Key>
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Loai" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TongSo" Type="Int32" />
+    <Property Name="Nu" Type="Int32" />
+    <Property Name="DanToc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DatChuan" Type="Int32" />
+    <Property Name="TrenChuan" Type="Int32" />
+    <Property Name="ChuaDatChuan" Type="Int32" />
+    <Property Name="GhiChu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" />
   </EntityType>
 </Schema>

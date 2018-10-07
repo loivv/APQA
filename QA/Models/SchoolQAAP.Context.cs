@@ -66,8 +66,8 @@ namespace QA.Models
         public virtual DbSet<HT_LopHoc> HT_LopHoc { get; set; }
         public virtual DbSet<DM_LopHocTH> DM_LopHocTH { get; set; }
         public virtual DbSet<DM_LopHocTHCS> DM_LopHocTHCS { get; set; }
-        public virtual DbSet<DM_CanBoCNV> DM_CanBoCNV { get; set; }
         public virtual DbSet<DM_TieuChi_DuKien> DM_TieuChi_DuKien { get; set; }
+        public virtual DbSet<DM_CanBoCNV> DM_CanBoCNV { get; set; }
     
         public virtual ObjectResult<GET_NHOMDANHGIA_Result> GET_NHOMDANHGIA(string maTruong)
         {

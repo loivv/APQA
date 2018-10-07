@@ -48,8 +48,8 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_LopHoc" Width="1.5" PointX="9.375" PointY="16.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTH" Width="1.5" PointX="11.375" PointY="16.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTHCS" Width="1.5" PointX="13.375" PointY="16.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_CanBoCNV" Width="1.5" PointX="15.375" PointY="16.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" Width="1.5" PointX="17.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_CanBoCNV" Width="1.5" PointX="15.375" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

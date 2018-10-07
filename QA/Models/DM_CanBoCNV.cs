@@ -24,5 +24,6 @@ namespace QA.Models
         public Nullable<int> TrenChuan { get; set; }
         public Nullable<int> ChuaDatChuan { get; set; }
         public string GhiChu { get; set; }
+        public Nullable<int> STT { get; set; }
     }
 }

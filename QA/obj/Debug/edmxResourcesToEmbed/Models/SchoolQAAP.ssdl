@@ -70,7 +70,7 @@
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="Loai" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Loai" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="TongSo" Type="int" />
     <Property Name="Nu" Type="int" />
     <Property Name="DanToc" Type="nvarchar" MaxLength="20" />
@@ -78,6 +78,7 @@
     <Property Name="TrenChuan" Type="int" />
     <Property Name="ChuaDatChuan" Type="int" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="100" />
+    <Property Name="STT" Type="int" />
   </EntityType>
   <EntityType Name="DM_ChucVu">
     <Key>

@@ -539,22 +539,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DM_CanBoCNV">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_CanBoCNV">
-        <MappingFragment StoreEntitySet="DM_CanBoCNV">
-          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-          <ScalarProperty Name="ChuaDatChuan" ColumnName="ChuaDatChuan" />
-          <ScalarProperty Name="TrenChuan" ColumnName="TrenChuan" />
-          <ScalarProperty Name="DatChuan" ColumnName="DatChuan" />
-          <ScalarProperty Name="DanToc" ColumnName="DanToc" />
-          <ScalarProperty Name="Nu" ColumnName="Nu" />
-          <ScalarProperty Name="TongSo" ColumnName="TongSo" />
-          <ScalarProperty Name="Loai" ColumnName="Loai" />
-          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DM_TieuChi_DuKien">
       <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi_DuKien">
         <MappingFragment StoreEntitySet="DM_TieuChi_DuKien">
@@ -566,6 +550,23 @@
           <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
           <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_CanBoCNV">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_CanBoCNV">
+        <MappingFragment StoreEntitySet="DM_CanBoCNV">
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="ChuaDatChuan" ColumnName="ChuaDatChuan" />
+          <ScalarProperty Name="TrenChuan" ColumnName="TrenChuan" />
+          <ScalarProperty Name="DatChuan" ColumnName="DatChuan" />
+          <ScalarProperty Name="DanToc" ColumnName="DanToc" />
+          <ScalarProperty Name="Nu" ColumnName="Nu" />
+          <ScalarProperty Name="TongSo" ColumnName="TongSo" />
+          <ScalarProperty Name="Loai" ColumnName="Loai" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

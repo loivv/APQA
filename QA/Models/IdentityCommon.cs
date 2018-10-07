@@ -148,6 +148,7 @@ namespace QA.Models
         public int IDTieuChi { get; set; }
         public string NoiDungTC { get; set; }
         public int TieuChi { get; set; }
+        public string TCDK { get; set; }
 
     }
     public class TieuChi
@@ -207,6 +208,15 @@ namespace QA.Models
         public string ThoiDiem { get; set; }
         public string GhiChu { get; set; }
 
+    }
+    public class DMCanBoCNV
+    {
+        public string NamHoc { get; set; }
+        public int TongSo { get; set; }
+        public int TongNu { get; set; }
+        public int TongDatChuan { get; set; }
+        public int TongTrenChuan { get; set; }
+        public int TongChuaDatChuan { get; set; }
     }
 
 }
