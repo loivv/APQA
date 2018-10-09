@@ -67,6 +67,18 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="DM_BaoCaoTieuChuan">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="IDTieuChuan" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MoDau" Type="nvarchar(max)" />
+          <Property Name="KetLuan" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="DM_CanBoCNV">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -85,6 +97,15 @@
           <Property Name="GhiChu" Type="nvarchar" MaxLength="100" />
           <Property Name="STT" Type="int" />
         </EntityType>
+        <EntityType Name="DM_ChiSoMoTa">
+          <Key>
+            <PropertyRef Name="IDChiSo" />
+          </Key>
+          <Property Name="IDChiSo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MoTaHienTrang" Type="nvarchar(max)" />
+          <Property Name="NhanXetPGD" Type="nvarchar(max)" />
+          <Property Name="Dat" Type="bit" />
+        </EntityType>
         <EntityType Name="DM_ChucVu">
           <Key>
             <PropertyRef Name="ID" />
@@ -95,6 +116,21 @@
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DM_DanhGiaTieuChi">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="IDTieuChi" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MoTaHienTrang" Type="nvarchar(max)" />
+          <Property Name="DiemManh" Type="nvarchar(max)" />
+          <Property Name="DiemYeu" Type="nvarchar(max)" />
+          <Property Name="NhanXetPGD" Type="nvarchar(max)" />
+          <Property Name="KeHoachCaiTien" Type="nvarchar(max)" />
+          <Property Name="MaNhom" Type="nvarchar" MaxLength="50" />
+          <Property Name="PGDDuyet" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
@@ -359,23 +395,6 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
           <Property Name="PhanLoai" Type="nvarchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="DM_TieuChi">
-          <Key>
-            <PropertyRef Name="IDTieuChuan" />
-            <PropertyRef Name="IDTieuChi" />
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="IDTieuChuan" Type="int" Nullable="false" />
-          <Property Name="IDTieuChi" Type="int" Nullable="false" />
-          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
-          <Property Name="DiemManh" Type="nvarchar(max)" />
-          <Property Name="DiemYeu" Type="nvarchar(max)" />
-          <Property Name="KeHoach" Type="nvarchar(max)" />
-          <Property Name="TuDanhGia" Type="bit" />
-        </EntityType>
         <EntityType Name="DM_TieuChi_DuKien">
           <Key>
             <PropertyRef Name="IDTieuChi" />
@@ -423,6 +442,25 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <Property Name="CoQuanBanHanh" Type="nvarchar" MaxLength="100" />
           <Property Name="LinkVanBan" Type="nvarchar" MaxLength="100" />
           <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DM_VanDeKetLuan">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DatVanDe" Type="nvarchar(max)" />
+          <Property Name="KetLuan" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DM_VietTat">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="VietTat" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="VietTat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="HT_CanBo">
           <Key>
@@ -620,8 +658,11 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_BaoCaoTieuChuan" EntityType="Self.DM_BaoCaoTieuChuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_CanBoCNV" EntityType="Self.DM_CanBoCNV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_ChiSoMoTa" EntityType="Self.DM_ChiSoMoTa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_DanhGiaTieuChi" EntityType="Self.DM_DanhGiaTieuChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_LopHocTH" EntityType="Self.DM_LopHocTH" Schema="dbo" store:Type="Tables" />
@@ -641,11 +682,12 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <EntitySet Name="DM_ThanhVien" EntityType="Self.DM_ThanhVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DM_TieuChi" EntityType="Self.DM_TieuChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TieuChi_DuKien" EntityType="Self.DM_TieuChi_DuKien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ToChucThucHien" EntityType="Self.DM_ToChucThucHien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_VanDeKetLuan" EntityType="Self.DM_VanDeKetLuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_VietTat" EntityType="Self.DM_VietTat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_LopHoc" EntityType="Self.HT_LopHoc" Schema="dbo" store:Type="Tables" />
@@ -726,7 +768,6 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <EntitySet Name="DM_SoLop" EntityType="SchoolQAAPModel.DM_SoLop" />
           <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" />
           <EntitySet Name="DM_ThoiGianBieu" EntityType="SchoolQAAPModel.DM_ThoiGianBieu" />
-          <EntitySet Name="DM_TieuChi" EntityType="SchoolQAAPModel.DM_TieuChi" />
           <EntitySet Name="DM_TieuChuan" EntityType="SchoolQAAPModel.DM_TieuChuan" />
           <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
           <EntitySet Name="HT_CanBo" EntityType="SchoolQAAPModel.HT_CanBo" />
@@ -766,6 +807,11 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <EntitySet Name="DM_LopHocTHCS" EntityType="SchoolQAAPModel.DM_LopHocTHCS" />
           <EntitySet Name="DM_TieuChi_DuKien" EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" />
           <EntitySet Name="DM_CanBoCNV" EntityType="SchoolQAAPModel.DM_CanBoCNV" />
+          <EntitySet Name="DM_BaoCaoTieuChuan" EntityType="SchoolQAAPModel.DM_BaoCaoTieuChuan" />
+          <EntitySet Name="DM_VietTat" EntityType="SchoolQAAPModel.DM_VietTat" />
+          <EntitySet Name="DM_VanDeKetLuan" EntityType="SchoolQAAPModel.DM_VanDeKetLuan" />
+          <EntitySet Name="DM_ChiSoMoTa" EntityType="SchoolQAAPModel.DM_ChiSoMoTa" />
+          <EntitySet Name="DM_DanhGiaTieuChi" EntityType="SchoolQAAPModel.DM_DanhGiaTieuChi" />
         </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -1013,23 +1059,6 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <Property Name="TuNgay" Type="DateTime" Precision="0" />
           <Property Name="DenNgay" Type="DateTime" Precision="0" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DM_TieuChi">
-          <Key>
-            <PropertyRef Name="IDTieuChuan" />
-            <PropertyRef Name="IDTieuChi" />
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="IDTieuChuan" Type="Int32" Nullable="false" />
-          <Property Name="IDTieuChi" Type="Int32" Nullable="false" />
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DiemManh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DiemYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="KeHoach" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TuDanhGia" Type="Boolean" />
         </EntityType>
         <EntityType Name="DM_TieuChuan">
           <Key>
@@ -1352,6 +1381,61 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <Property Name="GhiChu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="STT" Type="Int32" />
         </EntityType>
+        <EntityType Name="DM_BaoCaoTieuChuan">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="IDTieuChuan" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDTieuChuan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_VietTat">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="VietTat" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VietTat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_VanDeKetLuan">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DatVanDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_ChiSoMoTa">
+          <Key>
+            <PropertyRef Name="IDChiSo" />
+          </Key>
+          <Property Name="IDChiSo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaHienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NhanXetPGD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dat" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DM_DanhGiaTieuChi">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="IDTieuChi" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDTieuChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaHienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiemManh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiemYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NhanXetPGD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KeHoachCaiTien" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PGDDuyet" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1621,21 +1705,6 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
                 <ScalarProperty Name="Tuan" ColumnName="Tuan" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_TieuChi">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi">
-              <MappingFragment StoreEntitySet="DM_TieuChi">
-                <ScalarProperty Name="TuDanhGia" ColumnName="TuDanhGia" />
-                <ScalarProperty Name="KeHoach" ColumnName="KeHoach" />
-                <ScalarProperty Name="DiemYeu" ColumnName="DiemYeu" />
-                <ScalarProperty Name="DiemManh" ColumnName="DiemManh" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
-                <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1923,6 +1992,61 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
                 <ScalarProperty Name="TongSo" ColumnName="TongSo" />
                 <ScalarProperty Name="Loai" ColumnName="Loai" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_BaoCaoTieuChuan">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_BaoCaoTieuChuan">
+              <MappingFragment StoreEntitySet="DM_BaoCaoTieuChuan">
+                <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
+                <ScalarProperty Name="MoDau" ColumnName="MoDau" />
+                <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_VietTat">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_VietTat">
+              <MappingFragment StoreEntitySet="DM_VietTat">
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="VietTat" ColumnName="VietTat" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_VanDeKetLuan">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_VanDeKetLuan">
+              <MappingFragment StoreEntitySet="DM_VanDeKetLuan">
+                <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
+                <ScalarProperty Name="DatVanDe" ColumnName="DatVanDe" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_ChiSoMoTa">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ChiSoMoTa">
+              <MappingFragment StoreEntitySet="DM_ChiSoMoTa">
+                <ScalarProperty Name="Dat" ColumnName="Dat" />
+                <ScalarProperty Name="NhanXetPGD" ColumnName="NhanXetPGD" />
+                <ScalarProperty Name="MoTaHienTrang" ColumnName="MoTaHienTrang" />
+                <ScalarProperty Name="IDChiSo" ColumnName="IDChiSo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_DanhGiaTieuChi">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_DanhGiaTieuChi">
+              <MappingFragment StoreEntitySet="DM_DanhGiaTieuChi">
+                <ScalarProperty Name="PGDDuyet" ColumnName="PGDDuyet" />
+                <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+                <ScalarProperty Name="KeHoachCaiTien" ColumnName="KeHoachCaiTien" />
+                <ScalarProperty Name="NhanXetPGD" ColumnName="NhanXetPGD" />
+                <ScalarProperty Name="DiemYeu" ColumnName="DiemYeu" />
+                <ScalarProperty Name="DiemManh" ColumnName="DiemManh" />
+                <ScalarProperty Name="MoTaHienTrang" ColumnName="MoTaHienTrang" />
+                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
             </EntityTypeMapping>

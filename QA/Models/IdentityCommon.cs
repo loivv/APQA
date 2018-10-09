@@ -218,5 +218,12 @@ namespace QA.Models
         public int TongTrenChuan { get; set; }
         public int TongChuaDatChuan { get; set; }
     }
+    public class BaoCaoTieuChuan
+    {
+        public string IDTieuChuan { get; set; }
+        public int ID { get; set; }
+        public string MoDau { get; set; }
+        public string KetLuan { get; set; }
+    }
 
 }

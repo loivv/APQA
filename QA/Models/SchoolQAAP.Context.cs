@@ -44,7 +44,6 @@ namespace QA.Models
         public virtual DbSet<DM_SoLop> DM_SoLop { get; set; }
         public virtual DbSet<DM_TapHuanTuDanhGia> DM_TapHuanTuDanhGia { get; set; }
         public virtual DbSet<DM_ThoiGianBieu> DM_ThoiGianBieu { get; set; }
-        public virtual DbSet<DM_TieuChi> DM_TieuChi { get; set; }
         public virtual DbSet<DM_TieuChuan> DM_TieuChuan { get; set; }
         public virtual DbSet<DM_ToChucThucHien> DM_ToChucThucHien { get; set; }
         public virtual DbSet<HT_CanBo> HT_CanBo { get; set; }
@@ -68,6 +67,11 @@ namespace QA.Models
         public virtual DbSet<DM_LopHocTHCS> DM_LopHocTHCS { get; set; }
         public virtual DbSet<DM_TieuChi_DuKien> DM_TieuChi_DuKien { get; set; }
         public virtual DbSet<DM_CanBoCNV> DM_CanBoCNV { get; set; }
+        public virtual DbSet<DM_BaoCaoTieuChuan> DM_BaoCaoTieuChuan { get; set; }
+        public virtual DbSet<DM_VietTat> DM_VietTat { get; set; }
+        public virtual DbSet<DM_VanDeKetLuan> DM_VanDeKetLuan { get; set; }
+        public virtual DbSet<DM_ChiSoMoTa> DM_ChiSoMoTa { get; set; }
+        public virtual DbSet<DM_DanhGiaTieuChi> DM_DanhGiaTieuChi { get; set; }
     
         public virtual ObjectResult<GET_NHOMDANHGIA_Result> GET_NHOMDANHGIA(string maTruong)
         {

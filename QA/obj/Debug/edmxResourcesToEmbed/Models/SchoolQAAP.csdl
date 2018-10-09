@@ -45,7 +45,6 @@
     <EntitySet Name="DM_SoLop" EntityType="SchoolQAAPModel.DM_SoLop" />
     <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" />
     <EntitySet Name="DM_ThoiGianBieu" EntityType="SchoolQAAPModel.DM_ThoiGianBieu" />
-    <EntitySet Name="DM_TieuChi" EntityType="SchoolQAAPModel.DM_TieuChi" />
     <EntitySet Name="DM_TieuChuan" EntityType="SchoolQAAPModel.DM_TieuChuan" />
     <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
     <EntitySet Name="HT_CanBo" EntityType="SchoolQAAPModel.HT_CanBo" />
@@ -85,6 +84,11 @@
     <EntitySet Name="DM_LopHocTHCS" EntityType="SchoolQAAPModel.DM_LopHocTHCS" />
     <EntitySet Name="DM_TieuChi_DuKien" EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" />
     <EntitySet Name="DM_CanBoCNV" EntityType="SchoolQAAPModel.DM_CanBoCNV" />
+    <EntitySet Name="DM_BaoCaoTieuChuan" EntityType="SchoolQAAPModel.DM_BaoCaoTieuChuan" />
+    <EntitySet Name="DM_VietTat" EntityType="SchoolQAAPModel.DM_VietTat" />
+    <EntitySet Name="DM_VanDeKetLuan" EntityType="SchoolQAAPModel.DM_VanDeKetLuan" />
+    <EntitySet Name="DM_ChiSoMoTa" EntityType="SchoolQAAPModel.DM_ChiSoMoTa" />
+    <EntitySet Name="DM_DanhGiaTieuChi" EntityType="SchoolQAAPModel.DM_DanhGiaTieuChi" />
   </EntityContainer>
   <ComplexType Name="GET_NHOMDANHGIA_Result">
     <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -332,23 +336,6 @@
     <Property Name="TuNgay" Type="DateTime" Precision="0" />
     <Property Name="DenNgay" Type="DateTime" Precision="0" />
     <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DM_TieuChi">
-    <Key>
-      <PropertyRef Name="IDTieuChuan" />
-      <PropertyRef Name="IDTieuChi" />
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-    </Key>
-    <Property Name="IDTieuChuan" Type="Int32" Nullable="false" />
-    <Property Name="IDTieuChi" Type="Int32" Nullable="false" />
-    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="DiemManh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DiemYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="KeHoach" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="TuDanhGia" Type="Boolean" />
   </EntityType>
   <EntityType Name="DM_TieuChuan">
     <Key>
@@ -670,5 +657,60 @@
     <Property Name="ChuaDatChuan" Type="Int32" />
     <Property Name="GhiChu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="STT" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DM_BaoCaoTieuChuan">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="IDTieuChuan" />
+    </Key>
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IDTieuChuan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_VietTat">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="VietTat" />
+    </Key>
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="VietTat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_VanDeKetLuan">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DatVanDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DM_ChiSoMoTa">
+    <Key>
+      <PropertyRef Name="IDChiSo" />
+    </Key>
+    <Property Name="IDChiSo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MoTaHienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NhanXetPGD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Dat" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DM_DanhGiaTieuChi">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="IDTieuChi" />
+    </Key>
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IDTieuChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MoTaHienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DiemManh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DiemYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NhanXetPGD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KeHoachCaiTien" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PGDDuyet" Type="Boolean" />
   </EntityType>
 </Schema>

@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Đặt vấn đề, kết luận";
+
+}
+
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <!-- body-->
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Đặt vấn đề</label>
+                    <textarea rows="5" class="form-control" ng-model="ThongTin.DatVanDe" required></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Kết luận tự đánh giá</label>
+                    <textarea rows="10" class="form-control" ng-model="ThongTin.KetLuan" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end body-->
+    <!-- begin footer-->
+    <div class="modal-footer">
+        <button ng-click="edit()" class="btn btn-default">Lưu</button>
+    </div>
+    <!-- end footer-->
+</div>
+
+
+@section scripts {
+
+    <script>
+
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap']);
+        app.filter('unsafe', function ($sce) {
+            return function (val) {
+                return $sce.trustAsHtml(val);
+            };
+        });
+
+        //var app = angular.module('myApp', ['ngRoute']);
+        app.controller('myCtrl', function ($scope, $http) {
+
+
+            $scope.getData = function () {
+
+                $http.get('/datvandeketluan/getdata').then(function (response) {
+
+                    $scope.ThongTin = angular.copy(response.data.data);
+                });
+
+            };
+
+            $scope.getData();
+
+            $scope.edit = function () {
+                showLoader(true);
+                //update data
+                $http({
+                    method: "POST",
+                    url: "/datvandeketluan/edit",
+                    data: $scope.ThongTin
+                }).then(
+                    function success(response) {
+
+                        var result = response.data;
+
+                        if (result.error == 0) {
+
+                            showNotify("Đã cập nhật");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    },
+                    function errror(response) {
+                        showLoader(false);
+                        showNotify("connect has disconnect");
+                    }
+                    );
+                //ket thuc update
+            };
+        });
+
+    </script>
+}

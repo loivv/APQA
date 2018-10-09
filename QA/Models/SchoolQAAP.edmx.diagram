@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_SoLop" Width="1.5" PointX="11.75" PointY="7.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" Width="1.5" PointX="11.75" PointY="10.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThoiGianBieu" Width="1.5" PointX="13.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChi" Width="1.5" PointX="13.75" PointY="3.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChuan" Width="1.5" PointX="5.375" PointY="9.5" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_ToChucThucHien" Width="1.5" PointX="13.75" PointY="7.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.HT_CanBo" Width="1.5" PointX="13.75" PointY="11.25" />
@@ -50,6 +49,11 @@
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTHCS" Width="1.5" PointX="13.375" PointY="16.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" Width="1.5" PointX="17.375" PointY="13.75" />
         <EntityTypeShape EntityType="SchoolQAAPModel.DM_CanBoCNV" Width="1.5" PointX="15.375" PointY="17.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_BaoCaoTieuChuan" Width="1.5" PointX="17.375" PointY="17.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_VietTat" Width="1.5" PointX="7.625" PointY="9.25" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_VanDeKetLuan" Width="1.5" PointX="18.375" PointY="4.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ChiSoMoTa" Width="1.5" PointX="5.375" PointY="18.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_DanhGiaTieuChi" Width="1.5" PointX="18.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

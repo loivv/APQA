@@ -1,0 +1,542 @@
+﻿@{
+    ViewBag.Title = "Đánh giá tiêu chí";
+}
+
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Đánh giá tiêu chí</h2>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end x_title-->
+            <div class="x_content">
+                <!-- table data-->
+                <p class="p-3 mb-2 bg-secondary text-white"><span class="text-primary">Màu xanh</span> là đã đánh giá,<span class="text-danger">màu đỏ</span>  là chưa đánh giá</p>
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th>Tiêu chuẩn</th>
+                                <th>Nội dung</th>
+                                <th>Tiêu chí</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="(mindex,item) in allDanhMuc">
+                                <td>{{item.IDTieuChuan}}</td>
+                                <td>{{item.NoiDung}}</td>
+                                <td>
+                                    <table ng-init="GetTieuChi(mindex)" border="0">
+                                        <tr>
+                                            <td ng-repeat="item1 in item.allDetail">&nbsp;&nbsp;&nbsp;[<a ng-class="{'text-primary' : item1.TCDK != '0', 'text-danger' : item1.TCDK == '0'}" href="#" ng-click="addNew(mindex,$index)">   {{item1.IDTieuChi}}  </a>]</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end table data-->
+            </div>
+            <!-- end x_content-->
+        </div>
+        <!-- end x_pannel-->
+        <!--chi tiet cac tieu chi da duoc du kien-->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Các tiêu chí đã được dự kiến</h2>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end x_title-->
+            <div class="x_content">
+                <!-- table data-->
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th>Tiêu chuẩn</th>
+                                <th>Tiêu chí</th>
+                                <th>Hoạt động</th>
+                                <th>Nhân lực - vật lực cần thiết</th>
+                                <th>Thời điểm huy động</th>
+                                <th>#</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="item in allTieuChiDuKien">
+                                <td>{{item.ID}}</td>
+                                <td>{{item.IDTieuChi}}</td>
+                                <td>{{item.HoatDong}}</td>
+                                <td>{{item.NhanLuc}} - {{item.VatLuc}}</td>
+                                <td>{{item.ThoiDiem}}</td>
+                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end table data-->
+                <!--phan trang-->
+                <ul items-per-page="itemPerPage" uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                <!-- end phan trang-->
+            </div>
+            <!-- end x_content-->
+        </div>
+        <!---->
+    </div>
+
+    <!-- tao model them moi-->
+    <div id="insertmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{modaltitle}}</h4>
+                </div>
+                <!--panel dialog-->
+                <form class="css-form" name="createForm" ng-submit="finishForm(createForm.$valid)">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                <ul class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#tab_tieuchuantieuchi" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Tiêu chuẩn - Tiêu chí</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#tab_chisoa" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chỉ số a</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#tab_chisob" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chỉ số b</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#tab_chisoc" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chỉ số c</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#tab_danhgia" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Đánh giá</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#tab_kehoachcaitien" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Kế Hoạch Cải Tiến</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#tab_nhom" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Nhóm</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active in" id="tab_tieuchuantieuchi" aria-labelledby="home-tab">
+                                        <!-- begin tab-->
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.TieuChuanTieuChi" ng-disabled="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end tab-->
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_chisoa" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Nội dung</label>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoA.NoiDung" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Mô tả hiện trạng</label>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoA.MoTaHienTrang" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Ý kiến PGD&DT</label>
+                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_chisob" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Nội dung</label>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoB.NoiDung" required></textarea>
+                                                </div>
+                                            </div>                                            
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Mô tả hiện trạng</label>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoB.MoTaHienTrang" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Ý kiến PGD&DT</label>
+                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_chisoc" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Nội dung</label>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoC.NoiDung" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Mô tả hiện trạng</label>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoC.MoTaHienTrang" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Ý kiến PGD&DT</label>
+                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_danhgia" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Điểm mạnh</label>
+                                                    <textarea rows="2" class="form-control" ng-model="Info.DiemManh" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Mô tả hiện trạng</label>
+                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Ý kiến PGD&DT</label>
+                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_kehoachcaitien" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <textarea rows="2" class="form-control" ng-model="Info.DiemManh" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Ý kiến PGD&DT</label>
+                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_nhom" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Hiển thị bảng</label>
+                                                    <textarea rows="2" class="form-control" ng-model="Info.DiemManh" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Hoàn thành</button>
+                    </div>
+                </form>
+            </div>
+            <!-- end modal content-->
+        </div>
+    </div>
+    <!-- end modal them-->
+</div>
+
+
+<!-- end content-->
+@section scripts {
+
+    <script>
+
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap']);
+
+        app.controller('myCtrl', function ($scope, $http) {
+
+            // lay du lieu
+            $scope.Info = [];
+            $scope.allDanhMuc = [];
+            $scope.GetData = function () {
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/ThoiGianCungCap/getTieuChuan"
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allDanhMuc = response.data.data;
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            $scope.GetData();
+
+            //lay danh sach cac tieu chi da dc du kien
+            $scope.numPages;
+            $scope.itemPerPage;
+            $scope.totalItems;
+            $scope.currentPage = 1;
+            $scope.maxSize = 5;
+            $scope.pageChanged = function () {
+                $scope.GetData($scope.currentPage);
+            };
+
+            // lay du lieu
+            $scope.allTieuChiDuKien = [];
+            $scope.GetTieuChiDuKienAll = function (page, search) {
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/ThoiGianCungCap/getTieuChiDuKienAll?page=" + page
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allTieuChiDuKien = response.data.data;
+                        $scope.itemPerPage = response.data.pageSize;
+                        $scope.totalItems = response.data.toltalSize;
+                        $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            $scope.GetTieuChiDuKienAll(1);
+
+            //ham lay chi tiet tieu chi
+            $scope.GetTieuChi = function (index) {
+                $scope.alldetail = [];
+                var info = $scope.allDanhMuc[index];
+                $scope.Info = angular.copy(info);
+
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/ThoiGianCungCap/getTieuChi?idtieuchuan=" + $scope.Info.GuiID
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allDanhMuc[index].allDetail = response.data.data;
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            //ket thuc ham lay goi tieu chi
+
+            // action
+            $scope.finishForm = function (isValid) {
+                if (isValid) {
+                    if ($scope.IsAction === 'add') {
+                        $scope.sendCreate();
+                    } else if ($scope.IsAction === 'edit') {
+                        $scope.sendCreate();
+                    } else if ($scope.IsAction === 'delete') {
+                        $scope.sendDelete();
+                    }
+
+                } else {
+                    showNotify('our form is missing');
+                }
+            }
+            $scope.IsAction = '';
+            $scope.addNew = function (mindex, id) {
+                //kiểm tra xem neu chua co thi load mơi , nếu đã có thì load thông tin
+                //gettieuchidukien
+                //mindex ==> vi tri cua id tieu chuan , id vi tri cua tieu chi
+                var info = $scope.allDanhMuc[mindex];
+                $scope.Info = angular.copy(info);
+
+                $http({
+                    method: "GET",
+                    url: "/ThoiGianCungCap/getTieuChiDuKien?idtieuchi=" + id + "&idtieuchuan=" + $scope.Info.GuiID
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.Info.IDTieuChi = response.data.data;
+                        $scope.Info = { "HoatDong": "", "NhanLuc": "", "VatLuc": "", "ThoiDiem": "", "GhiChu": "", "IDTieuChi": response.data.data };
+                        $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
+                        //$scope.ZoneIDDisable = false;
+                        $scope.IsAction = 'add';
+
+                        showModel("insertmodal");
+
+                    } else if (response.data.error !== 0) {
+                        $scope.Info.IDTieuChi = response.data.data;
+                        //truong hop da ton tai thong in
+                        $http({
+                            method: "GET",
+                            url: "/ThoiGianCungCap/getTieuChiDuKienbyID?guiid=" + $scope.Info.IDTieuChi
+                        }).then(function mySuccess(response) {
+                            showLoader(false);
+
+                            if (response.data.error === 1) {
+                                $scope.Info = response.data.data;
+                            }
+
+                        }, function myError(response) {
+                            showLoader(false);
+                            showNotify('Connect error');
+                        });
+                        //lay thong in
+
+                        $scope.Info = { "HoatDong": $scope.Info.HoatDong, "NhanLuc": $scope.Info.NhanLuc, "VatLuc": $scope.Info.VatLuc, "ThoiDiem": $scope.Info.ThoiDiem, "GhiChu": $scope.Info.GhiChu, "IDTieuChi": $scope.Info.IDTieuChi };
+                        $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
+                        //$scope.ZoneIDDisable = false;
+                        $scope.IsAction = 'add';
+
+                        showModel("insertmodal");
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+                //ket thuc lay dữ liệu điều kiện
+            };
+            //khi nguoi dung click vao edit
+            $scope.edit = function (index) {
+                var info = $scope.allTieuChiDuKien[index];
+                $scope.Info = angular.copy(info);
+                console.log($scope.Info);
+                $scope.Info.IDTieuChi = $scope.Info.GuiIDTC;
+
+                $scope.modaltitle = "Chỉnh sửa năm học--------------";
+                $scope.IsAction = 'edit';
+                showModel("insertmodal");
+            };
+            //ket thuc
+            // them tinh
+            $scope.sendCreate = function () {
+
+                showLoader(true);
+
+                $http({
+                    method: "POST",
+                    url: "/ThoiGianCungCap/create",
+                    data: { tcdk: $scope.Info }
+                }).then(function success(response) {
+
+                    var result = response.data;
+                    console.log(result);
+                    if (result.error === 0) {
+                        $scope.GetData(1, "");
+                        $scope.allDanhMuc.unshift(result.data);
+                        $scope.GetData();
+                        $scope.GetTieuChiDuKienAll(1);
+                        hideModel("insertmodal");
+
+                        showNotify("Đã cập nhật thông tin");
+
+                    } else {
+
+                        alert(result.msg);
+
+                    }
+
+                    showLoader(false);
+
+                }
+                    , function error(response) {
+                        showNotify("connect has disconnect");
+                        showLoader(false);
+                    });
+
+            };
+
+
+            // xoa du lieu
+            $scope.sendDelete = function (index) {
+                var info = $scope.allTieuChiDuKien[index];
+
+                var r = confirm("Bạn muốn xóa không ?");
+                if (r == true) {
+                    showLoader(true);
+
+                    $http({
+                        method: "POST",
+                        url: "/ThoiGianCungCap/delete",
+                        data: { id: info.GuiIDTC }
+                    }).then(
+                        function success(response) {
+
+                            var result = response.data;
+
+                            if (result.error == 0) {
+
+                                // var findIndex = getSelectedIndex(result.data.CountryID);
+
+                                // if (findIndex !== -1) {
+                                $scope.allDanhMuc.splice(index, 1);
+                                $scope.GetData();
+                                $scope.GetTieuChiDuKienAll(1);
+                                //  }
+
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
+
+                        },
+                        function errror(response) {
+                            showLoader(false);
+                            showNotify("connect has disconnect");
+                        }
+                        );
+                } else {
+
+                }
+
+
+            }
+
+        });
+        //-- end controller
+
+    </script>
+}
+
+
+
