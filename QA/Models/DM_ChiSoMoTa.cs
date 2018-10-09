@@ -14,6 +14,8 @@ namespace QA.Models
     
     public partial class DM_ChiSoMoTa
     {
+        public string MaTruong { get; set; }
+        public string NamHoc { get; set; }
         public string IDChiSo { get; set; }
         public string MoTaHienTrang { get; set; }
         public string NhanXetPGD { get; set; }

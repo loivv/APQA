@@ -36,7 +36,7 @@ namespace QA.Controllers.tudanhgia
         {
 
             var id = new SqlParameter("@IDTieuChuan", idtieuchuan);
-            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI_TIEUCHUAN @IDTieuChuan", id).ToList();
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI_TIEUCHUAN_DANHGIA @IDTieuChuan", id).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -47,7 +47,28 @@ namespace QA.Controllers.tudanhgia
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public ActionResult getTieuChiDuKienAll(int? page)
+        public ActionResult getChiSo(int? page, string idtieuchi)
+        {
+            int pageSize = 50;
+
+            int pageNumber = (page ?? 1);
+
+            var id = new SqlParameter("@idtieuchi", idtieuchi);
+            var data = db.Database.SqlQuery<TieuChiChiSo>("GET_CHISO @idtieuchi", id).ToList();
+
+            ResultInfo result = new ResultWithPaging()
+            {
+                error = 0,
+                msg = "",
+                page = pageNumber,
+                pageSize = pageSize,
+                toltalSize = data.Count(),
+                data = data.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList()
+            };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult getDanhGiaTieuChiAll(int? page)
         {
 
             int pageSize = 50;
@@ -55,7 +76,7 @@ namespace QA.Controllers.tudanhgia
             int pageNumber = (page ?? 1);
             var matruong = new SqlParameter("@MaTruong", MaTruong);
             var namhoc = new SqlParameter("@NamHoc", NamHoc);
-            var data = db.Database.SqlQuery<TieuChiDuKien>("GET_TIEUCHI_DUKIEN @MaTruong,@NamHoc", matruong, namhoc).ToList();
+            var data = db.Database.SqlQuery<DanhGiaTieuChi>("GET_DANHGIA_TIEUCHI @MaTruong,@NamHoc", matruong, namhoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -70,28 +91,29 @@ namespace QA.Controllers.tudanhgia
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public ActionResult getTieuChiDuKien(string idtieuchi, string idtieuchuan)
+        public ActionResult getDanhGiaTieuChi(string idtieuchi)
         {
-            int id = int.Parse(idtieuchi) + 1;
-            var guiid = db.HT_TieuChi.Where(p => p.IDTieuChuan == idtieuchuan && p.IDTieuChi == id).Select(p => p.GuiID).FirstOrDefault();
-            var check = db.DM_TieuChi_DuKien.Where(p => p.IDTieuChi == guiid && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+            var check = db.DM_DanhGiaTieuChi.Where(p => p.IDTieuChi == idtieuchi && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
             ResultInfo result = new ResultWithPaging();
             if (check == null)
             {
                 result.error = 0;
-                result.data = guiid;
+                result.data = check;
             }
             else
             {
                 result.error = 1;
-                result.data = guiid;
+                result.data = check;
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public ActionResult getTieuChiDuKienbyID(string guiid)
+        public ActionResult getChiSoMoTa(string guiid)
         {
-            var check = db.DM_TieuChi_DuKien.Where(p => p.IDTieuChi == guiid && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var namhoc = new SqlParameter("@NamHoc", NamHoc);
+            var id = new SqlParameter("@idtieuchi", guiid);
+            var check = db.Database.SqlQuery<ChiSoMoTa>("GET_CHISOMOTA @idtieuchi,@MaTruong, @NamHoc",id, matruong, namhoc).ToList();
             ResultInfo result = new ResultWithPaging();
             if (check == null)
             {
@@ -107,32 +129,57 @@ namespace QA.Controllers.tudanhgia
         }
 
         [HttpPost]
-        public ActionResult create(DM_TieuChi_DuKien tcdk)
+        public ActionResult create(string idtieuchi,string dm,string dy,string kh, List<DM_ChiSoMoTa> mt)
         {
 
-            if (String.IsNullOrEmpty(tcdk.HoatDong.ToString()))
-                return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
+            //if (String.IsNullOrEmpty(tcdk.HoatDong.ToString()))
+                //return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_TieuChi_DuKien.Where(p => p.IDTieuChi == tcdk.IDTieuChi && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
-
+            var check = db.DM_DanhGiaTieuChi.Where(p => p.IDTieuChi == idtieuchi && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+            
             if (check == null)
             {
-                tcdk.MaTruong = MaTruong;
-                db.DM_TieuChi_DuKien.Add(tcdk);
+                DM_DanhGiaTieuChi dgtc = new DM_DanhGiaTieuChi();
+                dgtc.MaTruong = MaTruong;
+                dgtc.NamHoc = NamHoc;
+                dgtc.IDTieuChi = idtieuchi;
+                dgtc.DiemManh = dm;
+                dgtc.DiemYeu = dy;
+                dgtc.KeHoachCaiTien = kh;
+                db.DM_DanhGiaTieuChi.Add(dgtc);
             }
             else if (check != null)
             {
-                check.HoatDong = tcdk.HoatDong;
-                check.NhanLuc = tcdk.NhanLuc;
-                check.VatLuc = tcdk.VatLuc;
-                check.ThoiDiem = tcdk.ThoiDiem;
-                check.GhiChu = tcdk.GhiChu;
+                check.DiemManh =dm ;
+                check.DiemYeu = dy;
+                check.KeHoachCaiTien = kh;
                 db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+            }
+            //kiem tra truong hop chi so
+
+            foreach(var item in mt)
+            {
+                var check1 = db.DM_ChiSoMoTa.Where(p => p.IDChiSo == item.IDChiSo && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+
+                if (check1 == null)
+                {
+                    DM_ChiSoMoTa csmt = new DM_ChiSoMoTa();
+                    csmt.MaTruong = MaTruong;
+                    csmt.NamHoc = NamHoc;
+                    csmt.IDChiSo = item.IDChiSo;
+                    csmt.MoTaHienTrang = item.MoTaHienTrang;
+                    db.DM_ChiSoMoTa.Add(csmt);
+                }
+                else if (check1 != null)
+                {
+                    check1.MoTaHienTrang = item.MoTaHienTrang;
+                    db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                }
             }
 
             db.SaveChanges();
 
-            return Json(new ResultInfo() { error = 0, msg = "", data = tcdk }, JsonRequestBehavior.AllowGet);
+            return Json(new ResultInfo() { error = 0, msg = "", data = mt }, JsonRequestBehavior.AllowGet);
 
         }
         [HttpPost]

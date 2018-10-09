@@ -225,5 +225,26 @@ namespace QA.Models
         public string MoDau { get; set; }
         public string KetLuan { get; set; }
     }
+    public class ChiSoMoTa
+    {
+        public string IDChiSo { get; set; }
+        public string MoTaHienTrang { get; set; }
+        public string NhanXetPGD { get; set; }
+        public string NoiDung { get; set; }
+        public string GuiID { get; set; }
+
+    }
+    public class DanhGiaTieuChi
+    {
+        public string GuiID { get; set; }
+        public int ID { get; set; }
+        public string GuiIDTC { get; set; }
+        public int IDTieuChi { get; set; }
+        public string NoiDung { get; set; }
+        public bool PGDDuyet { get; set; }
+        public string TenNhom { get; set; }
+        public bool TuDanhGia { get; set; }
+        public string ND { get; set; }
+    }
 
 }

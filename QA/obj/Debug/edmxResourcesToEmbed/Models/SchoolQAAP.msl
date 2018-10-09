@@ -592,12 +592,15 @@
           <ScalarProperty Name="NhanXetPGD" ColumnName="NhanXetPGD" />
           <ScalarProperty Name="MoTaHienTrang" ColumnName="MoTaHienTrang" />
           <ScalarProperty Name="IDChiSo" ColumnName="IDChiSo" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DM_DanhGiaTieuChi">
       <EntityTypeMapping TypeName="SchoolQAAPModel.DM_DanhGiaTieuChi">
         <MappingFragment StoreEntitySet="DM_DanhGiaTieuChi">
+          <ScalarProperty Name="TuDanhGia" ColumnName="TuDanhGia" />
           <ScalarProperty Name="PGDDuyet" ColumnName="PGDDuyet" />
           <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
           <ScalarProperty Name="KeHoachCaiTien" ColumnName="KeHoachCaiTien" />
@@ -605,6 +608,7 @@
           <ScalarProperty Name="DiemYeu" ColumnName="DiemYeu" />
           <ScalarProperty Name="DiemManh" ColumnName="DiemManh" />
           <ScalarProperty Name="MoTaHienTrang" ColumnName="MoTaHienTrang" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
           <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
         </MappingFragment>

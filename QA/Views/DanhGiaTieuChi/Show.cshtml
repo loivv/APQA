@@ -47,7 +47,7 @@
         <!--chi tiet cac tieu chi da duoc du kien-->
         <div class="x_panel">
             <div class="x_title">
-                <h2>Các tiêu chí đã được dự kiến</h2>
+                <h2>Các tiêu chí đã đánh giá</h2>
                 <div class="clearfix"></div>
             </div>
             <!-- end x_title-->
@@ -59,9 +59,10 @@
                             <tr class="headings">
                                 <th>Tiêu chuẩn</th>
                                 <th>Tiêu chí</th>
-                                <th>Hoạt động</th>
-                                <th>Nhân lực - vật lực cần thiết</th>
-                                <th>Thời điểm huy động</th>
+                                <th>Nhận xét PGD&DT</th>
+                                <th>Nhóm tự đánh giá</th>
+                                <th>Tự đánh giá</th>
+                                <th>Lấy phiếu</th>
                                 <th>#</th>
                                 <th>#</th>
                             </tr>
@@ -70,10 +71,11 @@
                         <tbody>
                             <tr ng-repeat="item in allTieuChiDuKien">
                                 <td>{{item.ID}}</td>
-                                <td>{{item.IDTieuChi}}</td>
-                                <td>{{item.HoatDong}}</td>
-                                <td>{{item.NhanLuc}} - {{item.VatLuc}}</td>
-                                <td>{{item.ThoiDiem}}</td>
+                                <td>{{item.NoiDung}}</td>
+                                <td><span ng-class="{'fa fa-check' : item.PGDDuyet == true, 'fa fa-close' : item.PGDDuyet == false}"></span></td>
+                                <td>{{item.TenNhom}}</td>
+                                <td><span ng-class="{'fa fa-check' : item.TuDanhGia == true, 'fa fa-close' : item.TuDanhGia == false}"></span></td>
+                                <td>Lấy phiếu</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
@@ -133,7 +135,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.TieuChuanTieuChi" ng-disabled="true" />
+                                                    <input type="text" maxlength="10" class="form-control" ng-model="TieuChuanTieuChi" ng-disabled="true"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,19 +146,19 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Nội dung</label>
-                                                    <textarea rows="2" class="form-control" ng-model="ChiSoA.NoiDung" required></textarea>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoA.NoiDung" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Mô tả hiện trạng</label>
-                                                    <textarea rows="5" class="form-control" ng-model="ChiSoA.MoTaHienTrang" required></textarea>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoA.MoTaHienTrang" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoA.NhanXetPGD" ng-disabled="true"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -166,19 +168,19 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Nội dung</label>
-                                                    <textarea rows="2" class="form-control" ng-model="ChiSoB.NoiDung" required></textarea>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoB.NoiDung" ></textarea>
                                                 </div>
                                             </div>                                            
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Mô tả hiện trạng</label>
-                                                    <textarea rows="5" class="form-control" ng-model="ChiSoB.MoTaHienTrang" required></textarea>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoB.MoTaHienTrang" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoB.NhanXetPGD" ng-disabled="true"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,19 +190,19 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Nội dung</label>
-                                                    <textarea rows="2" class="form-control" ng-model="ChiSoC.NoiDung" required></textarea>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoC.NoiDung" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Mô tả hiện trạng</label>
-                                                    <textarea rows="5" class="form-control" ng-model="ChiSoC.MoTaHienTrang" required></textarea>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoC.MoTaHienTrang" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                    <textarea rows="5" class="form-control" ng-model="ChiSoC.NhanXetPGD" ng-disabled="true"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -210,19 +212,19 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Điểm mạnh</label>
-                                                    <textarea rows="2" class="form-control" ng-model="Info.DiemManh" required></textarea>
+                                                    <textarea rows="2" class="form-control" ng-model="DanhGia.DiemManh"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Mô tả hiện trạng</label>
-                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                    <label>Điểm yếu</label>
+                                                    <textarea rows="5" class="form-control" ng-model="DanhGia.DiemYeu"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                    <textarea rows="5" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -231,13 +233,13 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <textarea rows="2" class="form-control" ng-model="Info.DiemManh" required></textarea>
+                                                    <textarea rows="2" class="form-control" ng-model="DanhGia.KeHoachCaiTien" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control" ng-model="Info.DiemYeu" required></textarea>
+                                                    <textarea rows="5" class="form-control"  ></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -246,8 +248,8 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Hiển thị bảng</label>
-                                                    <textarea rows="2" class="form-control" ng-model="Info.DiemManh" required></textarea>
+                                                    <label>Hiển thị bảng - nhom danh gia</label>
+                                                    <textarea rows="2" class="form-control" ng-model="Info.DiemManh" ></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,13 +281,18 @@
         app.controller('myCtrl', function ($scope, $http) {
 
             // lay du lieu
+            $scope.DanhGia = [];
+            $scope.ChiSoA = [];
+            $scope.ChiSoB = [];
+            $scope.ChiSoC = [];
             $scope.Info = [];
+            $scope.TieuChuanTieuChi = [];
             $scope.allDanhMuc = [];
             $scope.GetData = function () {
                 showLoader(true);
                 $http({
                     method: "GET",
-                    url: "/ThoiGianCungCap/getTieuChuan"
+                    url: "/DanhGiaTieuChi/getTieuChuan"
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
@@ -317,7 +324,7 @@
                 showLoader(true);
                 $http({
                     method: "GET",
-                    url: "/ThoiGianCungCap/getTieuChiDuKienAll?page=" + page
+                    url: "/DanhGiaTieuChi/getDanhGiaTieuChiAll?page=" + page
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
@@ -335,7 +342,48 @@
                 });
             }
             $scope.GetTieuChiDuKienAll(1);
+            //lay ra thong tin cac chi so
+          
+            $scope.GetChiSo = function (page, search) {
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/DanhGiaTieuChi/getChiSo?page=" + page + "&idtieuchi=" + search
+                }).then(function mySuccess(response) {
+                    showLoader(false);
 
+                    if (response.data.error === 0) {
+
+                        $scope.allChiSo = response.data.data;
+                       
+                        $scope.ChiSoA = angular.copy($scope.allChiSo[0]);
+                        $scope.ChiSoB = angular.copy($scope.allChiSo[1]);
+                        $scope.ChiSoC = angular.copy($scope.allChiSo[2]);
+                        //console.log($scope.ChiSoA);
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            //ket thuc lay ra thong tin cac chi so
+            $scope.xemchiso = function (index) {
+
+                var infotc = $scope.allTieuChi[index];
+                $scope.InfoTC = angular.copy(infotc);
+
+                var info = $scope.allTieuChi[index];
+                $scope.Info = angular.copy(info);
+
+                //lay thong tin chi tiet cac chi so
+                $scope.GetChiSo(1, $scope.InfoTC.GuiIDTC);
+
+                $scope.modaltitle = "Xem tiêu chí - Tiêu chuẩn: " + $scope.idtchuan + " - Tiêu chí: " + $scope.InfoTC.IDTieuChi;
+                $scope.IsAction = 'edit';
+                showModel("insertmodal");
+
+            };
             //ham lay chi tiet tieu chi
             $scope.GetTieuChi = function (index) {
                 $scope.alldetail = [];
@@ -345,7 +393,7 @@
                 showLoader(true);
                 $http({
                     method: "GET",
-                    url: "/ThoiGianCungCap/getTieuChi?idtieuchuan=" + $scope.Info.GuiID
+                    url: "/DanhGiaTieuChi/getTieuChi?idtieuchuan=" + $scope.Info.GuiID
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
@@ -362,8 +410,7 @@
             //ket thuc ham lay goi tieu chi
 
             // action
-            $scope.finishForm = function (isValid) {
-                if (isValid) {
+            $scope.finishForm = function () {
                     if ($scope.IsAction === 'add') {
                         $scope.sendCreate();
                     } else if ($scope.IsAction === 'edit') {
@@ -372,28 +419,27 @@
                         $scope.sendDelete();
                     }
 
-                } else {
-                    showNotify('our form is missing');
-                }
             }
             $scope.IsAction = '';
             $scope.addNew = function (mindex, id) {
                 //kiểm tra xem neu chua co thi load mơi , nếu đã có thì load thông tin
                 //gettieuchidukien
                 //mindex ==> vi tri cua id tieu chuan , id vi tri cua tieu chi
-                var info = $scope.allDanhMuc[mindex];
+                
+                var info = $scope.allDanhMuc[mindex].allDetail[id];
                 $scope.Info = angular.copy(info);
+                $scope.GetChiSo(1, $scope.Info.GuiIDTC);
+                $scope.TieuChuanTieuChi = $scope.allDanhMuc[mindex].NoiDung + " - " + $scope.Info.NoiDungTC;
 
                 $http({
                     method: "GET",
-                    url: "/ThoiGianCungCap/getTieuChiDuKien?idtieuchi=" + id + "&idtieuchuan=" + $scope.Info.GuiID
+                    url: "/DanhGiaTieuChi/getDanhGiaTieuChi?idtieuchi=" + $scope.Info.GuiIDTC
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
                     if (response.data.error === 0) {
 
-                        $scope.Info.IDTieuChi = response.data.data;
-                        $scope.Info = { "HoatDong": "", "NhanLuc": "", "VatLuc": "", "ThoiDiem": "", "GhiChu": "", "IDTieuChi": response.data.data };
+                        $scope.DanhGia = { "DiemManh": "", "DiemYeu": "", "KeHoachCaiTien": "", "IDTieuChi": $scope.Info.GuiIDTC };
                         $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
                         //$scope.ZoneIDDisable = false;
                         $scope.IsAction = 'add';
@@ -401,16 +447,22 @@
                         showModel("insertmodal");
 
                     } else if (response.data.error !== 0) {
-                        $scope.Info.IDTieuChi = response.data.data;
+                        $scope.DanhGia = response.data.data;
                         //truong hop da ton tai thong in
                         $http({
                             method: "GET",
-                            url: "/ThoiGianCungCap/getTieuChiDuKienbyID?guiid=" + $scope.Info.IDTieuChi
+                            url: "/DanhGiaTieuChi/getChiSoMoTa?guiid=" + $scope.Info.GuiIDTC
                         }).then(function mySuccess(response) {
                             showLoader(false);
 
+                           
                             if (response.data.error === 1) {
-                                $scope.Info = response.data.data;
+                               
+                                $scope.allChiSo = response.data.data;
+                                $scope.ChiSoA = angular.copy($scope.allChiSo[0]);
+                                $scope.ChiSoB = angular.copy($scope.allChiSo[1]);
+                                $scope.ChiSoC = angular.copy($scope.allChiSo[2]);
+                
                             }
 
                         }, function myError(response) {
@@ -419,7 +471,7 @@
                         });
                         //lay thong in
 
-                        $scope.Info = { "HoatDong": $scope.Info.HoatDong, "NhanLuc": $scope.Info.NhanLuc, "VatLuc": $scope.Info.VatLuc, "ThoiDiem": $scope.Info.ThoiDiem, "GhiChu": $scope.Info.GhiChu, "IDTieuChi": $scope.Info.IDTieuChi };
+                       // $scope.Info = { "HoatDong": $scope.Info.HoatDong, "NhanLuc": $scope.Info.NhanLuc, "VatLuc": $scope.Info.VatLuc, "ThoiDiem": $scope.Info.ThoiDiem, "GhiChu": $scope.Info.GhiChu, "IDTieuChi": $scope.Info.IDTieuChi };
                         $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
                         //$scope.ZoneIDDisable = false;
                         $scope.IsAction = 'add';
@@ -435,29 +487,84 @@
             };
             //khi nguoi dung click vao edit
             $scope.edit = function (index) {
+                //$scope.TieuChuanTieuChi = $scope.GetTieuChiDuKienAll[index]
                 var info = $scope.allTieuChiDuKien[index];
-                $scope.Info = angular.copy(info);
-                console.log($scope.Info);
-                $scope.Info.IDTieuChi = $scope.Info.GuiIDTC;
 
-                $scope.modaltitle = "Chỉnh sửa năm học--------------";
+                $scope.TieuChuanTieuChi = info.ND + ' - ' + info.NoiDung;
+                $http({
+                    method: "GET",
+                    url: "/DanhGiaTieuChi/getDanhGiaTieuChi?idtieuchi=" + info.GuiIDTC
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.DanhGia = { "DiemManh": "", "DiemYeu": "", "KeHoachCaiTien": "", "IDTieuChi": info.GuiIDTC };
+                        $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (info.ID) + "  --- Tiêu chí " + info.IDTieuChi;
+                        //$scope.ZoneIDDisable = false;
+                        $scope.IsAction = 'add';
+
+                        showModel("insertmodal");
+
+                    } else if (response.data.error !== 0) {
+                        $scope.DanhGia = response.data.data;
+                        //truong hop da ton tai thong in
+                        $http({
+                            method: "GET",
+                            url: "/DanhGiaTieuChi/getChiSoMoTa?guiid=" + info.GuiIDTC
+                        }).then(function mySuccess(response) {
+                            showLoader(false);
+
+
+                            if (response.data.error === 1) {
+
+                                $scope.allChiSo = response.data.data;
+                                $scope.ChiSoA = angular.copy($scope.allChiSo[0]);
+                                $scope.ChiSoB = angular.copy($scope.allChiSo[1]);
+                                $scope.ChiSoC = angular.copy($scope.allChiSo[2]);
+                            }
+
+                        }, function myError(response) {
+                            showLoader(false);
+                            showNotify('Connect error');
+                        });
+                        //lay thong in
+
+                        // $scope.Info = { "HoatDong": $scope.Info.HoatDong, "NhanLuc": $scope.Info.NhanLuc, "VatLuc": $scope.Info.VatLuc, "ThoiDiem": $scope.Info.ThoiDiem, "GhiChu": $scope.Info.GhiChu, "IDTieuChi": $scope.Info.IDTieuChi };
+                        $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (info.ID) + "  --- Tiêu chí " + info.IDTieuChi;
+                        //$scope.ZoneIDDisable = false;
+                        $scope.IsAction = 'add';
+
+                        showModel("insertmodal");
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+                //ket thuc lay dữ liệu điều kiện
                 $scope.IsAction = 'edit';
                 showModel("insertmodal");
             };
             //ket thuc
             // them tinh
             $scope.sendCreate = function () {
-
                 showLoader(true);
+                $scope.test = {}
+                $scope.MoTa = [
+                  { IDChiSo:$scope.ChiSoA.GuiID,MoTaHienTrang: $scope.ChiSoA.MoTaHienTrang },
+                  { IDChiSo: $scope.ChiSoB.GuiID, MoTaHienTrang: $scope.ChiSoB.MoTaHienTrang },
+                  { IDChiSo: $scope.ChiSoC.GuiID, MoTaHienTrang: $scope.ChiSoC.MoTaHienTrang }
+                ];
 
                 $http({
                     method: "POST",
-                    url: "/ThoiGianCungCap/create",
-                    data: { tcdk: $scope.Info }
+                    url: "/DanhGiaTieuChi/create",
+                    data: { idtieuchi: $scope.Info.GuiIDTC, dm: $scope.DanhGia.DiemManh, dy: $scope.DanhGia.DiemYeu, kh: $scope.DanhGia.KeHoachCaiTien, mt: $scope.MoTa }
                 }).then(function success(response) {
 
                     var result = response.data;
-                    console.log(result);
+
                     if (result.error === 0) {
                         $scope.GetData(1, "");
                         $scope.allDanhMuc.unshift(result.data);

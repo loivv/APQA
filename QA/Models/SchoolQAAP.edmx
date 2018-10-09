@@ -99,8 +99,12 @@
         </EntityType>
         <EntityType Name="DM_ChiSoMoTa">
           <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
             <PropertyRef Name="IDChiSo" />
           </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="IDChiSo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MoTaHienTrang" Type="nvarchar(max)" />
           <Property Name="NhanXetPGD" Type="nvarchar(max)" />
@@ -121,9 +125,11 @@
           <Key>
             <PropertyRef Name="MaTruong" />
             <PropertyRef Name="IDTieuChi" />
+            <PropertyRef Name="NamHoc" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MoTaHienTrang" Type="nvarchar(max)" />
           <Property Name="DiemManh" Type="nvarchar(max)" />
           <Property Name="DiemYeu" Type="nvarchar(max)" />
@@ -131,6 +137,7 @@
           <Property Name="KeHoachCaiTien" Type="nvarchar(max)" />
           <Property Name="MaNhom" Type="nvarchar" MaxLength="50" />
           <Property Name="PGDDuyet" Type="bit" />
+          <Property Name="TuDanhGia" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
@@ -1414,8 +1421,12 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
         </EntityType>
         <EntityType Name="DM_ChiSoMoTa">
           <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
             <PropertyRef Name="IDChiSo" />
           </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IDChiSo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MoTaHienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NhanXetPGD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1425,9 +1436,11 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <Key>
             <PropertyRef Name="MaTruong" />
             <PropertyRef Name="IDTieuChi" />
+            <PropertyRef Name="NamHoc" />
           </Key>
           <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IDTieuChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="MoTaHienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DiemManh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DiemYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1435,6 +1448,7 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
           <Property Name="KeHoachCaiTien" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MaNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PGDDuyet" Type="Boolean" />
+          <Property Name="TuDanhGia" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2033,12 +2047,15 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
                 <ScalarProperty Name="NhanXetPGD" ColumnName="NhanXetPGD" />
                 <ScalarProperty Name="MoTaHienTrang" ColumnName="MoTaHienTrang" />
                 <ScalarProperty Name="IDChiSo" ColumnName="IDChiSo" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DM_DanhGiaTieuChi">
             <EntityTypeMapping TypeName="SchoolQAAPModel.DM_DanhGiaTieuChi">
               <MappingFragment StoreEntitySet="DM_DanhGiaTieuChi">
+                <ScalarProperty Name="TuDanhGia" ColumnName="TuDanhGia" />
                 <ScalarProperty Name="PGDDuyet" ColumnName="PGDDuyet" />
                 <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
                 <ScalarProperty Name="KeHoachCaiTien" ColumnName="KeHoachCaiTien" />
@@ -2046,6 +2063,7 @@ warning 6013: The table/view 'SchoolQAAP.dbo.DM_HocSinh' does not have a primary
                 <ScalarProperty Name="DiemYeu" ColumnName="DiemYeu" />
                 <ScalarProperty Name="DiemManh" ColumnName="DiemManh" />
                 <ScalarProperty Name="MoTaHienTrang" ColumnName="MoTaHienTrang" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>

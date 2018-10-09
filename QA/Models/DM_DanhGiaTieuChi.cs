@@ -16,6 +16,7 @@ namespace QA.Models
     {
         public string MaTruong { get; set; }
         public string IDTieuChi { get; set; }
+        public string NamHoc { get; set; }
         public string MoTaHienTrang { get; set; }
         public string DiemManh { get; set; }
         public string DiemYeu { get; set; }
@@ -23,5 +24,6 @@ namespace QA.Models
         public string KeHoachCaiTien { get; set; }
         public string MaNhom { get; set; }
         public Nullable<bool> PGDDuyet { get; set; }
+        public Nullable<bool> TuDanhGia { get; set; }
     }
 }

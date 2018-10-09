@@ -691,8 +691,12 @@
   </EntityType>
   <EntityType Name="DM_ChiSoMoTa">
     <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
       <PropertyRef Name="IDChiSo" />
     </Key>
+    <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IDChiSo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="MoTaHienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="NhanXetPGD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -702,9 +706,11 @@
     <Key>
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="IDTieuChi" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IDTieuChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="MoTaHienTrang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DiemManh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DiemYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -712,5 +718,6 @@
     <Property Name="KeHoachCaiTien" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="MaNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PGDDuyet" Type="Boolean" />
+    <Property Name="TuDanhGia" Type="Boolean" />
   </EntityType>
 </Schema>
