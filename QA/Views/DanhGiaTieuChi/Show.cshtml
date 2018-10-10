@@ -224,7 +224,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control"></textarea>
+                                                    <textarea rows="5" class="form-control" ng-disabled="true"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -248,8 +248,10 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Hiển thị bảng - nhom danh gia</label>
-                                                    <textarea rows="2" class="form-control" ng-model="Info.DiemManh" ></textarea>
+                                                    <label>Nhóm làm việc</label>
+                                                    <select class="form-control" ng-model="DanhGia.MaNhom" required>
+                                                        <option ng-repeat="x in allNhom" value="{{x.MaNhom}}">{{x.TenNhom | uppercase}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -280,6 +282,7 @@
 
         app.controller('myCtrl', function ($scope, $http) {
 
+            $scope.allNhom = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllNhom))');
             // lay du lieu
             $scope.DanhGia = [];
             $scope.ChiSoA = [];
@@ -439,7 +442,7 @@
 
                     if (response.data.error === 0) {
 
-                        $scope.DanhGia = { "DiemManh": "", "DiemYeu": "", "KeHoachCaiTien": "", "IDTieuChi": $scope.Info.GuiIDTC };
+                        $scope.DanhGia = { "DiemManh": "", "DiemYeu": "", "KeHoachCaiTien": "", "IDTieuChi": $scope.Info.GuiIDTC ,"MaNhom": ""};
                         $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
                         //$scope.ZoneIDDisable = false;
                         $scope.IsAction = 'add';
@@ -489,7 +492,10 @@
             $scope.edit = function (index) {
                 //$scope.TieuChuanTieuChi = $scope.GetTieuChiDuKienAll[index]
                 var info = $scope.allTieuChiDuKien[index];
-
+                if ($scope.Info.GuiIDTC === null)
+                    {
+                    $scope.Info.GuiIDTC = info.GuiIDTC;
+                    }
                 $scope.TieuChuanTieuChi = info.ND + ' - ' + info.NoiDung;
                 $http({
                     method: "GET",
@@ -499,7 +505,7 @@
 
                     if (response.data.error === 0) {
 
-                        $scope.DanhGia = { "DiemManh": "", "DiemYeu": "", "KeHoachCaiTien": "", "IDTieuChi": info.GuiIDTC };
+                        $scope.DanhGia = { "DiemManh": "", "DiemYeu": "", "KeHoachCaiTien": "", "IDTieuChi": info.GuiIDTC ,"MaNhom" : ""};
                         $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (info.ID) + "  --- Tiêu chí " + info.IDTieuChi;
                         //$scope.ZoneIDDisable = false;
                         $scope.IsAction = 'add';
@@ -549,7 +555,7 @@
             //ket thuc
             // them tinh
             $scope.sendCreate = function () {
-                showLoader(true);
+                showLoader(true);               
                 $scope.test = {}
                 $scope.MoTa = [
                   { IDChiSo:$scope.ChiSoA.GuiID,MoTaHienTrang: $scope.ChiSoA.MoTaHienTrang },
@@ -560,7 +566,7 @@
                 $http({
                     method: "POST",
                     url: "/DanhGiaTieuChi/create",
-                    data: { idtieuchi: $scope.Info.GuiIDTC, dm: $scope.DanhGia.DiemManh, dy: $scope.DanhGia.DiemYeu, kh: $scope.DanhGia.KeHoachCaiTien, mt: $scope.MoTa }
+                    data: { idtieuchi: $scope.Info.GuiIDTC, dm: $scope.DanhGia.DiemManh, dy: $scope.DanhGia.DiemYeu,mn : $scope.DanhGia.MaNhom, kh: $scope.DanhGia.KeHoachCaiTien, mt: $scope.MoTa }
                 }).then(function success(response) {
 
                     var result = response.data;

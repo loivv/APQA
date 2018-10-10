@@ -12,6 +12,7 @@ namespace QA.Controllers.tudanhgia
         // GET: DanhGiaTieuChi
         public ActionResult Show()
         {
+            ViewBag.AllNhom = db.DM_NhomDanhGia.Where(p => p.MaTruong == MaTruong).ToList();
             return View();
         }
         [HttpGet]
@@ -129,7 +130,7 @@ namespace QA.Controllers.tudanhgia
         }
 
         [HttpPost]
-        public ActionResult create(string idtieuchi,string dm,string dy,string kh, List<DM_ChiSoMoTa> mt)
+        public ActionResult create(string idtieuchi,string dm,string dy,string kh,string mn, List<DM_ChiSoMoTa> mt)
         {
 
             //if (String.IsNullOrEmpty(tcdk.HoatDong.ToString()))
@@ -146,6 +147,7 @@ namespace QA.Controllers.tudanhgia
                 dgtc.DiemManh = dm;
                 dgtc.DiemYeu = dy;
                 dgtc.KeHoachCaiTien = kh;
+                dgtc.MaNhom = mn;
                 db.DM_DanhGiaTieuChi.Add(dgtc);
             }
             else if (check != null)
@@ -153,6 +155,7 @@ namespace QA.Controllers.tudanhgia
                 check.DiemManh =dm ;
                 check.DiemYeu = dy;
                 check.KeHoachCaiTien = kh;
+                check.MaNhom = mn;
                 db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             }
             //kiem tra truong hop chi so
@@ -188,7 +191,7 @@ namespace QA.Controllers.tudanhgia
             if (String.IsNullOrEmpty(id))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
-            var check = db.DM_TieuChi_DuKien.Where(p => p.MaTruong == MaTruong && p.IDTieuChi == id).FirstOrDefault();
+            var check = db.DM_DanhGiaTieuChi.Where(p => p.MaTruong == MaTruong && p.IDTieuChi == id && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check == null)
                 return Json(new ResultInfo() { error = 1, msg = "Không tìm thấy thông tin" }, JsonRequestBehavior.AllowGet);

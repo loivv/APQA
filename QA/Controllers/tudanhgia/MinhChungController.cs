@@ -11,7 +11,33 @@ namespace QA.Controllers.tudanhgia
         // GET: MinhChung
         public ActionResult Show()
         {
+            //var a = from p in db.HT_TieuChuan orderby p.IDTieuChuan select p.IDTieuChuan;
+            ViewBag.AllTieuChuan = from p in db.HT_TieuChuan orderby p.IDTieuChuan select p;
+            ViewBag.AllTieuChi = from p in db.HT_TieuChi orderby p.IDTieuChi select p;
             return View();
+        }
+        [HttpGet]
+        public ActionResult get(int? page, string search = "")
+        {
+            int pageSize = 50;
+
+            int pageNumber = (page ?? 1);
+
+
+            var data = db.DM_MinhChung.Where(p => p.TenMC.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
+
+            ResultInfo result = new ResultWithPaging()
+            {
+                error = 0,
+                msg = "",
+                page = pageNumber,
+                pageSize = pageSize,
+                toltalSize = data.Count(),
+                data = data.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList()
+            };
+
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getMinhChung(int? page, string search = "")

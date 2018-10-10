@@ -70,10 +70,35 @@
                     <!-- body-->
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label>Mã minh chứng</label>
-                                    <input type="text" class="form-control text-uppercase" ng-model="Info.MaMC" required />
+                                    <label class="text-left">Mã minh chứng(H1.01.01.01)</label>                                                                 
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control" ng-model="Hop.Hop" required>
+                                        <option ng-repeat="x in Hop" value="{{x.Hop}}">{{x.Hop | uppercase}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control" ng-model="Info.IDTieuChuan" required>
+                                        <option ng-repeat="x in alltieuchuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control" ng-model="Info.IDTieuChi" required>
+                                        <option ng-repeat="x in alltieuchi" value="{{x.IDTieuChi}}">{{x.IDTieuChi}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input  type="text" class="form-control" ng-model="Info.STTS" required />
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -135,7 +160,27 @@
         var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader']);
 
         app.controller('myCtrl', function ($scope, $http, uiUploader) {
-
+            //danh sach cac hop dung minh chung
+            $scope.alltieuchuan = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChuan))');
+            $scope.alltieuchi = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChi))');
+            console.log($scope.alltieuchi);
+            $scope.Info = [];
+            $scope.Hop = [
+                 { Hop: 'H1'},
+                 { Hop: 'H2' },
+                 { Hop: 'H3' },
+                 { Hop: 'H4' },
+                 { Hop: 'H5' },
+                 { Hop: 'H6' },
+                 { Hop: 'H7' },
+                 { Hop: 'H8' },
+                 { Hop: 'H9' },
+                 { Hop: 'H10'},
+                 { Hop: 'H11'},
+                 { Hop: 'H12'},
+                 { Hop: 'H13'},
+                 { Hop: 'H14'}
+            ];
             // phan trang
             $scope.numPages;
             $scope.itemPerPage;
