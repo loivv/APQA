@@ -92,7 +92,7 @@
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <select class="form-control" ng-model="Info.IDTieuChi" required>
-                                        <option ng-repeat="x in alltieuchi" value="{{x.IDTieuChi}}">{{x.IDTieuChi}}</option>
+                                        <option ng-init="GetTieuChi()" ng-repeat="x in alltieuchi" value="{{x.IDTieuChi}}">{{x.IDTieuChi}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -232,6 +232,30 @@
                 console.log($scope.Info);
 
             };
+
+            //ham lay chi tiet tieu chi
+            $scope.GetTieuChi = function () {
+                $scope.alldetail = [];
+                
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/MinhChung/getTieuChibyID?idtieuchuan=" + $scope.Info.IDTieuChuan
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allDetail = response.data.data;
+                        console.log($scope.allDetail);
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            //ket thuc ham lay goi tieu chi
 
             $scope.edit = function (index) {
 
