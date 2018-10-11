@@ -16,7 +16,8 @@ namespace QA.Models
     {
         public string GuiID { get; set; }
         public string IDTieuChuan { get; set; }
-        public int IDTieuChi { get; set; }
+        public Nullable<int> IDTieuChi { get; set; }
         public string NoiDung { get; set; }
+        public Nullable<bool> Dat { get; set; }
     }
 }

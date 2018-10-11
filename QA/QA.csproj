@@ -250,6 +250,9 @@
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUserRole.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
@@ -401,9 +404,6 @@
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UMS_MenuGroupUser.cs">
-      <DependentUpon>SchoolQAAP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserPostOption.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USER_CHECKACCESS_Result.cs">

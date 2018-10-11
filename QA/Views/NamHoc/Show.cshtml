@@ -32,10 +32,10 @@
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
                                 <td>{{$index + 1}}</td>
-                                <td><input type="checkbox" ng-model="item.NamHienTai" ng-checked="item.NamHienTai">{{item.NamHoc}}</td>
+                                <td><input type="checkbox" ng-model="item.NamHienTai" ng-checked="item.NamHienTai" ng-disabled="True">{{item.NamHoc}}</td>
                                 <td>{{item.TuNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td>{{item.DenNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
-                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                <td><a href="#" ng-click="edit($index)">Xem</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
                         </tbody>
@@ -71,20 +71,20 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Năm học</label>
+                                    <label>Năm học (2017)</label>
                                     <input type="text" maxlength="10" class="form-control" ng-model="Info.Nam" required />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Niên khóa</label>
+                                    <label>Niên khóa(2017-2018)</label>
                                     <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Năm hiện tại</label>
-                                    <input type="checkbox"  class="form-control" ng-model="Info.NamHienTai" ng-checked="item.NamHienTai" />
+                                    <input type="checkbox"  class="form-control" ng-model="Info.NamHienTai" ng-checked="item.NamHienTai" ng-disabled="Info.Check"/>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -178,7 +178,7 @@
                 $scope.modaltitle = "Thêm năm học";
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
-
+                $scope.Info.Check = 'true';
                 showModel("insertmodal");
 
             };
@@ -196,6 +196,13 @@
 
                 $scope.modaltitle = "Chỉnh sửa năm học";
                 $scope.IsAction = 'edit';
+                if ($scope.Info.NamHienTai === true)
+                {
+                    $scope.Info.Check = true;
+                } else 
+                {
+                    $scope.Info.Check = false;
+                }               
                 showModel("insertmodal");
             };
 

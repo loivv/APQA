@@ -24,6 +24,7 @@
                                 <th>Ngày ban hành</th>
                                 <th>Cơ quan ban hành</th>
                                 <th>Áp dụng</th>
+                                <th>Tải file</th>
                                 <th>#</th>
                                 <th>#</th>
                             </tr>
@@ -38,7 +39,8 @@
                                 <td>{{item.NgayBanHanh.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td>{{item.CoQuan}}</td>
                                 <td><i ng-class="{'fa fa-check' : item.ApDung == true, 'fa fa-close' : item.ApDung == false}"></i></td>
-                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                <td><a href="{{item.LinkFile}}">Tải</a></td>
+                                <td><a href="#" ng-click="edit($index)">Xem</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
                         </tbody>
@@ -105,7 +107,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Áp dụng</label>
-                                    <input type="checkbox" class="form-control" ng-model="Info.ApDung" required />
+                                    <input type="checkbox" class="form-control" ng-model="Info.ApDung" />
                                 </div>
                             </div>
 
@@ -187,7 +189,6 @@
                 //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
                 showModel("insertmodal")
-                console.log($scope.Info);
 
             };
 
@@ -232,24 +233,18 @@
             // them tinh
             $scope.sendCreate = function () {
                 showLoader(true);
-                uiUploader.startUpload({
-                    url: '/QuyDinh/create',
-                    paramName: 'fileTaiLieu',
-                    data: $scope.Info ,
-                    onProgress: function (file) {
-                        $scope.$apply();
-                    },
-                    onCompleted: function (file, response) {
+                //
+                if (document.getElementById("filetailieu").files.length == 0) {
+                    $http({
+                        method: "POST",
+                        url: '/QuyDinh/create',
+                        data: $scope.Info
+                    }).then(function success(response) {
 
-                        showLoader(false);
-                        var result = angular.fromJson(response);
-
+                        var result = response.data;
+                        console.log(result);
                         if (result.error === 0) {
-                            // xoa file hien tai trong danh sach upload
-                            uiUploader.removeAll();
-                            $('#filetailieu').value = "";
-                            $scope.$apply();
-
+                            $scope.GetData(1, "");
                             $scope.allDanhMuc.unshift(result.data);
 
                             hideModel("insertmodal");
@@ -265,7 +260,46 @@
                         showLoader(false);
 
                     }
-                });
+                    , function error(response) {
+                        showNotify("connect has disconnect");
+                        showLoader(false);
+                    });
+                } else {
+                    uiUploader.startUpload({
+                        url: '/QuyDinh/create',
+                        paramName: 'fileTaiLieu',
+                        data: $scope.Info,
+                        onProgress: function (file) {
+                            $scope.$apply();
+                        },
+                        onCompleted: function (file, response) {
+
+                            showLoader(false);
+                            var result = angular.fromJson(response);
+
+                            if (result.error === 0) {
+                                // xoa file hien tai trong danh sach upload
+                                uiUploader.removeAll();
+                                $('#filetailieu').value = "";
+                                $scope.$apply();
+
+                                $scope.allDanhMuc.unshift(result.data);
+
+                                hideModel("insertmodal");
+                                $scope.GetData(1, "");
+                                showNotify("Đã thêm quy định");
+
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
+
+                        }
+                    });//
+                }               
             };
 
             // cap nhat tinh
@@ -292,7 +326,7 @@
                             $scope.allDanhMuc.unshift(result.data);
 
                             hideModel("insertmodal");
-
+                            $scope.GetData(1, "");
                             showNotify("Đã thêm quy định");
 
                         } else {
@@ -356,13 +390,13 @@
 
 
             // upload
-         //   $scope.files = [];
+            //   $scope.files = [];
+    
             var uploadFileTaiLieu = document.getElementById('filetailieu');
             uploadFileTaiLieu.addEventListener('change', function (e) {
                 uiUploader.removeAll();
                 var files = e.target.files;
                 uiUploader.addFiles(files);
-               // $scope.files = uiUploader.getFiles();
                 $scope.$apply();
             });
 

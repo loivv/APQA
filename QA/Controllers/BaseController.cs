@@ -39,7 +39,7 @@ namespace QA.Controllers
                     var checkcaphoc = db.DM_ThongTinChung.Where(x => x.MaTruong == checkUser.MaTruong).FirstOrDefault();
                     NamHoc = checkYear.NamHoc;
                     CapHoc = checkcaphoc.IDCapHoc;
-                    PhanLoai = checkcaphoc.PhanLoai;
+                    PhanLoai = checkcaphoc.PhanLoai; // so ph tr
                 }                   
             }
         }

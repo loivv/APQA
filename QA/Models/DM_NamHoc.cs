@@ -15,9 +15,9 @@ namespace QA.Models
     public partial class DM_NamHoc
     {
         public string NamHoc { get; set; }
+        public string MaTruong { get; set; }
         public Nullable<System.DateTime> TuNgay { get; set; }
         public Nullable<System.DateTime> DenNgay { get; set; }
-        public string MaTruong { get; set; }
         public Nullable<bool> NamHienTai { get; set; }
         public string Nam { get; set; }
     }

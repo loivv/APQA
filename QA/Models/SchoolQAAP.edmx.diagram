@@ -5,55 +5,51 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="812ce61a01134c199a1c865229c3cb40" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="SchoolQAAPModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="6.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetRole" Width="1.5" PointX="0.5" PointY="1.125" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.625" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetUser" Width="1.5" PointX="3" PointY="1.25" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_HocSinhNamHoc" Width="1.5" PointX="7.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_HoiDongTuDanhGia" Width="1.5" PointX="7.75" PointY="6.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_MinhChung" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomDanhGia" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomDanhGiaChiTiet" Width="1.5" PointX="2.75" PointY="10.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" Width="1.5" PointX="0.875" PointY="5" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NLCSVCTaiChinh" Width="1.5" PointX="9.75" PointY="10.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_PhongHoc" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_QuyDinh" Width="1.5" PointX="11.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_SoLop" Width="1.5" PointX="11.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" Width="1.5" PointX="11.75" PointY="10.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThoiGianBieu" Width="1.5" PointX="13.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChuan" Width="1.5" PointX="5.375" PointY="9.5" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ToChucThucHien" Width="1.5" PointX="13.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_CanBo" Width="1.5" PointX="13.75" PointY="11.25" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_CapHoc" Width="1.5" PointX="10.75" PointY="13.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi" Width="1.5" PointX="14.75" PointY="13.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi_ChiSo" Width="2.375" PointX="15.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChuan" Width="1.5" PointX="15.75" PointY="4.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.UMS_GroupMenu" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.UMS_Menu" Width="1.5" PointX="3" PointY="7" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.UMS_MenuGroupUser" Width="1.5" PointX="15.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.UserPostOption" Width="1.5" PointX="15.75" PointY="10.75" />
-        <AssociationConnector Association="SchoolQAAPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="SchoolQAAPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="SchoolQAAPModel.FK__UMS_Menu__GroupM__6754599E" />
-        <AssociationConnector Association="SchoolQAAPModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NamHoc" Width="1.5" PointX="3.375" PointY="16.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_VanBan" Width="1.5" PointX="5.5" PointY="12.625" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThongTinChung" Width="1.5" PointX="0.75" PointY="13.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThanhVien" Width="1.5" PointX="2.875" PointY="13.125" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ChucVu" Width="1.5" PointX="7.5" PointY="1" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhiemVu" Width="1.5" PointX="5.375" PointY="15.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_MucDichPhamVi" Width="1.5" PointX="7.375" PointY="15.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.HT_LopHoc" Width="1.5" PointX="9.375" PointY="16.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTH" Width="1.5" PointX="11.375" PointY="16.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTHCS" Width="1.5" PointX="13.375" PointY="16.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" Width="1.5" PointX="17.375" PointY="13.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_CanBoCNV" Width="1.5" PointX="15.375" PointY="17.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_BaoCaoTieuChuan" Width="1.5" PointX="17.375" PointY="17.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_VietTat" Width="1.5" PointX="7.625" PointY="9.25" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_VanDeKetLuan" Width="1.5" PointX="18.375" PointY="4.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ChiSoMoTa" Width="1.5" PointX="5.375" PointY="18.75" />
-        <EntityTypeShape EntityType="SchoolQAAPModel.DM_DanhGiaTieuChi" Width="1.5" PointX="18.375" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_BaoCaoTieuChuan" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_CanBoCNV" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ChiSoMoTa" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ChucVu" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_DanhGiaTieuChi" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_HocSinhNamHoc" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_HoiDongTuDanhGia" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTH" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_LopHocTHCS" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_MinhChung" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_MucDichPhamVi" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NamHoc" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhiemVu" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomDanhGia" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomDanhGiaChiTiet" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_NLCSVCTaiChinh" Width="1.5" PointX="10.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_PhongHoc" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_QuyDinh" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_SoLop" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" Width="1.5" PointX="4.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThanhVien" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThoiGianBieu" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ThongTinChung" Width="1.5" PointX="6.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" Width="1.5" PointX="12.75" PointY="7.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_ToChucThucHien" Width="1.5" PointX="10.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_VanBan" Width="1.5" PointX="12.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_VanDeKetLuan" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_VietTat" Width="1.5" PointX="2.75" PointY="14.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_CanBo" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_CapHoc" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_LopHoc" Width="1.5" PointX="14.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi_ChiSo" Width="1.5" PointX="8.75" PointY="15.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChuan" Width="1.5" PointX="10.75" PointY="15.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.C__MigrationHistory" Width="1.5" PointX="12.75" PointY="15.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetRole" Width="1.5" PointX="14.75" PointY="15.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetUserClaim" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetUserLogin" Width="1.5" PointX="16.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.AspNetUserRole" Width="1.5" PointX="16.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.UMS_GroupMenu" Width="1.5" PointX="16.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.UMS_Menu" Width="1.5" PointX="16.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.UMS_MenuGroupUser" Width="1.5" PointX="16.75" PointY="16.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.DM_TieuChuan" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="SchoolQAAPModel.HT_TieuChi" Width="1.5" PointX="3.375" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

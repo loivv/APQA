@@ -33,7 +33,6 @@ namespace QA.Controllers.baocao
 
 
 
-
         private void Save(Document oDoc, object filePath)
         {
             
@@ -64,11 +63,21 @@ namespace QA.Controllers.baocao
 
         private void Fill(Document document)
         {
+            object missing = Missing.Value;
+            object endOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+            //Tạo trang bia
+            Paragraph oPara0;
+            oPara0 = document.Content.Paragraphs.Add(ref missing);
+            // oPara1.Range.Text = "Heading 1";
+            oPara0.Range.Text = "â";
+            oPara0.Range.Font.Bold = 0;
+            oPara0.Format.SpaceAfter = 24;    //24 pt spacing after paragraph.
+            oPara0.Range.InsertParagraphAfter();
+            //Ket thuc tạo trang bìa
             var data = db.HT_TieuChi_ChiSo.ToList();
             foreach(var item in data)
             {
-                object missing = Missing.Value;
-                object endOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+               
                 Paragraph oPara1;
                 oPara1 = document.Content.Paragraphs.Add(ref missing);
                 // oPara1.Range.Text = "Heading 1";

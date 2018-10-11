@@ -14,7 +14,7 @@ namespace QA.Models
     
     public partial class DM_TieuChuan
     {
-        public int IDTieuChuan { get; set; }
+        public string IDTieuChuan { get; set; }
         public string MaTruong { get; set; }
         public string NamHoc { get; set; }
         public string MoDau { get; set; }

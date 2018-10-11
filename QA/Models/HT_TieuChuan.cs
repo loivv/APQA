@@ -15,8 +15,8 @@ namespace QA.Models
     public partial class HT_TieuChuan
     {
         public string GuiID { get; set; }
-        public int IDTieuChuan { get; set; }
-        public string NamHoc { get; set; }
+        public Nullable<int> IDTieuChuan { get; set; }
+        public string ThongTu { get; set; }
         public string IDCapHoc { get; set; }
         public string NoiDung { get; set; }
     }

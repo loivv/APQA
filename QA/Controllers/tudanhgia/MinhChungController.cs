@@ -128,8 +128,8 @@ namespace QA.Controllers.tudanhgia
             check.CoQuan = minhchung.CoQuan;
             check.GhiChu = minhchung.GhiChu;
             check.LinkFile = path;
-            check.TieuChuan = minhchung.TieuChuan;
-            check.TieuChi = minhchung.TieuChi;
+            check.IDTieuChuan = minhchung.IDTieuChuan;
+            check.IDTieuChi = minhchung.IDTieuChi;
 
             db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();

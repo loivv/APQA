@@ -21,7 +21,5 @@ namespace QA.Models
         public string GroupMenuId { get; set; }
         public Nullable<int> Position { get; set; }
         public string Code { get; set; }
-    
-        public virtual UMS_GroupMenu UMS_GroupMenu { get; set; }
     }
 }

@@ -149,6 +149,7 @@ namespace QA.Models
         public string NoiDungTC { get; set; }
         public int TieuChi { get; set; }
         public string TCDK { get; set; }
+        public bool Dat { get; set; }
 
     }
     public class TieuChi
@@ -178,7 +179,7 @@ namespace QA.Models
        public string YeuCau {get;set;}
        public string GoiY{get;set;}
        public string HienTrang{get;set;}
-       public int Muc { get; set; }
+       public Nullable<int> Muc { get; set; }
     }
     public  class DMThanhVien
     {

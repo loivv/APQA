@@ -12,10 +12,9 @@ namespace QA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserPostOption
+    public partial class AspNetUserRole
     {
-        public string Id { get; set; }
-        public string TUser { get; set; }
-        public string TPostId { get; set; }
+        public string UserId { get; set; }
+        public string RoleId { get; set; }
     }
 }

@@ -7,73 +7,31 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                    <ul class="nav nav-tabs bar_tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#tab_danhmuc" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Danh sách tiêu chuẩn</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#tab_chitiet" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Danh sách tiêu chí</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active in" id="tab_danhmuc" aria-labelledby="home-tab">
-                            <!-- begin tab-->
-                            <div class="row">
-                                <!-- thong tin-->
-                                <div class="table-responsive">
-                                    <table class="table table-striped jambo_table bulk_action">
-                                        <thead>
-                                            <tr class="headings">
-                                                <th>Tiêu chuẩn</th>
-                                                <th>Nội dung</th>
-                                                <th>Tổng số tiêu chí</th>
-                                                <th>#</th>
-                                                <th>#</th>
-                                            </tr>
-                                        </thead>
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th>Tiêu chuẩn</th>
+                                <th>Nội dung</th>
+                                <th>Tiêu chí</th>
+                            </tr>
+                        </thead>
 
-                                        <tbody>
-                                            <tr ng-repeat="item in allDanhMuc">
-                                                <td>{{item.IDTieuChuan}}</td>
-                                                <td>{{item.NoiDung}}</td>
-                                                <td>{{item.TieuChi}}</td>
-                                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
-                                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
-                                            </tr>
-                                        </tbody>
+                        <tbody>
+                            <tr ng-repeat="(mindex,item) in allDanhMuc">
+                                <td>{{item.IDTieuChuan}}</td>
+                                <td>{{item.NoiDung}}</td>
+                                <td>
+                                    <table ng-init="GetTieuChi(mindex)" border="0">
+                                        <tr>
+                                            <td ng-repeat="item1 in item.allDetail">&nbsp;&nbsp;&nbsp;[<a ng-class="{'text-primary' : item1.Dat == true, 'text-danger' : item1.Dat == false}" href="#" ng-click="addNew(mindex,$index)">   {{item1.IDTieuChi}}  </a>]</td>
+                                        </tr>
                                     </table>
-                                </div>
-                            </div>
-                            <!-- end tab-->
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab_chitiet" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="table-responsive">
-                                    <table class="table table-striped jambo_table bulk_action">
-                                        <thead>
-                                            <tr class="headings">
-                                                <th>STT</th>
-                                                <th>Tiêu chuẩn</th>
-                                                <th>Mã tiêu chí</th>
-                                                <th>Tiêu chí</th>
-                                                <th>Xem chỉ số</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="item in allTieuChi">
-                                                <td>{{$index + 1}}</td>
-                                                <td>{{item.NoiDung}}</td>
-                                                <td>{{item.IDTieuChi}}</td>
-                                                <td>{{item.NoiDungTC}}</td>
-                                                <td><a href="#" ng-click="xemchiso($index)">Chi tiết</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -243,21 +201,21 @@
                 });
             }
             //ham lay chi tiet tieu chi
-            $scope.allTieuChi = [];
-            $scope.GetTieuChi = function (page, search) {
+            $scope.GetTieuChi = function (index) {
+                $scope.alldetail = [];
+                var info = $scope.allDanhMuc[index];
+                $scope.Info = angular.copy(info);
+
                 showLoader(true);
                 $http({
                     method: "GET",
-                    url: "/TieuChuan/getTieuChi?page=" + page + "&idtieuchuan=" + search
+                    url: "/TieuChuan/getTieuChi?idtieuchuan=" + $scope.Info.GuiID
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
                     if (response.data.error === 0) {
 
-                        $scope.allTieuChi = response.data.data;
-                        $scope.itemPerPage = response.data.pageSize;
-                        $scope.totalItems = response.data.toltalSize;
-                        $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+                        $scope.allDanhMuc[index].allDetail = response.data.data;
                     }
 
                 }, function myError(response) {
@@ -266,17 +224,28 @@
                 });
             }
             //ket thuc ham lay goi tieu chi
-            //ham lay chi tiet chi so
+            $scope.GetData(1, "");
+            //
+            // khoi tao bien dung cho create va edit
+            $scope.Info = {};
+            $scope.IsAction = '';
             $scope.allChiSo = [];
             $scope.ChiSoA = [];
             $scope.ChiSoB = [];
             $scope.ChiSoC = [];
-            $scope.GetChiSo = function (page, search) {
-                showLoader(true);
-                console.log(search);
+            $scope.addNew = function (mindex, id) {
+                //kiểm tra xem neu chua co thi load mơi , nếu đã có thì load thông tin
+                //gettieuchidukien
+                //mindex ==> vi tri cua id tieu chuan , id vi tri cua tieu chi
+
+                var info = $scope.allDanhMuc[mindex].allDetail[id];
+                $scope.Info = angular.copy(info);
+                //$scope.GetChiSo(1, $scope.Info.GuiIDTC);
+                $scope.TieuChuanTieuChi = $scope.allDanhMuc[mindex].NoiDung + " - " + $scope.Info.NoiDungTC;
+
                 $http({
                     method: "GET",
-                    url: "/TieuChuan/getChiSo?page=" + page + "&idtieuchi=" + search
+                    url: "/TieuChuan/getChiSo?idtieuchi=" + $scope.Info.GuiIDTC
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
@@ -286,31 +255,17 @@
                         $scope.ChiSoA = angular.copy($scope.allChiSo[0]);
                         $scope.ChiSoB = angular.copy($scope.allChiSo[1]);
                         $scope.ChiSoC = angular.copy($scope.allChiSo[2]);
+                        $scope.IsAction = 'add';
+                        $scope.modaltitle = "Xem tiêu chí - Tiêu chuẩn: " + $scope.Info.IDTieuChuan + " - Tiêu chí: " + $scope.Info.IDTieuChi;
+                        showModel("insertmodal");
 
                     }
-
-                }, function myError(response) {
-                    showLoader(false);
-                    showNotify('Connect error');
-                });
-            }
-            //ket thuc ham lay chi tiet chi so
-
-            $scope.GetData(1, "");
-            //
-            // khoi tao bien dung cho create va edit
-            $scope.Info = {};
-            $scope.IsAction = '';
-
-            $scope.addNew = function () {
-
-                $scope.Info = { "IDTieuChuan": "", "NoiDung": "","MoDau":"","KetLuan":"" };
-
-                $scope.modaltitle = "Thêm tiêu chuẩn";
-                //$scope.ZoneIDDisable = false;
-                $scope.IsAction = 'add';
-                showModel("insertmodal")
-
+                        }, function myError(response) {
+                            showLoader(false);
+                            showNotify('Connect error');
+                        });
+                       
+                //ket thuc lay dữ liệu điều kiện
             };
 
             $scope.edit = function (index) {
