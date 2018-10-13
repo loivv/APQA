@@ -14,7 +14,7 @@ namespace QA.Controllers.tudanhgia
         {
             var matruong = new SqlParameter("@MaTruong", MaTruong);
             var namhoc = new SqlParameter("@NamHoc", NamHoc);
-            var result = db.Database.SqlQuery<ThanhVien>("GET_THANHVIEN @MaTruong,@NamHoc", matruong,namhoc).ToList();
+            var result = db.Database.SqlQuery<ThanhVien>("GET_THANHVIEN_ONLY @MaTruong,@NamHoc", matruong,namhoc).ToList();
             ViewBag.AllThanhVien = result;
             return View();
         }
@@ -120,7 +120,7 @@ namespace QA.Controllers.tudanhgia
             if (check != null)
                 return Json(new ResultInfo() { error = 1, msg = "Đã tồn tại" }, JsonRequestBehavior.AllowGet);
             //lay ra max manhom
-            var maxid = db.DM_NhomDanhGia.OrderByDescending(x => x.MaNhom).Where(x => x.MaTruong == MaTruong).First();
+            var maxid = db.DM_NhomDanhGia.OrderByDescending(x => x.MaNhom).Where(x => x.MaTruong == MaTruong).FirstOrDefault();
             string maxndg = string.Empty;
             if (maxid != null)
             {

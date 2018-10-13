@@ -26,7 +26,8 @@ namespace QA.Controllers.tudanhgia
 
             var matruong = new SqlParameter("@MaTruong", MaTruong);
             var namhoc = new SqlParameter("@NamHoc", NamHoc);
-            var data = db.Database.SqlQuery<DMThanhVien>("GET_THANHVIEN @MaTruong, @NamHoc", matruong, namhoc).ToList();
+            var thanhvien = new SqlParameter("@ThanhVien", true);
+            var data = db.Database.SqlQuery<DMThanhVien>("GET_THANHVIEN @MaTruong, @NamHoc,@ThanhVien", matruong, namhoc,thanhvien).ToList();
             //var data = db.DM_ThanhVien.Where(p => p.TenThanhVien.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
 
             ResultInfo result = new ResultWithPaging()

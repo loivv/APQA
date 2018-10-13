@@ -28,7 +28,7 @@
                                 <td>{{item.IDTieuChuan}}</td>
                                 <td>{{item.NoiDung}}</td>
                                 <td>
-                                    <table ng-init="GetTieuChi()" border="0">
+                                    <table ng-init="GetTieuChi(mindex)" border="0">
                                         <tr>
                                             <td ng-repeat="item1 in item.allDetail">&nbsp;&nbsp;&nbsp;[<a ng-class="{'text-primary' : item1.TCDK != '0', 'text-danger' : item1.TCDK == '0'}" href="#" ng-click="addNew(mindex,$index)">   {{item1.IDTieuChi}}  </a>]</td>
                                         </tr>
@@ -149,16 +149,54 @@
                                                     <textarea rows="2" class="form-control" ng-model="ChiSoA.NoiDung" ></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-8">
                                                 <div class="form-group">
                                                     <label>Mô tả hiện trạng</label>
-                                                    <textarea rows="5" class="form-control" ng-model="ChiSoA.MoTaHienTrang" ></textarea>
+                                                    -- <a href="#" ng-click="sub('chisoa')">Sub</a>
+                                                    <textarea id="chisoamota" name="chisoamota" rows="7" class="form-control" ng-model="ChiSoA.MoTaHienTrang" ></textarea>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>MC từ</label>
+                                                            <select class="form-control" ng-model="ChiSoA.IDTieuChuanFrom">
+                                                                <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>MC đến</label>
+                                                            <select class="form-control" ng-model="ChiSoA.IDTieuChuanTo" ng-change="getMC()">
+                                                                <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <table class="table table-striped jambo_table bulk_action">
+                                                        <thead>
+                                                            <tr class="headings">
+                                                                <th>Mã MC</th>
+                                                                <th>Tên MC</th>                                                 
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr ng-repeat="item in allMinhChung">                                     
+                                                                <td><a href="#" ng-click="insertText($index)">{{item.MaMC}}</a></td>
+                                                                <td>{{item.TenMC}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>                                          
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control" ng-model="ChiSoA.NhanXetPGD" ng-disabled="true"></textarea>
+                                                    <textarea rows="3" class="form-control" ng-model="ChiSoA.NhanXetPGD" ng-disabled="true"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,10 +209,24 @@
                                                     <textarea rows="2" class="form-control" ng-model="ChiSoB.NoiDung" ></textarea>
                                                 </div>
                                             </div>                                            
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-8">
                                                 <div class="form-group">
                                                     <label>Mô tả hiện trạng</label>
                                                     <textarea rows="5" class="form-control" ng-model="ChiSoB.MoTaHienTrang" ></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="Info.IDTieuChuan">
+                                                        <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="DanhGia.MaNhom" required>
+                                                        <option ng-repeat="x in allNhom" value="{{x.MaNhom}}">{{x.TenNhom | uppercase}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -283,6 +335,8 @@
         app.controller('myCtrl', function ($scope, $http) {
 
             $scope.allNhom = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllNhom))');
+            $scope.allTieuChuan = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChuan))');
+            console.log($scope.allTieuChuan);
             // lay du lieu
             $scope.DanhGia = [];
             $scope.ChiSoA = [];
@@ -337,6 +391,7 @@
                         $scope.itemPerPage = response.data.pageSize;
                         $scope.totalItems = response.data.toltalSize;
                         $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+
                     }
 
                 }, function myError(response) {
@@ -362,7 +417,7 @@
                         $scope.ChiSoA = angular.copy($scope.allChiSo[0]);
                         $scope.ChiSoB = angular.copy($scope.allChiSo[1]);
                         $scope.ChiSoC = angular.copy($scope.allChiSo[2]);
-                        //console.log($scope.ChiSoA);
+                        console.log($scope.ChiSoA);
                     }
 
                 }, function myError(response) {
@@ -411,7 +466,27 @@
                 });
             }
             //ket thuc ham lay goi tieu chi
+            //ham lay chi tiet tieu chi
+            $scope.getMC = function () {
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/DanhGiaTieuChi/getMCbyID?idfrom=" + $scope.ChiSoA.IDTieuChuanFrom + "&idto=" + $scope.ChiSoA.IDTieuChuanTo
+                }).then(function mySuccess(response) {
+                    showLoader(false);
 
+                    if (response.data.error === 0) {
+
+                        $scope.allMinhChung = response.data.data;
+                        console.log($scope.allMinhChung);
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            //ket thuc ham lay goi tieu chi
             // action
             $scope.finishForm = function () {
                     if ($scope.IsAction === 'add') {
@@ -462,10 +537,11 @@
                             if (response.data.error === 1) {
                                
                                 $scope.allChiSo = response.data.data;
+                                console.log($scope.allChiSo);
                                 $scope.ChiSoA = angular.copy($scope.allChiSo[0]);
                                 $scope.ChiSoB = angular.copy($scope.allChiSo[1]);
                                 $scope.ChiSoC = angular.copy($scope.allChiSo[2]);
-                
+
                             }
 
                         }, function myError(response) {
@@ -525,9 +601,11 @@
                             if (response.data.error === 1) {
 
                                 $scope.allChiSo = response.data.data;
+                               
                                 $scope.ChiSoA = angular.copy($scope.allChiSo[0]);
                                 $scope.ChiSoB = angular.copy($scope.allChiSo[1]);
                                 $scope.ChiSoC = angular.copy($scope.allChiSo[2]);
+                                console.log($scope.ChiSoA);
                             }
 
                         }, function myError(response) {
@@ -553,16 +631,81 @@
                 showModel("insertmodal");
             };
             //ket thuc
+            //add text after focus in textarea
+            $scope.lastFocused;
+            angular.element("textarea").focus(function () {
+                $scope.lastFocused = document.activeElement;
+            });
+            $scope.insertText = function (index) {
+                var info = $scope.allMinhChung[index];
+               // console.log(info);
+                var text = '[' +info.MaMC + ']';
+                var input = $scope.lastFocused;
+                //console.log(input);
+                if (input == undefined) { return; }
+                var scrollPos = input.scrollTop;
+                var pos = 0;
+                var browser = ((input.selectionStart || input.selectionStart == "0") ?
+                               "ff" : (document.selection ? "ie" : false));
+                if (browser == "ie") {
+                    input.focus();
+                    var range = document.selection.createRange();
+                    range.moveStart("character", -input.value.length);
+                    pos = range.text.length;
+                }
+                else if (browser == "ff") { pos = input.selectionStart };
+
+                var front = (input.value).substring(0, pos);
+                var back = (input.value).substring(pos, input.value.length);
+                input.value = front + text + back;
+                pos = pos + text.length;
+                if (browser == "ie") {
+                    input.focus();
+                    var range = document.selection.createRange();
+                    range.moveStart("character", -input.value.length);
+                    range.moveStart("character", pos);
+                    range.moveEnd("character", 0);
+                    range.select();
+                }
+                else if (browser == "ff") {
+                    input.selectionStart = pos;
+                    input.selectionEnd = pos;
+                    input.focus();
+                }
+                input.scrollTop = scrollPos;
+               // console.log(angular.element(input).val());
+                angular.element(input).trigger('textarea');
+            }
+            //end add text after focus in textarea
+            //convert sub select text
+            $scope.sub = function (ctl) {
+                //lay ra selected text
+               
+                //$scope.txtArea = angular.element(document.querySelector(ctl));
+                $scope.txtArea = document.querySelector('#chisoamota');
+                var selectedText;
+                if (txtArea.selectionStart != undefined)
+                {                   
+                    var startPosition = txtArea.selectionStart;
+                    var endPosition = txtArea.selectionEnd;
+                    selectedText = txtArea.value.substring(startPosition, endPosition);
+                    console.log(selectedText);
+                }
+
+                //txtArea.appendChild(selectedText);
+            };
+            //end convert sub text
             // them tinh
             $scope.sendCreate = function () {
-                showLoader(true);               
+                showLoader(true);
+                
                 $scope.test = {}
                 $scope.MoTa = [
                   { IDChiSo:$scope.ChiSoA.GuiID,MoTaHienTrang: $scope.ChiSoA.MoTaHienTrang },
                   { IDChiSo: $scope.ChiSoB.GuiID, MoTaHienTrang: $scope.ChiSoB.MoTaHienTrang },
                   { IDChiSo: $scope.ChiSoC.GuiID, MoTaHienTrang: $scope.ChiSoC.MoTaHienTrang }
                 ];
-
+      
                 $http({
                     method: "POST",
                     url: "/DanhGiaTieuChi/create",

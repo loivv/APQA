@@ -66,7 +66,7 @@
 
 
                 <!-- begin form-->
-                <form class="css-form" name="createForm" ng-submit="finishForm(createForm.$valid)">
+                <form class="css-form" name="createForm" ng-submit="finishForm()">
                     <!-- body-->
                     <div class="modal-body">
                         <div class="row">
@@ -84,21 +84,21 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <select class="form-control" ng-model="Info.IDTieuChuan" required>
+                                    <select class="form-control" ng-model="Info.IDTieuChuan" ng-change="GetTieuChi()" required>
                                         <option ng-repeat="x in alltieuchuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <select class="form-control" ng-model="Info.IDTieuChi" required>
-                                        <option ng-init="GetTieuChi()" ng-repeat="x in alltieuchi" value="{{x.IDTieuChi}}">{{x.IDTieuChi}}</option>
+                                    <select class="form-control" ng-model="Info.IDTieuChi" ng-change="getmaxid()" required>
+                                        <option ng-repeat="x in allDetail" value="{{x.IDTieuChi}}">{{x.IDTieuChi}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <input  type="text" class="form-control" ng-model="Info.STTS" required />
+                                    <input  type="text" class="form-control" ng-model="Info.STT" required ng-disabled="true" />
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -156,13 +156,13 @@
 
     <script>
 
-        // tao controller
-        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader']);
+    // tao controller
+    var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader']);
 
-        app.controller('myCtrl', function ($scope, $http, uiUploader) {
-            //danh sach cac hop dung minh chung
-            $scope.alltieuchuan = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChuan))');
-            $scope.alltieuchi = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChi))');
+    app.controller('myCtrl', function ($scope, $http, uiUploader) {
+        //danh sach cac hop dung minh chung
+        $scope.alltieuchuan = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChuan))');
+       
             console.log($scope.alltieuchi);
             $scope.Info = [];
             $scope.Hop = [
@@ -226,17 +226,15 @@
 
                 $scope.Info = { "MaMC": "", "TenMC": "","SoHieu":"","CoQuan":"","GhiChu":"","LinkFile":"","TieuChuan":"","TieuChi":"" };
                 $scope.modaltitle = "Thêm minh chứng";
-                //$scope.ZoneIDDisable = false;
                 $scope.IsAction = 'add';
                 showModel("insertmodal")
-                console.log($scope.Info);
+               // console.log($scope.Info);
 
             };
-
+            $scope.allDetail = [];
             //ham lay chi tiet tieu chi
             $scope.GetTieuChi = function () {
-                $scope.alldetail = [];
-                
+
                 showLoader(true);
                 $http({
                     method: "GET",
@@ -247,7 +245,6 @@
                     if (response.data.error === 0) {
 
                         $scope.allDetail = response.data.data;
-                        console.log($scope.allDetail);
                     }
 
                 }, function myError(response) {
@@ -255,7 +252,28 @@
                     showNotify('Connect error');
                 });
             }
-            //ket thuc ham lay goi tieu chi
+        //ket thuc ham lay goi tieu chi
+        //ham lay maxid
+            $scope.getmaxid = function () {
+
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/MinhChung/getmaxstt?idtieuchuan=" + $scope.Info.IDTieuChuan + "&idtieuchi=" + $scope.Info.IDTieuChi
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.Info.STT = response.data.data;                       
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+        //ket thuc ham lay maxid
 
             $scope.edit = function (index) {
 
@@ -278,8 +296,7 @@
             };
 
             // action
-            $scope.finishForm = function (isValid) {
-                if (isValid) {
+            $scope.finishForm = function () {
                     if ($scope.IsAction === 'add') {
                         $scope.sendCreate();
                     } else if ($scope.IsAction === 'edit') {
@@ -287,34 +304,24 @@
                     } else if ($scope.IsAction === 'delete') {
                         $scope.sendDelete();
                     }
-
-                } else {
-                    showNotify('our form is missing');
-                }
             }
 
 
             // them tinh
             $scope.sendCreate = function () {
                 showLoader(true);
-                uiUploader.startUpload({
-                    url: '/MinhChung/create',
-                    paramName: 'fileTaiLieu',
-                    data: $scope.Info ,
-                    onProgress: function (file) {
-                        $scope.$apply();
-                    },
-                    onCompleted: function (file, response) {
+                //
+                if (document.getElementById("filetailieu").files.length == 0) {
+                    $http({
+                        method: "POST",
+                        url: '/MinhChung/create',
+                        data: { t: $scope.Info.TenMC, sh: $scope.Info.SoHieu, cq: $scope.Info.CoQuan, gc: $scope.Info.GhiChu, cn: $scope.Info.IDTieuChuan, tc: $scope.Info.IDTieuChi, stt: $scope.Info.STT, hop: $scope.Hop.Hop }
+                    }).then(function success(response) {
 
-                        showLoader(false);
-                        var result = angular.fromJson(response);
-
+                        var result = response.data;
+                        console.log(result);
                         if (result.error === 0) {
-                            // xoa file hien tai trong danh sach upload
-                            uiUploader.removeAll();
-                            $('#filetailieu').value = "";
-                            $scope.$apply();
-
+                            $scope.GetData(1, "");
                             $scope.allDanhMuc.unshift(result.data);
 
                             hideModel("insertmodal");
@@ -330,7 +337,46 @@
                         showLoader(false);
 
                     }
-                });
+                    , function error(response) {
+                        showNotify("connect has disconnect");
+                        showLoader(false);
+                    });
+                } else {
+                    uiUploader.startUpload({
+                        url: '/MinhChung/create',
+                        paramName: 'fileTaiLieu',
+                        data: { t: $scope.Info.TenMC,sh:$scope.Info.SoHieu,cq:$scope.Info.CoQuan,gc:$scope.Info.GhiChu,cn:$scope.Info.IDTieuChuan,tc:$scope.Info.IDTieuChi,stt:$scope.Info.STT, hop: $scope.Hop.Hop },
+                        onProgress: function (file) {
+                            $scope.$apply();
+                        },
+                        onCompleted: function (file, response) {
+
+                            showLoader(false);
+                            var result = angular.fromJson(response);
+
+                            if (result.error === 0) {
+                                // xoa file hien tai trong danh sach upload
+                                uiUploader.removeAll();
+                                $('#filetailieu').value = "";
+                                $scope.$apply();
+
+                                $scope.allDanhMuc.unshift(result.data);
+                               
+                                hideModel("insertmodal");
+
+                                showNotify("Đã thêm minh chứng");
+                                $scope.GetData(1, "");
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
+
+                        }
+                    });
+                }
             };
 
             // cap nhat tinh

@@ -209,7 +209,6 @@
     <Compile Include="Controllers\danhmuc\ChuyenDuLieuController.cs" />
     <Compile Include="Controllers\danhmuc\TieuChiController.cs" />
     <Compile Include="Controllers\danhmuc\VanBanController.cs" />
-    <Compile Include="Controllers\kehoachtudanhgia\TDGTieuChiController.cs" />
     <Compile Include="Controllers\kehoachtudanhgia\ThoiGianCungCapController.cs" />
     <Compile Include="Controllers\kehoachtudanhgia\ToChucThucHienController.cs" />
     <Compile Include="Controllers\tudanhgia\BaoCaoTieuChuanController.cs" />

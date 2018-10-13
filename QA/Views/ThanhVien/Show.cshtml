@@ -21,6 +21,7 @@
                                 <th>Họ tên</th>
                                 <th>Chức vụ</th>
                                 <th>Nhiệm vụ</th>
+                                <th>Thành viên</th>
                                 <th>#</th>
                                 <th>#</th>
                             </tr>
@@ -33,6 +34,7 @@
                                 <td>{{item.TenThanhVien}}</td>
                                 <td>{{item.ChucVu}}</td>
                                 <td>{{item.NhiemVu}}</td>
+                                <td><i ng-class="{'fa fa-check' : item.ThanhVien == true, 'fa fa-close' : item.ThanhVien == false}"></i></td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
@@ -94,6 +96,14 @@
                                     <select class="form-control" ng-model="Info.MaNhiemVu" required>
                                         <option ng-repeat="x in allNhiemVu" value="{{x.MaNhiemVu}}">{{x.NhiemVu | uppercase}}</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Thành viên</label>
+                                        <input type="checkbox" class="form-control" ng-model="Info.ThanhVien" />
+                                    </div>
                                 </div>
                             </div>
 

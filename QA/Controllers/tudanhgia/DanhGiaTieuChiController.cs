@@ -13,6 +13,8 @@ namespace QA.Controllers.tudanhgia
         public ActionResult Show()
         {
             ViewBag.AllNhom = db.DM_NhomDanhGia.Where(p => p.MaTruong == MaTruong).ToList();
+            //ViewBag.AllTieuChuan = from p in db.HT_TieuChuan orderby p.IDTieuChuan select p;
+            ViewBag.AllTieuChuan = db.HT_TieuChuan.OrderBy(x => x.IDTieuChuan).ToList();
             return View();
         }
         [HttpGet]
@@ -21,8 +23,8 @@ namespace QA.Controllers.tudanhgia
 
 
             var caphoc = new SqlParameter("@CapHoc", CapHoc);
-            var phanloai = new SqlParameter("@PhanLoai", PhanLoai);
-            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHUAN_TIEUCHI @CapHoc, @PhanLoai", caphoc, phanloai).ToList();
+            //var phanloai = new SqlParameter("@PhanLoai", PhanLoai);
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHUAN @CapHoc", caphoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -45,6 +47,27 @@ namespace QA.Controllers.tudanhgia
                 msg = "",
                 data = data
             };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult getMCbyID(int idfrom,int idto)
+        {
+
+            //var data = from p in db.HT_TieuChi join t in db.HT_TieuChuan on p.IDTieuChuan equals t.GuiID  where t.IDTieuChuan == (idtieuchuan) orderby p.IDTieuChi select p;
+            var ifrom = new SqlParameter("@idtieuchuanfrom", idfrom);
+            var ito = new SqlParameter("@idtieuchuanto", idto);
+            var mt = new SqlParameter("@MaTruong", MaTruong);
+            var nh = new SqlParameter("@NamHoc", NamHoc);
+            var data = db.Database.SqlQuery<GET_MINHCHUNG_BYIDTIEUCHUAN>("GET_MINHCHUNG_BYIDTIEUCHUAN @idtieuchuanfrom,@idtieuchuanto,@MaTruong,@NamHoc", ifrom, ito, mt, nh).ToList();
+            ResultInfo result = new ResultWithPaging()
+            {
+                error = 0,
+                msg = "",
+                toltalSize = data.Count(),
+                data = data
+            };
+
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -77,7 +100,7 @@ namespace QA.Controllers.tudanhgia
             int pageNumber = (page ?? 1);
             var matruong = new SqlParameter("@MaTruong", MaTruong);
             var namhoc = new SqlParameter("@NamHoc", NamHoc);
-            var data = db.Database.SqlQuery<DanhGiaTieuChi>("GET_DANHGIA_TIEUCHI @MaTruong,@NamHoc", matruong, namhoc).ToList();
+            var data = db.Database.SqlQuery<DanhGiaTieuChi>("GET_TIEUCHI_DANHGIA @MaTruong,@NamHoc", matruong, namhoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -114,7 +137,7 @@ namespace QA.Controllers.tudanhgia
             var matruong = new SqlParameter("@MaTruong", MaTruong);
             var namhoc = new SqlParameter("@NamHoc", NamHoc);
             var id = new SqlParameter("@idtieuchi", guiid);
-            var check = db.Database.SqlQuery<ChiSoMoTa>("GET_CHISOMOTA @idtieuchi,@MaTruong, @NamHoc",id, matruong, namhoc).ToList();
+            var check = db.Database.SqlQuery<ChiSoMoTa>("GET_CHISOMOTA @idtieuchi,@MaTruong, @NamHoc", id, matruong, namhoc).ToList();
             ResultInfo result = new ResultWithPaging();
             if (check == null)
             {

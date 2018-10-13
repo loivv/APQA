@@ -35,7 +35,7 @@
                                 <td>
                                     <table border="0" ng-init="detail($index)">
                                         <tr ng-repeat="item1 in item.allDetail">
-                                            <td>{{item1.TenThanhVien}}</td>
+                                            <td><span ng-class="{'text-primary' : item1.TruongNhom == true, 'text-danger' : item1.TruongNhom == false}">  {{item1.TenThanhVien}}  </span></td>                                          
                                         </tr>
                                     </table>
                                 </td>
@@ -122,7 +122,7 @@
                                 <tr ng-repeat="item2 in allThanhVienByNhom">
                                     <td>{{$index + 1}}</td>
                                     <td>{{item2.MaThanhVien}}</td>
-                                    <td>{{item2.TenThanhVien}}</td>
+                                    <td>{{item2.ThanhVien}}</td>
                                     <td>{{item2.ChucVu}}</td>
                                     <td>{{item2.NhiemVu}}</td>
                                     <td><input type="checkbox" ng-model="item2.isCheck" ng-checked="item2.isCheck"></td>
@@ -232,7 +232,6 @@
                     showLoader(false);
 
                     $scope.allDanhMuc[index].allDetail = response.data;
-
 
                 }, function myError(response) {
                     showLoader(false);
@@ -455,8 +454,8 @@
 
                     $http({
                         method: "POST",
-                        url: "/ChucVu/delete",
-                        data: { id: info.ID }
+                        url: "/NhomDanhGia/delete",
+                        data: { manhom: info.MaNhom }
                     }).then(
                         function success(response) {
 

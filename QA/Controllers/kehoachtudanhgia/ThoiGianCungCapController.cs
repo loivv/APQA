@@ -20,8 +20,7 @@ namespace QA.Controllers.kehoachtudanhgia
 
 
             var caphoc = new SqlParameter("@CapHoc", CapHoc);
-            var phanloai = new SqlParameter("@PhanLoai", PhanLoai);
-            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHUAN_TIEUCHI @CapHoc, @PhanLoai", caphoc, phanloai).ToList();
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHUAN @CapHoc", caphoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -109,14 +108,15 @@ namespace QA.Controllers.kehoachtudanhgia
         public ActionResult create(DM_TieuChi_DuKien tcdk)
         {
 
-            if (String.IsNullOrEmpty(tcdk.HoatDong.ToString()))
-                return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
+            //if (String.IsNullOrEmpty(tcdk.HoatDong.ToString()))
+            //    return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
             var check = db.DM_TieuChi_DuKien.Where(p => p.IDTieuChi == tcdk.IDTieuChi && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check == null)
             {
                 tcdk.MaTruong = MaTruong;
+                tcdk.NamHoc = NamHoc;
                 db.DM_TieuChi_DuKien.Add(tcdk);
             }else if(check != null)
             {

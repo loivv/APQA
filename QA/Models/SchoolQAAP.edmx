@@ -209,8 +209,9 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="CoQuan" Type="nvarchar" MaxLength="200" />
           <Property Name="GhiChu" Type="nvarchar(max)" />
           <Property Name="LinkFile" Type="nvarchar" MaxLength="200" />
-          <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" />
-          <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDTieuChuan" Type="int" />
+          <Property Name="IDTieuChi" Type="int" />
+          <Property Name="STT" Type="int" />
         </EntityType>
         <EntityType Name="DM_MucDichPhamVi">
           <Key>
@@ -398,7 +399,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
             <PropertyRef Name="MaTruong" />
             <PropertyRef Name="NamHoc" />
           </Key>
-          <Property Name="IDTieuChi" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="HoatDong" Type="nvarchar(max)" />
@@ -694,7 +695,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="SchoolQAAPModel.DM_HoiDongTuDanhGia" />
           <EntitySet Name="DM_LopHocTH" EntityType="SchoolQAAPModel.DM_LopHocTH" />
           <EntitySet Name="DM_LopHocTHCS" EntityType="SchoolQAAPModel.DM_LopHocTHCS" />
-          <EntitySet Name="DM_MinhChung" EntityType="SchoolQAAPModel.DM_MinhChung" />
           <EntitySet Name="DM_MucDichPhamVi" EntityType="SchoolQAAPModel.DM_MucDichPhamVi" />
           <EntitySet Name="DM_NamHoc" EntityType="SchoolQAAPModel.DM_NamHoc" />
           <EntitySet Name="DM_NhiemVu" EntityType="SchoolQAAPModel.DM_NhiemVu" />
@@ -709,7 +709,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <EntitySet Name="DM_ThanhVien" EntityType="SchoolQAAPModel.DM_ThanhVien" />
           <EntitySet Name="DM_ThoiGianBieu" EntityType="SchoolQAAPModel.DM_ThoiGianBieu" />
           <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
-          <EntitySet Name="DM_TieuChi_DuKien" EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" />
           <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
           <EntitySet Name="DM_VanBan" EntityType="SchoolQAAPModel.DM_VanBan" />
           <EntitySet Name="DM_VanDeKetLuan" EntityType="SchoolQAAPModel.DM_VanDeKetLuan" />
@@ -729,6 +728,8 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <EntitySet Name="UMS_MenuGroupUser" EntityType="SchoolQAAPModel.UMS_MenuGroupUser" />
           <EntitySet Name="DM_TieuChuan" EntityType="SchoolQAAPModel.DM_TieuChuan" />
           <EntitySet Name="HT_TieuChi" EntityType="SchoolQAAPModel.HT_TieuChi" />
+          <EntitySet Name="DM_TieuChi_DuKien" EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" />
+          <EntitySet Name="DM_MinhChung" EntityType="SchoolQAAPModel.DM_MinhChung" />
           </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -912,23 +913,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="Lop8" Type="Int32" />
           <Property Name="Lop9" Type="Int32" />
         </EntityType>
-        <EntityType Name="DM_MinhChung">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-            <PropertyRef Name="MaMC" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MaMC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TenMC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SoHieu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CoQuan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LinkFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IDTieuChuan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDTieuChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DM_MucDichPhamVi">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -1108,21 +1092,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DM_TieuChi_DuKien">
-          <Key>
-            <PropertyRef Name="IDTieuChi" />
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="IDTieuChi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="HoatDong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NhanLuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="VatLuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ThoiDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_ToChucThucHien">
           <Key>
@@ -1309,6 +1278,39 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Dat" Type="Boolean" />
         </EntityType>
+        <EntityType Name="DM_TieuChi_DuKien">
+          <Key>
+            <PropertyRef Name="IDTieuChi" />
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="IDTieuChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HoatDong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NhanLuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VatLuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_MinhChung">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="MaMC" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MaMC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TenMC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SoHieu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CoQuan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IDTieuChuan" Type="Int32" />
+          <Property Name="IDTieuChi" Type="Int32" />
+          <Property Name="STT" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1440,22 +1442,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
                 <ScalarProperty Name="Lop8" ColumnName="Lop8" />
                 <ScalarProperty Name="Lop7" ColumnName="Lop7" />
                 <ScalarProperty Name="Lop6" ColumnName="Lop6" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_MinhChung">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_MinhChung">
-              <MappingFragment StoreEntitySet="DM_MinhChung">
-                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
-                <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
-                <ScalarProperty Name="LinkFile" ColumnName="LinkFile" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="CoQuan" ColumnName="CoQuan" />
-                <ScalarProperty Name="SoHieu" ColumnName="SoHieu" />
-                <ScalarProperty Name="TenMC" ColumnName="TenMC" />
-                <ScalarProperty Name="MaMC" ColumnName="MaMC" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
@@ -1635,20 +1621,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
                 <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_TieuChi_DuKien">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi_DuKien">
-              <MappingFragment StoreEntitySet="DM_TieuChi_DuKien">
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="ThoiDiem" ColumnName="ThoiDiem" />
-                <ScalarProperty Name="VatLuc" ColumnName="VatLuc" />
-                <ScalarProperty Name="NhanLuc" ColumnName="NhanLuc" />
-                <ScalarProperty Name="HoatDong" ColumnName="HoatDong" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1841,6 +1813,37 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
                 <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
                 <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
                 <ScalarProperty Name="GuiID" ColumnName="GuiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_TieuChi_DuKien">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi_DuKien">
+              <MappingFragment StoreEntitySet="DM_TieuChi_DuKien">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="ThoiDiem" ColumnName="ThoiDiem" />
+                <ScalarProperty Name="VatLuc" ColumnName="VatLuc" />
+                <ScalarProperty Name="NhanLuc" ColumnName="NhanLuc" />
+                <ScalarProperty Name="HoatDong" ColumnName="HoatDong" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_MinhChung">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_MinhChung">
+              <MappingFragment StoreEntitySet="DM_MinhChung">
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
+                <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
+                <ScalarProperty Name="LinkFile" ColumnName="LinkFile" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="CoQuan" ColumnName="CoQuan" />
+                <ScalarProperty Name="SoHieu" ColumnName="SoHieu" />
+                <ScalarProperty Name="TenMC" ColumnName="TenMC" />
+                <ScalarProperty Name="MaMC" ColumnName="MaMC" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

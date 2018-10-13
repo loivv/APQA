@@ -204,8 +204,9 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="CoQuan" Type="nvarchar" MaxLength="200" />
     <Property Name="GhiChu" Type="nvarchar(max)" />
     <Property Name="LinkFile" Type="nvarchar" MaxLength="200" />
-    <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" />
-    <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDTieuChuan" Type="int" />
+    <Property Name="IDTieuChi" Type="int" />
+    <Property Name="STT" Type="int" />
   </EntityType>
   <EntityType Name="DM_MucDichPhamVi">
     <Key>
@@ -393,7 +394,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
     </Key>
-    <Property Name="IDTieuChi" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="HoatDong" Type="nvarchar(max)" />

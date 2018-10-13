@@ -95,6 +95,7 @@ namespace QA.Models
         public string ChucVu { get; set; }
         public string NhiemVu { get; set; }
         public string TenNhom { get; set; }
+        public Nullable<bool> TruongNhom { get; set; }
 
     }
     public class VanBan
@@ -246,6 +247,15 @@ namespace QA.Models
         public string TenNhom { get; set; }
         public bool TuDanhGia { get; set; }
         public string ND { get; set; }
+    }
+    public class GET_TIEUCHI_BY_IDTIEUCHUAN
+    {
+        public int IDTieuChi { get; set; }
+    }
+    public class GET_MINHCHUNG_BYIDTIEUCHUAN
+    {
+        public string MaMC { get; set; }
+        public string TenMC { get; set; }
     }
 
 }

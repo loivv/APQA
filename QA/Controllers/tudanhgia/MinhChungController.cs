@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QA.Models;
+using System.Data.SqlClient;
 namespace QA.Controllers.tudanhgia
 {
     public class MinhChungController : BaseController
@@ -13,14 +14,16 @@ namespace QA.Controllers.tudanhgia
         {
             //var a = from p in db.HT_TieuChuan orderby p.IDTieuChuan select p.IDTieuChuan;
             ViewBag.AllTieuChuan = from p in db.HT_TieuChuan orderby p.IDTieuChuan select p;
+            //ViewBag.AllTieuChi = from p in db.HT_TieuChi join t in db.HT_TieuChuan on p.IDTieuChuan equals t.GuiID where t.IDTieuChuan == 1 orderby p.IDTieuChi select p;
             return View();
         }
         [HttpGet]
-        public ActionResult getTieuChibyID(string idtieuchuan)
+        public ActionResult getTieuChibyID(int idtieuchuan)
         {
 
-            var data = from p in db.HT_TieuChi where p.IDTieuChuan == (idtieuchuan) orderby p.IDTieuChi select p;
-
+            //var data = from p in db.HT_TieuChi join t in db.HT_TieuChuan on p.IDTieuChuan equals t.GuiID  where t.IDTieuChuan == (idtieuchuan) orderby p.IDTieuChi select p;
+            var id = new SqlParameter("@idtieuchuan", idtieuchuan);
+            var data = db.Database.SqlQuery<GET_TIEUCHI_BY_IDTIEUCHUAN>("GET_TIEUCHI_BY_IDTIEUCHUAN @idtieuchuan", id).ToList();
             ResultInfo result = new ResultWithPaging()
             {
                 error = 0,
@@ -29,6 +32,30 @@ namespace QA.Controllers.tudanhgia
                 data = data
             };
 
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult getmaxstt(int idtieuchuan,int idtieuchi)
+        {
+
+            var maxid = db.DM_MinhChung.Where(p=>p.IDTieuChuan == idtieuchuan && p.IDTieuChi == idtieuchi && p.MaTruong == MaTruong && p.NamHoc == NamHoc).OrderByDescending(x => x.STT).FirstOrDefault();
+            string maxndg = "01";
+            if (maxid != null)
+            {
+                maxndg = (maxid.STT + 1).ToString();
+                if(maxndg.Length == 1)
+                {
+                    maxndg = "0" + maxndg;
+                }
+            }
+
+            ResultInfo result = new ResultWithPaging()
+            {
+                error = 0,
+                msg = "",
+                data = maxndg
+            };
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -57,12 +84,22 @@ namespace QA.Controllers.tudanhgia
         }
 
         [HttpPost]
-        public ActionResult create(DM_MinhChung minhchung, HttpPostedFileBase fileTaiLieu)
+        public ActionResult create(string t, string sh,string cq,string gc,string cn,string tc,string hop,string stt, HttpPostedFileBase fileTaiLieu)
         {
 
-            if (String.IsNullOrEmpty(minhchung.MaMC) || String.IsNullOrEmpty(minhchung.SoHieu) || String.IsNullOrEmpty(minhchung.TenMC))
-                return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
-          
+            //if (String.IsNullOrEmpty(minhchung.MaMC) || String.IsNullOrEmpty(minhchung.SoHieu) || String.IsNullOrEmpty(minhchung.TenMC))
+            //    return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
+            if (tc.Length == 1)
+            {
+                tc = '0' + tc;
+            }
+
+            if (stt.Length == 1)
+            {
+                stt = '0' + stt;
+            }
+            DM_MinhChung minhchung = new DM_MinhChung();
+            minhchung.MaMC = hop + '.' + cn + '.' + tc + '.' + stt;
             var check = db.DM_MinhChung.Where(p => p.MaTruong == MaTruong && p.MaMC == minhchung.MaMC && p.NamHoc == NamHoc).FirstOrDefault();
 
             if (check != null)
@@ -71,10 +108,22 @@ namespace QA.Controllers.tudanhgia
             string path = "";
             string fileSave = "";
             string extension = "";
+                       
+            minhchung.MaTruong = MaTruong;
+            minhchung.NamHoc = NamHoc;            
+            minhchung.TenMC = t;
+            minhchung.SoHieu = sh;
+            minhchung.CoQuan = cq;
+            minhchung.GhiChu = gc;
+            minhchung.IDTieuChuan =int.Parse( cn);
+            minhchung.IDTieuChi =int.Parse( tc);
+            minhchung.STT = int.Parse(stt);
+           
+
             if (fileTaiLieu != null && fileTaiLieu.ContentLength > 0)
             {
                 extension = System.IO.Path.GetExtension(fileTaiLieu.FileName);
-                fileSave = "MC_" + minhchung.MaMC + "_" + NamHoc + "_" + MaTruong + extension;
+                fileSave =  minhchung.MaMC + "_" + NamHoc + "_" + MaTruong + extension;
                 path = Server.MapPath("~/TaiLieu/MinhChung/" + fileSave);
                 if (System.IO.File.Exists(path))
                 {
@@ -83,17 +132,13 @@ namespace QA.Controllers.tudanhgia
                 fileTaiLieu.SaveAs(path);
 
             }
-            minhchung.MaTruong = MaTruong;
-            minhchung.NamHoc = NamHoc;
             minhchung.LinkFile = path;
             db.DM_MinhChung.Add(minhchung);
-
             db.SaveChanges();
 
             return Json(new ResultInfo() { error = 0, msg = "", data = minhchung }, JsonRequestBehavior.AllowGet);
 
         }
-
 
         [HttpPost]
         public ActionResult edit(DM_MinhChung minhchung, HttpPostedFileBase fileTaiLieu)

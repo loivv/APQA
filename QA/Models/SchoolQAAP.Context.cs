@@ -37,7 +37,6 @@ namespace QA.Models
         public virtual DbSet<DM_HoiDongTuDanhGia> DM_HoiDongTuDanhGia { get; set; }
         public virtual DbSet<DM_LopHocTH> DM_LopHocTH { get; set; }
         public virtual DbSet<DM_LopHocTHCS> DM_LopHocTHCS { get; set; }
-        public virtual DbSet<DM_MinhChung> DM_MinhChung { get; set; }
         public virtual DbSet<DM_MucDichPhamVi> DM_MucDichPhamVi { get; set; }
         public virtual DbSet<DM_NamHoc> DM_NamHoc { get; set; }
         public virtual DbSet<DM_NhiemVu> DM_NhiemVu { get; set; }
@@ -52,7 +51,6 @@ namespace QA.Models
         public virtual DbSet<DM_ThanhVien> DM_ThanhVien { get; set; }
         public virtual DbSet<DM_ThoiGianBieu> DM_ThoiGianBieu { get; set; }
         public virtual DbSet<DM_ThongTinChung> DM_ThongTinChung { get; set; }
-        public virtual DbSet<DM_TieuChi_DuKien> DM_TieuChi_DuKien { get; set; }
         public virtual DbSet<DM_ToChucThucHien> DM_ToChucThucHien { get; set; }
         public virtual DbSet<DM_VanBan> DM_VanBan { get; set; }
         public virtual DbSet<DM_VanDeKetLuan> DM_VanDeKetLuan { get; set; }
@@ -72,6 +70,8 @@ namespace QA.Models
         public virtual DbSet<UMS_MenuGroupUser> UMS_MenuGroupUser { get; set; }
         public virtual DbSet<DM_TieuChuan> DM_TieuChuan { get; set; }
         public virtual DbSet<HT_TieuChi> HT_TieuChi { get; set; }
+        public virtual DbSet<DM_TieuChi_DuKien> DM_TieuChi_DuKien { get; set; }
+        public virtual DbSet<DM_MinhChung> DM_MinhChung { get; set; }
     
         public virtual ObjectResult<GET_NHOMDANHGIA_Result> GET_NHOMDANHGIA(string maTruong)
         {
