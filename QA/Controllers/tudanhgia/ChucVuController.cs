@@ -4,22 +4,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QA.Models;
+using QA.Filters;
 namespace QA.Controllers.tudanhgia
 {
     public class ChucVuController : BaseController
     {
+        // chucvu
+
         // GET: ChucVu
+        [MyValidateAccess(code = "chucvu", edit = 0)]
         public ActionResult Show()
         {
             return View();
         }
+
+
         [HttpGet]
+        [MyValidateAccess(code = "chucvu", edit = 0)]
         public ActionResult getChucVu(int? page, string search = "")
         {
             int pageSize = 50;
 
             int pageNumber = (page ?? 1);
-
 
             var data = db.DM_ChucVu.Where(p => p.ChucVu.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
 
@@ -38,6 +44,7 @@ namespace QA.Controllers.tudanhgia
         }
 
         [HttpPost]
+        [MyValidateAccess(code = "chucvu", edit = 0)]
         public ActionResult create(DM_ChucVu chucvu)
         {
 
@@ -60,6 +67,7 @@ namespace QA.Controllers.tudanhgia
 
 
         [HttpPost]
+        [MyValidateAccess(code = "chucvu", edit = 0)]
         public ActionResult edit(DM_ChucVu chucvu)
         {
             if (String.IsNullOrEmpty(chucvu.ChucVu))
@@ -81,6 +89,7 @@ namespace QA.Controllers.tudanhgia
 
         }
         [HttpPost]
+        [MyValidateAccess(code = "chucvu", edit = 0)]
         public ActionResult delete(string id)
         {
             if (String.IsNullOrEmpty(id))

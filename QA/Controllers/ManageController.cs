@@ -74,7 +74,7 @@ namespace QA.Controllers
             };
             return View(model);
         }
-
+        /*
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
@@ -212,7 +212,7 @@ namespace QA.Controllers
             }
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
-
+        */
         //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()

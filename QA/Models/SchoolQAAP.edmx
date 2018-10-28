@@ -80,15 +80,18 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="AccessFailedCount" Type="int" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserGroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DM_BaoCaoTieuChuan">
           <Key>
             <PropertyRef Name="MaTruong" />
             <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="IDTieuChuan" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MoDau" Type="nvarchar(max)" />
           <Property Name="KetLuan" Type="nvarchar(max)" />
         </EntityType>
@@ -96,10 +99,11 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Key>
             <PropertyRef Name="MaTruong" />
             <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="Loai" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Loai" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loai" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TongSo" Type="int" />
           <Property Name="Nu" Type="int" />
           <Property Name="DanToc" Type="nvarchar" MaxLength="20" />
@@ -108,6 +112,8 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="ChuaDatChuan" Type="int" />
           <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
           <Property Name="STT" Type="int" />
+          <Property Name="ChuanHuyen" Type="int" />
+          <Property Name="ChuanTinh" Type="int" />
         </EntityType>
         <EntityType Name="DM_ChiSoMoTa">
           <Key>
@@ -150,16 +156,144 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="PGDDuyet" Type="bit" />
           <Property Name="TuDanhGia" Type="bit" />
         </EntityType>
-        <EntityType Name="DM_HocSinhNamHoc">
+        <EntityType Name="DM_DuKienMinhChung">
           <Key>
             <PropertyRef Name="MaTruong" />
             <PropertyRef Name="NamHoc" />
-            <PropertyRef Name="LopHoc" />
+            <PropertyRef Name="IDTieuChi" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="LopHoc" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SoLuong" Type="int" />
+          <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DuKienMC" Type="nvarchar(max)" />
+          <Property Name="NoiThuThap" Type="nvarchar(max)" />
+          <Property Name="Nhom" Type="nvarchar" MaxLength="100" />
+          <Property Name="CaNhan" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tuan" Type="nvarchar" MaxLength="50" />
+          <Property Name="TuNgay" Type="date" />
+          <Property Name="DenNgay" Type="date" />
+          <Property Name="ChiPhi" Type="money" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DM_GoiYMinhChung">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="GuiID" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NguoiLuu" Type="nvarchar" MaxLength="50" />
+          <Property Name="NguoiThuThap" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThoiGian" Type="nvarchar" MaxLength="200" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhMN">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Col1" Type="int" />
+          <Property Name="Col2" Type="int" />
+          <Property Name="Col3" Type="int" />
+          <Property Name="Col4" Type="int" />
+          <Property Name="Col5" Type="int" />
+          <Property Name="Col6" Type="int" />
+          <Property Name="Nu" Type="int" />
+          <Property Name="DanToc" Type="int" />
+          <Property Name="ChinhSach" Type="int" />
+          <Property Name="KhuyetTat" Type="int" />
+          <Property Name="TuyenMoi" Type="int" />
+          <Property Name="HaiBuoi" Type="int" />
+          <Property Name="BanTru" Type="int" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhTH">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lop1" Type="int" />
+          <Property Name="Lop2" Type="int" />
+          <Property Name="Lop3" Type="int" />
+          <Property Name="Lop4" Type="int" />
+          <Property Name="Lop5" Type="int" />
+          <Property Name="Nu" Type="int" />
+          <Property Name="DanToc" Type="int" />
+          <Property Name="ChinhSach" Type="int" />
+          <Property Name="KhuyetTat" Type="int" />
+          <Property Name="TuyenMoi" Type="int" />
+          <Property Name="LuuBan" Type="int" />
+          <Property Name="BoHoc" Type="int" />
+          <Property Name="HaiBuoi" Type="int" />
+          <Property Name="BanTru" Type="int" />
+          <Property Name="NoiTru" Type="int" />
+          <Property Name="TotNghiep" Type="int" />
+          <Property Name="TotNghiepNu" Type="int" />
+          <Property Name="TotNghiepDT" Type="int" />
+          <Property Name="GioiCapHuyen" Type="int" />
+          <Property Name="GioiCapTinh" Type="int" />
+          <Property Name="GioiCapQG" Type="int" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhTHCS">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lop6" Type="int" />
+          <Property Name="Lop7" Type="int" />
+          <Property Name="Lop8" Type="int" />
+          <Property Name="Lop9" Type="int" />
+          <Property Name="Nu" Type="int" />
+          <Property Name="DanToc" Type="int" />
+          <Property Name="ChinhSach" Type="int" />
+          <Property Name="KhuyetTat" Type="int" />
+          <Property Name="TuyenMoi" Type="int" />
+          <Property Name="LuuBan" Type="int" />
+          <Property Name="BoHoc" Type="int" />
+          <Property Name="HaiBuoi" Type="int" />
+          <Property Name="BanTru" Type="int" />
+          <Property Name="NoiTru" Type="int" />
+          <Property Name="TotNghiep" Type="int" />
+          <Property Name="TotNghiepNu" Type="int" />
+          <Property Name="TotNghiepDT" Type="int" />
+          <Property Name="GioiCapHuyen" Type="int" />
+          <Property Name="GioiCapTinh" Type="int" />
+          <Property Name="GioiCapQG" Type="int" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhTHPT">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lop10" Type="int" />
+          <Property Name="Lop11" Type="int" />
+          <Property Name="Lop12" Type="int" />
+          <Property Name="Nu" Type="int" />
+          <Property Name="DanToc" Type="int" />
+          <Property Name="ChinhSach" Type="int" />
+          <Property Name="KhuyetTat" Type="int" />
+          <Property Name="TuyenMoi" Type="int" />
+          <Property Name="LuuBan" Type="int" />
+          <Property Name="BoHoc" Type="int" />
+          <Property Name="HaiBuoi" Type="int" />
+          <Property Name="BanTru" Type="int" />
+          <Property Name="NoiTru" Type="int" />
+          <Property Name="TotNghiep" Type="int" />
+          <Property Name="TotNghiepNu" Type="int" />
+          <Property Name="TotNghiepDT" Type="int" />
+          <Property Name="GioiCapHuyen" Type="int" />
+          <Property Name="GioiCapTinh" Type="int" />
+          <Property Name="GioiCapQG" Type="int" />
         </EntityType>
         <EntityType Name="DM_HoiDongTuDanhGia">
           <Key>
@@ -169,6 +303,24 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MoDau" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DM_LopHocMN">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Col1" Type="int" />
+          <Property Name="Col2" Type="int" />
+          <Property Name="Col3" Type="int" />
+          <Property Name="Col4" Type="int" />
+          <Property Name="Col5" Type="int" />
+          <Property Name="Col6" Type="int" />
+          <Property Name="Col7" Type="int" />
+          <Property Name="Col8" Type="int" />
+          <Property Name="Col9" Type="int" />
+          <Property Name="Col10" Type="int" />
         </EntityType>
         <EntityType Name="DM_LopHocTH">
           <Key>
@@ -195,6 +347,17 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="Lop8" Type="int" />
           <Property Name="Lop9" Type="int" />
         </EntityType>
+        <EntityType Name="DM_LopHocTHPT">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lop10" Type="int" />
+          <Property Name="Lop11" Type="int" />
+          <Property Name="Lop12" Type="int" />
+        </EntityType>
         <EntityType Name="DM_MinhChung">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -209,6 +372,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="CoQuan" Type="nvarchar" MaxLength="200" />
           <Property Name="GhiChu" Type="nvarchar(max)" />
           <Property Name="LinkFile" Type="nvarchar" MaxLength="200" />
+          <Property Name="Hop" Type="nvarchar" MaxLength="10" />
           <Property Name="IDTieuChuan" Type="int" />
           <Property Name="IDTieuChi" Type="int" />
           <Property Name="STT" Type="int" />
@@ -279,6 +443,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MoDau" Type="nvarchar(max)" />
+          <Property Name="ThuKy" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DM_NLCSVCTaiChinh">
           <Key>
@@ -313,17 +478,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="LinkFile" Type="nvarchar" MaxLength="200" />
           <Property Name="ApDung" Type="bit" />
           <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="DM_SoLop">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-            <PropertyRef Name="LopHoc" />
-          </Key>
-          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="LopHoc" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SoLuong" Type="int" />
         </EntityType>
         <EntityType Name="DM_TapHuanTuDanhGia">
           <Key>
@@ -392,6 +546,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="Code" Type="nvarchar" MaxLength="50" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
           <Property Name="PhanLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cap" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="DM_TieuChi_DuKien">
           <Key>
@@ -407,18 +562,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="VatLuc" Type="nvarchar(max)" />
           <Property Name="ThoiDiem" Type="nvarchar(max)" />
           <Property Name="GhiChu" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="DM_TieuChuan">
-          <Key>
-            <PropertyRef Name="IDTieuChuan" />
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="MoDau" Type="nvarchar(max)" />
-          <Property Name="KetLuan" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DM_ToChucThucHien">
           <Key>
@@ -454,9 +597,10 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
         <EntityType Name="DM_VietTat">
           <Key>
             <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="VietTat" />
           </Key>
           <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="VietTat" Type="nvarchar" MaxLength="50" />
+          <Property Name="VietTat" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NoiDung" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="HT_CanBo">
@@ -474,6 +618,15 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="HT_GoiYMinhChung">
+          <Key>
+            <PropertyRef Name="GuiID" />
+          </Key>
+          <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDChiSo" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaMC" Type="nvarchar" MaxLength="20" />
+          <Property Name="TenMC" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="HT_LopHoc">
           <Key>
             <PropertyRef Name="MaKhoi" />
@@ -488,7 +641,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
           <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" />
           <Property Name="IDTieuChi" Type="int" />
-          <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
           <Property Name="Dat" Type="bit" />
         </EntityType>
         <EntityType Name="HT_TieuChi_ChiSo">
@@ -509,13 +662,10 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
             <PropertyRef Name="GuiID" />
           </Key>
           <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDQuyDinh" Type="nvarchar" MaxLength="20" />
           <Property Name="IDTieuChuan" Type="int" />
-          <Property Name="ThongTu" Type="nvarchar" MaxLength="20" />
-          <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
           <Property Name="NoiDung" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SchoolQAAP.dbo.UMS_GroupMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UMS_GroupMenu">
           <Key>
             <PropertyRef Name="Id" />
@@ -525,9 +675,8 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_GroupMenu' does not have a prim
           <Property Name="Position" Type="int" />
           <Property Name="Icon" Type="nvarchar" MaxLength="128" />
           <Property Name="IsActive" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SchoolQAAP.dbo.UMS_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UMS_Menu">
           <Key>
             <PropertyRef Name="Id" />
@@ -540,8 +689,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_Menu' does not have a primary k
           <Property Name="Position" Type="int" />
           <Property Name="Code" Type="nvarchar" MaxLength="128" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UMS_MenuGroupUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -551,6 +698,29 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="GroupUserId" Type="nvarchar" MaxLength="128" />
           <Property Name="CanEdit" Type="int" />
         </EntityType>
+        <EntityType Name="UMS_UserGroups">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="GroupID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="int" />
+        </EntityType>
+        <Function Name="GROUPUSER_GETLISTMENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="USER_CHECKACCESS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupId" Type="nvarchar" Mode="In" />
+          <Parameter Name="menuCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="USER_CHECKADMIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="USER_GETMENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="SchoolQAAPModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_BaoCaoTieuChuan" EntityType="Self.DM_BaoCaoTieuChuan" Schema="dbo" store:Type="Tables" />
@@ -558,10 +728,17 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <EntitySet Name="DM_ChiSoMoTa" EntityType="Self.DM_ChiSoMoTa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_DanhGiaTieuChi" EntityType="Self.DM_DanhGiaTieuChi" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_DuKienMinhChung" EntityType="Self.DM_DuKienMinhChung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_GoiYMinhChung" EntityType="Self.DM_GoiYMinhChung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_HocSinhMN" EntityType="Self.DM_HocSinhMN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_HocSinhTH" EntityType="Self.DM_HocSinhTH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_HocSinhTHCS" EntityType="Self.DM_HocSinhTHCS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_HocSinhTHPT" EntityType="Self.DM_HocSinhTHPT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_LopHocMN" EntityType="Self.DM_LopHocMN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_LopHocTH" EntityType="Self.DM_LopHocTH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_LopHocTHCS" EntityType="Self.DM_LopHocTHCS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_LopHocTHPT" EntityType="Self.DM_LopHocTHPT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_MinhChung" EntityType="Self.DM_MinhChung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_MucDichPhamVi" EntityType="Self.DM_MucDichPhamVi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_NamHoc" EntityType="Self.DM_NamHoc" Schema="dbo" store:Type="Tables" />
@@ -572,23 +749,26 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <EntitySet Name="DM_NLCSVCTaiChinh" EntityType="Self.DM_NLCSVCTaiChinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_PhongHoc" EntityType="Self.DM_PhongHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_QuyDinh" EntityType="Self.DM_QuyDinh" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DM_SoLop" EntityType="Self.DM_SoLop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="Self.DM_TapHuanTuDanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ThanhVien" EntityType="Self.DM_ThanhVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TieuChi_DuKien" EntityType="Self.DM_TieuChi_DuKien" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_ToChucThucHien" EntityType="Self.DM_ToChucThucHien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_VanDeKetLuan" EntityType="Self.DM_VanDeKetLuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_VietTat" EntityType="Self.DM_VietTat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HT_GoiYMinhChung" EntityType="Self.HT_GoiYMinhChung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_LopHoc" EntityType="Self.HT_LopHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_TieuChi" EntityType="Self.HT_TieuChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_TieuChi_ChiSo" EntityType="Self.HT_TieuChi_ChiSo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HT_TieuChuan" EntityType="Self.HT_TieuChuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMS_UserGroups" EntityType="Self.UMS_UserGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [__MigrationHistory].[MigrationId] AS [MigrationId], 
@@ -624,34 +804,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
     [AspNetUserRoles].[RoleId] AS [RoleId]
     FROM [dbo].[AspNetUserRoles] AS [AspNetUserRoles]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UMS_GroupMenu].[Id] AS [Id], 
-    [UMS_GroupMenu].[Name] AS [Name], 
-    [UMS_GroupMenu].[Position] AS [Position], 
-    [UMS_GroupMenu].[Icon] AS [Icon], 
-    [UMS_GroupMenu].[IsActive] AS [IsActive]
-    FROM [dbo].[UMS_GroupMenu] AS [UMS_GroupMenu]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UMS_Menu].[Id] AS [Id], 
-    [UMS_Menu].[Name] AS [Name], 
-    [UMS_Menu].[Link] AS [Link], 
-    [UMS_Menu].[Icon] AS [Icon], 
-    [UMS_Menu].[GroupMenuId] AS [GroupMenuId], 
-    [UMS_Menu].[Position] AS [Position], 
-    [UMS_Menu].[Code] AS [Code]
-    FROM [dbo].[UMS_Menu] AS [UMS_Menu]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UMS_MenuGroupUser].[Id] AS [Id], 
-    [UMS_MenuGroupUser].[MenuId] AS [MenuId], 
-    [UMS_MenuGroupUser].[GroupUserId] AS [GroupUserId], 
-    [UMS_MenuGroupUser].[CanEdit] AS [CanEdit]
-    FROM [dbo].[UMS_MenuGroupUser] AS [UMS_MenuGroupUser]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -675,23 +827,15 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <FunctionImport Name="NhomDanhGia_ThanhVien" ReturnType="Collection(SchoolQAAPModel.NhomDanhGia_ThanhVien_Result)">
           <Parameter Name="manhom" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="USER_CHECKACCESS" ReturnType="Collection(SchoolQAAPModel.USER_CHECKACCESS_Result)">
-            <Parameter Name="groupId" Mode="In" Type="String" />
-            <Parameter Name="menuCode" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="USER_GETMENU">
           <Parameter Name="user" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USER_GETROLE">
           <Parameter Name="user" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="AspNetUsers" EntityType="SchoolQAAPModel.AspNetUser" />
-          <EntitySet Name="DM_BaoCaoTieuChuan" EntityType="SchoolQAAPModel.DM_BaoCaoTieuChuan" />
-          <EntitySet Name="DM_CanBoCNV" EntityType="SchoolQAAPModel.DM_CanBoCNV" />
           <EntitySet Name="DM_ChiSoMoTa" EntityType="SchoolQAAPModel.DM_ChiSoMoTa" />
           <EntitySet Name="DM_ChucVu" EntityType="SchoolQAAPModel.DM_ChucVu" />
           <EntitySet Name="DM_DanhGiaTieuChi" EntityType="SchoolQAAPModel.DM_DanhGiaTieuChi" />
-          <EntitySet Name="DM_HocSinhNamHoc" EntityType="SchoolQAAPModel.DM_HocSinhNamHoc" />
           <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="SchoolQAAPModel.DM_HoiDongTuDanhGia" />
           <EntitySet Name="DM_LopHocTH" EntityType="SchoolQAAPModel.DM_LopHocTH" />
           <EntitySet Name="DM_LopHocTHCS" EntityType="SchoolQAAPModel.DM_LopHocTHCS" />
@@ -700,36 +844,60 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <EntitySet Name="DM_NhiemVu" EntityType="SchoolQAAPModel.DM_NhiemVu" />
           <EntitySet Name="DM_NhomDanhGia" EntityType="SchoolQAAPModel.DM_NhomDanhGia" />
           <EntitySet Name="DM_NhomDanhGiaChiTiet" EntityType="SchoolQAAPModel.DM_NhomDanhGiaChiTiet" />
-          <EntitySet Name="DM_NhomTuDanhGia" EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" />
           <EntitySet Name="DM_NLCSVCTaiChinh" EntityType="SchoolQAAPModel.DM_NLCSVCTaiChinh" />
           <EntitySet Name="DM_PhongHoc" EntityType="SchoolQAAPModel.DM_PhongHoc" />
           <EntitySet Name="DM_QuyDinh" EntityType="SchoolQAAPModel.DM_QuyDinh" />
-          <EntitySet Name="DM_SoLop" EntityType="SchoolQAAPModel.DM_SoLop" />
           <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="SchoolQAAPModel.DM_TapHuanTuDanhGia" />
           <EntitySet Name="DM_ThanhVien" EntityType="SchoolQAAPModel.DM_ThanhVien" />
           <EntitySet Name="DM_ThoiGianBieu" EntityType="SchoolQAAPModel.DM_ThoiGianBieu" />
-          <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
           <EntitySet Name="DM_ToChucThucHien" EntityType="SchoolQAAPModel.DM_ToChucThucHien" />
           <EntitySet Name="DM_VanBan" EntityType="SchoolQAAPModel.DM_VanBan" />
           <EntitySet Name="DM_VanDeKetLuan" EntityType="SchoolQAAPModel.DM_VanDeKetLuan" />
-          <EntitySet Name="DM_VietTat" EntityType="SchoolQAAPModel.DM_VietTat" />
           <EntitySet Name="HT_CanBo" EntityType="SchoolQAAPModel.HT_CanBo" />
           <EntitySet Name="HT_CapHoc" EntityType="SchoolQAAPModel.HT_CapHoc" />
-          <EntitySet Name="HT_LopHoc" EntityType="SchoolQAAPModel.HT_LopHoc" />
           <EntitySet Name="HT_TieuChi_ChiSo" EntityType="SchoolQAAPModel.HT_TieuChi_ChiSo" />
-          <EntitySet Name="HT_TieuChuan" EntityType="SchoolQAAPModel.HT_TieuChuan" />
           <EntitySet Name="C__MigrationHistory" EntityType="SchoolQAAPModel.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="SchoolQAAPModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="SchoolQAAPModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="SchoolQAAPModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUserRoles" EntityType="SchoolQAAPModel.AspNetUserRole" />
+          <EntitySet Name="UMS_MenuGroupUser" EntityType="SchoolQAAPModel.UMS_MenuGroupUser" />
+          <EntitySet Name="DM_TieuChi_DuKien" EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" />
+          <EntitySet Name="DM_VietTat" EntityType="SchoolQAAPModel.DM_VietTat" />
+          <EntitySet Name="DM_CanBoCNV" EntityType="SchoolQAAPModel.DM_CanBoCNV" />
+          <EntitySet Name="DM_HocSinhTH" EntityType="SchoolQAAPModel.DM_HocSinhTH" />
+          <EntitySet Name="DM_HocSinhTHCS" EntityType="SchoolQAAPModel.DM_HocSinhTHCS" />
+          <EntitySet Name="HT_LopHoc" EntityType="SchoolQAAPModel.HT_LopHoc" />
           <EntitySet Name="UMS_GroupMenu" EntityType="SchoolQAAPModel.UMS_GroupMenu" />
           <EntitySet Name="UMS_Menu" EntityType="SchoolQAAPModel.UMS_Menu" />
-          <EntitySet Name="UMS_MenuGroupUser" EntityType="SchoolQAAPModel.UMS_MenuGroupUser" />
-          <EntitySet Name="DM_TieuChuan" EntityType="SchoolQAAPModel.DM_TieuChuan" />
+          <FunctionImport Name="GROUPUSER_GETLISTMENU" ReturnType="Collection(SchoolQAAPModel.GROUPUSER_GETLISTMENU_Result)">
+          <Parameter Name="groupId" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="UMS_UserGroups" EntityType="SchoolQAAPModel.UMS_UserGroups" />
+          <FunctionImport Name="USER_GETMENU1" ReturnType="Collection(SchoolQAAPModel.USER_GETMENU1_Result)">
+          <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="AspNetUsers" EntityType="SchoolQAAPModel.AspNetUser" />
+          <EntitySet Name="DM_NhomTuDanhGia" EntityType="SchoolQAAPModel.DM_NhomTuDanhGia" />
+          <FunctionImport Name="USER_CHECKACCESS" ReturnType="Collection(SchoolQAAPModel.USER_CHECKACCESS_Result)">
+            <Parameter Name="groupId" Mode="In" Type="String" />
+            <Parameter Name="menuCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USER_CHECKADMIN" ReturnType="Collection(SchoolQAAPModel.USER_CHECKADMIN_Result)">
+          <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="HT_TieuChuan" EntityType="SchoolQAAPModel.HT_TieuChuan" />
           <EntitySet Name="HT_TieuChi" EntityType="SchoolQAAPModel.HT_TieuChi" />
-          <EntitySet Name="DM_TieuChi_DuKien" EntityType="SchoolQAAPModel.DM_TieuChi_DuKien" />
+          <EntitySet Name="DM_ThongTinChung" EntityType="SchoolQAAPModel.DM_ThongTinChung" />
+          <EntitySet Name="DM_BaoCaoTieuChuan" EntityType="SchoolQAAPModel.DM_BaoCaoTieuChuan" />
           <EntitySet Name="DM_MinhChung" EntityType="SchoolQAAPModel.DM_MinhChung" />
+          <EntitySet Name="DM_DuKienMinhChung" EntityType="SchoolQAAPModel.DM_DuKienMinhChung" />
+          <EntitySet Name="HT_GoiYMinhChung" EntityType="SchoolQAAPModel.HT_GoiYMinhChung" />
+          <EntitySet Name="DM_GoiYMinhChung" EntityType="SchoolQAAPModel.DM_GoiYMinhChung" />
+          <EntitySet Name="DM_LopHocTHPT" EntityType="SchoolQAAPModel.DM_LopHocTHPT" />
+          <EntitySet Name="DM_HocSinhTHPT" EntityType="SchoolQAAPModel.DM_HocSinhTHPT" />
+          <EntitySet Name="DM_LopHocMN" EntityType="SchoolQAAPModel.DM_LopHocMN" />
+          <EntitySet Name="DM_HocSinhMN" EntityType="SchoolQAAPModel.DM_HocSinhMN" />
           </EntityContainer>
         <ComplexType Name="GET_NHOMDANHGIA_Result">
           <Property Type="String" Name="MaNhom" Nullable="false" MaxLength="10" />
@@ -775,58 +943,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Type="String" Name="ChucVu" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="TruongNhom" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="USER_CHECKACCESS_Result">
-          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
-          <Property Type="String" Name="MenuId" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="GroupUserId" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="CanEdit" Nullable="true" />
-        </ComplexType>
-        <EntityType Name="AspNetUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" />
-          <Property Name="AccessFailedCount" Type="Int32" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DM_BaoCaoTieuChuan">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IDTieuChuan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DM_CanBoCNV">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Loai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TongSo" Type="Int32" />
-          <Property Name="Nu" Type="Int32" />
-          <Property Name="DanToc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="DatChuan" Type="Int32" />
-          <Property Name="TrenChuan" Type="Int32" />
-          <Property Name="ChuaDatChuan" Type="Int32" />
-          <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="STT" Type="Int32" />
-        </EntityType>
         <EntityType Name="DM_ChiSoMoTa">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -867,17 +983,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="MaNhom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="PGDDuyet" Type="Boolean" />
           <Property Name="TuDanhGia" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="DM_HocSinhNamHoc">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-            <PropertyRef Name="LopHoc" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LopHoc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SoLuong" Type="Int32" />
         </EntityType>
         <EntityType Name="DM_HoiDongTuDanhGia">
           <Key>
@@ -971,15 +1076,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="MaNhanVien" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TruongNhom" Type="Boolean" />
         </EntityType>
-        <EntityType Name="DM_NhomTuDanhGia">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DM_NLCSVCTaiChinh">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -1013,17 +1109,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="LinkFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ApDung" Type="Boolean" />
           <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DM_SoLop">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-            <PropertyRef Name="LopHoc" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LopHoc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SoLuong" Type="Int32" />
         </EntityType>
         <EntityType Name="DM_TapHuanTuDanhGia">
           <Key>
@@ -1064,35 +1149,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="DenNgay" Type="DateTime" Precision="0" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DM_ThongTinChung">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TenTruongMoi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="TenTruongCu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CoQuanChuQuan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="TinhThanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="QuanHuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhuongXa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HieuTruong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChuanQuocGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NamThanhLap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SoDiemTruong" Type="Int32" />
-          <Property Name="Loai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="VungKhoKhan" Type="Boolean" />
-          <Property Name="LienKetNuocNgoai" Type="Boolean" />
-          <Property Name="Khac" Type="Boolean" />
-          <Property Name="GhiChuKhac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DM_ToChucThucHien">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -1124,14 +1180,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="DatVanDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DM_VietTat">
-          <Key>
-            <PropertyRef Name="MaTruong" />
-          </Key>
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="VietTat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NoiDung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="HT_CanBo">
           <Key>
             <PropertyRef Name="MaCanBo" />
@@ -1147,13 +1195,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="IDCapHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="HT_LopHoc">
-          <Key>
-            <PropertyRef Name="MaKhoi" />
-          </Key>
-          <Property Name="MaKhoi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LopHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="HT_TieuChi_ChiSo">
           <Key>
             <PropertyRef Name="GuiID" />
@@ -1166,16 +1207,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GoiY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Muc" Type="Int32" />
-        </EntityType>
-        <EntityType Name="HT_TieuChuan">
-          <Key>
-            <PropertyRef Name="GuiID" />
-          </Key>
-          <Property Name="GuiID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDTieuChuan" Type="Int32" />
-          <Property Name="ThongTu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -1225,28 +1256,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="UMS_GroupMenu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Position" Type="Int32" />
-          <Property Name="Icon" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Int32" />
-        </EntityType>
-        <EntityType Name="UMS_Menu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Icon" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="GroupMenuId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Position" Type="Int32" />
-          <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="UMS_MenuGroupUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -1255,28 +1264,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="MenuId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="GroupUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CanEdit" Type="Int32" />
-        </EntityType>
-        <EntityType Name="DM_TieuChuan">
-          <Key>
-            <PropertyRef Name="IDTieuChuan" />
-            <PropertyRef Name="MaTruong" />
-            <PropertyRef Name="NamHoc" />
-          </Key>
-          <Property Name="IDTieuChuan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="HT_TieuChi">
-          <Key>
-            <PropertyRef Name="GuiID" />
-          </Key>
-          <Property Name="GuiID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDTieuChuan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDTieuChi" Type="Int32" />
-          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Dat" Type="Boolean" />
         </EntityType>
         <EntityType Name="DM_TieuChi_DuKien">
           <Key>
@@ -1293,6 +1280,269 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="ThoiDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="DM_VietTat">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="VietTat" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VietTat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_CanBoCNV">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="Loai" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Loai" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TongSo" Type="Int32" />
+          <Property Name="Nu" Type="Int32" />
+          <Property Name="DanToc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DatChuan" Type="Int32" />
+          <Property Name="TrenChuan" Type="Int32" />
+          <Property Name="ChuaDatChuan" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STT" Type="Int32" />
+          <Property Name="ChuanHuyen" Type="Int32" />
+          <Property Name="ChuanTinh" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhTH">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Lop1" Type="Int32" />
+          <Property Name="Lop2" Type="Int32" />
+          <Property Name="Lop3" Type="Int32" />
+          <Property Name="Lop4" Type="Int32" />
+          <Property Name="Lop5" Type="Int32" />
+          <Property Name="Nu" Type="Int32" />
+          <Property Name="DanToc" Type="Int32" />
+          <Property Name="ChinhSach" Type="Int32" />
+          <Property Name="KhuyetTat" Type="Int32" />
+          <Property Name="TuyenMoi" Type="Int32" />
+          <Property Name="LuuBan" Type="Int32" />
+          <Property Name="BoHoc" Type="Int32" />
+          <Property Name="HaiBuoi" Type="Int32" />
+          <Property Name="BanTru" Type="Int32" />
+          <Property Name="NoiTru" Type="Int32" />
+          <Property Name="TotNghiep" Type="Int32" />
+          <Property Name="TotNghiepNu" Type="Int32" />
+          <Property Name="TotNghiepDT" Type="Int32" />
+          <Property Name="GioiCapHuyen" Type="Int32" />
+          <Property Name="GioiCapTinh" Type="Int32" />
+          <Property Name="GioiCapQG" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhTHCS">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Lop6" Type="Int32" />
+          <Property Name="Lop7" Type="Int32" />
+          <Property Name="Lop8" Type="Int32" />
+          <Property Name="Lop9" Type="Int32" />
+          <Property Name="Nu" Type="Int32" />
+          <Property Name="DanToc" Type="Int32" />
+          <Property Name="ChinhSach" Type="Int32" />
+          <Property Name="KhuyetTat" Type="Int32" />
+          <Property Name="TuyenMoi" Type="Int32" />
+          <Property Name="LuuBan" Type="Int32" />
+          <Property Name="BoHoc" Type="Int32" />
+          <Property Name="HaiBuoi" Type="Int32" />
+          <Property Name="BanTru" Type="Int32" />
+          <Property Name="NoiTru" Type="Int32" />
+          <Property Name="TotNghiep" Type="Int32" />
+          <Property Name="TotNghiepNu" Type="Int32" />
+          <Property Name="TotNghiepDT" Type="Int32" />
+          <Property Name="GioiCapHuyen" Type="Int32" />
+          <Property Name="GioiCapTinh" Type="Int32" />
+          <Property Name="GioiCapQG" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HT_LopHoc">
+          <Key>
+            <PropertyRef Name="MaKhoi" />
+          </Key>
+          <Property Name="MaKhoi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LopHoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UMS_GroupMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UMS_Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GroupMenuId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="GROUPUSER_GETLISTMENU_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="Link" Nullable="true" />
+          <Property Type="String" Name="Icon" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="GroupMenuId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="Position" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="groupUserId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="canedit" Nullable="true" />
+          <Property Type="String" Name="groupName" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="UMS_UserGroups">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GroupID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="USER_GETMENU1_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="Link" Nullable="true" />
+          <Property Type="String" Name="Icon" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="GroupMenuId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="Position" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="groupName" Nullable="true" />
+          <Property Type="String" Name="GroupIcon" Nullable="true" MaxLength="128" />
+        </ComplexType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" />
+          <Property Name="AccessFailedCount" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaTruong" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_NhomTuDanhGia">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThuKy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="USER_CHECKACCESS_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="MenuId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="GroupUserId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="CanEdit" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USER_CHECKADMIN_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="true" />
+          <Property Type="String" Name="PasswordHash" Nullable="true" />
+          <Property Type="String" Name="SecurityStamp" Nullable="true" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="PhoneNumberConfirmed" Nullable="true" />
+          <Property Type="Boolean" Name="TwoFactorEnabled" Nullable="true" />
+          <Property Type="DateTime" Name="LockoutEndDateUtc" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="LockoutEnabled" Nullable="true" />
+          <Property Type="Int32" Name="AccessFailedCount" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MaTruong" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="UserGroup" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HoTen" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="HT_TieuChuan">
+          <Key>
+            <PropertyRef Name="GuiID" />
+          </Key>
+          <Property Name="GuiID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDQuyDinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDTieuChuan" Type="Int32" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HT_TieuChi">
+          <Key>
+            <PropertyRef Name="GuiID" />
+          </Key>
+          <Property Name="GuiID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDTieuChuan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDTieuChi" Type="Int32" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dat" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DM_ThongTinChung">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDCapHoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TenTruongMoi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TenTruongCu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CoQuanChuQuan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TinhThanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuanHuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhuongXa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HieuTruong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChuanQuocGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NamThanhLap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoDiemTruong" Type="Int32" />
+          <Property Name="Loai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="VungKhoKhan" Type="Boolean" />
+          <Property Name="LienKetNuocNgoai" Type="Boolean" />
+          <Property Name="Khac" Type="Boolean" />
+          <Property Name="GhiChuKhac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhanLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cap" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_BaoCaoTieuChuan">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="IDTieuChuan" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDTieuChuan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MoDau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KetLuan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="DM_MinhChung">
           <Key>
             <PropertyRef Name="MaTruong" />
@@ -1307,9 +1557,130 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
           <Property Name="CoQuan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LinkFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Hop" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IDTieuChuan" Type="Int32" />
           <Property Name="IDTieuChi" Type="Int32" />
           <Property Name="STT" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_DuKienMinhChung">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="IDTieuChi" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDTieuChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DuKienMC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoiThuThap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nhom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CaNhan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tuan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TuNgay" Type="DateTime" Precision="0" />
+          <Property Name="DenNgay" Type="DateTime" Precision="0" />
+          <Property Name="ChiPhi" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HT_GoiYMinhChung">
+          <Key>
+            <PropertyRef Name="GuiID" />
+          </Key>
+          <Property Name="GuiID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDChiSo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaMC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TenMC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_GoiYMinhChung">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+            <PropertyRef Name="GuiID" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GuiID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiLuu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NguoiThuThap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiGian" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_LopHocTHPT">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Lop10" Type="Int32" />
+          <Property Name="Lop11" Type="Int32" />
+          <Property Name="Lop12" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhTHPT">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Lop10" Type="Int32" />
+          <Property Name="Lop11" Type="Int32" />
+          <Property Name="Lop12" Type="Int32" />
+          <Property Name="Nu" Type="Int32" />
+          <Property Name="DanToc" Type="Int32" />
+          <Property Name="ChinhSach" Type="Int32" />
+          <Property Name="KhuyetTat" Type="Int32" />
+          <Property Name="TuyenMoi" Type="Int32" />
+          <Property Name="LuuBan" Type="Int32" />
+          <Property Name="BoHoc" Type="Int32" />
+          <Property Name="HaiBuoi" Type="Int32" />
+          <Property Name="BanTru" Type="Int32" />
+          <Property Name="NoiTru" Type="Int32" />
+          <Property Name="TotNghiep" Type="Int32" />
+          <Property Name="TotNghiepNu" Type="Int32" />
+          <Property Name="TotNghiepDT" Type="Int32" />
+          <Property Name="GioiCapHuyen" Type="Int32" />
+          <Property Name="GioiCapTinh" Type="Int32" />
+          <Property Name="GioiCapQG" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_LopHocMN">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Col1" Type="Int32" />
+          <Property Name="Col2" Type="Int32" />
+          <Property Name="Col3" Type="Int32" />
+          <Property Name="Col4" Type="Int32" />
+          <Property Name="Col5" Type="Int32" />
+          <Property Name="Col6" Type="Int32" />
+          <Property Name="Col7" Type="Int32" />
+          <Property Name="Col8" Type="Int32" />
+          <Property Name="Col9" Type="Int32" />
+          <Property Name="Col10" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DM_HocSinhMN">
+          <Key>
+            <PropertyRef Name="MaTruong" />
+            <PropertyRef Name="NamHoc" />
+          </Key>
+          <Property Name="MaTruong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NamHoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Col1" Type="Int32" />
+          <Property Name="Col2" Type="Int32" />
+          <Property Name="Col3" Type="Int32" />
+          <Property Name="Col4" Type="Int32" />
+          <Property Name="Col5" Type="Int32" />
+          <Property Name="Col6" Type="Int32" />
+          <Property Name="Nu" Type="Int32" />
+          <Property Name="DanToc" Type="Int32" />
+          <Property Name="ChinhSach" Type="Int32" />
+          <Property Name="KhuyetTat" Type="Int32" />
+          <Property Name="TuyenMoi" Type="Int32" />
+          <Property Name="HaiBuoi" Type="Int32" />
+          <Property Name="BanTru" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1317,53 +1688,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SchoolQAAPModelStoreContainer" CdmEntityContainer="SchoolQAAPEntities">
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_BaoCaoTieuChuan">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_BaoCaoTieuChuan">
-              <MappingFragment StoreEntitySet="DM_BaoCaoTieuChuan">
-                <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
-                <ScalarProperty Name="MoDau" ColumnName="MoDau" />
-                <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_CanBoCNV">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_CanBoCNV">
-              <MappingFragment StoreEntitySet="DM_CanBoCNV">
-                <ScalarProperty Name="STT" ColumnName="STT" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="ChuaDatChuan" ColumnName="ChuaDatChuan" />
-                <ScalarProperty Name="TrenChuan" ColumnName="TrenChuan" />
-                <ScalarProperty Name="DatChuan" ColumnName="DatChuan" />
-                <ScalarProperty Name="DanToc" ColumnName="DanToc" />
-                <ScalarProperty Name="Nu" ColumnName="Nu" />
-                <ScalarProperty Name="TongSo" ColumnName="TongSo" />
-                <ScalarProperty Name="Loai" ColumnName="Loai" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_ChiSoMoTa">
             <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ChiSoMoTa">
               <MappingFragment StoreEntitySet="DM_ChiSoMoTa">
@@ -1399,16 +1723,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
                 <ScalarProperty Name="MoTaHienTrang" ColumnName="MoTaHienTrang" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_HocSinhNamHoc">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_HocSinhNamHoc">
-              <MappingFragment StoreEntitySet="DM_HocSinhNamHoc">
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1503,15 +1817,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_NhomTuDanhGia">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NhomTuDanhGia">
-              <MappingFragment StoreEntitySet="DM_NhomTuDanhGia">
-                <ScalarProperty Name="MoDau" ColumnName="MoDau" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_NLCSVCTaiChinh">
             <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NLCSVCTaiChinh">
               <MappingFragment StoreEntitySet="DM_NLCSVCTaiChinh">
@@ -1544,16 +1849,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
                 <ScalarProperty Name="TenQuyDinh" ColumnName="TenQuyDinh" />
                 <ScalarProperty Name="SoHieu" ColumnName="SoHieu" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DM_SoLop">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_SoLop">
-              <MappingFragment StoreEntitySet="DM_SoLop">
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1594,36 +1889,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_ThongTinChung">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
-              <MappingFragment StoreEntitySet="DM_ThongTinChung">
-                <ScalarProperty Name="PhanLoai" ColumnName="PhanLoai" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="GhiChuKhac" ColumnName="GhiChuKhac" />
-                <ScalarProperty Name="Khac" ColumnName="Khac" />
-                <ScalarProperty Name="LienKetNuocNgoai" ColumnName="LienKetNuocNgoai" />
-                <ScalarProperty Name="VungKhoKhan" ColumnName="VungKhoKhan" />
-                <ScalarProperty Name="Loai" ColumnName="Loai" />
-                <ScalarProperty Name="SoDiemTruong" ColumnName="SoDiemTruong" />
-                <ScalarProperty Name="NamThanhLap" ColumnName="NamThanhLap" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="ChuanQuocGia" ColumnName="ChuanQuocGia" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-                <ScalarProperty Name="HieuTruong" ColumnName="HieuTruong" />
-                <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
-                <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
-                <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
-                <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
-                <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
-                <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
-                <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
-                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_ToChucThucHien">
             <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ToChucThucHien">
               <MappingFragment StoreEntitySet="DM_ToChucThucHien">
@@ -1656,15 +1921,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_VietTat">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_VietTat">
-              <MappingFragment StoreEntitySet="DM_VietTat">
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="VietTat" ColumnName="VietTat" />
-                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="HT_CanBo">
             <EntityTypeMapping TypeName="SchoolQAAPModel.HT_CanBo">
               <MappingFragment StoreEntitySet="HT_CanBo">
@@ -1682,14 +1938,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HT_LopHoc">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_LopHoc">
-              <MappingFragment StoreEntitySet="HT_LopHoc">
-                <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
-                <ScalarProperty Name="MaKhoi" ColumnName="MaKhoi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="HT_TieuChi_ChiSo">
             <EntityTypeMapping TypeName="SchoolQAAPModel.HT_TieuChi_ChiSo">
               <MappingFragment StoreEntitySet="HT_TieuChi_ChiSo">
@@ -1700,17 +1948,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="ChiSo" ColumnName="ChiSo" />
                 <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
-                <ScalarProperty Name="GuiID" ColumnName="GuiID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HT_TieuChuan">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_TieuChuan">
-              <MappingFragment StoreEntitySet="HT_TieuChuan">
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
-                <ScalarProperty Name="ThongTu" ColumnName="ThongTu" />
-                <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
                 <ScalarProperty Name="GuiID" ColumnName="GuiID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1760,9 +1997,127 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UMS_MenuGroupUser">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.UMS_MenuGroupUser">
+              <MappingFragment StoreEntitySet="UMS_MenuGroupUser">
+                <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
+                <ScalarProperty Name="GroupUserId" ColumnName="GroupUserId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_TieuChi_DuKien">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi_DuKien">
+              <MappingFragment StoreEntitySet="DM_TieuChi_DuKien">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="ThoiDiem" ColumnName="ThoiDiem" />
+                <ScalarProperty Name="VatLuc" ColumnName="VatLuc" />
+                <ScalarProperty Name="NhanLuc" ColumnName="NhanLuc" />
+                <ScalarProperty Name="HoatDong" ColumnName="HoatDong" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_VietTat">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_VietTat">
+              <MappingFragment StoreEntitySet="DM_VietTat">
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="VietTat" ColumnName="VietTat" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_CanBoCNV">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_CanBoCNV">
+              <MappingFragment StoreEntitySet="DM_CanBoCNV">
+                <ScalarProperty Name="ChuanTinh" ColumnName="ChuanTinh" />
+                <ScalarProperty Name="ChuanHuyen" ColumnName="ChuanHuyen" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="ChuaDatChuan" ColumnName="ChuaDatChuan" />
+                <ScalarProperty Name="TrenChuan" ColumnName="TrenChuan" />
+                <ScalarProperty Name="DatChuan" ColumnName="DatChuan" />
+                <ScalarProperty Name="DanToc" ColumnName="DanToc" />
+                <ScalarProperty Name="Nu" ColumnName="Nu" />
+                <ScalarProperty Name="TongSo" ColumnName="TongSo" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_HocSinhTH">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_HocSinhTH">
+              <MappingFragment StoreEntitySet="DM_HocSinhTH">
+                <ScalarProperty Name="GioiCapQG" ColumnName="GioiCapQG" />
+                <ScalarProperty Name="GioiCapTinh" ColumnName="GioiCapTinh" />
+                <ScalarProperty Name="GioiCapHuyen" ColumnName="GioiCapHuyen" />
+                <ScalarProperty Name="TotNghiepDT" ColumnName="TotNghiepDT" />
+                <ScalarProperty Name="TotNghiepNu" ColumnName="TotNghiepNu" />
+                <ScalarProperty Name="TotNghiep" ColumnName="TotNghiep" />
+                <ScalarProperty Name="NoiTru" ColumnName="NoiTru" />
+                <ScalarProperty Name="BanTru" ColumnName="BanTru" />
+                <ScalarProperty Name="HaiBuoi" ColumnName="HaiBuoi" />
+                <ScalarProperty Name="BoHoc" ColumnName="BoHoc" />
+                <ScalarProperty Name="LuuBan" ColumnName="LuuBan" />
+                <ScalarProperty Name="TuyenMoi" ColumnName="TuyenMoi" />
+                <ScalarProperty Name="KhuyetTat" ColumnName="KhuyetTat" />
+                <ScalarProperty Name="ChinhSach" ColumnName="ChinhSach" />
+                <ScalarProperty Name="DanToc" ColumnName="DanToc" />
+                <ScalarProperty Name="Nu" ColumnName="Nu" />
+                <ScalarProperty Name="Lop5" ColumnName="Lop5" />
+                <ScalarProperty Name="Lop4" ColumnName="Lop4" />
+                <ScalarProperty Name="Lop3" ColumnName="Lop3" />
+                <ScalarProperty Name="Lop2" ColumnName="Lop2" />
+                <ScalarProperty Name="Lop1" ColumnName="Lop1" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_HocSinhTHCS">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_HocSinhTHCS">
+              <MappingFragment StoreEntitySet="DM_HocSinhTHCS">
+                <ScalarProperty Name="GioiCapQG" ColumnName="GioiCapQG" />
+                <ScalarProperty Name="GioiCapTinh" ColumnName="GioiCapTinh" />
+                <ScalarProperty Name="GioiCapHuyen" ColumnName="GioiCapHuyen" />
+                <ScalarProperty Name="TotNghiepDT" ColumnName="TotNghiepDT" />
+                <ScalarProperty Name="TotNghiepNu" ColumnName="TotNghiepNu" />
+                <ScalarProperty Name="TotNghiep" ColumnName="TotNghiep" />
+                <ScalarProperty Name="NoiTru" ColumnName="NoiTru" />
+                <ScalarProperty Name="BanTru" ColumnName="BanTru" />
+                <ScalarProperty Name="HaiBuoi" ColumnName="HaiBuoi" />
+                <ScalarProperty Name="BoHoc" ColumnName="BoHoc" />
+                <ScalarProperty Name="LuuBan" ColumnName="LuuBan" />
+                <ScalarProperty Name="TuyenMoi" ColumnName="TuyenMoi" />
+                <ScalarProperty Name="KhuyetTat" ColumnName="KhuyetTat" />
+                <ScalarProperty Name="ChinhSach" ColumnName="ChinhSach" />
+                <ScalarProperty Name="DanToc" ColumnName="DanToc" />
+                <ScalarProperty Name="Nu" ColumnName="Nu" />
+                <ScalarProperty Name="Lop9" ColumnName="Lop9" />
+                <ScalarProperty Name="Lop8" ColumnName="Lop8" />
+                <ScalarProperty Name="Lop7" ColumnName="Lop7" />
+                <ScalarProperty Name="Lop6" ColumnName="Lop6" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HT_LopHoc">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_LopHoc">
+              <MappingFragment StoreEntitySet="HT_LopHoc">
+                <ScalarProperty Name="LopHoc" ColumnName="LopHoc" />
+                <ScalarProperty Name="MaKhoi" ColumnName="MaKhoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UMS_GroupMenu">
             <EntityTypeMapping TypeName="SchoolQAAPModel.UMS_GroupMenu">
               <MappingFragment StoreEntitySet="UMS_GroupMenu">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
@@ -1784,24 +2139,116 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UMS_MenuGroupUser">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.UMS_MenuGroupUser">
-              <MappingFragment StoreEntitySet="UMS_MenuGroupUser">
-                <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
-                <ScalarProperty Name="GroupUserId" ColumnName="GroupUserId" />
-                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <FunctionImportMapping FunctionImportName="GROUPUSER_GETLISTMENU" FunctionName="SchoolQAAPModel.Store.GROUPUSER_GETLISTMENU">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolQAAPModel.GROUPUSER_GETLISTMENU_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="GroupMenuId" ColumnName="GroupMenuId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="groupUserId" ColumnName="groupUserId" />
+                <ScalarProperty Name="canedit" ColumnName="canedit" />
+                <ScalarProperty Name="groupName" ColumnName="groupName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="UMS_UserGroups">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.UMS_UserGroups">
+              <MappingFragment StoreEntitySet="UMS_UserGroups">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USER_GETMENU1" FunctionName="SchoolQAAPModel.Store.USER_GETMENU">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolQAAPModel.USER_GETMENU1_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="GroupMenuId" ColumnName="GroupMenuId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="groupName" ColumnName="groupName" />
+                <ScalarProperty Name="GroupIcon" ColumnName="GroupIcon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="UserGroup" ColumnName="UserGroup" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_TieuChuan">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChuan">
-              <MappingFragment StoreEntitySet="DM_TieuChuan">
-                <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
+          <EntitySetMapping Name="DM_NhomTuDanhGia">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_NhomTuDanhGia">
+              <MappingFragment StoreEntitySet="DM_NhomTuDanhGia">
+                <ScalarProperty Name="ThuKy" ColumnName="ThuKy" />
                 <ScalarProperty Name="MoDau" ColumnName="MoDau" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USER_CHECKACCESS" FunctionName="SchoolQAAPModel.Store.USER_CHECKACCESS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolQAAPModel.USER_CHECKACCESS_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="GroupUserId" ColumnName="GroupUserId" />
+                <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USER_CHECKADMIN" FunctionName="SchoolQAAPModel.Store.USER_CHECKADMIN">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolQAAPModel.USER_CHECKADMIN_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+                <ScalarProperty Name="UserGroup" ColumnName="UserGroup" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="HT_TieuChuan">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_TieuChuan">
+              <MappingFragment StoreEntitySet="HT_TieuChuan">
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
+                <ScalarProperty Name="IDQuyDinh" ColumnName="IDQuyDinh" />
+                <ScalarProperty Name="GuiID" ColumnName="GuiID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1816,17 +2263,45 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_TieuChi_DuKien">
-            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_TieuChi_DuKien">
-              <MappingFragment StoreEntitySet="DM_TieuChi_DuKien">
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="ThoiDiem" ColumnName="ThoiDiem" />
-                <ScalarProperty Name="VatLuc" ColumnName="VatLuc" />
-                <ScalarProperty Name="NhanLuc" ColumnName="NhanLuc" />
-                <ScalarProperty Name="HoatDong" ColumnName="HoatDong" />
+          <EntitySetMapping Name="DM_ThongTinChung">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
+              <MappingFragment StoreEntitySet="DM_ThongTinChung">
+                <ScalarProperty Name="Cap" ColumnName="Cap" />
+                <ScalarProperty Name="PhanLoai" ColumnName="PhanLoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="GhiChuKhac" ColumnName="GhiChuKhac" />
+                <ScalarProperty Name="Khac" ColumnName="Khac" />
+                <ScalarProperty Name="LienKetNuocNgoai" ColumnName="LienKetNuocNgoai" />
+                <ScalarProperty Name="VungKhoKhan" ColumnName="VungKhoKhan" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="SoDiemTruong" ColumnName="SoDiemTruong" />
+                <ScalarProperty Name="NamThanhLap" ColumnName="NamThanhLap" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ChuanQuocGia" ColumnName="ChuanQuocGia" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="HieuTruong" ColumnName="HieuTruong" />
+                <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
+                <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
+                <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
+                <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
+                <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
+                <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
+                <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_BaoCaoTieuChuan">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_BaoCaoTieuChuan">
+              <MappingFragment StoreEntitySet="DM_BaoCaoTieuChuan">
+                <ScalarProperty Name="KetLuan" ColumnName="KetLuan" />
+                <ScalarProperty Name="MoDau" ColumnName="MoDau" />
+                <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1836,12 +2311,132 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
                 <ScalarProperty Name="STT" ColumnName="STT" />
                 <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
                 <ScalarProperty Name="IDTieuChuan" ColumnName="IDTieuChuan" />
+                <ScalarProperty Name="Hop" ColumnName="Hop" />
                 <ScalarProperty Name="LinkFile" ColumnName="LinkFile" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
                 <ScalarProperty Name="CoQuan" ColumnName="CoQuan" />
                 <ScalarProperty Name="SoHieu" ColumnName="SoHieu" />
                 <ScalarProperty Name="TenMC" ColumnName="TenMC" />
                 <ScalarProperty Name="MaMC" ColumnName="MaMC" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_DuKienMinhChung">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_DuKienMinhChung">
+              <MappingFragment StoreEntitySet="DM_DuKienMinhChung">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="ChiPhi" ColumnName="ChiPhi" />
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="Tuan" ColumnName="Tuan" />
+                <ScalarProperty Name="CaNhan" ColumnName="CaNhan" />
+                <ScalarProperty Name="Nhom" ColumnName="Nhom" />
+                <ScalarProperty Name="NoiThuThap" ColumnName="NoiThuThap" />
+                <ScalarProperty Name="DuKienMC" ColumnName="DuKienMC" />
+                <ScalarProperty Name="IDTieuChi" ColumnName="IDTieuChi" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HT_GoiYMinhChung">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.HT_GoiYMinhChung">
+              <MappingFragment StoreEntitySet="HT_GoiYMinhChung">
+                <ScalarProperty Name="TenMC" ColumnName="TenMC" />
+                <ScalarProperty Name="MaMC" ColumnName="MaMC" />
+                <ScalarProperty Name="IDChiSo" ColumnName="IDChiSo" />
+                <ScalarProperty Name="GuiID" ColumnName="GuiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_GoiYMinhChung">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_GoiYMinhChung">
+              <MappingFragment StoreEntitySet="DM_GoiYMinhChung">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="NguoiThuThap" ColumnName="NguoiThuThap" />
+                <ScalarProperty Name="NguoiLuu" ColumnName="NguoiLuu" />
+                <ScalarProperty Name="GuiID" ColumnName="GuiID" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_LopHocTHPT">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_LopHocTHPT">
+              <MappingFragment StoreEntitySet="DM_LopHocTHPT">
+                <ScalarProperty Name="Lop12" ColumnName="Lop12" />
+                <ScalarProperty Name="Lop11" ColumnName="Lop11" />
+                <ScalarProperty Name="Lop10" ColumnName="Lop10" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_HocSinhTHPT">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_HocSinhTHPT">
+              <MappingFragment StoreEntitySet="DM_HocSinhTHPT">
+                <ScalarProperty Name="GioiCapQG" ColumnName="GioiCapQG" />
+                <ScalarProperty Name="GioiCapTinh" ColumnName="GioiCapTinh" />
+                <ScalarProperty Name="GioiCapHuyen" ColumnName="GioiCapHuyen" />
+                <ScalarProperty Name="TotNghiepDT" ColumnName="TotNghiepDT" />
+                <ScalarProperty Name="TotNghiepNu" ColumnName="TotNghiepNu" />
+                <ScalarProperty Name="TotNghiep" ColumnName="TotNghiep" />
+                <ScalarProperty Name="NoiTru" ColumnName="NoiTru" />
+                <ScalarProperty Name="BanTru" ColumnName="BanTru" />
+                <ScalarProperty Name="HaiBuoi" ColumnName="HaiBuoi" />
+                <ScalarProperty Name="BoHoc" ColumnName="BoHoc" />
+                <ScalarProperty Name="LuuBan" ColumnName="LuuBan" />
+                <ScalarProperty Name="TuyenMoi" ColumnName="TuyenMoi" />
+                <ScalarProperty Name="KhuyetTat" ColumnName="KhuyetTat" />
+                <ScalarProperty Name="ChinhSach" ColumnName="ChinhSach" />
+                <ScalarProperty Name="DanToc" ColumnName="DanToc" />
+                <ScalarProperty Name="Nu" ColumnName="Nu" />
+                <ScalarProperty Name="Lop12" ColumnName="Lop12" />
+                <ScalarProperty Name="Lop11" ColumnName="Lop11" />
+                <ScalarProperty Name="Lop10" ColumnName="Lop10" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_LopHocMN">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_LopHocMN">
+              <MappingFragment StoreEntitySet="DM_LopHocMN">
+                <ScalarProperty Name="Col10" ColumnName="Col10" />
+                <ScalarProperty Name="Col9" ColumnName="Col9" />
+                <ScalarProperty Name="Col8" ColumnName="Col8" />
+                <ScalarProperty Name="Col7" ColumnName="Col7" />
+                <ScalarProperty Name="Col6" ColumnName="Col6" />
+                <ScalarProperty Name="Col5" ColumnName="Col5" />
+                <ScalarProperty Name="Col4" ColumnName="Col4" />
+                <ScalarProperty Name="Col3" ColumnName="Col3" />
+                <ScalarProperty Name="Col2" ColumnName="Col2" />
+                <ScalarProperty Name="Col1" ColumnName="Col1" />
+                <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+                <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_HocSinhMN">
+            <EntityTypeMapping TypeName="SchoolQAAPModel.DM_HocSinhMN">
+              <MappingFragment StoreEntitySet="DM_HocSinhMN">
+                <ScalarProperty Name="BanTru" ColumnName="BanTru" />
+                <ScalarProperty Name="HaiBuoi" ColumnName="HaiBuoi" />
+                <ScalarProperty Name="TuyenMoi" ColumnName="TuyenMoi" />
+                <ScalarProperty Name="KhuyetTat" ColumnName="KhuyetTat" />
+                <ScalarProperty Name="ChinhSach" ColumnName="ChinhSach" />
+                <ScalarProperty Name="DanToc" ColumnName="DanToc" />
+                <ScalarProperty Name="Nu" ColumnName="Nu" />
+                <ScalarProperty Name="Col6" ColumnName="Col6" />
+                <ScalarProperty Name="Col5" ColumnName="Col5" />
+                <ScalarProperty Name="Col4" ColumnName="Col4" />
+                <ScalarProperty Name="Col3" ColumnName="Col3" />
+                <ScalarProperty Name="Col2" ColumnName="Col2" />
+                <ScalarProperty Name="Col1" ColumnName="Col1" />
                 <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
                 <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
               </MappingFragment>

@@ -381,6 +381,6 @@ D:\LapTrinh\APQA\QA\bin\Microsoft.AI.DependencyCollector.xml
 D:\LapTrinh\APQA\QA\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\LapTrinh\APQA\QA\bin\Microsoft.AI.WindowsServer.xml
 D:\LapTrinh\APQA\QA\bin\Microsoft.AI.Web.xml
-D:\LapTrinh\APQA\QA\obj\Debug\QA.csprojResolveAssemblyReference.cache
 D:\LapTrinh\APQA\QA\obj\Debug\QA.dll
 D:\LapTrinh\APQA\QA\obj\Debug\QA.pdb
+D:\LapTrinh\APQA\QA\obj\Debug\QA.csprojResolveAssemblyReference.cache

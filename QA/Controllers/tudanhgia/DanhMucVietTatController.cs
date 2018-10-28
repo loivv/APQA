@@ -13,7 +13,8 @@ namespace QA.Controllers.tudanhgia
         // GET: /DanhMucVietTat/
         public ActionResult Show()
         {
-            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDCapHoc == CapHoc).Select(x => new { ID = x.IDTieuChuan, NoiDung = x.NoiDung, IDTieuChuan = x.GuiID }).ToList();
+            var idquydinh = db.DM_QuyDinh.Where(p => p.IDCapHoc == CapHoc).Select(p => p.ID).FirstOrDefault();
+            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDQuyDinh == idquydinh).Select(x => new { ID = x.IDTieuChuan, NoiDung = x.NoiDung, IDTieuChuan = x.GuiID }).ToList();
             return View();
         }
 
@@ -53,6 +54,7 @@ namespace QA.Controllers.tudanhgia
             return Json(new ResultInfo() { error = 0, msg = "", data = vt }, JsonRequestBehavior.AllowGet);
 
         }
+         [HttpPost]
         public ActionResult edit(DM_VietTat vt)
         {
             if (String.IsNullOrEmpty(vt.NoiDung) || String.IsNullOrEmpty(vt.VietTat))

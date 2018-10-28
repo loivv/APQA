@@ -43,6 +43,7 @@ namespace QA.Controllers.kehoachtudanhgia
             else
             {
                 check.MoDau = tdg.MoDau;
+                check.ThuKy = tdg.ThuKy;
                 db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             }
             db.SaveChanges();

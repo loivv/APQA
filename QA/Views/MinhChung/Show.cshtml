@@ -20,9 +20,8 @@
                                 <th>STT</th>
                                 <th>Mã MC</th>
                                 <th>Tên MC</th>
-                                <th>Số , ngày ban hành, thời điểm quan sát, phỏng vấn</th>
-                                <th>Cơ quan ban hành</th>
-                                <th>Ghi chú</th>
+                                <th>Số - ngày</th>
+                                <th>Cơ quan</th>
                                 <th>#</th>
                                 <th>#</th>
                             </tr>
@@ -35,7 +34,6 @@
                                 <td>{{item.TenMC}}</td>
                                 <td>{{item.SoHieu}}</td>
                                 <td>{{item.CoQuan}}</td>
-                                <td>{{item.GhiChu}}</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
@@ -77,7 +75,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <select class="form-control" ng-model="Hop.Hop" required>
+                                    <select class="form-control" ng-model="Info.Hop" required>
                                         <option ng-repeat="x in Hop" value="{{x.Hop}}">{{x.Hop | uppercase}}</option>
                                     </select>
                                 </div>
@@ -85,7 +83,7 @@
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <select class="form-control" ng-model="Info.IDTieuChuan" ng-change="GetTieuChi()" required>
-                                        <option ng-repeat="x in alltieuchuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                        <option ng-repeat="x in alltieuchuan" value="{{x.ID}}">{{x.ID}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -163,7 +161,6 @@
         //danh sach cac hop dung minh chung
         $scope.alltieuchuan = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChuan))');
        
-            console.log($scope.alltieuchi);
             $scope.Info = [];
             $scope.Hop = [
                  { Hop: 'H1'},
@@ -278,10 +275,11 @@
             $scope.edit = function (index) {
 
                 var info = $scope.allDanhMuc[index];
-
                 $scope.Info = angular.copy(info);
                 $scope.modaltitle = "Chỉnh sửa minh chứng";
                 // $scope.CountryIDDisable = true;
+               // console.log($scope.Info.IDTieuChuan);
+                //$scope.GetTieuChi();
                 $scope.IsAction = 'edit';
                 showModel("insertmodal")
             };
@@ -315,7 +313,7 @@
                     $http({
                         method: "POST",
                         url: '/MinhChung/create',
-                        data: { t: $scope.Info.TenMC, sh: $scope.Info.SoHieu, cq: $scope.Info.CoQuan, gc: $scope.Info.GhiChu, cn: $scope.Info.IDTieuChuan, tc: $scope.Info.IDTieuChi, stt: $scope.Info.STT, hop: $scope.Hop.Hop }
+                        data: { t: $scope.Info.TenMC, sh: $scope.Info.SoHieu, cq: $scope.Info.CoQuan, gc: $scope.Info.GhiChu, cn: $scope.Info.IDTieuChuan, tc: $scope.Info.IDTieuChi, stt: $scope.Info.STT, hop: $scope.Info.Hop }
                     }).then(function success(response) {
 
                         var result = response.data;
@@ -345,7 +343,7 @@
                     uiUploader.startUpload({
                         url: '/MinhChung/create',
                         paramName: 'fileTaiLieu',
-                        data: { t: $scope.Info.TenMC,sh:$scope.Info.SoHieu,cq:$scope.Info.CoQuan,gc:$scope.Info.GhiChu,cn:$scope.Info.IDTieuChuan,tc:$scope.Info.IDTieuChi,stt:$scope.Info.STT, hop: $scope.Hop.Hop },
+                        data: { t: $scope.Info.TenMC,sh:$scope.Info.SoHieu,cq:$scope.Info.CoQuan,gc:$scope.Info.GhiChu,cn:$scope.Info.IDTieuChuan,tc:$scope.Info.IDTieuChi,stt:$scope.Info.STT, hop: $scope.Info.Hop },
                         onProgress: function (file) {
                             $scope.$apply();
                         },
@@ -390,7 +388,6 @@
                         $scope.$apply();
                     },
                     onCompleted: function (file, response) {
-
                         showLoader(false);
                         var result = angular.fromJson(response);
 
@@ -429,7 +426,7 @@
                     $http({
                         method: "POST",
                         url: "/MinhChung/delete",
-                        data: { id: info.ID }
+                        data: { id: info.MaMC }
                     }).then(
                         function success(response) {
 

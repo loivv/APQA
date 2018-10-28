@@ -13,8 +13,13 @@
             <!-- end x_title-->
             <div class="x_content">
                 <div class="row">
+                    <div class="form-group">
+                        <label>Năm học</label>
+                        <select class="form-control" ng-model="IDTieuChuan" ng-change="GetData()">
+                            <option ng-repeat="x in allTieuChuan" value="{{x.GuiIDTC}}">{{x.IDTieuChuan}}.{{x.NoiDung}}</option>
+                        </select>
+                    </div>
                 </div>
-
                 <!-- table data-->
                 <div class="table-responsive">
                     <table class="table table-striped jambo_table bulk_action">
@@ -138,7 +143,7 @@
                 showLoader(true);
                 $http({
                     method: "GET",
-                    url: "/TieuChi/getTieuChi?page=" + page + "&search=" + search
+                    url: "/TieuChi/getTieuChi?page=" + page + "&idtieuchuan=" + $scope.IDTieuChuan
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
@@ -158,7 +163,7 @@
             }
             // goi lay du liẹu
 
-            $scope.GetData(1, "");
+           // $scope.GetData(1, "");
             //
             // khoi tao bien dung cho create va edit
             $scope.Info = {};

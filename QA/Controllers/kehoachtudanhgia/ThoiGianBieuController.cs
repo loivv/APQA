@@ -22,7 +22,7 @@ namespace QA.Controllers.kehoachtudanhgia
 
             int pageNumber = (page ?? 1);
 
-            var data = db.DM_ThoiGianBieu.Where(p => p.Tuan.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).OrderBy(x => x.Tuan).ToList(); 
+            var data = db.DM_ThoiGianBieu.Where(p => p.Tuan.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList().OrderBy(x => x.Tuan); 
 
             ResultInfo result = new ResultWithPaging()
             {

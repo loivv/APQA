@@ -41,7 +41,7 @@ namespace QA.Controllers.danhmuc
         {
 
             var id = new SqlParameter("@IDTieuChuan", idtieuchuan);
-            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI_TIEUCHUAN @IDTieuChuan", id).ToList();
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_DM_TIEUCHUAN_TIEUCHI @IDTieuChuan", id).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {

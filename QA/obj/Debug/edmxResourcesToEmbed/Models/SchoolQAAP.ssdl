@@ -75,15 +75,18 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="AccessFailedCount" Type="int" />
     <Property Name="UserName" Type="nvarchar" MaxLength="50" />
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" />
+    <Property Name="UserGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="DM_BaoCaoTieuChuan">
     <Key>
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="IDTieuChuan" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="MoDau" Type="nvarchar(max)" />
     <Property Name="KetLuan" Type="nvarchar(max)" />
   </EntityType>
@@ -91,10 +94,11 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Key>
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="Loai" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Loai" Type="nvarchar" MaxLength="50" />
+    <Property Name="Loai" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="TongSo" Type="int" />
     <Property Name="Nu" Type="int" />
     <Property Name="DanToc" Type="nvarchar" MaxLength="20" />
@@ -103,6 +107,8 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="ChuaDatChuan" Type="int" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
     <Property Name="STT" Type="int" />
+    <Property Name="ChuanHuyen" Type="int" />
+    <Property Name="ChuanTinh" Type="int" />
   </EntityType>
   <EntityType Name="DM_ChiSoMoTa">
     <Key>
@@ -145,16 +151,144 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="PGDDuyet" Type="bit" />
     <Property Name="TuDanhGia" Type="bit" />
   </EntityType>
-  <EntityType Name="DM_HocSinhNamHoc">
+  <EntityType Name="DM_DuKienMinhChung">
     <Key>
       <PropertyRef Name="MaTruong" />
       <PropertyRef Name="NamHoc" />
-      <PropertyRef Name="LopHoc" />
+      <PropertyRef Name="IDTieuChi" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="LopHoc" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="SoLuong" Type="int" />
+    <Property Name="IDTieuChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DuKienMC" Type="nvarchar(max)" />
+    <Property Name="NoiThuThap" Type="nvarchar(max)" />
+    <Property Name="Nhom" Type="nvarchar" MaxLength="100" />
+    <Property Name="CaNhan" Type="nvarchar" MaxLength="100" />
+    <Property Name="Tuan" Type="nvarchar" MaxLength="50" />
+    <Property Name="TuNgay" Type="date" />
+    <Property Name="DenNgay" Type="date" />
+    <Property Name="ChiPhi" Type="money" />
+    <Property Name="GhiChu" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="DM_GoiYMinhChung">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+      <PropertyRef Name="GuiID" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NguoiLuu" Type="nvarchar" MaxLength="50" />
+    <Property Name="NguoiThuThap" Type="nvarchar" MaxLength="50" />
+    <Property Name="ThoiGian" Type="nvarchar" MaxLength="200" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+    <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="DM_HocSinhMN">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Col1" Type="int" />
+    <Property Name="Col2" Type="int" />
+    <Property Name="Col3" Type="int" />
+    <Property Name="Col4" Type="int" />
+    <Property Name="Col5" Type="int" />
+    <Property Name="Col6" Type="int" />
+    <Property Name="Nu" Type="int" />
+    <Property Name="DanToc" Type="int" />
+    <Property Name="ChinhSach" Type="int" />
+    <Property Name="KhuyetTat" Type="int" />
+    <Property Name="TuyenMoi" Type="int" />
+    <Property Name="HaiBuoi" Type="int" />
+    <Property Name="BanTru" Type="int" />
+  </EntityType>
+  <EntityType Name="DM_HocSinhTH">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Lop1" Type="int" />
+    <Property Name="Lop2" Type="int" />
+    <Property Name="Lop3" Type="int" />
+    <Property Name="Lop4" Type="int" />
+    <Property Name="Lop5" Type="int" />
+    <Property Name="Nu" Type="int" />
+    <Property Name="DanToc" Type="int" />
+    <Property Name="ChinhSach" Type="int" />
+    <Property Name="KhuyetTat" Type="int" />
+    <Property Name="TuyenMoi" Type="int" />
+    <Property Name="LuuBan" Type="int" />
+    <Property Name="BoHoc" Type="int" />
+    <Property Name="HaiBuoi" Type="int" />
+    <Property Name="BanTru" Type="int" />
+    <Property Name="NoiTru" Type="int" />
+    <Property Name="TotNghiep" Type="int" />
+    <Property Name="TotNghiepNu" Type="int" />
+    <Property Name="TotNghiepDT" Type="int" />
+    <Property Name="GioiCapHuyen" Type="int" />
+    <Property Name="GioiCapTinh" Type="int" />
+    <Property Name="GioiCapQG" Type="int" />
+  </EntityType>
+  <EntityType Name="DM_HocSinhTHCS">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Lop6" Type="int" />
+    <Property Name="Lop7" Type="int" />
+    <Property Name="Lop8" Type="int" />
+    <Property Name="Lop9" Type="int" />
+    <Property Name="Nu" Type="int" />
+    <Property Name="DanToc" Type="int" />
+    <Property Name="ChinhSach" Type="int" />
+    <Property Name="KhuyetTat" Type="int" />
+    <Property Name="TuyenMoi" Type="int" />
+    <Property Name="LuuBan" Type="int" />
+    <Property Name="BoHoc" Type="int" />
+    <Property Name="HaiBuoi" Type="int" />
+    <Property Name="BanTru" Type="int" />
+    <Property Name="NoiTru" Type="int" />
+    <Property Name="TotNghiep" Type="int" />
+    <Property Name="TotNghiepNu" Type="int" />
+    <Property Name="TotNghiepDT" Type="int" />
+    <Property Name="GioiCapHuyen" Type="int" />
+    <Property Name="GioiCapTinh" Type="int" />
+    <Property Name="GioiCapQG" Type="int" />
+  </EntityType>
+  <EntityType Name="DM_HocSinhTHPT">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Lop10" Type="int" />
+    <Property Name="Lop11" Type="int" />
+    <Property Name="Lop12" Type="int" />
+    <Property Name="Nu" Type="int" />
+    <Property Name="DanToc" Type="int" />
+    <Property Name="ChinhSach" Type="int" />
+    <Property Name="KhuyetTat" Type="int" />
+    <Property Name="TuyenMoi" Type="int" />
+    <Property Name="LuuBan" Type="int" />
+    <Property Name="BoHoc" Type="int" />
+    <Property Name="HaiBuoi" Type="int" />
+    <Property Name="BanTru" Type="int" />
+    <Property Name="NoiTru" Type="int" />
+    <Property Name="TotNghiep" Type="int" />
+    <Property Name="TotNghiepNu" Type="int" />
+    <Property Name="TotNghiepDT" Type="int" />
+    <Property Name="GioiCapHuyen" Type="int" />
+    <Property Name="GioiCapTinh" Type="int" />
+    <Property Name="GioiCapQG" Type="int" />
   </EntityType>
   <EntityType Name="DM_HoiDongTuDanhGia">
     <Key>
@@ -164,6 +298,24 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MoDau" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="DM_LopHocMN">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Col1" Type="int" />
+    <Property Name="Col2" Type="int" />
+    <Property Name="Col3" Type="int" />
+    <Property Name="Col4" Type="int" />
+    <Property Name="Col5" Type="int" />
+    <Property Name="Col6" Type="int" />
+    <Property Name="Col7" Type="int" />
+    <Property Name="Col8" Type="int" />
+    <Property Name="Col9" Type="int" />
+    <Property Name="Col10" Type="int" />
   </EntityType>
   <EntityType Name="DM_LopHocTH">
     <Key>
@@ -190,6 +342,17 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="Lop8" Type="int" />
     <Property Name="Lop9" Type="int" />
   </EntityType>
+  <EntityType Name="DM_LopHocTHPT">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Lop10" Type="int" />
+    <Property Name="Lop11" Type="int" />
+    <Property Name="Lop12" Type="int" />
+  </EntityType>
   <EntityType Name="DM_MinhChung">
     <Key>
       <PropertyRef Name="MaTruong" />
@@ -204,6 +367,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="CoQuan" Type="nvarchar" MaxLength="200" />
     <Property Name="GhiChu" Type="nvarchar(max)" />
     <Property Name="LinkFile" Type="nvarchar" MaxLength="200" />
+    <Property Name="Hop" Type="nvarchar" MaxLength="10" />
     <Property Name="IDTieuChuan" Type="int" />
     <Property Name="IDTieuChi" Type="int" />
     <Property Name="STT" Type="int" />
@@ -274,6 +438,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="MoDau" Type="nvarchar(max)" />
+    <Property Name="ThuKy" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="DM_NLCSVCTaiChinh">
     <Key>
@@ -308,17 +473,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="LinkFile" Type="nvarchar" MaxLength="200" />
     <Property Name="ApDung" Type="bit" />
     <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
-  </EntityType>
-  <EntityType Name="DM_SoLop">
-    <Key>
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-      <PropertyRef Name="LopHoc" />
-    </Key>
-    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="LopHoc" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="SoLuong" Type="int" />
   </EntityType>
   <EntityType Name="DM_TapHuanTuDanhGia">
     <Key>
@@ -387,6 +541,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="Code" Type="nvarchar" MaxLength="50" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
     <Property Name="PhanLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cap" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="DM_TieuChi_DuKien">
     <Key>
@@ -402,18 +557,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="VatLuc" Type="nvarchar(max)" />
     <Property Name="ThoiDiem" Type="nvarchar(max)" />
     <Property Name="GhiChu" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="DM_TieuChuan">
-    <Key>
-      <PropertyRef Name="IDTieuChuan" />
-      <PropertyRef Name="MaTruong" />
-      <PropertyRef Name="NamHoc" />
-    </Key>
-    <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="MoDau" Type="nvarchar(max)" />
-    <Property Name="KetLuan" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="DM_ToChucThucHien">
     <Key>
@@ -449,9 +592,10 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
   <EntityType Name="DM_VietTat">
     <Key>
       <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="VietTat" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="VietTat" Type="nvarchar" MaxLength="50" />
+    <Property Name="VietTat" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="NoiDung" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="HT_CanBo">
@@ -469,6 +613,15 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Ten" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="HT_GoiYMinhChung">
+    <Key>
+      <PropertyRef Name="GuiID" />
+    </Key>
+    <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDChiSo" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaMC" Type="nvarchar" MaxLength="20" />
+    <Property Name="TenMC" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="HT_LopHoc">
     <Key>
       <PropertyRef Name="MaKhoi" />
@@ -483,7 +636,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IDTieuChuan" Type="nvarchar" MaxLength="50" />
     <Property Name="IDTieuChi" Type="int" />
-    <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
     <Property Name="Dat" Type="bit" />
   </EntityType>
   <EntityType Name="HT_TieuChi_ChiSo">
@@ -504,13 +657,10 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
       <PropertyRef Name="GuiID" />
     </Key>
     <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDQuyDinh" Type="nvarchar" MaxLength="20" />
     <Property Name="IDTieuChuan" Type="int" />
-    <Property Name="ThongTu" Type="nvarchar" MaxLength="20" />
-    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
     <Property Name="NoiDung" Type="nvarchar(max)" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'SchoolQAAP.dbo.UMS_GroupMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UMS_GroupMenu">
     <Key>
       <PropertyRef Name="Id" />
@@ -520,9 +670,8 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_GroupMenu' does not have a prim
     <Property Name="Position" Type="int" />
     <Property Name="Icon" Type="nvarchar" MaxLength="128" />
     <Property Name="IsActive" Type="int" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'SchoolQAAP.dbo.UMS_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UMS_Menu">
     <Key>
       <PropertyRef Name="Id" />
@@ -535,8 +684,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_Menu' does not have a primary k
     <Property Name="Position" Type="int" />
     <Property Name="Code" Type="nvarchar" MaxLength="128" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UMS_MenuGroupUser">
     <Key>
       <PropertyRef Name="Id" />
@@ -546,6 +693,29 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
     <Property Name="GroupUserId" Type="nvarchar" MaxLength="128" />
     <Property Name="CanEdit" Type="int" />
   </EntityType>
+  <EntityType Name="UMS_UserGroups">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="GroupID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="200" />
+    <Property Name="IsActive" Type="int" />
+  </EntityType>
+  <Function Name="GROUPUSER_GETLISTMENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="groupId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="USER_CHECKACCESS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="groupId" Type="nvarchar" Mode="In" />
+    <Parameter Name="menuCode" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="USER_CHECKADMIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="USER_GETMENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="SchoolQAAPModelStoreContainer">
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_BaoCaoTieuChuan" EntityType="Self.DM_BaoCaoTieuChuan" Schema="dbo" store:Type="Tables" />
@@ -553,10 +723,17 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
     <EntitySet Name="DM_ChiSoMoTa" EntityType="Self.DM_ChiSoMoTa" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ChucVu" EntityType="Self.DM_ChucVu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_DanhGiaTieuChi" EntityType="Self.DM_DanhGiaTieuChi" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DM_HocSinhNamHoc" EntityType="Self.DM_HocSinhNamHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_DuKienMinhChung" EntityType="Self.DM_DuKienMinhChung" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_GoiYMinhChung" EntityType="Self.DM_GoiYMinhChung" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_HocSinhMN" EntityType="Self.DM_HocSinhMN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_HocSinhTH" EntityType="Self.DM_HocSinhTH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_HocSinhTHCS" EntityType="Self.DM_HocSinhTHCS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_HocSinhTHPT" EntityType="Self.DM_HocSinhTHPT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_HoiDongTuDanhGia" EntityType="Self.DM_HoiDongTuDanhGia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_LopHocMN" EntityType="Self.DM_LopHocMN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_LopHocTH" EntityType="Self.DM_LopHocTH" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_LopHocTHCS" EntityType="Self.DM_LopHocTHCS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DM_LopHocTHPT" EntityType="Self.DM_LopHocTHPT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_MinhChung" EntityType="Self.DM_MinhChung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_MucDichPhamVi" EntityType="Self.DM_MucDichPhamVi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_NamHoc" EntityType="Self.DM_NamHoc" Schema="dbo" store:Type="Tables" />
@@ -567,23 +744,26 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
     <EntitySet Name="DM_NLCSVCTaiChinh" EntityType="Self.DM_NLCSVCTaiChinh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_PhongHoc" EntityType="Self.DM_PhongHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_QuyDinh" EntityType="Self.DM_QuyDinh" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DM_SoLop" EntityType="Self.DM_SoLop" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_TapHuanTuDanhGia" EntityType="Self.DM_TapHuanTuDanhGia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ThanhVien" EntityType="Self.DM_ThanhVien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ThoiGianBieu" EntityType="Self.DM_ThoiGianBieu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ThongTinChung" EntityType="Self.DM_ThongTinChung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_TieuChi_DuKien" EntityType="Self.DM_TieuChi_DuKien" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DM_TieuChuan" EntityType="Self.DM_TieuChuan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_ToChucThucHien" EntityType="Self.DM_ToChucThucHien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_VanBan" EntityType="Self.DM_VanBan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_VanDeKetLuan" EntityType="Self.DM_VanDeKetLuan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DM_VietTat" EntityType="Self.DM_VietTat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HT_GoiYMinhChung" EntityType="Self.HT_GoiYMinhChung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_LopHoc" EntityType="Self.HT_LopHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChi" EntityType="Self.HT_TieuChi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChi_ChiSo" EntityType="Self.HT_TieuChi_ChiSo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChuan" EntityType="Self.HT_TieuChuan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UMS_UserGroups" EntityType="Self.UMS_UserGroups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [__MigrationHistory].[MigrationId] AS [MigrationId], 
@@ -618,34 +798,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.UMS_MenuGroupUser' does not have a 
     [AspNetUserRoles].[UserId] AS [UserId], 
     [AspNetUserRoles].[RoleId] AS [RoleId]
     FROM [dbo].[AspNetUserRoles] AS [AspNetUserRoles]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="UMS_GroupMenu" EntityType="Self.UMS_GroupMenu" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [UMS_GroupMenu].[Id] AS [Id], 
-    [UMS_GroupMenu].[Name] AS [Name], 
-    [UMS_GroupMenu].[Position] AS [Position], 
-    [UMS_GroupMenu].[Icon] AS [Icon], 
-    [UMS_GroupMenu].[IsActive] AS [IsActive]
-    FROM [dbo].[UMS_GroupMenu] AS [UMS_GroupMenu]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="UMS_Menu" EntityType="Self.UMS_Menu" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [UMS_Menu].[Id] AS [Id], 
-    [UMS_Menu].[Name] AS [Name], 
-    [UMS_Menu].[Link] AS [Link], 
-    [UMS_Menu].[Icon] AS [Icon], 
-    [UMS_Menu].[GroupMenuId] AS [GroupMenuId], 
-    [UMS_Menu].[Position] AS [Position], 
-    [UMS_Menu].[Code] AS [Code]
-    FROM [dbo].[UMS_Menu] AS [UMS_Menu]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="UMS_MenuGroupUser" EntityType="Self.UMS_MenuGroupUser" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [UMS_MenuGroupUser].[Id] AS [Id], 
-    [UMS_MenuGroupUser].[MenuId] AS [MenuId], 
-    [UMS_MenuGroupUser].[GroupUserId] AS [GroupUserId], 
-    [UMS_MenuGroupUser].[CanEdit] AS [CanEdit]
-    FROM [dbo].[UMS_MenuGroupUser] AS [UMS_MenuGroupUser]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

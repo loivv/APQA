@@ -12,18 +12,18 @@ namespace QA.Controllers.danhmuc
         // GET: TieuChi
         public ActionResult Show()
         {
-            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDCapHoc == CapHoc).Select(x => new {IDTieuChuan = x.IDTieuChuan,NoiDung = x.NoiDung,GuiIDTC = x.GuiID }).ToList();
+            var idquydinh = db.DM_QuyDinh.Where(p => p.IDCapHoc == CapHoc).Select(p => p.ID).FirstOrDefault();
+            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDQuyDinh == idquydinh).Select(x => new {IDTieuChuan = x.IDTieuChuan,NoiDung = x.NoiDung,GuiIDTC = x.GuiID }).ToList().OrderBy(x=>x.IDTieuChuan);
             return View();
         }
-
         [HttpGet]
-        public ActionResult getTieuChi(int? page, string search = "")
+        public ActionResult getTieuChi(int? page, string idtieuchuan)
         {
             int pageSize = 50;
 
             int pageNumber = (page ?? 1);
-
-            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI").ToList();
+            var idtc = new SqlParameter("@idtieuchuan", idtieuchuan);
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI @idtieuchuan", idtc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {

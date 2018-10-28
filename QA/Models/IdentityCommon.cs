@@ -87,6 +87,10 @@ namespace QA.Models
 
         public string currentPost { get; set; }
     }
+    public class NamHoc
+    {
+        public string Nam_Hoc { get; set; }
+    }
     public class ThanhVien
     {
 
@@ -123,6 +127,7 @@ namespace QA.Models
     }
     public class KhoiLopHocTH
     {
+      
         public string NamHoc { get; set; }
         public int Lop1 { get; set; }
         public int Lop2 { get; set; }
@@ -140,6 +145,29 @@ namespace QA.Models
         public int Lop9 { get; set; }
         public int Tong { get; set; }
     }
+    public class KhoiLopHocTHPT
+    {
+        public string NamHoc { get; set; }
+        public int Lop10 { get; set; }
+        public int Lop11 { get; set; }
+        public int Lop12 { get; set; }
+        public int Tong { get; set; }
+    }
+    public class KhoiLopHocMN
+    {
+        public string NamHoc { get; set; }
+        public int Col1 { get; set; }
+        public int Col2 { get; set; }
+        public int Col3 { get; set; }//
+        public int Col4 { get; set; }
+        public int Col5 { get; set; }
+        public int Col6 { get; set; }
+        public int Col7 { get; set; }
+        public int Col8 { get; set; }
+        public int Col9 { get; set; }
+        public int Col10 { get; set; }
+        public int Tong { get; set; }
+    }
     public class TieuChuanTieuChi
     {
         public string GuiID { get; set; }
@@ -151,6 +179,7 @@ namespace QA.Models
         public int TieuChi { get; set; }
         public string TCDK { get; set; }
         public bool Dat { get; set; }
+        public string SoHieu { get; set; }
 
     }
     public class TieuChi
@@ -211,6 +240,37 @@ namespace QA.Models
         public string GhiChu { get; set; }
 
     }
+    public class MinhChungGoiY
+    {
+        public string GuiIDCN { get; set; }
+        public int IDTieuChuan { get; set; }
+        public string GuiIDTC { get; set; }
+        public int IDTieuChi { get; set; }
+        public string TenMC { get; set; }
+        public string MaMC { get; set; }
+        public string NguoiLuu { get; set; }
+        public string NguoiThuThap { get; set; }
+        public string ThoiGian { get; set; }
+        public string TrangThai { get; set; }
+    }
+    public class MinhChungDuKien
+    {
+        public string GuiIDCN { get; set; }
+        public int IDTieuChuan { get; set; }
+        public string GuiIDTC { get; set; }
+        public int IDTieuChi { get; set; }
+        public string DKMC { get; set; }
+        public string DuKienMC { get; set; }
+        public string NoiTT { get; set; }
+        public string NoiThuThap { get; set; }
+        public string Nhom { get; set; }
+        public string CaNhan { get; set; }
+        public string Tuan { get; set; }
+        public DateTime TuNgay { get; set; }
+        public DateTime DenNgay { get; set; }
+        public decimal ChiPhi { get; set; }
+        public string GhiChu { get; set; }
+    }
     public class DMCanBoCNV
     {
         public string NamHoc { get; set; }
@@ -251,11 +311,65 @@ namespace QA.Models
     public class GET_TIEUCHI_BY_IDTIEUCHUAN
     {
         public int IDTieuChi { get; set; }
+        public string GuiIDTC { get; set; }
     }
     public class GET_MINHCHUNG_BYIDTIEUCHUAN
     {
         public string MaMC { get; set; }
         public string TenMC { get; set; }
     }
+    public class MODAU_KETLUAN_TIEUCHUAN
+    {
+        public string IDTieuChuan { get; set; }
+       public int  ID {get;set;}
+       public string  NoiDung {get;set;}
+       public string  MoDau {get;set;}
+       public string KetLuan { get; set; }
+    }
+    //cn.GuiID, cn.IDTieuChuan , tc.GuiID as GuiIDTC,
+ //tc.IDTieuChi,tccs.ChiSo,tccs.NoiDung ,tccs.HienTrang,tccs.YeuCau,
+ //tccs.GoiY,tccs.Muc
+    public class TIEUCHUAN_TIEUCHI_CHISO
+    {
+        public string GuiID { get; set; }
+        public int IDTieuChuan { get; set; }
+        public string GuiIDTC { get; set; }
+        public int IDTieuChi { get; set; }
+        public string ChiSo { get; set; }
+        public string NoiDung { get; set; }
+        public string HienTrang { get; set; }
+        public string YeuCau { get; set; }
+        public string GoiY { get; set; }
+        public Nullable< int> Muc { get; set; }
+        public string IDCapHoc { get; set; }
+        public string GuiIDCN { get; set; }
+        public string IDQuyDinh { get; set; }
+    }
+    public class MenuInfo
+    {
+        public string name { get; set; }
 
+        public string link { get; set; }
+    }
+
+    public class GroupMenuInfo
+    {
+        public string name { get; set; }
+
+        public string icon { get; set; }
+
+        public List<MenuInfo> menus { get; set; }
+    }
+    public class USER_GETMENU
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Link { get; set; }
+        public string Icon { get; set; }
+        public string GroupMenuId { get; set; }
+        public int Position { get; set; }
+        public string Code { get; set; }
+        public string groupName { get; set; }
+        public string GroupIcon { get; set; }
+    }
 }

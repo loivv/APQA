@@ -201,16 +201,23 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\baocao\TuDanhGiaController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\cosodulieu\HocSinhNamHocController.cs" />
     <Compile Include="Controllers\cosodulieu\SoCanBoController.cs" />
     <Compile Include="Controllers\cosodulieu\SoHocSinhController.cs" />
     <Compile Include="Controllers\cosodulieu\SoLopHocController.cs" />
     <Compile Include="Controllers\cosodulieu\SoPhongHocController.cs" />
     <Compile Include="Controllers\danhmuc\ChuyenDuLieuController.cs" />
+    <Compile Include="Controllers\danhmuc\GoiYNoiHamController.cs" />
+    <Compile Include="Controllers\danhmuc\TieuChiChiSoController.cs" />
     <Compile Include="Controllers\danhmuc\TieuChiController.cs" />
     <Compile Include="Controllers\danhmuc\VanBanController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\hethong\MenuController.cs" />
+    <Compile Include="Controllers\hethong\NguoiDungController.cs" />
+    <Compile Include="Controllers\hethong\NhomNguoiDungController.cs" />
+    <Compile Include="Controllers\kehoachtudanhgia\DuKienMinhChungController.cs" />
     <Compile Include="Controllers\kehoachtudanhgia\ThoiGianCungCapController.cs" />
     <Compile Include="Controllers\kehoachtudanhgia\ToChucThucHienController.cs" />
+    <Compile Include="Controllers\QAAdminController.cs" />
     <Compile Include="Controllers\tudanhgia\BaoCaoTieuChuanController.cs" />
     <Compile Include="Controllers\tudanhgia\ChucVuController.cs" />
     <Compile Include="Controllers\kehoachtudanhgia\CSVCController.cs" />
@@ -219,10 +226,11 @@
     <Compile Include="Controllers\tudanhgia\DanhGiaTieuChiController.cs" />
     <Compile Include="Controllers\tudanhgia\DanhMucVietTatController.cs" />
     <Compile Include="Controllers\tudanhgia\DatVanDeKetLuanController.cs" />
+    <Compile Include="Controllers\tudanhgia\GoiYPhanCongMCController.cs" />
     <Compile Include="Controllers\tudanhgia\MinhChungController.cs" />
     <Compile Include="Controllers\kehoachtudanhgia\MucDichPhamViController.cs" />
     <Compile Include="Controllers\danhmuc\NamHocController.cs" />
-    <Compile Include="Controllers\tudanhgia\GoiYMinhChungController.cs" />
+    <Compile Include="Controllers\tudanhgia\MinhChungGoiYController.cs" />
     <Compile Include="Controllers\tudanhgia\NhiemVuController.cs" />
     <Compile Include="Controllers\tudanhgia\NhomDanhGiaController.cs" />
     <Compile Include="Controllers\danhmuc\QuyDinhController.cs" />
@@ -233,6 +241,7 @@
     <Compile Include="Controllers\danhmuc\TieuChuanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Filters\MyValidateAccess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,16 +279,37 @@
     <Compile Include="Models\DM_DanhGiaTieuChi.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DM_HocSinhNamHoc.cs">
+    <Compile Include="Models\DM_DuKienMinhChung.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_GoiYMinhChung.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_HocSinhMN.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_HocSinhTH.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_HocSinhTHCS.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_HocSinhTHPT.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_HoiDongTuDanhGia.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_LopHocMN.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_LopHocTH.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_LopHocTHCS.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DM_LopHocTHPT.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_MinhChung.cs">
@@ -312,9 +342,6 @@
     <Compile Include="Models\DM_QuyDinh.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DM_SoLop.cs">
-      <DependentUpon>SchoolQAAP.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DM_TapHuanTuDanhGia.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
@@ -328,9 +355,6 @@
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_TieuChi_DuKien.cs">
-      <DependentUpon>SchoolQAAP.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DM_TieuChuan.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DM_ToChucThucHien.cs">
@@ -357,10 +381,16 @@
     <Compile Include="Models\GET_VANBAN_CAPHOC_Result.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GROUPUSER_GETLISTMENU_Result.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HT_CanBo.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HT_CapHoc.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HT_GoiYMinhChung.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HT_LopHoc.cs">
@@ -405,7 +435,16 @@
     <Compile Include="Models\UMS_MenuGroupUser.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UMS_UserGroups.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\USER_CHECKACCESS_Result.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER_CHECKADMIN_Result.cs">
+      <DependentUpon>SchoolQAAP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER_GETMENU1_Result.cs">
       <DependentUpon>SchoolQAAP.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -982,6 +1021,22 @@
     <Content Include="Views\DanhMucVietTat\Show.cshtml" />
     <Content Include="Views\DatVanDeKetLuan\Show.cshtml" />
     <Content Include="Views\DanhGiaTieuChi\Show.cshtml" />
+    <Content Include="Views\GoiYNoiHam\Show.cshtml" />
+    <Content Include="Views\MoDauKetLuanTieuChuan\Show.cshtml" />
+    <Content Include="Views\TieuChiChiSo\Show.cshtml" />
+    <Content Include="Views\SoHocSinh\Show.cshtml" />
+    <Content Include="Views\NhomNguoiDung\Show.cshtml" />
+    <Content Include="Views\NguoiDung\Show.cshtml" />
+    <Content Include="Views\Menu\Show.cshtml" />
+    <Content Include="Views\Menu\GroupUserMenu.cshtml" />
+    <Content Include="Views\Shared\_MenuUser.cshtml" />
+    <Content Include="Views\GoiYPhanCongMC\Show.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\Relogin.cshtml" />
+    <Content Include="Views\Shared\_AdminMenu.cshtml" />
+    <Content Include="Views\NguoiDung\SetPassword.cshtml" />
+    <Content Include="Views\DuKienMinhChung\Show.cshtml" />
+    <Content Include="Views\MinhChungGoiY\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -991,10 +1046,9 @@
     <Folder Include="TaiLieu\ThamKhao\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ChuyenDuLieu\" />
-    <Folder Include="Views\GoiYMinhChung\" />
-    <Folder Include="Views\HocSinhNamHoc\" />
+    <Folder Include="Views\GroupMenu\" />
     <Folder Include="Views\PhongHoc\" />
-    <Folder Include="Views\SoHocSinh\" />
+    <Folder Include="Views\QAAdmin\" />
     <Folder Include="Views\TDGTieuChi\" />
   </ItemGroup>
   <ItemGroup>

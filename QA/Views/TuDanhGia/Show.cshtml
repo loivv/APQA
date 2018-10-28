@@ -1,7 +1,273 @@
-﻿
-@{
-    ViewBag.Title = "Show";
+﻿@{
+    ViewBag.Title = "Báo cáo tự đánh giá";
 }
 
-<h2>Show</h2>
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Báo cáo tự đánh giá</h2>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end x_title-->
+            <div class="x_content">
+                <div class="row">
+                </div>
+
+                <!-- table data-->
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th>STT</th>
+                                <th>Nội dung</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Kế hoạch tự đánh giá</td>
+                                <td><a href="#" ng-click="edit()">Xuất báo cáo</a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Bảng tổng hợp kết quả tự đánh giá</td>
+                                <td><a href="#" ng-click="edit($index)">Xuất báo cáo</a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Danh mục minh chứng</td>
+                                <td><a href="#" ng-click="edit($index)">Xuất báo cáo</a></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Tổng hợp tự đánh giá</td>
+                                <td><a href="#" ng-click="edit($index)">Xuất báo cáo</a></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Báo cáo tự đánh giá</td>
+                                <td><a href="~/TaiLieu/BaoCao/BCTDG{{Nam}}.doc">Xuất báo cáo</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!-- end x_content-->
+        </div>
+        <!-- end x_pannel-->
+    </div>
+
+
+    <!-- tao model them moi-->
+    <div id="insertmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{modaltitle}}</h4>
+                </div>
+
+
+                <!-- begin form-->
+                <form class="css-form" name="createForm" ng-submit="finishForm(createForm.$valid)">
+                    <!-- body-->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Năm học (2017)</label>
+                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Nam" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Niên khóa(2017-2018)</label>
+                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Năm hiện tại</label>
+                                    <input type="checkbox" class="form-control" ng-model="Info.NamHienTai" ng-checked="item.NamHienTai" ng-disabled="Info.Check" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Từ ngày</label>
+                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.FromDate" required ui-mask="99/99/9999" ui-mask-placeholder />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Đến ngày</label>
+                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.ToDate" required ui-mask="99/99/9999" ui-mask-placeholder />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end body-->
+                    <!-- begin footer-->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Hoàn thành</button>
+                    </div>
+                    <!-- end footer-->
+                </form>
+                <!-- end form-->
+
+            </div>
+            <!-- end modal content-->
+        </div>
+    </div>
+    <!-- end modal them-->
+</div>
+
+
+<!-- end content-->
+@section scripts {
+
+    <script>
+
+        // tao controller
+        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader', 'ui.mask']);
+        app.controller('myCtrl', function ($scope, $http, $filter) {
+            $scope.Nam = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.NamHoc))');
+            // lay du lie     
+
+            // them tinh
+            $scope.sendCreate = function () {
+                showLoader(true);
+
+                $http({
+                    method: "POST",
+                    url: "/NamHoc/create",
+                    data: { Nam: $scope.Info.Nam, NamHoc: $scope.Info.NamHoc, NamHienTai: $scope.Info.NamHienTai, tuNgay: $scope.Info.FromDate, denNgay: $scope.Info.ToDate }
+                }).then(function success(response) {
+
+                    var result = response.data;
+                    console.log(result);
+                    if (result.error === 0) {
+                        $scope.GetData(1, "");
+                        $scope.allDanhMuc.unshift(result.data);
+
+                        hideModel("insertmodal");
+
+                        showNotify("Đã thêm năm học");
+
+                    } else {
+
+                        alert(result.msg);
+
+                    }
+
+                    showLoader(false);
+
+                }
+                    , function error(response) {
+                        showNotify("connect has disconnect");
+                        showLoader(false);
+                    });
+
+            };
+
+            // cap nhat tinh
+            $scope.sendEdit = function () {
+                console.log("edit");
+                showLoader(true);
+                //console.log($scope.Info.NamHienTai);
+                $http({
+                    method: "POST",
+                    url: "/NamHoc/edit",
+                    data: { namhoc: $scope.Info, tuNgay: $scope.Info.FromDate, denNgay: $scope.Info.ToDate }
+                }).then(
+                    function success(response) {
+                        $scope.GetData(1, "");
+                        var result = response.data;
+
+                        if (result.error === 0) {
+
+                            var findIndex = getSelectedIndex(result.data.NamHoc);
+
+                            if (findIndex !== -1) {
+                                $scope.allDanhMuc[findIndex] = angular.copy(result.data);
+                            }
+
+                            showNotify("Đã cập nhật");
+                            hideModel("insertmodal");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    },
+                    function errror(response) {
+                        showLoader(false);
+                        showNotify("connect has disconnect");
+                    }
+                    );
+            };
+
+            // xoa du lieu
+            $scope.sendDelete = function (index) {
+                var info = $scope.allDanhMuc[index];
+                var r = confirm("Bạn muốn xóa không ?");
+                if (r) {
+                    showLoader(true);
+
+                    $http({
+                        method: "POST",
+                        url: "/NamHoc/delete",
+                        data: { namhoc: info.NamHoc }
+                    }).then(
+                        function success(response) {
+
+                            var result = response.data;
+
+                            if (result.error == 0) {
+
+                                // var findIndex = getSelectedIndex(result.data.CountryID);
+
+                                // if (findIndex !== -1) {
+                                $scope.allDanhMuc.splice(index, 1);
+                                //  }
+
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
+
+                        },
+                        function errror(response) {
+                            showLoader(false);
+                            showNotify("connect has disconnect");
+                        }
+                        );
+                } else {
+
+                }
+
+
+            }
+
+        });
+        //-- end controller
+
+    </script>
+}
+
+
+
+
 

@@ -19,5 +19,6 @@ namespace QA.Models
         public Nullable<int> Position { get; set; }
         public string Icon { get; set; }
         public Nullable<int> IsActive { get; set; }
+        public string Type { get; set; }
     }
 }

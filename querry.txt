@@ -1,0 +1,25 @@
+
+select distinct tc.GuiID, htgymc.IDTieuChuan,dmgymc.GuiID from HT_TieuChi tc
+inner join HT_TieuChuan cn
+on cn.GuiID = tc.IDTieuChuan
+left join HT_GoiYMinhChung htgymc
+on htgymc .IDTieuChi = tc.GuiID
+left join DM_GoiYMinhChung dmgymc
+on dmgymc.GuiID = htgymc.GuiID
+where cn.IDCapHoc ='THCS'
+
+can bo sung thtp va mamnon ==> table sql + controller + view
+goi y minh chung
+
+ke hoach tdg ==> minh chung ==> du kien
+
+
+
+tu danh gia ==> goi ý minh chung : nhap vao tung dong goi y minh chung cua tung chi so
+chon nguoi luu giu, chon nguoi thu thap, chon thoi gian thu thap, chon trang thai , ghi chu => hoan tat
+
+can luu truoc cac minh chung theo tung chi so ==> cai nao da gan ten thi hien thi la dã giao
+
+HT_goiyminhchung co the ko su dung
+
+kiem tra cac chuc nang co lay theo dung truong hay khong

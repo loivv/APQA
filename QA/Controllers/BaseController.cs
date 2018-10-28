@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using QA.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.SqlClient;
 namespace QA.Controllers
 {
 
@@ -23,6 +24,9 @@ namespace QA.Controllers
         public string NamHoc;
         public string CapHoc;
         public string PhanLoai;
+        public string TenTruong;
+        public string Cap;
+     
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
@@ -38,8 +42,11 @@ namespace QA.Controllers
                     MaTruong = checkUser.MaTruong;
                     var checkcaphoc = db.DM_ThongTinChung.Where(x => x.MaTruong == checkUser.MaTruong).FirstOrDefault();
                     NamHoc = checkYear.NamHoc;
+                    TenTruong = checkcaphoc.TenTruongMoi;
                     CapHoc = checkcaphoc.IDCapHoc;
                     PhanLoai = checkcaphoc.PhanLoai; // so ph tr
+                    Cap = checkcaphoc.Cap;
+                   
                 }                   
             }
         }
@@ -49,6 +56,45 @@ namespace QA.Controllers
             UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(sdb));
 
         }
+        //[HttpGet]
+        public ActionResult Menus()
+        {
+            var user = User.Identity.Name;
 
+            var us = new SqlParameter("@user", user);
+            var getMenu = db.Database.SqlQuery<USER_GETMENU>("USER_GETMENU @user", us).ToList();
+            //var getMenu = db.USER_GETMENU(user).ToList();
+
+            List<GroupMenuInfo> groupMenus = new List<GroupMenuInfo>();
+
+            var listGroup = db.UMS_GroupMenu.OrderBy(p => p.Position).ToList();
+
+            foreach (var item in listGroup)
+            {
+                GroupMenuInfo groupInfo = new GroupMenuInfo()
+                {
+                    name = item.Name,
+                    icon = item.Icon,
+                    menus = new List<MenuInfo>()
+                };
+
+                var listMenu = getMenu.Where(p => p.GroupMenuId == item.Id).OrderBy(p => p.Position).ToList();
+
+                if (listMenu.Count() > 0)
+                {
+                    foreach (var menuItem in listMenu)
+                    {
+                        groupInfo.menus.Add(new MenuInfo()
+                        {
+                            name = menuItem.Name,
+                            link = menuItem.Link
+                        });
+                    }
+                    groupMenus.Add(groupInfo);
+                }
+            }
+
+            return PartialView("_MenuUser", groupMenus);
+        }
     }
 }

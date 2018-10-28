@@ -12,6 +12,7 @@
                         <thead>
                             <tr class="headings">
                                 <th>Tiêu chuẩn</th>
+                                <th>Số hiệu</th>
                                 <th>Nội dung</th>
                                 <th>Tiêu chí</th>
                             </tr>
@@ -20,11 +21,12 @@
                         <tbody>
                             <tr ng-repeat="(mindex,item) in allDanhMuc">
                                 <td>{{item.IDTieuChuan}}</td>
+                                <td>{{item.SoHieu}}</td>
                                 <td>{{item.NoiDung}}</td>
                                 <td>
                                     <table ng-init="GetTieuChi(mindex)" border="0">
                                         <tr>
-                                            <td ng-repeat="item1 in item.allDetail">&nbsp;&nbsp;&nbsp;[<a ng-class="{'text-primary' : item1.Dat == true, 'text-danger' : item1.Dat == false}" href="#" ng-click="addNew(mindex,$index)">   {{item1.IDTieuChi}}  </a>]</td>
+                                            <td ng-repeat="item1 in item.allDetail">&nbsp;&nbsp;&nbsp;[<a ng-class="{'text-primary' : item1.Dat == true, 'text-danger' : item1.Dat == false}" href="#" ng-click="addNew(mindex,$index)">   {{item1.IDTieuChi}}</a>]</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -230,6 +232,7 @@
                     if (response.data.error === 0) {
 
                         $scope.allDanhMuc[index].allDetail = response.data.data;
+                        console.log(response.data.data);
                     }
 
                 }, function myError(response) {

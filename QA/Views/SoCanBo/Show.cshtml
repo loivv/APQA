@@ -5,14 +5,20 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Danh sách cán bộ công nhân viên tại thời điểm đánh giá&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
+                <h2>Danh sách cán bộ công nhân viên&nbsp;&nbsp;&nbsp;<a href="#" ng-click="addNew()"><i my-tool-tip="Thêm mới" class="fa fa-plus"></i></a></h2>
                 <div class="clearfix"></div>
             </div>
             <!-- end x_title-->
             <div class="x_content">
                 <div class="row">
+                    <div class="form-group">
+                        <label>Năm học</label>
+                        <select class="form-control" ng-model="Info.DMNamHoc" ng-change="GetData()">
+                            <option ng-repeat="x in AllNamHoc" value="{{x.NamHoc}}">{{x.NamHoc | uppercase}}</option>
+                        </select>
+                    </div>
                 </div>
-
+                    
                 <!-- table data-->
                 <div class="table-responsive">
                     <table class="table table-striped jambo_table bulk_action">
@@ -20,11 +26,14 @@
                             <tr class="headings">
                                 <th>STT</th>
                                 <th>Năm học</th>
+                                <th>Chức vụ</th>
                                 <th>Tổng số</th>
                                 <th>Tổng nữ</th>
                                 <th>Đạt chuẩn</th>
                                 <th>Trên chuẩn</th>
                                 <th>Chưa đạt chuẩn</th>
+                                <th>Chuẩn huyện</th>
+                                <th>Chuẩn tỉnh</th>
                                 <th>#</th>
                                 <th>#</th>
                             </tr>
@@ -32,13 +41,16 @@
 
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
-                                <td>{{$index + 1}}</td>                              
+                                <td>{{item.STT}}</td>                              
                                 <td>{{item.NamHoc}}</td>
+                                <td>{{item.Loai}}</td>
                                 <td>{{item.TongSo}}</td>
-                                <td>{{item.TongNu}}</td>
-                                <td>{{item.TongDatChuan}}</td>
-                                <td>{{item.TongTrenChuan}}</td>
-                                <td>{{item.TongChuaDatChuan}}</td>
+                                <td>{{item.Nu}}</td>
+                                <td>{{item.DatChuan}}</td>
+                                <td>{{item.TrenChuan}}</td>
+                                <td>{{item.ChuaDatChuan}}</td>
+                                <td>{{item.ChuanHuyen}}</td>
+                                <td>{{item.ChuanTinh}}</td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
@@ -73,34 +85,80 @@
                     <!-- body-->
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Năm học</label>
-                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Nam" required />
+                                    <select class="form-control" ng-model="Info.NamHoc" ng-disabled="DisNamHoc" required>
+                                        <option ng-repeat="x in AllNamHoc" value="{{x.NamHoc}}">{{x.NamHoc | uppercase}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Niên khóa</label>
-                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                    <label>Chức vụ</label> 
+                                    <select class="form-control" ng-model="Info.Loai" ng-disabled="DisLoai" required>
+                                        <option ng-repeat="x in Loai" value="{{x.Loai}}">{{x.Loai | uppercase}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>STT</label>
+                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.STT" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Tổng số</label>
+                                    <input type="text" class="form-control" ng-model="Info.TongSo"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Số nữ</label>
+                                    <input type="text" class="form-control" ng-model="Info.Nu"/>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Năm hiện tại</label>
-                                    <input type="checkbox" class="form-control" ng-model="Info.NamHienTai" ng-checked="item.NamHienTai" />
+                                    <label>Dân tộc</label>
+                                    <input type="text" class="form-control" ng-model="Info.DanToc" />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label>Từ ngày</label>
-                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.FromDate" required ui-mask="99/99/9999" ui-mask-placeholder />
+                                    <label>Đạt chuẩn</label>
+                                    <input type="text" class="form-control" ng-model="Info.DatChuan" />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label>Đến ngày</label>
-                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.ToDate" required ui-mask="99/99/9999" ui-mask-placeholder />
+                                    <label>Trên chuẩn</label>
+                                    <input type="text" class="form-control" ng-model="Info.TrenChuan" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Chưa đạt chuẩn</label>
+                                    <input type="text" class="form-control" ng-model="Info.ChuaDatChuan" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Chuẩn huyện</label>
+                                    <input type="text" class="form-control" ng-model="Info.ChuanHuyen" />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Chuẩn tỉnh</label>
+                                    <input type="text" class="form-control" ng-model="Info.ChuanTinh" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Ghi chú</label>
+                                    <input type="text" class="form-control" ng-model="Info.GhiChu" />
                                 </div>
                             </div>
 
@@ -129,9 +187,15 @@
     <script>
 
         // tao controller
-        var app = angular.module('myApp', ['ui.bootstrap', 'ui.uploader', 'ui.mask']);
-        app.controller('myCtrl', function ($scope, $http, $filter) {
-
+        var app = angular.module('myApp', ['ui.bootstrap']);
+        app.controller('myCtrl', function ($scope, $http) {
+            $scope.AllNamHoc = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.NamHoc))');
+            $scope.Loai = [
+                { Loai: 'HT' },
+                { Loai: 'PTH' },
+                { Loai: 'GV' },
+                { Loai: 'CNV' }              
+            ];
             // phan trang
             $scope.numPages;
             $scope.itemPerPage;
@@ -143,20 +207,17 @@
             };
             // lay du lieu
             $scope.allDanhMuc = [];
-            $scope.GetData = function (page, search) {
+            $scope.GetData = function () {
                 showLoader(true);
                 $http({
                     method: "GET",
-                    url: "/SoCanBo/getCanBo?page=" + page + "&search=" + search
+                    url: "/SoCanBo/getCanBo?namhoc=" + $scope.Info.DMNamHoc
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
                     if (response.data.error === 0) {
 
                         $scope.allDanhMuc = response.data.data;
-                        $scope.itemPerPage = response.data.pageSize;
-                        $scope.totalItems = response.data.toltalSize;
-                        $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
                     }
 
                 }, function myError(response) {
@@ -166,20 +227,18 @@
             }
             // goi lay du liẹu
 
-            $scope.GetData(1, "");
+           // $scope.GetData(1, "");
             //
             // khoi tao bien dung cho create va edit
             $scope.Info = {};
             $scope.IsAction = '';
 
             $scope.addNew = function () {
-                var date = new Date();
-                var fDate = $filter('date')(date, "dd/MM/yyyy");
-                var tDate = $filter('date')(date.addDays(365), "dd/MM/yyyy");
 
-                $scope.Info = { "Nam": "", "NamHoc": "", "NamHienTai": false, "FromDate": fDate, "ToDate": tDate };
-                $scope.modaltitle = "Thêm năm học";
-                //$scope.ZoneIDDisable = false;
+                $scope.Info = { "NamHoc": $scope.NamHoc, "Loai": "", "TongSo": 0, "Nu": 0, "DanToc":0,"DatChuan":0,"TrenChuan":0,"ChuaDatChuan":0,"GhiChu":"","STT":"","ChuanHuyen":0,"ChuanTinh":0 };
+                $scope.modaltitle = "Thêm thông tin cán bộ";
+                $scope.DisNamHoc = false;
+                $scope.DisLoai = false;
                 $scope.IsAction = 'add';
 
                 showModel("insertmodal");
@@ -191,13 +250,9 @@
             $scope.edit = function (index) {
                 var info = $scope.allDanhMuc[index];
                 $scope.Info = angular.copy(info);
-
-                var fDate = $filter('date')($scope.Info.TuNgay.slice(6, -2), "dd/MM/yyyy");
-                var tDate = $filter('date')($scope.Info.DenNgay.slice(6, -2), "dd/MM/yyyy");
-                $scope.Info.FromDate = fDate;
-                $scope.Info.ToDate = tDate;
-
-                $scope.modaltitle = "Chỉnh sửa năm học";
+                $scope.DisNamHoc = true;
+                $scope.DisLoai = true;
+                $scope.modaltitle = "Chỉnh sửa thông tin cán bộ";
                 $scope.IsAction = 'edit';
                 showModel("insertmodal");
             };
@@ -232,8 +287,8 @@
 
                 $http({
                     method: "POST",
-                    url: "/NamHoc/create",
-                    data: { Nam: $scope.Info.Nam, NamHoc: $scope.Info.NamHoc, NamHienTai: $scope.Info.NamHienTai, tuNgay: $scope.Info.FromDate, denNgay: $scope.Info.ToDate }
+                    url: "/SoCanBo/create",
+                    data: {canbo : $scope.Info }
                 }).then(function success(response) {
 
                     var result = response.data;
@@ -244,7 +299,7 @@
 
                         hideModel("insertmodal");
 
-                        showNotify("Đã thêm năm học");
+                        showNotify("Đã thêm thông tin cán bộ");
 
                     } else {
 
@@ -264,13 +319,12 @@
 
             // cap nhat tinh
             $scope.sendEdit = function () {
-                console.log("edit");
                 showLoader(true);
                 //console.log($scope.Info.NamHienTai);
                 $http({
                     method: "POST",
-                    url: "/NamHoc/edit",
-                    data: { namhoc: $scope.Info, tuNgay: $scope.Info.FromDate, denNgay: $scope.Info.ToDate }
+                    url: "/SoCanBo/edit",
+                    data: { canbo: $scope.Info }
                 }).then(
                     function success(response) {
                         $scope.GetData(1, "");
@@ -309,11 +363,10 @@
                 var r = confirm("Bạn muốn xóa không ?");
                 if (r) {
                     showLoader(true);
-
                     $http({
                         method: "POST",
-                        url: "/NamHoc/delete",
-                        data: { namhoc: info.NamHoc }
+                        url: "/SoCanBo/delete",
+                        data: { canbo: info }
                     }).then(
                         function success(response) {
 

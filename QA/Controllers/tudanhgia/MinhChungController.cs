@@ -13,7 +13,8 @@ namespace QA.Controllers.tudanhgia
         public ActionResult Show()
         {
             //var a = from p in db.HT_TieuChuan orderby p.IDTieuChuan select p.IDTieuChuan;
-            ViewBag.AllTieuChuan = from p in db.HT_TieuChuan orderby p.IDTieuChuan select p;
+            var idquydinh = db.DM_QuyDinh.Where(p => p.IDCapHoc == CapHoc).Select(p => p.ID).FirstOrDefault();
+            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDQuyDinh == idquydinh).Select(x => new { ID = x.IDTieuChuan, NoiDung = x.NoiDung, IDTieuChuan = x.GuiID }).ToList().OrderBy(x => x.ID);
             //ViewBag.AllTieuChi = from p in db.HT_TieuChi join t in db.HT_TieuChuan on p.IDTieuChuan equals t.GuiID where t.IDTieuChuan == 1 orderby p.IDTieuChi select p;
             return View();
         }
@@ -22,8 +23,10 @@ namespace QA.Controllers.tudanhgia
         {
 
             //var data = from p in db.HT_TieuChi join t in db.HT_TieuChuan on p.IDTieuChuan equals t.GuiID  where t.IDTieuChuan == (idtieuchuan) orderby p.IDTieuChi select p;
+            var idqd = db.DM_QuyDinh.Where(p => p.IDCapHoc == CapHoc).Select(p => p.ID).FirstOrDefault();
             var id = new SqlParameter("@idtieuchuan", idtieuchuan);
-            var data = db.Database.SqlQuery<GET_TIEUCHI_BY_IDTIEUCHUAN>("GET_TIEUCHI_BY_IDTIEUCHUAN @idtieuchuan", id).ToList();
+            var ch = new SqlParameter("@idquydinh", idqd);
+            var data = db.Database.SqlQuery<GET_TIEUCHI_BY_IDTIEUCHUAN>("GET_TIEUCHI_BY_IDTIEUCHUAN @idtieuchuan,@idquydinh", id, ch).ToList();
             ResultInfo result = new ResultWithPaging()
             {
                 error = 0,

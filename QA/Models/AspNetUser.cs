@@ -27,5 +27,7 @@ namespace QA.Models
         public Nullable<int> AccessFailedCount { get; set; }
         public string UserName { get; set; }
         public string MaTruong { get; set; }
+        public string UserGroup { get; set; }
+        public string HoTen { get; set; }
     }
 }

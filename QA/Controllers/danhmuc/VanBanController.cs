@@ -25,11 +25,10 @@ namespace QA.Controllers.danhmuc
 
             int pageNumber = (page ?? 1);
 
-
-            //var data = db.DM_VanBan.Where(p => p.TrichYeu.Contains(search) && p.MaTruong == MaTruong && p.NamHoc == NamHoc).ToList();
-            var caphoc = new SqlParameter("@CapHoc", CapHoc);
-            var phanloai = new SqlParameter("@PhanLoai", PhanLoai);
-            var data = db.Database.SqlQuery<VanBan>("GET_VANBAN_CAPHOC @CapHoc, @PhanLoai", caphoc,phanloai).ToList();
+            var data = db.DM_VanBan.ToList();
+           // var caphoc = new SqlParameter("@CapHoc", CapHoc);
+            //var phanloai = new SqlParameter("@PhanLoai", PhanLoai);
+            //var data = db.Database.SqlQuery<VanBan>("GET_VANBAN_CAPHOC @CapHoc, @PhanLoai", caphoc,phanloai).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {

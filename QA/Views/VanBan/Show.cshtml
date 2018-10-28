@@ -35,8 +35,8 @@
                                 <td>{{item.TrichYeu}}</td>
                                 <td>{{item.NgayBanHanh.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td>{{item.CoQuanBanHanh}}</td>
-                                <td>{{item.CapHoc}}</td>
-                                <td><i class="fa fa-paperclip"><a target="_blank" href="TaiLieu/VanBan/{{item.ID}}.{{item.LinkVanBan}}">Tải file</a> </i></td>
+                                <td>{{item.IDCapHoc}}</td>
+                                <td><i class="fa fa-paperclip"><a target="_blank" href="~/TaiLieu/VanBan/{{item.ID}}.{{item.LinkVanBan}}">Tải file</a> </i></td>
                                 <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
                                 <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
                             </tr>
@@ -230,28 +230,23 @@
             }
 
 
+            /////////////////////
             // them tinh
             $scope.sendCreate = function () {
-
                 showLoader(true);
-                uiUploader.startUpload({
-                    url: '/VanBan/create',
-                    paramName: 'fileTaiLieu',
-                    data: { maso: $scope.Info.MaSo, trichyeu: $scope.Info.TrichYeu, coquan: $scope.Info.CoQuanBanHanh, ngaybanhanh: $scope.Info.NgayBanHanh, idcaphoc: $scope.Info.IDCapHoc},
-                    onProgress: function (file) {
-                        $scope.$apply();
-                    },
-                    onCompleted: function (file, response) {
+                //
+                if (document.getElementById("filetailieu").files.length == 0) {
+                    $http({
+                        method: "POST",
+                        url: '/VanBan/create',
+                        paramName: 'fileTaiLieu',
+                        data: { maso: $scope.Info.MaSo, trichyeu: $scope.Info.TrichYeu, coquan: $scope.Info.CoQuanBanHanh, ngaybanhanh: $scope.Info.NgayBanHanh, idcaphoc: $scope.Info.IDCapHoc }
+                    }).then(function success(response) {
 
-                        showLoader(false);
-                        var result = angular.fromJson(response);
-
+                        var result = response.data;
+                        console.log(result);
                         if (result.error === 0) {
-                            // xoa file hien tai trong danh sach upload
-                            uiUploader.removeAll();
-                            $('#filetailieu').value = "";
-                            $scope.$apply();
-
+                            $scope.GetData(1, "");
                             $scope.allDanhMuc.unshift(result.data);
 
                             hideModel("insertmodal");
@@ -267,51 +262,48 @@
                         showLoader(false);
 
                     }
-                });
-            };
-
-            // cap nhat tinh
-            $scope.sendEdit = function () {
-                showLoader(true);
-                var ngayBH = $scope.Info.NgayBanHanh;
-                $scope.Info.ngaybanhanh = ngayBH;
-
-                uiUploader.startUpload({
-                    url: '/VanBan/edit',
-                    concurrency: 2,
-                    paramName: 'fileTaiLieu',
-                    data: { maso: $scope.Info.MaSo, trichyeu: $scope.Info.TrichYeu, coquan: $scope.Info.CoQuanBanHanh, ngaybanhanh: $scope.Info.NgayBanHanh, idcaphoc: $scope.Info.IDCapHoc, id: $scope.Info.ID },
-                    onProgress: function (file) {
-                        $scope.$apply();
-                    },
-                    onCompleted: function (file, response) {
-
+                    , function error(response) {
+                        showNotify("connect has disconnect");
                         showLoader(false);
-                        var result = angular.fromJson(response);
-
-                        if (result.error === 0) {
-                            // xoa file hien tai trong danh sach upload
-                            uiUploader.removeAll();
-                            $('#filetailieu').value = "";
+                    });
+                } else {
+                    uiUploader.startUpload({
+                        url: '/VanBan/create',
+                        paramName: 'fileTaiLieu',
+                        data: { maso: $scope.Info.MaSo, trichyeu: $scope.Info.TrichYeu, coquan: $scope.Info.CoQuanBanHanh, ngaybanhanh: $scope.Info.NgayBanHanh, idcaphoc: $scope.Info.IDCapHoc },
+                        onProgress: function (file) {
                             $scope.$apply();
+                        },
+                        onCompleted: function (file, response) {
 
-                            $scope.allDanhMuc.unshift(result.data);
-                            $scope.GetData(1, "");
-                            hideModel("insertmodal");
+                            showLoader(false);
+                            var result = angular.fromJson(response);
 
-                            showNotify("Đã chỉnh sửa văn bản");
+                            if (result.error === 0) {
+                                // xoa file hien tai trong danh sach upload
+                                uiUploader.removeAll();
+                                $('#filetailieu').value = "";
+                                $scope.$apply();
 
-                        } else {
+                                $scope.allDanhMuc.unshift(result.data);
 
-                            alert(result.msg);
+                                hideModel("insertmodal");
+                                $scope.GetData(1, "");
+                                showNotify("Đã thêm văn bản");
+
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
 
                         }
-
-                        showLoader(false);
-
-                    }
-                });
-            };
+                    });
+                }
+            };//
+            /////////////////////           
 
             // xoa du lieu
             $scope.sendDelete = function (index) {

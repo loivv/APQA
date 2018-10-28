@@ -18,7 +18,6 @@ namespace QA.Controllers.kehoachtudanhgia
         public ActionResult getTieuChuan()
         {
 
-
             var caphoc = new SqlParameter("@CapHoc", CapHoc);
             var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHUAN @CapHoc", caphoc).ToList();
 
@@ -35,7 +34,9 @@ namespace QA.Controllers.kehoachtudanhgia
         {
 
             var id = new SqlParameter("@IDTieuChuan", idtieuchuan);
-            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI_TIEUCHUAN @IDTieuChuan", id).ToList();
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var namhoc = new SqlParameter("@NamHoc", NamHoc);
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI_TIEUCHUAN @IDTieuChuan,@MaTruong,@NamHoc", id,matruong,namhoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {

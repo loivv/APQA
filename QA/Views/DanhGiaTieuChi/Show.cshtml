@@ -60,8 +60,8 @@
                                 <th>Tiêu chuẩn</th>
                                 <th>Tiêu chí</th>
                                 <th>Nhận xét PGD&DT</th>
-                                <th>Nhóm tự đánh giá</th>
-                                <th>Tự đánh giá</th>
+                                <th>Nhóm TĐG</th>
+                                <th>Tự ĐG</th>
                                 <th>Lấy phiếu</th>
                                 <th>#</th>
                                 <th>#</th>
@@ -146,53 +146,53 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Nội dung</label>
-                                                    <textarea rows="2" class="form-control" ng-model="ChiSoA.NoiDung" ></textarea>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoA.NoiDung"  ng-disabled="true"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <div class="form-group">
-                                                    <label>Mô tả hiện trạng</label>
-                                                    -- <a href="#" ng-click="sub('chisoa')">Sub</a>
-                                                    <textarea id="chisoamota" name="chisoamota" rows="7" class="form-control" ng-model="ChiSoA.MoTaHienTrang" ></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>MC từ</label>
-                                                            <select class="form-control" ng-model="ChiSoA.IDTieuChuanFrom">
-                                                                <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>MC đến</label>
-                                                            <select class="form-control" ng-model="ChiSoA.IDTieuChuanTo" ng-change="getMC()">
-                                                                <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
-                                                            </select>
-                                                        </div>
+                                                <div class="col-sm-8">
+                                                    <div class="form-group">
+                                                        <label>Mô tả hiện trạng</label>
+                                                        -- <a href="#" ng-click="sub('chisoa')">Sub</a>
+                                                        <textarea id="chisoamota" name="chisoamota" rows="7" class="form-control" ng-model="ChiSoA.MoTaHienTrang"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <table class="table table-striped jambo_table bulk_action">
-                                                        <thead>
-                                                            <tr class="headings">
-                                                                <th>Mã MC</th>
-                                                                <th>Tên MC</th>                                                 
-                                                            </tr>
-                                                        </thead>
+                                                <div class="col-sm-4">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>MC từ</label>
+                                                                <select class="form-control" ng-model="ChiSoA.IDTieuChuanFrom">
+                                                                    <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>MC đến</label>
+                                                                <select class="form-control" ng-model="ChiSoA.IDTieuChuanTo" ng-change="getMCA()">
+                                                                    <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <table class="table table-striped jambo_table bulk_action">
+                                                            <thead>
+                                                                <tr class="headings">
+                                                                    <th>Mã MC</th>
+                                                                    <th>Tên MC</th>
+                                                                </tr>
+                                                            </thead>
 
-                                                        <tbody>
-                                                            <tr ng-repeat="item in allMinhChung">                                     
-                                                                <td><a href="#" ng-click="insertText($index)">{{item.MaMC}}</a></td>
-                                                                <td>{{item.TenMC}}</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>                                          
+                                                            <tbody>
+                                                                <tr ng-repeat="item in allMinhChungA">
+                                                                    <td><a href="#" ng-click="insertText($index)">{{item.MaMC}}</a></td>
+                                                                    <td>{{item.TenMC}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>                                    
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
@@ -206,7 +206,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Nội dung</label>
-                                                    <textarea rows="2" class="form-control" ng-model="ChiSoB.NoiDung" ></textarea>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoB.NoiDung" ng-disabled="true" ></textarea>
                                                 </div>
                                             </div>                                            
                                             <div class="col-sm-8">
@@ -215,20 +215,43 @@
                                                     <textarea rows="5" class="form-control" ng-model="ChiSoB.MoTaHienTrang" ></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <select class="form-control" ng-model="Info.IDTieuChuan">
-                                                        <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
-                                                    </select>
+                                            <div class="col-sm-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>MC từ</label>
+                                                            <select class="form-control" ng-model="ChiSoB.IDTieuChuanFrom">
+                                                                <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>MC đến</label>
+                                                            <select class="form-control" ng-model="ChiSoB.IDTieuChuanTo" ng-change="getMCB()">
+                                                                <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="form-group">
-                                                    <select class="form-control" ng-model="DanhGia.MaNhom" required>
-                                                        <option ng-repeat="x in allNhom" value="{{x.MaNhom}}">{{x.TenNhom | uppercase}}</option>
-                                                    </select>
+                                                <div class="row">
+                                                    <table class="table table-striped jambo_table bulk_action">
+                                                        <thead>
+                                                            <tr class="headings">
+                                                                <th>Mã MC</th>
+                                                                <th>Tên MC</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr ng-repeat="item in allMinhChungB">
+                                                                <td><a href="#" ng-click="insertText($index)">{{item.MaMC}}</a></td>
+                                                                <td>{{item.TenMC}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                            </div>
+                                            </div> 
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
@@ -242,15 +265,52 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Nội dung</label>
-                                                    <textarea rows="2" class="form-control" ng-model="ChiSoC.NoiDung" ></textarea>
+                                                    <textarea rows="2" class="form-control" ng-model="ChiSoC.NoiDung" ng-disabled="true"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-8">
                                                 <div class="form-group">
                                                     <label>Mô tả hiện trạng</label>
                                                     <textarea rows="5" class="form-control" ng-model="ChiSoC.MoTaHienTrang" ></textarea>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>MC từ</label>
+                                                            <select class="form-control" ng-model="ChiSoC.IDTieuChuanFrom">
+                                                                <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>MC đến</label>
+                                                            <select class="form-control" ng-model="ChiSoC.IDTieuChuanTo" ng-change="getMCC()">
+                                                                <option ng-repeat="x in allTieuChuan" value="{{x.IDTieuChuan}}">{{x.IDTieuChuan}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <table class="table table-striped jambo_table bulk_action">
+                                                        <thead>
+                                                            <tr class="headings">
+                                                                <th>Mã MC</th>
+                                                                <th>Tên MC</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr ng-repeat="item in allMinhChungC">
+                                                                <td><a href="#" ng-click="insertText($index)">{{item.MaMC}}</a></td>
+                                                                <td>{{item.TenMC}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div> 
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
@@ -264,19 +324,25 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Điểm mạnh</label>
-                                                    <textarea rows="2" class="form-control" ng-model="DanhGia.DiemManh"></textarea>
+                                                    <textarea rows="4" class="form-control" ng-model="DanhGia.DiemManh"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Điểm yếu</label>
-                                                    <textarea rows="5" class="form-control" ng-model="DanhGia.DiemYeu"></textarea>
+                                                    <textarea rows="4" class="form-control" ng-model="DanhGia.DiemYeu"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Tự đánh giá</label>
+                                                    <input type="checkbox" class="form-control" ng-model="DanhGia.TuDanhGia" ng-checked="DanhGia.TuDanhGia"/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control" ng-disabled="true"></textarea>
+                                                    <textarea rows="4" class="form-control" ng-disabled="true"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -285,13 +351,13 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <textarea rows="2" class="form-control" ng-model="DanhGia.KeHoachCaiTien" ></textarea>
+                                                    <textarea rows="4" class="form-control" ng-model="DanhGia.KeHoachCaiTien" ></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Ý kiến PGD&DT</label>
-                                                    <textarea rows="5" class="form-control"  ></textarea>
+                                                    <textarea rows="4" class="form-control" ng-disabled="true"  ></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -336,7 +402,7 @@
 
             $scope.allNhom = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllNhom))');
             $scope.allTieuChuan = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllTieuChuan))');
-            console.log($scope.allTieuChuan);
+            
             // lay du lieu
             $scope.DanhGia = [];
             $scope.ChiSoA = [];
@@ -444,7 +510,8 @@
             };
             //ham lay chi tiet tieu chi
             $scope.GetTieuChi = function (index) {
-                $scope.alldetail = [];
+                //$scope.alldetail = [];
+                $scope.allDanhMuc[index].allDetail = [];
                 var info = $scope.allDanhMuc[index];
                 $scope.Info = angular.copy(info);
 
@@ -458,6 +525,7 @@
                     if (response.data.error === 0) {
 
                         $scope.allDanhMuc[index].allDetail = response.data.data;
+                        console.log(response.data.data);
                     }
 
                 }, function myError(response) {
@@ -467,7 +535,7 @@
             }
             //ket thuc ham lay goi tieu chi
             //ham lay chi tiet tieu chi
-            $scope.getMC = function () {
+            $scope.getMCA = function () {
                 showLoader(true);
                 $http({
                     method: "GET",
@@ -477,8 +545,47 @@
 
                     if (response.data.error === 0) {
 
-                        $scope.allMinhChung = response.data.data;
-                        console.log($scope.allMinhChung);
+                        $scope.allMinhChungA = response.data.data;
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            //ket thuc ham lay goi tieu chi
+            //ham lay chi tiet tieu chi
+            $scope.getMCAB = function () {
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/DanhGiaTieuChi/getMCbyID?idfrom=" + $scope.ChiSoB.IDTieuChuanFrom + "&idto=" + $scope.ChiSoB.IDTieuChuanTo
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allMinhChungB = response.data.data;
+                    }
+
+                }, function myError(response) {
+                    showLoader(false);
+                    showNotify('Connect error');
+                });
+            }
+            //ket thuc ham lay goi tieu chi
+            //ham lay chi tiet tieu chi
+            $scope.getMCC = function () {
+                showLoader(true);
+                $http({
+                    method: "GET",
+                    url: "/DanhGiaTieuChi/getMCbyID?idfrom=" + $scope.ChiSoC.IDTieuChuanFrom + "&idto=" + $scope.ChiSoC.IDTieuChuanTo
+                }).then(function mySuccess(response) {
+                    showLoader(false);
+
+                    if (response.data.error === 0) {
+
+                        $scope.allMinhChungC = response.data.data;
                     }
 
                 }, function myError(response) {
@@ -517,7 +624,7 @@
 
                     if (response.data.error === 0) {
 
-                        $scope.DanhGia = { "DiemManh": "", "DiemYeu": "", "KeHoachCaiTien": "", "IDTieuChi": $scope.Info.GuiIDTC ,"MaNhom": ""};
+                        $scope.DanhGia = { "DiemManh": "", "DiemYeu": "", "KeHoachCaiTien": "", "IDTieuChi": $scope.Info.GuiIDTC ,"MaNhom": "","TuDanhGia":false};
                         $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
                         //$scope.ZoneIDDisable = false;
                         $scope.IsAction = 'add';
@@ -526,6 +633,7 @@
 
                     } else if (response.data.error !== 0) {
                         $scope.DanhGia = response.data.data;
+                        console.log($scope.DanhGia);
                         //truong hop da ton tai thong in
                         $http({
                             method: "GET",
@@ -698,7 +806,7 @@
             // them tinh
             $scope.sendCreate = function () {
                 showLoader(true);
-                
+                console.log($scope.DanhGia.TuDanhGia);
                 $scope.test = {}
                 $scope.MoTa = [
                   { IDChiSo:$scope.ChiSoA.GuiID,MoTaHienTrang: $scope.ChiSoA.MoTaHienTrang },
@@ -709,7 +817,7 @@
                 $http({
                     method: "POST",
                     url: "/DanhGiaTieuChi/create",
-                    data: { idtieuchi: $scope.Info.GuiIDTC, dm: $scope.DanhGia.DiemManh, dy: $scope.DanhGia.DiemYeu,mn : $scope.DanhGia.MaNhom, kh: $scope.DanhGia.KeHoachCaiTien, mt: $scope.MoTa }
+                    data: { idtieuchi: $scope.Info.GuiIDTC, dm: $scope.DanhGia.DiemManh, dy: $scope.DanhGia.DiemYeu, dat: $scope.DanhGia.TuDanhGia, mn: $scope.DanhGia.MaNhom, kh: $scope.DanhGia.KeHoachCaiTien, mt: $scope.MoTa }
                 }).then(function success(response) {
 
                     var result = response.data;
@@ -750,7 +858,7 @@
 
                     $http({
                         method: "POST",
-                        url: "/ThoiGianCungCap/delete",
+                        url: "/DanhGiaTieuChi/delete",
                         data: { id: info.GuiIDTC }
                     }).then(
                         function success(response) {

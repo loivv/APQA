@@ -91,6 +91,7 @@ namespace QA.Controllers
             }
         }
 
+        /*8
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -133,10 +134,10 @@ namespace QA.Controllers
                     return View(model);
             }
         }
-
+        */
         //
         // GET: /Account/Register
-        [Authorize]
+        [Authorize(Roles="admin")]
         public ActionResult Register()
         {
             return View();
@@ -145,13 +146,13 @@ namespace QA.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , MaTruong = model.MaTruong};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , MaTruong = model.MaTruong,UserGroup ="ADMIN"};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -173,6 +174,7 @@ namespace QA.Controllers
             return View(model);
         }
 
+        /*
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -235,7 +237,9 @@ namespace QA.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
+            //UserManager.GeneratePasswordResetTokenAsync(user.Id);
             return code == null ? View("Error") : View();
+           // return View();
         }
 
         //
@@ -385,7 +389,7 @@ namespace QA.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
+        */
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -396,6 +400,7 @@ namespace QA.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /*
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
@@ -403,7 +408,7 @@ namespace QA.Controllers
         {
             return View();
         }
-
+        */
         protected override void Dispose(bool disposing)
         {
             if (disposing)

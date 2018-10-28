@@ -39,7 +39,9 @@ namespace QA.Controllers.tudanhgia
         {
 
             var id = new SqlParameter("@IDTieuChuan", idtieuchuan);
-            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI_TIEUCHUAN_DANHGIA @IDTieuChuan", id).ToList();
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var namhoc = new SqlParameter("@NamHoc", NamHoc);
+            var data = db.Database.SqlQuery<TieuChuanTieuChi>("GET_TIEUCHI_TIEUCHUAN_DANHGIA @IDTieuChuan,@MaTruong,@NamHoc", id,matruong,namhoc).ToList();
 
             ResultInfo result = new ResultWithPaging()
             {
@@ -153,7 +155,7 @@ namespace QA.Controllers.tudanhgia
         }
 
         [HttpPost]
-        public ActionResult create(string idtieuchi,string dm,string dy,string kh,string mn, List<DM_ChiSoMoTa> mt)
+        public ActionResult create(string idtieuchi,string dm,string dy,bool dat,string kh,string mn, List<DM_ChiSoMoTa> mt)
         {
 
             //if (String.IsNullOrEmpty(tcdk.HoatDong.ToString()))
@@ -171,6 +173,7 @@ namespace QA.Controllers.tudanhgia
                 dgtc.DiemYeu = dy;
                 dgtc.KeHoachCaiTien = kh;
                 dgtc.MaNhom = mn;
+                dgtc.TuDanhGia = dat;
                 db.DM_DanhGiaTieuChi.Add(dgtc);
             }
             else if (check != null)
@@ -179,6 +182,7 @@ namespace QA.Controllers.tudanhgia
                 check.DiemYeu = dy;
                 check.KeHoachCaiTien = kh;
                 check.MaNhom = mn;
+                check.TuDanhGia = dat;
                 db.Entry(check).State = System.Data.Entity.EntityState.Modified;
             }
             //kiem tra truong hop chi so

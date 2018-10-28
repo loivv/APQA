@@ -17,7 +17,8 @@
                     <table class="table table-striped jambo_table bulk_action">
                         <thead>
                             <tr class="headings">
-                                <th>Tiêu chuẩn</th>
+                                <th>TC</th>
+                                <th>Số hiệu</th>
                                 <th>Nội dung</th>
                                 <th>Tiêu chí</th>
                             </tr>
@@ -26,6 +27,7 @@
                         <tbody>
                             <tr ng-repeat="(mindex,item) in allDanhMuc">                               
                                 <td>{{item.IDTieuChuan}}</td>
+                                <td>{{item.SoHieu}}</td>
                                 <td>{{item.NoiDung}}</td>
                                 <td>
                                     <table ng-init="GetTieuChi(mindex)" border="0">

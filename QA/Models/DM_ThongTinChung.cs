@@ -38,5 +38,6 @@ namespace QA.Models
         public string Code { get; set; }
         public string DiaChi { get; set; }
         public string PhanLoai { get; set; }
+        public string Cap { get; set; }
     }
 }

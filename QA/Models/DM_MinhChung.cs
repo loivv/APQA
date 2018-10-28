@@ -22,6 +22,7 @@ namespace QA.Models
         public string CoQuan { get; set; }
         public string GhiChu { get; set; }
         public string LinkFile { get; set; }
+        public string Hop { get; set; }
         public Nullable<int> IDTieuChuan { get; set; }
         public Nullable<int> IDTieuChi { get; set; }
         public Nullable<int> STT { get; set; }

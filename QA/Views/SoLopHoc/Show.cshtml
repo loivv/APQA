@@ -80,7 +80,78 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="table-responsive" ng-switch-when="THPT">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th>STT</th>
+                                    <th>Năm học</th>
+                                    <th>Lớp 10</th>
+                                    <th>Lớp 11</th>
+                                    <th>Lớp 12</th>
+                                    <th>Tổng</th>
+                                    <th>#</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
 
+                            <tbody>
+                                <tr ng-repeat="item in allDanhMuc">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{item.NamHoc}}</td>
+                                    <td>{{item.Lop10}}</td>
+                                    <td>{{item.Lop11}}</td>
+                                    <td>{{item.Lop12}}</td>
+                                    <td>{{item.Tong}}</td>
+                                    <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                    <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive" ng-switch-when="MN">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th>STT</th>
+                                    <th>Năm học</th>
+                                    <th>Nhóm 3->12 tháng</th>
+                                    <th>Nhóm 13->24 tháng</th>
+                                    <th>Nhóm 25->36 tháng</th>
+                                    <th>Lớp 3->4 tuổi</th>
+                                    <th>Lớp 3+4 tuổi</th>
+                                    <th>Lớp 3+5 tuổi</th>
+                                    <th>Lớp 3+4+5 tuổi</th>
+                                    <th>Lớp 4->5 tuổi</th>
+                                    <th>Lớp 4+5 tuổ</th>
+                                    <th>Lớp 5->6 tuổi</th>
+                                    <th>Tổng</th>
+                                    <th>#</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="item in allDanhMuc">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{item.NamHoc}}</td>
+                                    <td>{{item.Col1}}</td>
+                                    <td>{{item.Col2}}</td>
+                                    <td>{{item.Col3}}</td>
+                                    <td>{{item.Col4}}</td>
+                                    <td>{{item.Col5}}</td>
+                                    <td>{{item.Col6}}</td>
+                                    <td>{{item.Col7}}</td>
+                                    <td>{{item.Col8}}</td>
+                                    <td>{{item.Col9}}</td>
+                                    <td>{{item.Col10}}</td>
+                                    <td>{{item.Tong}}</td>
+                                    <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
+                                    <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     </div>
                     <!-- end table data-->
                     <!--phan trang-->
@@ -101,7 +172,6 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">{{modaltitle}}</h4>
                 </div>
-
 
                 <!-- begin form-->
                 <form class="css-form" name="createForm" ng-submit="finishForm(createForm.$valid)">
@@ -182,6 +252,104 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" ng-switch-when="THPT">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Năm học</label>
+                                        <select class="form-control" ng-model="Info.NamHoc" required>
+                                            <option ng-repeat="x in allnamhoc" value="{{x.NamHoc}}">{{x.NamHoc | uppercase}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Lớp 10</label>
+                                        <input type="number" class="form-control" ng-model="Info.Lop10" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Lớp 11</label>
+                                        <input type="number" class="form-control" ng-model="Info.Lop11" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Lớp 12</label>
+                                        <input type="number" class="form-control" ng-model="Info.Lop12" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-switch-when="MN">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Năm học</label>
+                                        <select class="form-control" ng-model="Info.NamHoc" required>
+                                            <option ng-repeat="x in allnamhoc" value="{{x.NamHoc}}">{{x.NamHoc | uppercase}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số nhóm trẻ từ 3 đến 12 tháng tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col1" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số nhóm trẻ từ 13 đến 24 tháng tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col2" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số nhóm trẻ từ 25 đến 36 tháng tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col3" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số lớp mẫu giáo từ 3 đến 4 tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col4" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số lớp ghép 3+4 tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col5" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số lớp ghép 3+5 tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col6" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số lớp ghép 3+4+5 tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col7" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số lớp mẫu giáo từ 4 đến 5 tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col8" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số lớp ghép 4+5 tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col9" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Số lớp mẫu giáo từ 5 đến 6 tuổi</label>
+                                        <input type="number" class="form-control" ng-model="Info.Col10" required />
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     <!-- end body-->
@@ -211,7 +379,8 @@
         app.controller('myCtrl', function ($scope, $http) {
 
             $scope.allnamhoc = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllNamHoc))');
-            $scope.caphoc = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.CapHoc))');
+            $scope.caphoc = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Cap))');
+            //console.log($scope.caphoc);
             // phan trang
             $scope.numPages;
             $scope.itemPerPage;
@@ -258,7 +427,46 @@
                         if (response.data.error === 0) {
 
                             $scope.allDanhMuc = response.data.data;
-                            console.log($scope.allDanhMuc);
+                            $scope.itemPerPage = response.data.pageSize;
+                            $scope.totalItems = response.data.toltalSize;
+                            $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+                        }
+
+                    }, function myError(response) {
+                        showLoader(false);
+                        showNotify('Connect error');
+                    });
+                } else if ($scope.caphoc == "THPT") {
+                    showLoader(true);
+                    $http({
+                        method: "GET",
+                        url: "/SoLopHoc/getLopHocTHPT?page=" + page + "&search=" + search
+                    }).then(function mySuccess(response) {
+                        showLoader(false);
+
+                        if (response.data.error === 0) {
+
+                            $scope.allDanhMuc = response.data.data;
+                            $scope.itemPerPage = response.data.pageSize;
+                            $scope.totalItems = response.data.toltalSize;
+                            $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
+                        }
+
+                    }, function myError(response) {
+                        showLoader(false);
+                        showNotify('Connect error');
+                    });
+                } else if ($scope.caphoc == "MN") {
+                    showLoader(true);
+                    $http({
+                        method: "GET",
+                        url: "/SoLopHoc/getLopHocMN?page=" + page + "&search=" + search
+                    }).then(function mySuccess(response) {
+                        showLoader(false);
+
+                        if (response.data.error === 0) {
+
+                            $scope.allDanhMuc = response.data.data;
                             $scope.itemPerPage = response.data.pageSize;
                             $scope.totalItems = response.data.toltalSize;
                             $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
@@ -286,7 +494,11 @@
                 {
                     $scope.Info = { "NamHoc": "", "Lop6": 1, "Lop7": 1, "Lop8": 1, "Lop9": 1};
                 }
-
+                else if ($scope.caphoc == "THPT") {
+                    $scope.Info = { "NamHoc": "", "Lop10": 1, "Lop11": 1, "Lop12": 1 };
+                } else if ($scope.caphoc == "MN") {
+                    $scope.Info = { "NamHoc": "", "Col1":1, "Col2":1,"Col3":1,"Col4":1,"Col5":1,"Col6":1,"Col7":1,"Col8":1,"Col9":1,"Col10":1};
+                }
                 
                 $scope.modaltitle = "Thêm phòng học";
                 //$scope.ZoneIDDisable = false;
@@ -342,7 +554,7 @@
                 }).then(function success(response) {
 
                     var result = response.data;
-                    console.log(result);
+
                     if (result.error === 0) {
                         $scope.GetData(1, "");
                         $scope.allDanhMuc.unshift(result.data);
@@ -371,6 +583,68 @@
                         method: "POST",
                         url: "/SoLopHoc/createthcs",
                         data: { thcs: $scope.Info }
+                    }).then(function success(response) {
+
+                        var result = response.data;
+                        if (result.error === 0) {
+                            $scope.GetData(1, "");
+                            $scope.allDanhMuc.unshift(result.data);
+
+                            hideModel("insertmodal");
+
+                            showNotify("Đã thêm thông tin phòng học");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    }
+                        , function error(response) {
+                            showNotify("connect has disconnect");
+                            showLoader(false);
+                        });
+                } else if ($scope.caphoc == "THPT") {
+                    showLoader(true);
+                    $http({
+                        method: "POST",
+                        url: "/SoLopHoc/createthpt",
+                        data: { thpt: $scope.Info }
+                    }).then(function success(response) {
+
+                        var result = response.data;
+                        console.log(result);
+                        if (result.error === 0) {
+                            $scope.GetData(1, "");
+                            $scope.allDanhMuc.unshift(result.data);
+
+                            hideModel("insertmodal");
+
+                            showNotify("Đã thêm thông tin phòng học");
+
+                        } else {
+
+                            alert(result.msg);
+
+                        }
+
+                        showLoader(false);
+
+                    }
+                        , function error(response) {
+                            showNotify("connect has disconnect");
+                            showLoader(false);
+                        });
+                }
+                else if ($scope.caphoc == "MN") {
+                    showLoader(true);
+                    $http({
+                        method: "POST",
+                        url: "/SoLopHoc/createmn",
+                        data: { mn: $scope.Info }
                     }).then(function success(response) {
 
                         var result = response.data;
@@ -445,6 +719,78 @@
                         method: "POST",
                         url: "/SoLopHoc/editthcs",
                         data: { thcs: $scope.Info }
+                    }).then(
+                        function success(response) {
+                            $scope.GetData(1, "");
+                            var result = response.data;
+
+                            if (result.error === 0) {
+
+                                var findIndex = getSelectedIndex(result.data.NamHoc);
+
+                                if (findIndex !== -1) {
+                                    $scope.allDanhMuc[findIndex] = angular.copy(result.data);
+                                }
+
+                                showNotify("Đã cập nhật");
+                                hideModel("insertmodal");
+
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
+
+                        },
+                        function errror(response) {
+                            showLoader(false);
+                            showNotify("connect has disconnect");
+                        });
+                } else if ($scope.caphoc == "THPT") {
+                    showLoader(true);
+                    //console.log($scope.Info.NamHienTai);
+                    $http({
+                        method: "POST",
+                        url: "/SoLopHoc/editthpt",
+                        data: { thpt: $scope.Info }
+                    }).then(
+                        function success(response) {
+                            $scope.GetData(1, "");
+                            var result = response.data;
+
+                            if (result.error === 0) {
+
+                                var findIndex = getSelectedIndex(result.data.NamHoc);
+
+                                if (findIndex !== -1) {
+                                    $scope.allDanhMuc[findIndex] = angular.copy(result.data);
+                                }
+
+                                showNotify("Đã cập nhật");
+                                hideModel("insertmodal");
+
+                            } else {
+
+                                alert(result.msg);
+
+                            }
+
+                            showLoader(false);
+
+                        },
+                        function errror(response) {
+                            showLoader(false);
+                            showNotify("connect has disconnect");
+                        });
+                } else if ($scope.caphoc == "MN") {
+                    showLoader(true);
+                    //console.log($scope.Info.NamHienTai);
+                    $http({
+                        method: "POST",
+                        url: "/SoLopHoc/editmn",
+                        data: { mn: $scope.Info }
                     }).then(
                         function success(response) {
                             $scope.GetData(1, "");
@@ -560,10 +906,87 @@
                     } else {
 
                     }
+                } else if ($scope.caphoc == "THPT") {
+                    var info = $scope.allDanhMuc[index];
+                    var r = confirm("Bạn muốn xóa không ?");
+                    if (r) {
+                        showLoader(true);
+
+                        $http({
+                            method: "POST",
+                            url: "/SoLopHoc/deletethpt",
+                            data: { namhoc: info.NamHoc }
+                        }).then(
+                            function success(response) {
+
+                                var result = response.data;
+
+                                if (result.error == 0) {
+
+                                    // var findIndex = getSelectedIndex(result.data.CountryID);
+
+                                    // if (findIndex !== -1) {
+                                    $scope.allDanhMuc.splice(index, 1);
+                                    //  }
+
+                                } else {
+
+                                    alert(result.msg);
+
+                                }
+
+                                showLoader(false);
+
+                            },
+                            function errror(response) {
+                                showLoader(false);
+                                showNotify("connect has disconnect");
+                            }
+                            );
+                    } else {
+
+                    }
+                } else if ($scope.caphoc == "MN") {
+                    var info = $scope.allDanhMuc[index];
+                    var r = confirm("Bạn muốn xóa không ?");
+                    if (r) {
+                        showLoader(true);
+
+                        $http({
+                            method: "POST",
+                            url: "/SoLopHoc/deletemn",
+                            data: { namhoc: info.NamHoc }
+                        }).then(
+                            function success(response) {
+
+                                var result = response.data;
+
+                                if (result.error == 0) {
+
+                                    // var findIndex = getSelectedIndex(result.data.CountryID);
+
+                                    // if (findIndex !== -1) {
+                                    $scope.allDanhMuc.splice(index, 1);
+                                    //  }
+
+                                } else {
+
+                                    alert(result.msg);
+
+                                }
+
+                                showLoader(false);
+
+                            },
+                            function errror(response) {
+                                showLoader(false);
+                                showNotify("connect has disconnect");
+                            }
+                            );
+                    } else {
+
+                    }
                 }
-                
-
-
             }
 
         });

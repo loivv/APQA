@@ -13,7 +13,8 @@ namespace QA.Controllers.tudanhgia
         // GET: /BaoCaoTieuChuan/
         public ActionResult Show()
         {
-            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDCapHoc == CapHoc).Select(x => new { ID = x.IDTieuChuan, NoiDung = x.NoiDung, IDTieuChuan = x.GuiID }).ToList();
+            var idquydinh = db.DM_QuyDinh.Where(p => p.IDCapHoc == CapHoc).Select(p => p.ID).FirstOrDefault();
+            ViewBag.AllTieuChuan = db.HT_TieuChuan.Where(p => p.IDQuyDinh == idquydinh).Select(x => new { ID = x.IDTieuChuan, NoiDung = x.NoiDung, IDTieuChuan = x.GuiID }).ToList().OrderBy(x=>x.ID);
             return View();
         }
 
@@ -23,7 +24,7 @@ namespace QA.Controllers.tudanhgia
             var namhoc = new SqlParameter("@NamHoc", NamHoc);
             var matruong = new SqlParameter("@MaTruong", MaTruong);
             var data = db.Database.SqlQuery<BaoCaoTieuChuan>("GET_BAOCAOTIEUCHUAN @MaTruong, @NamHoc",matruong , namhoc).ToList();
-
+            //var data = db.DM_BaoCaoTieuChuan.Where(p=>p.MaTruong == MaTruong).ToList().OrderBy(p=>p.)
             ResultInfo result = new ResultWithPaging()
             {
                 error = 0,

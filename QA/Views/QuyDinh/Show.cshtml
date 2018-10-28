@@ -18,30 +18,24 @@
                         <thead>
                             <tr class="headings">
                                 <th>STT</th>
-                                <th>Mã QĐ</th>
                                 <th>Số hiệu</th>
                                 <th>Tên quy định</th>
                                 <th>Ngày ban hành</th>
                                 <th>Cơ quan ban hành</th>
                                 <th>Áp dụng</th>
                                 <th>Tải file</th>
-                                <th>#</th>
-                                <th>#</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
                                 <td>{{$index + 1}}</td>
-                                <td>{{item.ID}}</td>
                                 <td>{{item.SoHieu}}</td>
                                 <td>{{item.TenQuyDinh}}</td>
                                 <td>{{item.NgayBanHanh.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td>{{item.CoQuan}}</td>
                                 <td><i ng-class="{'fa fa-check' : item.ApDung == true, 'fa fa-close' : item.ApDung == false}"></i></td>
-                                <td><a href="{{item.LinkFile}}">Tải</a></td>
-                                <td><a href="#" ng-click="edit($index)">Xem</a></td>
-                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                                <td><a href="~/TaiLieu/QuyDinh/{{item.LinkFile}}">Tải</a></td>
                             </tr>
                         </tbody>
                     </table>

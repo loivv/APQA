@@ -72,7 +72,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Tuần</label>
-                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Tuan" required />
+                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Tuan" required ng-disabled="IDDisable" />
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -177,7 +177,7 @@
                 $scope.Info = { "Tuan": "","TuNgay":fDate,"DenNgay":tDate,"NoiDung":"" };
 
                 $scope.modaltitle = "Thêm thời gian biểu";
-                //$scope.ZoneIDDisable = false;
+                $scope.IDDisable = false;
                 $scope.IsAction = 'add';
                 showModel("insertmodal")
 
@@ -192,7 +192,7 @@
                 $scope.Info.TuNgay = fDate;
                 $scope.Info.DenNgay = tDate;
                 $scope.modaltitle = "Chỉnh sửa thời gian biểu";
-                // $scope.CountryIDDisable = true;
+                 $scope.IDDisable = true;
                 $scope.IsAction = 'edit';
                 showModel("insertmodal")
             };

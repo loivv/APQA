@@ -18,6 +18,9 @@ namespace QA.Models
         }
 
         public string MaTruong { get; set; }
+        public string UserGroup { get; set; }
+        public string HoTen { get; set; }
+       // public string Id { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

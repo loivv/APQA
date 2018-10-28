@@ -193,9 +193,6 @@
                 var info = $scope.allDanhMuc[index];
 
                 $scope.Info = angular.copy(info);
-                console.log($scope.Info);
-                console.log($scope.Info.ID);
-                console.log($scope.Info.MaNhiemVu);
                 $scope.modaltitle = "Chỉnh sửa thành viên";
                 $scope.MaThanhVienDisable = true;
                 $scope.IsAction = 'edit';
@@ -236,7 +233,7 @@
                 $http({
                     method: "POST",
                     url: "/ThanhVien/create",
-                    data: { thanhvien: $scope.Info, manv: $scope.Info.MaNhiemVu, id: $scope.Info.ID }
+                    data: { manv: $scope.Info.MaThanhVien, tennv: $scope.Info.TenThanhVien, chucvu: $scope.Info.ID, nhiemvu: $scope.Info.MaNhiemVu, thanhvien: $scope.Info.ThanhVien }
                 }).then(function success(response) {
 
                     var result = response.data;
@@ -274,7 +271,7 @@
                 $http({
                     method: "POST",
                     url: "/ThanhVien/edit",
-                    data: { thanhvien: $scope.Info, manv: $scope.Info.MaNhiemVu, id: $scope.Info.ID }
+                    data: { manv: $scope.Info.MaThanhVien, tennv: $scope.Info.TenThanhVien, chucvu: $scope.Info.ID, nhiemvu: $scope.Info.MaNhiemVu, thanhvien: $scope.Info.ThanhVien }
                 }).then(
                     function success(response) {
 
