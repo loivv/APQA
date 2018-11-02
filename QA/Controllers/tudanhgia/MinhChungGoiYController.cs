@@ -14,6 +14,10 @@ namespace QA.Controllers.tudanhgia
         public ActionResult Show()
         {
             ViewBag.AllNhom = db.DM_NhomDanhGia.Where(p => p.MaTruong == MaTruong).ToList();
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var namhoc = new SqlParameter("@NamHoc", NamHoc);
+            var result = db.Database.SqlQuery<ThanhVien>("GET_THANHVIEN_ONLY @MaTruong,@NamHoc", matruong, namhoc).ToList();
+            ViewBag.AllThanhVien = result;
             return View();
         }
         [HttpGet]
@@ -76,24 +80,36 @@ namespace QA.Controllers.tudanhgia
         {
             int id = int.Parse(idtieuchi) + 1;
             var guiid = db.HT_TieuChi.Where(p => p.IDTieuChuan == idtieuchuan && p.IDTieuChi == id).Select(p => p.GuiID).FirstOrDefault();
-            var check = db.DM_DuKienMinhChung.Where(p => p.IDTieuChi == guiid && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
-            ResultInfo result = new ResultWithPaging();
-            if (check == null)
+            var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var namhoc = new SqlParameter("@NamHoc", NamHoc);
+            var idtc = new SqlParameter("@IDTieuChi", guiid);
+            var data = db.Database.SqlQuery<DMGoiYMinhChung>("GET_GOIYMINHCHUNG_BY_IDTIEUCHI @MaTruong,@NamHoc,@IDTieuChi", matruong, namhoc,idtc).ToList();
+
+            GYMC result = new GYMC();
+            if (data == null)
             {
                 result.error = 0;
-                result.data = guiid;
+               // result.data = guiid;
             }
             else
-            {
+            {                
                 result.error = 1;
-                result.data = guiid;
+                result.chisoa = data.Where(p=>p.ChiSo == "a") ;
+                result.chisob = data.Where(p => p.ChiSo == "b");
+                result.chisoc = data.Where(p => p.ChiSo == "c");
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult getTieuChiDuKienbyID(string guiid)
         {
-            var check = db.DM_DuKienMinhChung.Where(p => p.IDTieuChi == guiid && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+
+            //var guiidcs = db.HT_TieuChi_ChiSo.Where(p => p.IDTieuChi == guiid).Select(p => p.GuiID).ToList();
+            var check = (from mc in db.DM_GoiYMinhChung
+                         join tccs in db.HT_TieuChi_ChiSo on mc.GuiID equals tccs.GuiID
+                         where tccs.IDTieuChi == guiid
+                         select new { ID = mc.GuiID }).FirstOrDefault();
+            
             ResultInfo result = new ResultWithPaging();
             if (check == null)
             {
@@ -109,40 +125,118 @@ namespace QA.Controllers.tudanhgia
         }
 
         [HttpPost]
-        public ActionResult create(DM_DuKienMinhChung dkmc, string tuNgay, string denNgay)
+        public ActionResult create(List<DMGoiYMinhChung> gymca,List<DMGoiYMinhChung> gymcb,List<DMGoiYMinhChung> gymcc)
         {
-
-            //if (String.IsNullOrEmpty(tcdk.HoatDong.ToString()))
-            //    return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
-
-            var check = db.DM_DuKienMinhChung.Where(p => p.IDTieuChi == dkmc.IDTieuChi && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
-            DateTime dateFrom = DateTime.Parse(tuNgay);
-            DateTime dateTo = DateTime.Parse(denNgay);
-            if (check == null)
+            //kiem tra tung truong hop
+            //truong hop chi so a
+            foreach(var item in gymca)
             {
-                dkmc.MaTruong = MaTruong;
-                dkmc.NamHoc = NamHoc;
-                dkmc.TuNgay = dateFrom;
-                dkmc.DenNgay = dateTo;
-                db.DM_DuKienMinhChung.Add(dkmc);
+                var checka = db.DM_GoiYMinhChung.Where(p => p.GuiID == item.GuiID && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+                if (checka == null)
+                {
+                    if(item.TrangThai != null && item.TrangThai !="")
+                    {
+                        DM_GoiYMinhChung gymc = new DM_GoiYMinhChung();
+                        gymc.GuiID = item.GuiID;
+                        gymc.MaTruong = MaTruong;
+                        gymc.NamHoc = NamHoc;
+                        gymc.NguoiLuu = item.NguoiLuu;
+                        gymc.NguoiThuThap = item.NguoiThuThap;
+                        gymc.TuNgay = DateTime.Parse(item.TuNgay);
+                        gymc.DenNgay = DateTime.Parse(item.DenNgay);
+                        gymc.TrangThai = item.TrangThai;
+                        gymc.GhiChu = item.GhiChu;
+                        db.DM_GoiYMinhChung.Add(gymc);
+                    }                   
+                }
+                else if (checka != null)
+                {
+                    //DM_GoiYMinhChung gymc = new DM_GoiYMinhChung();
+                    //checka.GuiID = item.GuiID;
+                    //checka.MaTruong = MaTruong;
+                    //checka.NamHoc = NamHoc;
+                    checka.NguoiLuu = item.NguoiLuu;
+                    checka.NguoiThuThap = item.NguoiThuThap;
+                    checka.TuNgay = DateTime.Parse(item.TuNgay);
+                    checka.DenNgay = DateTime.Parse(item.DenNgay);
+                    checka.TrangThai = item.TrangThai;
+                    checka.GhiChu = item.GhiChu;
+                    //db.DM_GoiYMinhChung.Add(gymc);
+                    db.Entry(checka).State = System.Data.Entity.EntityState.Modified;
+                }
             }
-            else if (check != null)
+            
+            //truong hop chi so b
+            foreach (var item in gymcb)
             {
-                check.DuKienMC = dkmc.DuKienMC;
-                check.NoiThuThap = dkmc.NoiThuThap;
-                check.Nhom = dkmc.Nhom;
-                check.CaNhan = dkmc.CaNhan;
-                check.Tuan = dkmc.Tuan;
-                check.TuNgay = dateFrom;
-                check.DenNgay = dateTo;
-                check.ChiPhi = dkmc.ChiPhi;
-                check.GhiChu = dkmc.GhiChu;
-                db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                var checka = db.DM_GoiYMinhChung.Where(p => p.GuiID == item.GuiID && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+                if (checka == null)
+                {
+                    if (item.TrangThai != null && item.TrangThai != "")
+                    {
+                        DM_GoiYMinhChung gymc = new DM_GoiYMinhChung();
+                        gymc.GuiID = item.GuiID;
+                        gymc.MaTruong = MaTruong;
+                        gymc.NamHoc = NamHoc;
+                        gymc.NguoiLuu = item.NguoiLuu;
+                        gymc.NguoiThuThap = item.NguoiThuThap;
+                        gymc.TuNgay = DateTime.Parse(item.TuNgay);
+                        gymc.DenNgay = DateTime.Parse(item.DenNgay);
+                        gymc.TrangThai = item.TrangThai;
+                        gymc.GhiChu = item.GhiChu;
+                        db.DM_GoiYMinhChung.Add(gymc);
+                    }
+                }
+                else if (checka != null)
+                {
+                    checka.NguoiLuu = item.NguoiLuu;
+                    checka.NguoiThuThap = item.NguoiThuThap;
+                    checka.TuNgay = DateTime.Parse(item.TuNgay);
+                    checka.DenNgay = DateTime.Parse(item.DenNgay);
+                    checka.TrangThai = item.TrangThai;
+                    checka.GhiChu = item.GhiChu;
+                    //db.DM_GoiYMinhChung.Add(gymc);
+                    db.Entry(checka).State = System.Data.Entity.EntityState.Modified;
+                }
+            }
+            //truong hop chi so c
+            foreach (var item in gymcc)
+            {
+                var checka = db.DM_GoiYMinhChung.Where(p => p.GuiID == item.GuiID && p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
+                if (checka == null)
+                {
+                    if (item.TrangThai != null && item.TrangThai != "")
+                    {
+                        DM_GoiYMinhChung gymc = new DM_GoiYMinhChung();
+                        gymc.GuiID = item.GuiID;
+                        gymc.MaTruong = MaTruong;
+                        gymc.NamHoc = NamHoc;
+                        gymc.NguoiLuu = item.NguoiLuu;
+                        gymc.NguoiThuThap = item.NguoiThuThap;
+                        gymc.TuNgay = DateTime.Parse(item.TuNgay);
+                        gymc.DenNgay = DateTime.Parse(item.DenNgay);
+                        gymc.TrangThai = item.TrangThai;
+                        gymc.GhiChu = item.GhiChu;
+                        db.DM_GoiYMinhChung.Add(gymc);
+                    }
+                }
+                else if (checka != null)
+                {
+
+                    checka.NguoiLuu = item.NguoiLuu;
+                    checka.NguoiThuThap = item.NguoiThuThap;
+                    checka.TuNgay = DateTime.Parse(item.TuNgay);
+                    checka.DenNgay = DateTime.Parse(item.DenNgay);
+                    checka.TrangThai = item.TrangThai;
+                    checka.GhiChu = item.GhiChu;
+                    //db.DM_GoiYMinhChung.Add(gymc);
+                    db.Entry(checka).State = System.Data.Entity.EntityState.Modified;
+                }
             }
 
             db.SaveChanges();
 
-            return Json(new ResultInfo() { error = 0, msg = "", data = dkmc }, JsonRequestBehavior.AllowGet);
+            return Json(new ResultInfo() { error = 0, msg = "", data = "" }, JsonRequestBehavior.AllowGet);
 
         }
         [HttpPost]

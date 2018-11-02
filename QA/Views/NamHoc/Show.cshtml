@@ -32,7 +32,7 @@
                         <tbody>
                             <tr ng-repeat="item in allDanhMuc">
                                 <td>{{$index + 1}}</td>
-                                <td><input type="checkbox" ng-model="item.NamHienTai" ng-checked="item.NamHienTai" ng-disabled="True">{{item.NamHoc}}</td>
+                                <td><input type="checkbox" ng-model="item.NamHienTai" ng-checked="item.NamHienTai" ng-disabled="true">{{item.NamHoc}}</td>
                                 <td>{{item.TuNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td>{{item.DenNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}</td>
                                 <td><a href="#" ng-click="edit($index)">Xem</a></td>

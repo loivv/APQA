@@ -44,6 +44,9 @@ namespace QA.Controllers.danhmuc
             if (String.IsNullOrEmpty(quydinh.TenQuyDinh) || String.IsNullOrEmpty(quydinh.CoQuan) || String.IsNullOrEmpty(quydinh.SoHieu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
 
+            if (PhanLoai == "TRUONG")
+                return Json(new ResultInfo() { error = 1, msg = "Tài khoản không thể thêm mới quy định" }, JsonRequestBehavior.AllowGet);
+
             var check = db.DM_QuyDinh.Where(p => p.SoHieu == quydinh.SoHieu && p.TenQuyDinh == quydinh.TenQuyDinh).FirstOrDefault();
 
             if (check != null)

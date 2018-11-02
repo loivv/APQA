@@ -81,8 +81,9 @@ namespace QA.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "Mã trường")]
+        [Display(Name = "Trường")]
         public string MaTruong { get; set; }
+
     }
 
     public class ResetPasswordViewModel

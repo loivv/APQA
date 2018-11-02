@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace QA.Controllers
 {
+
+      [Authorize (Roles="sadmin")]
     public class QAAdminController : Controller
     {
         //

@@ -3,26 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QA.Models;
 
 namespace QA.Controllers
 {
 
-    [Authorize]
     public class HomeController : BaseController
     {
+       
         public ActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
+
         public ActionResult MenuAdmin()
         {
-            var check = db.USER_CHECKADMIN(User.Identity.Name).FirstOrDefault();
+            var check = db.USER_CHECKADMIN(User.Identity.Name, "admin").FirstOrDefault();
 
             var isADmin = check == null ? false : true;
 
             return PartialView("_AdminMenu", isADmin);
+        }
+
+   
+        public ActionResult MenuSAdmin()
+        {
+            var check = db.USER_CHECKADMIN(User.Identity.Name, "sadmin").FirstOrDefault();
+
+            var isADmin = check == null ? false : true;
+
+            return PartialView("_SAdminMenu", isADmin);
         }
 
         public ActionResult ShowInfoTruong()

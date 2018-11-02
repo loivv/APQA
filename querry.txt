@@ -12,6 +12,7 @@ can bo sung thtp va mamnon ==> table sql + controller + view
 goi y minh chung
 
 ke hoach tdg ==> minh chung ==> du kien
+them hay xoa email vao nhom admin can luu va xoa bang userroles
 
 
 
@@ -23,3 +24,7 @@ can luu truoc cac minh chung theo tung chi so ==> cai nao da gan ten thi hien th
 HT_goiyminhchung co the ko su dung
 
 kiem tra cac chuc nang co lay theo dung truong hay khong
+
+==============
+khi nh?p m?i tên nhân viên c?n ch?n nhóm ngu?i dùng
+khi t?o nhóm ngu?i dùng thì nh? insert db d? có ch?c nang

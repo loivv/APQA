@@ -452,22 +452,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GROUPUSER_GETLISTMENU" FunctionName="SchoolQAAPModel.Store.GROUPUSER_GETLISTMENU">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SchoolQAAPModel.GROUPUSER_GETLISTMENU_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Link" ColumnName="Link" />
-          <ScalarProperty Name="Icon" ColumnName="Icon" />
-          <ScalarProperty Name="GroupMenuId" ColumnName="GroupMenuId" />
-          <ScalarProperty Name="Position" ColumnName="Position" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="groupUserId" ColumnName="groupUserId" />
-          <ScalarProperty Name="canedit" ColumnName="canedit" />
-          <ScalarProperty Name="groupName" ColumnName="groupName" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <EntitySetMapping Name="UMS_UserGroups">
       <EntityTypeMapping TypeName="SchoolQAAPModel.UMS_UserGroups">
         <MappingFragment StoreEntitySet="UMS_UserGroups">
@@ -576,37 +560,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DM_ThongTinChung">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
-        <MappingFragment StoreEntitySet="DM_ThongTinChung">
-          <ScalarProperty Name="Cap" ColumnName="Cap" />
-          <ScalarProperty Name="PhanLoai" ColumnName="PhanLoai" />
-          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="GhiChuKhac" ColumnName="GhiChuKhac" />
-          <ScalarProperty Name="Khac" ColumnName="Khac" />
-          <ScalarProperty Name="LienKetNuocNgoai" ColumnName="LienKetNuocNgoai" />
-          <ScalarProperty Name="VungKhoKhan" ColumnName="VungKhoKhan" />
-          <ScalarProperty Name="Loai" ColumnName="Loai" />
-          <ScalarProperty Name="SoDiemTruong" ColumnName="SoDiemTruong" />
-          <ScalarProperty Name="NamThanhLap" ColumnName="NamThanhLap" />
-          <ScalarProperty Name="Website" ColumnName="Website" />
-          <ScalarProperty Name="ChuanQuocGia" ColumnName="ChuanQuocGia" />
-          <ScalarProperty Name="Fax" ColumnName="Fax" />
-          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-          <ScalarProperty Name="HieuTruong" ColumnName="HieuTruong" />
-          <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
-          <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
-          <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
-          <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
-          <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
-          <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
-          <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
-          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DM_BaoCaoTieuChuan">
       <EntityTypeMapping TypeName="SchoolQAAPModel.DM_BaoCaoTieuChuan">
         <MappingFragment StoreEntitySet="DM_BaoCaoTieuChuan">
@@ -661,20 +614,6 @@
           <ScalarProperty Name="MaMC" ColumnName="MaMC" />
           <ScalarProperty Name="IDChiSo" ColumnName="IDChiSo" />
           <ScalarProperty Name="GuiID" ColumnName="GuiID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DM_GoiYMinhChung">
-      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_GoiYMinhChung">
-        <MappingFragment StoreEntitySet="DM_GoiYMinhChung">
-          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
-          <ScalarProperty Name="NguoiThuThap" ColumnName="NguoiThuThap" />
-          <ScalarProperty Name="NguoiLuu" ColumnName="NguoiLuu" />
-          <ScalarProperty Name="GuiID" ColumnName="GuiID" />
-          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
-          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -751,6 +690,78 @@
           <ScalarProperty Name="Col2" ColumnName="Col2" />
           <ScalarProperty Name="Col1" ColumnName="Col1" />
           <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_ThongTinChung">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_ThongTinChung">
+        <MappingFragment StoreEntitySet="DM_ThongTinChung">
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="GhiChuKhac" ColumnName="GhiChuKhac" />
+          <ScalarProperty Name="Khac" ColumnName="Khac" />
+          <ScalarProperty Name="LienKetNuocNgoai" ColumnName="LienKetNuocNgoai" />
+          <ScalarProperty Name="VungKhoKhan" ColumnName="VungKhoKhan" />
+          <ScalarProperty Name="Loai" ColumnName="Loai" />
+          <ScalarProperty Name="SoDiemTruong" ColumnName="SoDiemTruong" />
+          <ScalarProperty Name="NamThanhLap" ColumnName="NamThanhLap" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="ChuanQuocGia" ColumnName="ChuanQuocGia" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+          <ScalarProperty Name="HieuTruong" ColumnName="HieuTruong" />
+          <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
+          <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
+          <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
+          <ScalarProperty Name="CoQuanChuQuan" ColumnName="CoQuanChuQuan" />
+          <ScalarProperty Name="TenTruongCu" ColumnName="TenTruongCu" />
+          <ScalarProperty Name="TenTruongMoi" ColumnName="TenTruongMoi" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_GoiYMinhChung">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.DM_GoiYMinhChung">
+        <MappingFragment StoreEntitySet="DM_GoiYMinhChung">
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+          <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+          <ScalarProperty Name="NguoiThuThap" ColumnName="NguoiThuThap" />
+          <ScalarProperty Name="NguoiLuu" ColumnName="NguoiLuu" />
+          <ScalarProperty Name="GuiID" ColumnName="GuiID" />
+          <ScalarProperty Name="NamHoc" ColumnName="NamHoc" />
+          <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GROUPUSER_GETLISTMENU" FunctionName="SchoolQAAPModel.Store.GROUPUSER_GETLISTMENU">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SchoolQAAPModel.GROUPUSER_GETLISTMENU_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="GroupMenuId" ColumnName="GroupMenuId" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="groupUserId" ColumnName="groupUserId" />
+          <ScalarProperty Name="canedit" ColumnName="canedit" />
+          <ScalarProperty Name="groupName" ColumnName="groupName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="HT_DonVi">
+      <EntityTypeMapping TypeName="SchoolQAAPModel.HT_DonVi">
+        <MappingFragment StoreEntitySet="HT_DonVi">
+          <ScalarProperty Name="Huyen" ColumnName="Huyen" />
+          <ScalarProperty Name="Tinh" ColumnName="Tinh" />
+          <ScalarProperty Name="Cap" ColumnName="Cap" />
+          <ScalarProperty Name="PhanLoai" ColumnName="PhanLoai" />
+          <ScalarProperty Name="IDCapHoc" ColumnName="IDCapHoc" />
+          <ScalarProperty Name="TenTruong" ColumnName="TenTruong" />
           <ScalarProperty Name="MaTruong" ColumnName="MaTruong" />
         </MappingFragment>
       </EntityTypeMapping>

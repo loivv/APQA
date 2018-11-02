@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "Chuyển dữ liệu";
+}
+
+<div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Chuyển dữ liệu tự đánh giá</h2>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end x_title-->
+            <div class="x_content">
+                <div class="row">
+                </div>
+
+                <!-- table data-->
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action table-bordered align-middle">
+                        <thead>
+                            <tr class="headings">
+                                <th>Năm chuyển</th>
+                                <th>Nội dung</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td rowspan="26"> Từ năm -> năm</td>
+                                <td>Xóa tất cả minh chứng - năm hiện tại</td>
+                                <td rowspan="1" class="text-center"><a href="#" ng-click="edit()">Chuyển minh chứng từ năm ht sang năm sau</a></td>
+                            </tr>
+                            <tr>
+                                <td>1.Danh mục chức vụ</td>
+                                <td rowspan="7" class="text-center"><a href="#" ng-click="edit()">Chuyển từ năm sang năm</a></td>
+                            </tr>
+                            <tr>
+                                <td>2.Danh mục nhiệm vụ</td>
+                            </tr>
+                            <tr>
+                                <td>3.Danh sách thành viên</td>
+                            </tr>
+                            <tr>
+                                <td>4.Danh sách nhóm tự đánh giá</td>
+                            </tr>
+                            <tr>
+                                <td>5.Danh sách dự kiến minh chứng</td>
+                            </tr>
+                            <tr>
+                                <td>6.Danh sách tự đánh giá tiêu chí</td>
+                            </tr>
+                            <tr>
+                                <td>7.Danh sách gợi ý minh chứng</td>
+                            </tr>
+                            <tr>
+                                <td>1.Mục đích - phạm vi</td>
+                                <td rowspan="9" class="text-center"><a href="#" ng-click="edit()">Chuyển từ năm sang năm</a></td>
+                            </tr>
+                            <tr>
+                                <td>2.Tập huấn nghiệp vụ</td>
+                            </tr>
+                            <tr>
+                                <td>3.Thời gian biểu</td>
+                            </tr>
+                            <tr>
+                                <td>4.Tổ chức thực hiện</td>
+                            </tr>
+                            <tr>
+                                <td>5.Nguồn lực CSVC -TC</td>
+                            </tr>
+                            <tr>
+                                <td>6.Thời gian cung cấp</td>
+                            </tr>
+                            <tr>
+                                <td>7.Hội đồng tự đánh giá</td>
+                            </tr>
+                            <tr>
+                                <td>8.Thành viên hội đồng</td>
+                            </tr>
+                            <tr>
+                                <td>9.Nhóm làm việc</td>
+                            </tr>
+                            <tr>
+                                <td>1.Báo cáo tiêu chuẩn trường</td>
+                                <td rowspan="3" class="text-center"><a href="#" ng-click="edit()">Chuyển từ năm sang năm</a></td>
+                            </tr>
+                            <tr>
+                                <td>2.Danh mục viết tắt</td>
+                            </tr>
+                            <tr>
+                                <td>3.Đặt vấn đề - kết luận</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!-- end x_content-->
+        </div>
+        <!-- end x_pannel-->
+    </div>
+
+
+    <!-- tao model them moi-->
+    <div id="insertmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{modaltitle}}</h4>
+                </div>
+
+
+                <!-- begin form-->
+                <form class="css-form" name="createForm" ng-submit="finishForm(createForm.$valid)">
+                    <!-- body-->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Năm học (2017)</label>
+                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Nam" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Niên khóa(2017-2018)</label>
+                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.NamHoc" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Năm hiện tại</label>
+                                    <input type="checkbox" class="form-control" ng-model="Info.NamHienTai" ng-checked="item.NamHienTai" ng-disabled="Info.Check" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Từ ngày</label>
+                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.FromDate" required ui-mask="99/99/9999" ui-mask-placeholder />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Đến ngày</label>
+                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.ToDate" required ui-mask="99/99/9999" ui-mask-placeholder />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end body-->
+                    <!-- begin footer-->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Hoàn thành</button>
+                    </div>
+                    <!-- end footer-->
+                </form>
+                <!-- end form-->
+
+            </div>
+            <!-- end modal content-->
+        </div>
+    </div>
+    <!-- end modal them-->
+</div>
+
+
+<!-- end content-->
+@section scripts {
+
+    
+}
+
+
+
+
+

@@ -2,7 +2,7 @@
 @model LoginViewModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Đăng nhập hệ thống";
     Layout = null;
 }
 <head>
@@ -29,10 +29,12 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section id="loginForm" class="login_content">
+                
+                    <h2>ĐĂNG NHẬP HỆ THỐNG</h2>
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })                     
                         <div class="form-group">
                             <div class="col-md-10">
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
@@ -51,15 +53,15 @@
                                     @Html.CheckBoxFor(m => m.RememberMe)
                                     @Html.LabelFor(m => m.RememberMe)
                                 </div>
-                                <input type="submit" value="Log in" class="btn btn-default" />
+                                <input type="submit" value="Đăng nhập" class="btn btn-default" />
                             </div>
                         </div>
 
                     }
                 </section>
-            </div>
-        </div>
-    </div>
+            </div>            
+        </div>       
+    </div>   
 </body>
 
 

@@ -69,16 +69,17 @@ namespace QA.Models
         public virtual DbSet<DM_NhomTuDanhGia> DM_NhomTuDanhGia { get; set; }
         public virtual DbSet<HT_TieuChuan> HT_TieuChuan { get; set; }
         public virtual DbSet<HT_TieuChi> HT_TieuChi { get; set; }
-        public virtual DbSet<DM_ThongTinChung> DM_ThongTinChung { get; set; }
         public virtual DbSet<DM_BaoCaoTieuChuan> DM_BaoCaoTieuChuan { get; set; }
         public virtual DbSet<DM_MinhChung> DM_MinhChung { get; set; }
         public virtual DbSet<DM_DuKienMinhChung> DM_DuKienMinhChung { get; set; }
         public virtual DbSet<HT_GoiYMinhChung> HT_GoiYMinhChung { get; set; }
-        public virtual DbSet<DM_GoiYMinhChung> DM_GoiYMinhChung { get; set; }
         public virtual DbSet<DM_LopHocTHPT> DM_LopHocTHPT { get; set; }
         public virtual DbSet<DM_HocSinhTHPT> DM_HocSinhTHPT { get; set; }
         public virtual DbSet<DM_LopHocMN> DM_LopHocMN { get; set; }
         public virtual DbSet<DM_HocSinhMN> DM_HocSinhMN { get; set; }
+        public virtual DbSet<DM_ThongTinChung> DM_ThongTinChung { get; set; }
+        public virtual DbSet<DM_GoiYMinhChung> DM_GoiYMinhChung { get; set; }
+        public virtual DbSet<HT_DonVi> HT_DonVi { get; set; }
     
         public virtual ObjectResult<GET_NHOMDANHGIA_Result> GET_NHOMDANHGIA(string maTruong)
         {
@@ -151,15 +152,6 @@ namespace QA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USER_GETROLE", userParameter);
         }
     
-        public virtual ObjectResult<GROUPUSER_GETLISTMENU_Result> GROUPUSER_GETLISTMENU(string groupId)
-        {
-            var groupIdParameter = groupId != null ?
-                new ObjectParameter("groupId", groupId) :
-                new ObjectParameter("groupId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GROUPUSER_GETLISTMENU_Result>("GROUPUSER_GETLISTMENU", groupIdParameter);
-        }
-    
         public virtual ObjectResult<USER_GETMENU1_Result> USER_GETMENU1(string user)
         {
             var userParameter = user != null ?
@@ -182,13 +174,26 @@ namespace QA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USER_CHECKACCESS_Result>("USER_CHECKACCESS", groupIdParameter, menuCodeParameter);
         }
     
-        public virtual ObjectResult<USER_CHECKADMIN_Result> USER_CHECKADMIN(string user)
+        public virtual ObjectResult<USER_CHECKADMIN_Result> USER_CHECKADMIN(string user, string role)
         {
             var userParameter = user != null ?
                 new ObjectParameter("user", user) :
                 new ObjectParameter("user", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USER_CHECKADMIN_Result>("USER_CHECKADMIN", userParameter);
+            var roleParameter = role != null ?
+                new ObjectParameter("role", role) :
+                new ObjectParameter("role", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USER_CHECKADMIN_Result>("USER_CHECKADMIN", userParameter, roleParameter);
+        }
+    
+        public virtual ObjectResult<GROUPUSER_GETLISTMENU_Result> GROUPUSER_GETLISTMENU(string groupId)
+        {
+            var groupIdParameter = groupId != null ?
+                new ObjectParameter("groupId", groupId) :
+                new ObjectParameter("groupId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GROUPUSER_GETLISTMENU_Result>("GROUPUSER_GETLISTMENU", groupIdParameter);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace QA.Controllers.danhmuc
     public class ChuyenDuLieuController : Controller
     {
         // GET: ChuyenDuLieu
-        public ActionResult Index()
+        public ActionResult Show()
         {
             return View();
         }

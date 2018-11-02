@@ -16,7 +16,16 @@ namespace QA.Models
 
         public Object data { get; set; }
 
+    }
+    public class GYMC
+    {
+        public int error { get; set; }
 
+        public string msg { get; set; }
+
+        public Object chisoa { get; set; }
+        public Object chisob { get; set; }
+        public Object chisoc { get; set; }
     }
 
     public class ResultWithPaging : ResultInfo
@@ -252,6 +261,25 @@ namespace QA.Models
         public string NguoiThuThap { get; set; }
         public string ThoiGian { get; set; }
         public string TrangThai { get; set; }
+        public DateTime TuNgay { get; set; }
+        public DateTime DenNgay { get; set; }
+    }
+    public class DMGoiYMinhChung
+    {
+        public string MaTruong { get; set; }
+        public string NamHoc { get; set; }
+        public string GuiID { get; set; }
+        public string NguoiLuu { get; set; }
+        public string NguoiThuThap { get; set; }
+        public string TuNgay { get; set; }
+        public string DenNgay { get; set; }
+        public string TrangThai { get; set; }
+        public string GhiChu { get; set; }
+        public string IDChiSo { get; set; }
+        public string ChiSo { get; set; }
+        public string MaMC { get; set; }
+        public string TenMC { get; set; }
+
     }
     public class MinhChungDuKien
     {

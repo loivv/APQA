@@ -89,11 +89,10 @@
                             @if (Request.IsAuthenticated)
                             {
                                 @Html.Action("Menus", "Base")
-                            }
-                            @if (Request.IsAuthenticated)
-                            {
                                 @Html.Action("MenuAdmin", "Home")
+                                @Html.Action("MenuSAdmin", "Home")
                             }
+
                         </div>
                     </div>
                     <!-- /sidebar menu -->
@@ -175,7 +174,7 @@
             }
             <footer>
                 <div class="pull-right">
-                    EPMC
+                    Công ty cổ phần công nghệ EPM
                 </div>
                 <div class="clearfix"></div>
             </footer>

@@ -26,6 +26,7 @@ namespace QA.Controllers
         public string PhanLoai;
         public string TenTruong;
         public string Cap;
+        public List<string> roles;
      
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
@@ -43,9 +44,14 @@ namespace QA.Controllers
                     var checkcaphoc = db.DM_ThongTinChung.Where(x => x.MaTruong == checkUser.MaTruong).FirstOrDefault();
                     NamHoc = checkYear.NamHoc;
                     TenTruong = checkcaphoc.TenTruongMoi;
-                    CapHoc = checkcaphoc.IDCapHoc;
-                    PhanLoai = checkcaphoc.PhanLoai; // so ph tr
-                    Cap = checkcaphoc.Cap;
+
+                    var checkloai = db.HT_DonVi.Where(x => x.MaTruong == MaTruong).FirstOrDefault();
+                    CapHoc = checkloai.IDCapHoc;
+                    PhanLoai = checkloai.PhanLoai; // so ph tr
+                    Cap = checkloai.Cap;
+
+
+                    
                    
                 }                   
             }

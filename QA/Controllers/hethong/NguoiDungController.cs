@@ -17,6 +17,7 @@ namespace QA.Controllers.hethong
     public class NguoiDungController : BaseController
     {
         private UserManager<ApplicationUser> userManager;
+    
         public NguoiDungController()
         {
             userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -26,7 +27,7 @@ namespace QA.Controllers.hethong
         // GET: /NguoiDung/
         public ActionResult Show()
         {
-            ViewBag.AllNhom = db.UMS_UserGroups.Where(p => p.MaTruong == MaTruong).ToList();
+            ViewBag.AllNhom = db.UMS_UserGroups.Where(p => p.MaTruong == MaTruong || p.MaTruong=="ADMIN").ToList();
             return View();
         }
         [HttpGet]
@@ -55,7 +56,42 @@ namespace QA.Controllers.hethong
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult edit(string Email, string UserName, string GroupId,string Id)
+        {
+            var checkUSer1 = db.AspNetUsers.Where(p => p.Id == Id).FirstOrDefault();
+            if (checkUSer1 != null)
+            {
+                if(GroupId =="ADMIN" && checkUSer1.UserGroup != "ADMIN")
+                {                   
+                    try
+                    {
+                       // AspNetUserRole role = new AspNetUserRole();
+                       // role.UserId = Id;
+                        //role.RoleId = roleid;
+                       // db.AspNetUserRoles.Add(role);
+                        //db.SaveChanges();
+                        UserManager.AddToRole(Id, "admin");
+                    }catch
+                    {
 
+                    }
+                   
+                }
+                else if (GroupId != "ADMIN" && checkUSer1.UserGroup == "ADMIN")
+                {
+                    //var checkrole = db.AspNetUserRoles.Where(p => p.UserId == Id).FirstOrDefault();
+                    //db.Entry(checkrole).State = System.Data.Entity.EntityState.Deleted;
+                    //db.SaveChanges();
+                     UserManager.RemoveFromRolesAsync(Id, "admin");
+                }
+                checkUSer1.HoTen = UserName;
+                checkUSer1.UserGroup = GroupId;
+                db.Entry(checkUSer1).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Json(new ResultInfo() { error = 0, msg = "", data = checkUSer1 }, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -81,19 +117,28 @@ namespace QA.Controllers.hethong
                 return View();
             }
 
+            
             checkUSer.PasswordHash = null;
-            checkUSer.SecurityStamp = null;
             db.Entry(checkUSer).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            var result = await userManager.AddPasswordAsync(User.Identity.GetUserId(), password);
 
-            ViewBag.msg = "Đã đổi thành công";
+            IdentityResult result = await UserManager.AddPasswordAsync(checkUSer.Id, password);
+
+            if (result.Succeeded)
+            {
+                ViewBag.msg = "Đã đổi thành công";
+            }
+            else
+            {
+                ViewBag.msg = result.Errors.FirstOrDefault();
+            }
+
             return View();
         }
 
         [HttpPost]
-       // [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult> SignUpStaff(string Email,string UserName, string Password,string RePassword, string GroupId)
         {
@@ -113,11 +158,16 @@ namespace QA.Controllers.hethong
             if (result.Succeeded)
             {
                 //var findUser = UserManager.FindByName(Email);
-                //var getus = db.AspNetUsers.Where(p => p.Email == Email).Select(p => p.Id).FirstOrDefault();
+               
                 //UserManager.AddToRole(getus, "user");
                // findEmployee.Email = UserName;
                 //db.Entry(findEmployee).State = System.Data.Entity.EntityState.Modified;
                // db.SaveChanges();
+                if(GroupId == "ADMIN")
+                {
+                    var getusid = db.AspNetUsers.Where(p => p.Email == Email).Select(p => p.Id).FirstOrDefault();
+                    UserManager.AddToRole(getusid, "admin");
+                }
 
                 return Json(new ResultInfo() { error = 0, msg = "" });
             }

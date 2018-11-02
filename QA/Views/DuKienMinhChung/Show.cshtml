@@ -17,8 +17,7 @@
                     <table class="table table-striped jambo_table bulk_action">
                         <thead>
                             <tr class="headings">
-                                <th>TC</th>
-                                <th>Số hiệu</th>
+                                <th>TC</th>                               
                                 <th>Nội dung</th>
                                 <th>Tiêu chí</th>
                             </tr>
@@ -27,7 +26,6 @@
                         <tbody>
                             <tr ng-repeat="(mindex,item) in allDanhMuc">
                                 <td>{{item.IDTieuChuan}}</td>
-                                <td>{{item.SoHieu}}</td>
                                 <td>{{item.NoiDung}}</td>
                                 <td>
                                     <table ng-init="GetTieuChi(mindex)" border="0">
@@ -104,6 +102,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">{{modaltitle}}</h4>
                 </div>
                 <!--panel dialog-->
@@ -162,7 +161,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Tuần</label>
-                                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Tuan" required  />
+                                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Tuan"   />
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -180,7 +179,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Chi phí</label>
-                                                    <input type="text" class="form-control" ng-model="Info.ChiPhi" required></input>
+                                                    <input type="number" class="form-control" ng-model="Info.ChiPhi" ></input>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -321,7 +320,6 @@
                 //kiểm tra xem neu chua co thi load mơi , nếu đã có thì load thông tin
                 //gettieuchidukien
                 //mindex ==> vi tri cua id tieu chuan , id vi tri cua tieu chi               
-                
                 var info = $scope.allDanhMuc[mindex];
                 $scope.Info = angular.copy(info);
 
@@ -340,7 +338,6 @@
                         $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
                         //$scope.ZoneIDDisable = false;
                         $scope.IsAction = 'add';
-
                         showModel("insertmodal");
 
                     } else if (response.data.error !== 0) {
@@ -351,27 +348,26 @@
                             url: "/DuKienMinhChung/getTieuChiDuKienbyID?guiid=" + $scope.Info.IDTieuChi
                         }).then(function mySuccess(response) {
                             showLoader(false);
-
+                            $scope.Info = [];
                             if (response.data.error === 1) {
                                 $scope.Info = response.data.data;
+                                var fDate = $filter('date')($scope.Info.TuNgay.slice(6, -2), "dd/MM/yyyy");
+                                var tDate = $filter('date')($scope.Info.DenNgay.slice(6, -2), "dd/MM/yyyy");
+                                $scope.Info.TuNgay = fDate;
+                                $scope.Info.DenNgay = tDate;
+                                $scope.Info = { "DuKienMC": $scope.Info.DuKienMC, "NoiThuThap": $scope.Info.NoiThuThap, "CaNhan": $scope.Info.CaNhan, "Tuan": $scope.Info.Tuan, "Nhom": $scope.Info.Nhom, "TuNgay": $scope.Info.TuNgay, "DenNgay": $scope.Info.DenNgay, "ChiPhi": $scope.Info.ChiPhi, "GhiChu": $scope.Info.GhiChu, "IDTieuChi": $scope.Info.IDTieuChi };
+                                $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
+                                //$scope.ZoneIDDisable = false;
+                                $scope.IsAction = 'add';
+
+                                showModel("insertmodal");
                             }
 
                         }, function myError(response) {
                             showLoader(false);
                             showNotify('Connect error');
                         });
-                        //lay thong in
-                        var fDate = $filter('date')($scope.Info.TuNgay.slice(6, -2), "dd/MM/yyyy");
-                        var tDate = $filter('date')($scope.Info.DenNgay.slice(6, -2), "dd/MM/yyyy");
-                        console.log($scope.Info.TuNgay);
-                        $scope.Info.TuNgay = fDate;
-                        $scope.Info.DenNgay = tDate;
-                        $scope.Info = { "DuKienMC": $scope.Info.DuKienMC, "NoiThuThap": $scope.Info.NoiThuThap, "CaNhan": $scope.Info.CaNhan, "Tuan": $scope.Info.Tuan, "Nhom": $scope.Info.Nhom, "TuNgay": $scope.Info.TuNgay, "DenNgay": $scope.Info.DenNgay, "ChiPhi": $scope.Info.ChiPhi, "GhiChu": $scope.Info.GhiChu, "IDTieuChi": $scope.Info.IDTieuChi };
-                        $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
-                        //$scope.ZoneIDDisable = false;
-                        $scope.IsAction = 'add';
-
-                        showModel("insertmodal");
+                        //lay thong in                        
                     }
 
                 }, function myError(response) {
@@ -390,8 +386,8 @@
                 var tDate = $filter('date')($scope.Info.DenNgay.slice(6, -2), "dd/MM/yyyy");
                 $scope.Info.TuNgay = fDate;
                 $scope.Info.DenNgay = tDate;
-                // console.log($scope.Info);              
-                $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + $scope.Info.ID + "  --- Tiêu chí " + $scope.Info.IDTC;
+                 //console.log($scope.Info);              
+                $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + $scope.Info.IDTieuChuan + "  --- Tiêu chí " + $scope.Info.IDTC;
                 $scope.IsAction = 'edit';
                 showModel("insertmodal");
             };

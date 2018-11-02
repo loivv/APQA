@@ -16,7 +16,6 @@ namespace QA.Models
     {
         public string MaTruong { get; set; }
         public string NamHoc { get; set; }
-        public string IDCapHoc { get; set; }
         public string TenTruongMoi { get; set; }
         public string TenTruongCu { get; set; }
         public string CoQuanChuQuan { get; set; }
@@ -37,7 +36,5 @@ namespace QA.Models
         public string GhiChuKhac { get; set; }
         public string Code { get; set; }
         public string DiaChi { get; set; }
-        public string PhanLoai { get; set; }
-        public string Cap { get; set; }
     }
 }

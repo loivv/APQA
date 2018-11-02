@@ -15,9 +15,11 @@ namespace QA.Controllers.kehoachtudanhgia
         {
             var MDInfo = db.DM_NhomTuDanhGia.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
             var matruong = new SqlParameter("@MaTruong", MaTruong);
+            var namhoc = new SqlParameter("@NamHoc", NamHoc);
             var matruong1 = new SqlParameter("@MaTruong", MaTruong);
-            var result = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA @MaTruong", matruong).ToList();
-            var result1 = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA_THUKY @MaTruong", matruong1).ToList();
+            var namhoc1 = new SqlParameter("@NamHoc", NamHoc);
+            var result = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA @MaTruong,@NamHoc", matruong,namhoc).ToList();
+            var result1 = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA_THUKY @MaTruong,@NamHoc", matruong1,namhoc1).ToList();
 
 
             ViewBag.Info = MDInfo;

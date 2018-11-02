@@ -137,9 +137,16 @@ namespace QA.Controllers
         */
         //
         // GET: /Account/Register
-        [Authorize(Roles="admin")]
+        [Authorize(Roles="sadmin")]
         public ActionResult Register()
         {
+            SchoolQAAPEntities db = new SchoolQAAPEntities();
+            ViewBag.ListTruong = db.HT_DonVi.Select(p => new CommonData
+            {
+                code = p.MaTruong,
+                name = p.TenTruong
+            }).ToList();
+
             return View();
         }
 
@@ -147,7 +154,7 @@ namespace QA.Controllers
         // POST: /Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "sadmin")]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -156,6 +163,7 @@ namespace QA.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    result = UserManager.AddToRole(user.Id, "admin");
                   //  await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

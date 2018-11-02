@@ -1866,7 +1866,8 @@ namespace QA.Controllers.baocao
             wrdRng2.Paragraphs.SpaceBefore = 0;
             // int trow = db.DM_ThanhVien.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc && p.ThanhVien == true).Select(p => p.MaThanhVien).Count();
             var matruong2 = new SqlParameter("@MaTruong", MaTruong);
-            var result2 = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA_THUKY @MaTruong", matruong2).ToList();
+            var namhoc2 = new SqlParameter("@NamHoc", NamHoc);
+            var result2 = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA_THUKY @MaTruong,@NamHoc", matruong2,namhoc2).ToList();
             int trow2 = result2.Count();
             oTable2 = document.Tables.Add(wrdRng2, trow2 + 1, 3, ref missing, ref missing);  //dong,cot
             oTable2.Borders.InsideLineStyle = WdLineStyle.wdLineStyleSingle;
@@ -1904,7 +1905,8 @@ namespace QA.Controllers.baocao
             wrdRng3.Paragraphs.SpaceBefore = 0;
             // int trow = db.DM_ThanhVien.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc && p.ThanhVien == true).Select(p => p.MaThanhVien).Count();
             var matruong3 = new SqlParameter("@MaTruong", MaTruong);
-            var result3 = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA @MaTruong", matruong3).ToList();
+            var namhoc3 = new SqlParameter("@NamHoc", NamHoc);
+            var result3 = db.Database.SqlQuery<ThanhVien>("GET_NHOMDANHGIA @MaTruong,@NamHoc", matruong3,namhoc3).ToList();
             int trow3 = result3.Count();
             oTable3 = document.Tables.Add(wrdRng3, trow3 + 1, 3, ref missing, ref missing);  //dong,cot
             oTable3.Borders.InsideLineStyle = WdLineStyle.wdLineStyleSingle;

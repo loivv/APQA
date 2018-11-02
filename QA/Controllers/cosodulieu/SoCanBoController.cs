@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using QA.Models;
 using System.Data.SqlClient;
+using QA.Filters;
 namespace QA.Controllers.cosodulieu
 {
     public class SoCanBoController : BaseController
     {
         // GET: SoCanBo
+         [MyValidateAccess(code = "socanbo", edit = 1)]
         public ActionResult Show()
         {
             ViewBag.NamHoc = db.DM_NamHoc.Where(p => p.MaTruong == MaTruong).OrderBy(p=>p.NamHoc).ToList() ;
@@ -30,6 +32,7 @@ namespace QA.Controllers.cosodulieu
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [MyValidateAccess(code = "socanbo", edit = 1)]
         public ActionResult create(DM_CanBoCNV canbo)
         {
              if (String.IsNullOrEmpty(canbo.Loai))

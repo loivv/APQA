@@ -267,7 +267,7 @@
         app.controller('myCtrl', function ($scope, $http) {
 
             $scope.ThongTin = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.Info))');
-            console.log($scope.ThongTin);
+            
             $scope.edit = function () {
                 showLoader(true);
                 //update data

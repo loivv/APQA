@@ -19,7 +19,8 @@ namespace QA.Models
         public string GuiID { get; set; }
         public string NguoiLuu { get; set; }
         public string NguoiThuThap { get; set; }
-        public string ThoiGian { get; set; }
+        public Nullable<System.DateTime> TuNgay { get; set; }
+        public Nullable<System.DateTime> DenNgay { get; set; }
         public string TrangThai { get; set; }
         public string GhiChu { get; set; }
     }

@@ -50,6 +50,8 @@ namespace QA.Controllers.danhmuc
 
             if (String.IsNullOrEmpty(maso) || String.IsNullOrEmpty(trichyeu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
+            if (PhanLoai == "TRUONG")
+                return Json(new ResultInfo() { error = 1, msg = "Tài khoản không thể thêm mới văn bản" }, JsonRequestBehavior.AllowGet);
             DateTime Ngay = DateTime.Parse(ngaybanhanh);
             //var check = db.DM_VanBan.Where(p => p.MaTruong == MaTruong && p.NamHoc == NamHoc).FirstOrDefault();
 
@@ -105,6 +107,8 @@ namespace QA.Controllers.danhmuc
         {
             if (String.IsNullOrEmpty(maso) || String.IsNullOrEmpty(trichyeu))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
+            if (PhanLoai == "TRUONG")
+                return Json(new ResultInfo() { error = 1, msg = "Tài khoản không thể thêm mới văn bản" }, JsonRequestBehavior.AllowGet);
             DateTime Ngay = DateTime.Parse(ngaybanhanh);
             var check = db.DM_VanBan.Where(p =>p.ID == id).FirstOrDefault();
 
@@ -144,6 +148,8 @@ namespace QA.Controllers.danhmuc
         {
             if (String.IsNullOrEmpty(id))
                 return Json(new ResultInfo() { error = 1, msg = "Missing info" }, JsonRequestBehavior.AllowGet);
+            if (PhanLoai == "TRUONG")
+                return Json(new ResultInfo() { error = 1, msg = "Tài khoản không thể thêm mới văn bản" }, JsonRequestBehavior.AllowGet);
 
             var check = db.DM_VanBan.Where(p =>  p.ID == id).FirstOrDefault();
 

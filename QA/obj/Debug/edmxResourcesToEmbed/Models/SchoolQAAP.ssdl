@@ -181,7 +181,8 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="GuiID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="NguoiLuu" Type="nvarchar" MaxLength="50" />
     <Property Name="NguoiThuThap" Type="nvarchar" MaxLength="50" />
-    <Property Name="ThoiGian" Type="nvarchar" MaxLength="200" />
+    <Property Name="TuNgay" Type="date" />
+    <Property Name="DenNgay" Type="date" />
     <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
   </EntityType>
@@ -516,10 +517,10 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
   <EntityType Name="DM_ThongTinChung">
     <Key>
       <PropertyRef Name="MaTruong" />
+      <PropertyRef Name="NamHoc" />
     </Key>
     <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" />
-    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" />
+    <Property Name="NamHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="TenTruongMoi" Type="nvarchar" MaxLength="200" />
     <Property Name="TenTruongCu" Type="nvarchar" MaxLength="200" />
     <Property Name="CoQuanChuQuan" Type="nvarchar" MaxLength="200" />
@@ -540,8 +541,6 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <Property Name="GhiChuKhac" Type="nvarchar" MaxLength="50" />
     <Property Name="Code" Type="nvarchar" MaxLength="50" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
-    <Property Name="PhanLoai" Type="nvarchar" MaxLength="50" />
-    <Property Name="Cap" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="DM_TieuChi_DuKien">
     <Key>
@@ -612,6 +611,18 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     </Key>
     <Property Name="IDCapHoc" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HT_DonVi">
+    <Key>
+      <PropertyRef Name="MaTruong" />
+    </Key>
+    <Property Name="MaTruong" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="TenTruong" Type="nvarchar" MaxLength="100" />
+    <Property Name="IDCapHoc" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhanLoai" Type="nvarchar" MaxLength="20" />
+    <Property Name="Cap" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tinh" Type="nvarchar" MaxLength="20" />
+    <Property Name="Huyen" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="HT_GoiYMinhChung">
     <Key>
@@ -712,6 +723,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
   </Function>
   <Function Name="USER_CHECKADMIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="user" Type="nvarchar" Mode="In" />
+    <Parameter Name="role" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="USER_GETMENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="user" Type="nvarchar" Mode="In" />
@@ -755,6 +767,7 @@ warning 6002: The table/view 'SchoolQAAP.dbo.AspNetUserRoles' does not have a pr
     <EntitySet Name="DM_VietTat" EntityType="Self.DM_VietTat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_CanBo" EntityType="Self.HT_CanBo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_CapHoc" EntityType="Self.HT_CapHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HT_DonVi" EntityType="Self.HT_DonVi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_GoiYMinhChung" EntityType="Self.HT_GoiYMinhChung" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_LopHoc" EntityType="Self.HT_LopHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HT_TieuChi" EntityType="Self.HT_TieuChi" Schema="dbo" store:Type="Tables" />

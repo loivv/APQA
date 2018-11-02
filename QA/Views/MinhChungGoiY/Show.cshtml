@@ -59,32 +59,28 @@
                     <table class="table table-striped jambo_table bulk_action">
                         <thead>
                             <tr class="headings">
-                                <th>Tiêu chuẩn</th>
-                                <th>Tiêu chí</th>
-                                <th>Dự kiến thông tin</th>
-                                <th>Nguồn thu thập</th>
-                                <th>Nhóm, cá nhân thực hiện</th>
-                                <th>Thời gian thu thập</th>
-                                <th>Chi phí</th>
-                                <th>#</th>
-                                <th>#</th>
+                                <th>Mã MC</th>
+                                <th>Tên MC</th>
+                                <th>Người lưu</th>
+                                <th>Người thu thập</th>
+                                <th>Thời gian</th>
+                                <th>Trạng thái</th>
+                                <th>Ghi chú</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="item in allTieuChiDuKien">
-                                <td>{{item.IDTieuChuan}}</td>
-                                <td>{{item.IDTieuChi}}</td>
-                                <td>{{item.DKMC}}...</td>
-                                <td>{{item.NoiTT}}...</td>
-                                <td>{{item.Nhom}} - {{item.CaNhan}}</td>
+                                <td>{{item.MaMC}}</td>
+                                <td>{{item.TenMC}}</td>
+                                <td>{{item.NguoiLuu}}</td>
+                                <td>{{item.NguoiThuThap}}</td>
                                 <td>
                                     {{item.TuNgay.slice(6, -2) | date : 'dd/MM/yyyy'}} -
                                     {{item.DenNgay.slice(6, -2) | date : 'dd/MM/yyyy'}}
                                 </td>
-                                <td>{{item.ChiPhi}}</td>
-                                <td><a href="#" ng-click="edit($index)">Chi tiết</a></td>
-                                <td><a href="#" ng-click="sendDelete($index)">Xóa</a></td>
+                                <td>{{item.TrangThai}}</td>
+                                <td>{{item.GhiChu}}</td>
                             </tr>
 
                         </tbody>
@@ -115,81 +111,151 @@
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">
                                 <ul class="nav nav-tabs bar_tabs" role="tablist">
                                     <li role="presentation" class="active">
-                                        <a href="#tab_dukien" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Dự kiến minh chứng</a>
+                                        <a href="#tab_chisoa" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=false">Chỉ số a</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="#tab_phutrach" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Nhóm, cá nhân thu thập</a>
+                                        <a href="#tab_chisob" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chỉ số b</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="#tab_thoigian" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Thời gian và chi phí</a>
+                                        <a href="#tab_chisoc" role="tab" data-toggle="tab" aria-expanded="false" ng-click="showEdit=true">Chỉ số c</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active in" id="tab_dukien" aria-labelledby="home-tab">
+                                    <div role="tabpanel" class="tab-pane active in" id="tab_chisoa" aria-labelledby="home-tab">
                                         <!-- begin tab-->
                                         <div class="row">
-                                            <div class="col-sm-8">
-                                                <div class="form-group">
-                                                    <label>Minh chứng</label>
-                                                    <textarea rows="10" class="form-control" ng-model="Info.DuKienMC"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>Nguồn thu thập</label>
-                                                    <textarea rows="10" class="form-control" ng-model="Info.NoiThuThap"></textarea>
-                                                </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped jambo_table bulk_action">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th>Tên MC</th>
+                                                            <th>Người lưu trữ</th>
+                                                            <th>Người thu thập</th>
+                                                            <th>Thời gian thu thập</th>
+                                                            <th>Trạng thái</th>
+                                                            <th>Ghi chú</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr ng-repeat="item in ChiSoA">
+                                                            <td class="tableinput">{{item.TenMC}}</td>
+                                                            <td class="tableinput">
+                                                                <select ng-model="item.NguoiLuu" class="tdinpit">
+                                                                    <option ng-repeat="x in allThanhVien" value="{{x.MaThanhVien}}">{{x.TenThanhVien}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput" >
+                                                                <select ng-model="item.NguoiThuThap" class="tdinpit">
+                                                                    <option ng-repeat="x in allThanhVien" value="{{x.MaThanhVien}}">{{x.TenThanhVien}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput">
+                                                                Từ ngày <input class="tdinpit" type="text" ui-mask="99/99/9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="" ng-model="item.TuNgay" /> 
+
+                                                                Đến ngày <input class="tdinpit" type="text" ui-mask="99/99/9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="" ng-model="item.DenNgay" />
+                                                            </td>
+                                                            <td class="tableinput">
+                                                                <select ng-model="item.TrangThai" class="tdinpit">
+                                                                    <option ng-repeat="x in TrangThai" value="{{x.TrangThai}}">{{x.TrangThai}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput"><input class="tdinpit" ng-model="item.GhiChu" type="text" /></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                         <!-- end tab-->
                                     </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="tab_phutrach" aria-labelledby="profile-tab">
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_chisob" aria-labelledby="profile-tab">
                                         <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Nhóm làm việc</label>
-                                                    <select class="form-control" ng-model="Info.Nhom" required>
-                                                        <option ng-repeat="x in allNhom" value="{{x.MaNhom}}">{{x.TenNhom | uppercase}}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Cá nhân</label>
-                                                    <textarea rows="2" class="form-control" ng-model="Info.CaNhan"></textarea>
-                                                </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped jambo_table bulk_action">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th>Tên MC</th>
+                                                            <th>Người lưu trữ</th>
+                                                            <th>Người thu thập</th>
+                                                            <th>Thời gian thu thập</th>
+                                                            <th>Trạng thái</th>
+                                                            <th>Ghi chú</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr ng-repeat="item in ChiSoB">
+                                                            <td class="tableinput">{{item.TenMC}}</td>
+                                                            <td class="tableinput">
+                                                                <select ng-model="item.NguoiLuu" class="tdinpit">
+                                                                    <option ng-repeat="x in allThanhVien" value="{{x.MaThanhVien}}">{{x.TenThanhVien}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput">
+                                                                <select ng-model="item.NguoiThuThap" class="tdinpit">
+                                                                    <option ng-repeat="x in allThanhVien" value="{{x.MaThanhVien}}">{{x.TenThanhVien}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput">
+                                                                Từ ngày <input class="tdinpit" type="text" ui-mask="99/99/9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="" ng-model="item.TuNgay" />
+
+                                                                Đến ngày <input class="tdinpit" type="text" ui-mask="99/99/9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="" ng-model="item.DenNgay" />
+                                                            </td>
+                                                            <td class="tableinput">
+                                                                <select ng-model="item.TrangThai" class="tdinpit">
+                                                                    <option ng-repeat="x in TrangThai" value="{{x.TrangThai}}">{{x.TrangThai}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput"><input class="tdinpit" ng-model="item.GhiChu" type="text" /></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="tab_thoigian" aria-labelledby="profile-tab">
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_chisoc" aria-labelledby="profile-tab">
                                         <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Tuần</label>
-                                                    <input type="text" maxlength="10" class="form-control" ng-model="Info.Tuan" required />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Từ ngày</label>
-                                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.TuNgay" required ui-mask="99/99/9999" ui-mask-placeholder />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Đến ngày</label>
-                                                    <input type="text" model-view-value="true" class="form-control" ng-model="Info.DenNgay" required ui-mask="99/99/9999" ui-mask-placeholder />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Chi phí</label>
-                                                    <input type="text" class="form-control" ng-model="Info.ChiPhi" required></input>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Ghi chú</label>
-                                                    <textarea rows="6" class="form-control" ng-model="Info.GhiChu"></textarea>
-                                                </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped jambo_table bulk_action">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th>Tên MC</th>
+                                                            <th>Người lưu trữ</th>
+                                                            <th>Người thu thập</th>
+                                                            <th>Thời gian thu thập</th>
+                                                            <th>Trạng thái</th>
+                                                            <th>Ghi chú</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr ng-repeat="item in ChiSoC">
+                                                            <td class="tableinput">{{item.TenMC}}</td>
+                                                            <td class="tableinput">
+                                                                <select ng-model="item.NguoiLuu" class="tdinpit">
+                                                                    <option ng-repeat="x in allThanhVien" value="{{x.MaThanhVien}}">{{x.TenThanhVien}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput">
+                                                                <select ng-model="item.NguoiThuThap" class="tdinpit">
+                                                                    <option ng-repeat="x in allThanhVien" value="{{x.MaThanhVien}}">{{x.TenThanhVien}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput">
+                                                                Từ ngày <input class="tdinpit" type="text" ui-mask="99/99/9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="" ng-model="item.TuNgay" />
+
+                                                                Đến ngày <input class="tdinpit" type="text" ui-mask="99/99/9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="" ng-model="item.DenNgay" />
+                                                            </td>
+                                                            <td class="tableinput">
+                                                                <select ng-model="item.TrangThai" class="tdinpit">
+                                                                    <option ng-repeat="x in TrangThai" value="{{x.TrangThai}}">{{x.TrangThai}}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="tableinput"><input class="tdinpit" ng-model="item.GhiChu" type="text" /></td>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -208,6 +274,23 @@
     <!-- end modal them-->
 </div>
 
+@section styles {
+
+    <style type="text/css">
+        .tableinput {
+            text-align: left;
+            vertical-align: middle;
+            height: 100px;
+            line-height: .1em;
+        }
+        .tdinpit {
+            display: block;
+            height: 20px;
+            vertical-align: middle;
+        }
+    </style>
+
+}
 
 <!-- end content-->
 @section scripts {
@@ -224,8 +307,18 @@
         });
         app.controller('myCtrl', function ($scope, $http, $filter) {
             $scope.allNhom = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllNhom))');
+            $scope.allThanhVien = angular.fromJson('@Html.Raw(Json.Encode(ViewBag.AllThanhVien))');
+            //console.log($scope.allThanhVien);
+            $scope.TrangThai = [
+               { TrangThai: 'Hoàn tất' },
+               { TrangThai: 'Đang thu thập' },
+               { TrangThai: 'Thất lạc' }
+            ];
             // lay du lieu
             $scope.Info = [];
+            $scope.InfoA = [];
+            $scope.InfoB = [];
+            $scope.InfoC = [];
             $scope.allDanhMuc = [];
             $scope.GetData = function () {
                 showLoader(true);
@@ -282,7 +375,7 @@
             }
             $scope.GetTieuChiDuKienAll(1);
 
-            //ham lay chi tiet tieu chi
+            //ham lay chi tiet tieu chi -- lấy thông tin các chỉ số minh chứng
             $scope.GetTieuChi = function (index) {
                 $scope.alldetail = [];
                 var info = $scope.allDanhMuc[index];
@@ -311,19 +404,57 @@
             $scope.finishForm = function () {
 
                 if ($scope.IsAction === 'add') {
-                    $scope.sendCreate();
+                    //   $scope.sendCreate();
+                    $scope.sendEdit();
                 } else if ($scope.IsAction === 'edit') {
-                    $scope.sendCreate();
+                    $scope.sendEdit();
                 } else if ($scope.IsAction === 'delete') {
                     $scope.sendDelete();
                 }
             }
+
+            $scope.sendEdit = function () {
+                console.log($scope.ChiSoA);
+                console.log($scope.ChiSoB);
+                console.log($scope.ChiSoB);
+                $http({
+                    method: "POST",
+                    url: "/MinhChungGoiY/create",
+                    data: { gymca: $scope.ChiSoA, gymcb: $scope.ChiSoB, gymcc: $scope.ChiSoC }
+                }).then(function success(response) {
+
+                    var result = response.data;
+
+                    if (result.error === 0) {
+                        $scope.GetData(1, "");
+                        $scope.allDanhMuc.unshift(result.data);
+                        $scope.GetData();
+                        $scope.GetTieuChiDuKienAll(1);
+                        hideModel("insertmodal");
+
+                        showNotify("Đã cập nhật thông tin");
+
+                    } else {
+
+                        alert(result.msg);
+
+                    }
+
+                    showLoader(false);
+
+                }
+                    , function error(response) {
+                        showNotify("connect has disconnect");
+                        showLoader(false);
+                    });
+            };
+
             $scope.IsAction = '';
             $scope.addNew = function (mindex, id) {
                 //kiểm tra xem neu chua co thi load mơi , nếu đã có thì load thông tin
                 //gettieuchidukien
                 //mindex ==> vi tri cua id tieu chuan , id vi tri cua tieu chi
-
+                //lay thong tin cac minh chung cho tung chi so
                 var info = $scope.allDanhMuc[mindex];
                 $scope.Info = angular.copy(info);
 
@@ -333,48 +464,13 @@
                 }).then(function mySuccess(response) {
                     showLoader(false);
 
-                    if (response.data.error === 0) {
-                        var date = new Date();
-                        var fDate = $filter('date')(date, "dd/MM/yyyy");
-                        var tDate = $filter('date')(date, "dd/MM/yyyy");
-                        $scope.Info.IDTieuChi = response.data.data;
-                        $scope.Info = { "DuKienMC": "", "NoiThuThap": "", "CaNhan": "", "Tuan": "", "Nhom": "", "TuNgay": fDate, "DenNgay": tDate, "ChiPhi": 0, "GhiChu": "", "IDTieuChi": response.data.data };
-                        $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
-                        //$scope.ZoneIDDisable = false;
-                        $scope.IsAction = 'add';
+                    $scope.ChiSoA = response.data.chisoa;
+                    $scope.ChiSoB = response.data.chisob;
+                    $scope.ChiSoC = response.data.chisoc;
+                    $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
+                    $scope.IsAction = 'add';
 
-                        showModel("insertmodal");
-
-                    } else if (response.data.error !== 0) {
-                        $scope.Info.IDTieuChi = response.data.data;
-                        //truong hop da ton tai thong in
-                        $http({
-                            method: "GET",
-                            url: "/MinhChungGoiY/getTieuChiDuKienbyID?guiid=" + $scope.Info.IDTieuChi
-                        }).then(function mySuccess(response) {
-                            showLoader(false);
-
-                            if (response.data.error === 1) {
-                                $scope.Info = response.data.data;
-                            }
-
-                        }, function myError(response) {
-                            showLoader(false);
-                            showNotify('Connect error');
-                        });
-                        //lay thong in
-                        var fDate = $filter('date')($scope.Info.TuNgay.slice(6, -2), "dd/MM/yyyy");
-                        var tDate = $filter('date')($scope.Info.DenNgay.slice(6, -2), "dd/MM/yyyy");
-                        console.log($scope.Info.TuNgay);
-                        $scope.Info.TuNgay = fDate;
-                        $scope.Info.DenNgay = tDate;
-                        $scope.Info = { "DuKienMC": $scope.Info.DuKienMC, "NoiThuThap": $scope.Info.NoiThuThap, "CaNhan": $scope.Info.CaNhan, "Tuan": $scope.Info.Tuan, "Nhom": $scope.Info.Nhom, "TuNgay": $scope.Info.TuNgay, "DenNgay": $scope.Info.DenNgay, "ChiPhi": $scope.Info.ChiPhi, "GhiChu": $scope.Info.GhiChu, "IDTieuChi": $scope.Info.IDTieuChi };
-                        $scope.modaltitle = "Chỉnh sửa thông tin" + "  --- Tiêu chuẩn " + (mindex + 1) + "  --- Tiêu chí " + (id + 1);
-                        //$scope.ZoneIDDisable = false;
-                        $scope.IsAction = 'add';
-
-                        showModel("insertmodal");
-                    }
+                    showModel("insertmodal");
 
                 }, function myError(response) {
                     showLoader(false);
@@ -403,10 +499,42 @@
 
                 showLoader(true);
 
+                //add list
+                var listA = [];
+                var listB = [];
+                var listC = [];
+                //for (var i = 0; i < $scope.allThanhVienByNhom.length; i++) {
+                //    if ($scope.allThanhVienByNhom[i].isCheck) {
+                //        listNhom.push($scope.allThanhVienByNhom[i].MaThanhVien)
+                //    }
+                //}
+               // console.log($scope.ChiSoA);
+               // console.log($scope.InfoA.Chk[1]);
+                for (var i = 0; i < $scope.ChiSoA.length; i++) {
+                    var info = $scope.ChiSoA[i];
+                    //var fDate = $filter('date')($scope.InfoA[i].TuNgay.slice(6, -2), "dd/MM/yyyy");
+                    //var tDate = $filter('date')($scope.InfoA[i].DenNgay.slice(6, -2), "dd/MM/yyyy");
+                    listA.push(info.GuiID, $scope.listA[i].NguoiLuu + i, $scope.listA[i].NguoiThuThap + i, $scope.listA[i].TrangThai + i, $scope.listA[i].GhiChu + i)
+                    console.log($scope.listA[i].NguoiLuu + i);
+                }
+
+                for (var i = 0; i < $scope.ChiSoB.length; i++) {
+                    var info = $scope.InfoB[i];
+                    //var fDate = $filter('date')($scope.InfoB[i].TuNgay.slice(6, -2), "dd/MM/yyyy");
+                    //var tDate = $filter('date')($scope.InfoB[i].DenNgay.slice(6, -2), "dd/MM/yyyy");
+                    listB.push(info.GuiID, $scope.listB[i].NguoiLuu, $scope.listB[i].NguoiThuThap, $scope.listB[i].TrangThai, $scope.listB[i].GhiChu)
+                }
+                for (var i = 0; i < ChiSoA.length; i++) {
+                    var info = $scope.ChiSoC.InfoC[i];
+                    //var fDate = $filter('date')($scope.InfoC[i].TuNgay.slice(6, -2), "dd/MM/yyyy");
+                    //var tDate = $filter('date')($scope.InfoC[i].DenNgay.slice(6, -2), "dd/MM/yyyy");
+                    listC.push(info.GuiID, $scope.listC[i].NguoiLuu, $scope.listC[i].NguoiThuThap, $scope.listC[i].TrangThai, $scope.listC[i].GhiChu)
+                }
+                //
                 $http({
                     method: "POST",
                     url: "/MinhChungGoiY/create",
-                    data: { dkmc: $scope.Info, tuNgay: $scope.Info.TuNgay, denNgay: $scope.Info.DenNgay }
+                    data: { gymca: listA, gymcb: listB, gymcb: listC }
                 }).then(function success(response) {
 
                     var result = response.data;
@@ -428,7 +556,7 @@
 
                     showLoader(false);
 
-                }
+                     }
                     , function error(response) {
                         showNotify("connect has disconnect");
                         showLoader(false);
